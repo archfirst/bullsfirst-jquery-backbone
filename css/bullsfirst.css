@@ -107,38 +107,38 @@ input[type="text"], input[type="password"] {
 /* -----------------------------------------------------------------------------
  * Home Page
  * -------------------------------------------------------------------------- */
-#home_page {
+#home-page {
     background: #F89F1B url(../img/horns.png) no-repeat right bottom;
     height: 541px;
     margin: 10px 10px 0 10px;
     position: relative;
 }
 
-#home_page header {
+#home-page header {
     left: 76px;
     position: absolute;
     top: 15px;
 }
 
-#home_page header h1 {
+#home-page header h1 {
     background-image: url(../img/logo.png);
     height: 93px;
     margin: 0;
     width: 194px;
 }
 
-#home_page header h2 {
+#home-page header h2 {
     font-style: italic;
     margin: 8px 5px 0 0;
     text-align: right;
 }
 
 /* Override selection color for gold background */
-#home_page ::-moz-selection  {
+#home-page ::-moz-selection  {
     background: #FBBE39;
 }
 
-#home_page ::selection  {
+#home-page ::selection  {
     background: #FBBE39;
 }
 
@@ -146,25 +146,25 @@ input[type="text"], input[type="password"] {
 /* -----------------------------------------------------------------------------
  * Home Page - Login Section
  * -------------------------------------------------------------------------- */
-#home_page #login_section {
+#home-page #login-section {
     left: 78px;
     position: absolute;
     top: 181px;
 }
 
-#home_page #login_section h1 {
+#home-page #login-section h1 {
     font: 18px Aller;
     margin: 0 0 8px 15px;
 }
 
-#loginForm {
+#login-form {
     background-color: #404040;
     height: 247px;
     padding: 35px 15px 0 15px;
     width: 270px;
 }
 
-#l_login_button {
+#l-login-button {
     background-image: url(../img/login-button.png);
     display: block;
     height: 75px;
@@ -172,47 +172,47 @@ input[type="text"], input[type="password"] {
     width: 110px;
 }
 
-#l_login_button:hover {
+#l-login-button:hover {
 	background-position: -110px 0;
 }
 
-#l_login_button:active {
+#l-login-button:active {
 	background-position: -220px 0;
 }
 
 /* -----------------------------------------------------------------------------
  * Home Page - Intro Section
  * -------------------------------------------------------------------------- */
-#home_page #intro_section {
+#home-page #intro-section {
     left: 477px;
     position: absolute;
     top: 108px;
     width: 353px;
 }
 
-#home_page #intro_section h1 {
+#home-page #intro-section h1 {
     color: #FFFFFF;
     margin: 0;
 }
 
-#home_page #intro_section h2 {
+#home-page #intro-section h2 {
     margin: 5px 0 15px 0;
 }
 
-#home_page #intro_section p.features, #home_page #intro_section ul {
+#home-page #intro-section p.features, #home-page #intro-section ul {
     font: 200 16px Aller;
     line-height: 26px;
 }
 
-#home_page #intro_section ul {
+#home-page #intro-section ul {
     margin: 0 0 11px 0;
 }
 
-#home_page #intro_section p.side-note {
+#home-page #intro-section p.side-note {
     font-style: italic;
 }
 
-#home_page #intro_section p.open-account {
+#home-page #intro-section p.open-account {
     background: url(../img/popsicle.png) no-repeat right center;
     line-height: 30px;
     margin-top: 16px;
