@@ -96,6 +96,47 @@ input[type="text"], input[type="password"] {
 }
 
 /* -----------------------------------------------------------------------------
+ * Buttons
+ * -------------------------------------------------------------------------- */
+a.button {
+    background-color: #F04100;
+    display: block;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+
+a.button:hover {
+    background-color: #F36733;
+}
+
+a.button:active {
+    background-color: #7B2A0C;
+}
+
+a.button span  {
+    color: #FFFFFF;
+    display: block;
+}
+
+a.button.large {
+    width: 110px;
+    height: 75px;
+}
+
+a.button.large span  {
+    padding-top: 43px;
+    text-align: center;
+}
+
+a.button.large.person-icon span  {
+    background: url(../img/person-icon.png) no-repeat center 13px;
+}
+
+/* -----------------------------------------------------------------------------
  * Main Container
  * -------------------------------------------------------------------------- */
 .container {
@@ -165,19 +206,7 @@ input[type="text"], input[type="password"] {
 }
 
 #l-login-button {
-    background-image: url(../img/login-button.png);
-    display: block;
-    height: 75px;
     margin: 26px auto 0 auto;
-    width: 110px;
-}
-
-#l-login-button:hover {
-	background-position: -110px 0;
-}
-
-#l-login-button:active {
-	background-position: -220px 0;
 }
 
 /* -----------------------------------------------------------------------------
