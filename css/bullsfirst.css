@@ -24,9 +24,10 @@
  * @colordef  #333333; Grey (container background)
  * @colordef  #404040; Grey (login form background)
  * @colordef  #666666; Grey (label background)
- * @colordef  #9E2B00; Dark Red (link selections)
- * @colordef  #F04100; Red (links and buttons)
- * @colordef  #F36733; Gold (link rollovers)
+ * @colordef  #7B2A0C; Brown (buttons - selected)
+ * @colordef  #9E2B00; Dark Red (link - selected)
+ * @colordef  #F04100; Orange (links and buttons - normal state)
+ * @colordef  #F36733; Light orange (links and buttons - rollover)
  * @colordef  #F89F1B; Gold (home page background, text selection)
  * @colordef  #F8E5C9; Cream (label text)
  * @colordef  #FBBE39; Yellowish gold (text selection for home page against gold background)
@@ -75,6 +76,13 @@ a:focus {
     outline: 0;
 }
 
+/* -----------------------------------------------------------------------------
+ * General Purpose Classes
+ * -------------------------------------------------------------------------- */
+.nodisplay {
+    display:none;
+} 
+ 
 /* -----------------------------------------------------------------------------
  * Form Styles
  * -------------------------------------------------------------------------- */
@@ -136,6 +144,11 @@ a.button.large.person-icon span  {
     background: url(../img/person-icon.png) no-repeat center 13px;
 }
 
+.button-bar a.button {
+    float: left;
+    margin-right: 20px;
+}
+
 /* -----------------------------------------------------------------------------
  * Main Container
  * -------------------------------------------------------------------------- */
@@ -183,7 +196,6 @@ a.button.large.person-icon span  {
     background: #FBBE39;
 }
 
-
 /* -----------------------------------------------------------------------------
  * Home Page - Login Section
  * -------------------------------------------------------------------------- */
@@ -205,7 +217,7 @@ a.button.large.person-icon span  {
     width: 270px;
 }
 
-#l-login-button {
+#login-button {
     margin: 26px auto 0 auto;
 }
 
@@ -246,6 +258,65 @@ a.button.large.person-icon span  {
     line-height: 30px;
     margin-top: 16px;
     width: 137px;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page
+ * -------------------------------------------------------------------------- */
+#user-page header {
+    background-color: #F89F1B;
+    height: 137px;
+    margin: 10px 10px 0 10px;
+    position: relative;
+}
+
+#user-page header h1 {
+    background-image: url(../img/logo-small.png);
+    height: 54px;
+    left: 61px;
+    margin: 0;
+    position: absolute;
+    top: 18px;
+    width: 113px;
+}
+
+#user-page header h2 {
+    font-size: 14px;
+    font-style: italic;
+    left: 79px;
+    margin: 0;
+    position: absolute;
+    top: 75px;
+}
+
+#user-page header .button-bar {
+    left: 640px;
+    position: absolute;
+    top: 32px;
+}
+
+#user-page .user-info {
+    float: right;
+    margin: 7px 12px 0 0;
+}
+
+#user-page .user-info span {
+    font-size: 11px;
+    font-style: italic;
+}
+
+#user-page .user-info img {
+    vertical-align: baseline;
+}
+
+#user-page .user-info a {
+    font-size: 11px;
+}
+
+#user-page .content {
+    background-color: #FFFFFF;
+    height: 404px;
+    margin: 0 10px 0 10px;
 }
 
 /* -----------------------------------------------------------------------------

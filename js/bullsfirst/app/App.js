@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,25 @@
  */
 
 /**
- * Application Entry Point
+ * bullsfirst/app/App
+ *
+ * Singleton application object.
  *
  * @author Naresh Bhatia
  */
-require(['bullsfirst/app/App'],
-        function(App) {
+define(['bullsfirst/app/AppRouter'],
+       function(AppRouter) {
 
-    $(document).ready(function() {
-        // Load Crockford's JSON library if browser does not have native support
-        Modernizr.load({
-            test: window.JSON,
-            nope: 'js/vendor/json2.js'
-        });
-    });
+    // Set default timeout for AJAX requests to 20 seconds
+    // This should be done before instantiating the AppRouter,
+    // because the initialization sequence fires AJAX requests
+    $.ajaxSetup({timeout: 20000});
+
+    // Create the router
+    var _appRouter = new AppRouter();
+
+    // Begin monitoring hashchange events and dispatching routes.
+    // This triggers the default route (''), which in turn
+    // invokes AppRouter.showHomePage()
+    Backbone.history.start();
 });

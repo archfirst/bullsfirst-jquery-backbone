@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,27 @@
  */
 
 /**
- * Application Entry Point
+ * bullsfirst/framework/MessageBus
+ *
+ * Provides the ability to publish and subscribe to messages.
  *
  * @author Naresh Bhatia
  */
-require(['bullsfirst/app/App'],
-        function(App) {
+define(function() {
 
-    $(document).ready(function() {
-        // Load Crockford's JSON library if browser does not have native support
-        Modernizr.load({
-            test: window.JSON,
-            nope: 'js/vendor/json2.js'
-        });
-    });
+    var _messageBus = _.extend({}, Backbone.Events);
+
+    return {
+        on: function(events, callback, context) {
+            _messageBus.on(events, callback, context);
+        },
+
+        off: function(events, callback, context) {
+            _messageBus.off(events, callback, context);
+        },
+
+        trigger: function(events) {
+            _messageBus.trigger.apply(_messageBus, arguments);
+        }
+    }
 });

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,29 @@
  */
 
 /**
- * Application Entry Point
+ * bullsfirst/views/HomePage
  *
  * @author Naresh Bhatia
  */
-require(['bullsfirst/app/App'],
-        function(App) {
+define(['bullsfirst/framework/MessageBus',
+        'bullsfirst/framework/Page'],
+       function(MessageBus, Page) {
+    return Page.extend({
+        el: '#home-page',
 
-    $(document).ready(function() {
-        // Load Crockford's JSON library if browser does not have native support
-        Modernizr.load({
-            test: window.JSON,
-            nope: 'js/vendor/json2.js'
-        });
+        events: {
+            'click #login-button': 'login',
+            'click #open-account-link': 'openAccount'
+        },
+
+        login: function() {
+            MessageBus.trigger('UserLoggedInEvent');
+            return false;
+        },
+
+        openAccount: function() {
+            alert('Open Account');
+            return false;
+        }
     });
 });
