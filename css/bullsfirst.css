@@ -28,6 +28,7 @@
  * @colordef  #9E2B00; Dark Red (link - selected)
  * @colordef  #F04100; Orange (links and buttons - normal state)
  * @colordef  #F36733; Light orange (links and buttons - rollover)
+ * @colordef  #F8791B; Gold (Tab - normal state)
  * @colordef  #F89F1B; Gold (home page background, text selection)
  * @colordef  #F8E5C9; Cream (label text)
  * @colordef  #FBBE39; Yellowish gold (text selection for home page against gold background)
@@ -261,7 +262,7 @@ a.button.large.person-icon span  {
 }
 
 /* -----------------------------------------------------------------------------
- * User Page
+ * User Page - Header
  * -------------------------------------------------------------------------- */
 #user-page header {
     background-color: #F89F1B;
@@ -313,7 +314,50 @@ a.button.large.person-icon span  {
     font-size: 11px;
 }
 
-#user-page .content {
+/* -----------------------------------------------------------------------------
+ * User Page - Tab Bar
+ * Reference: http://stackoverflow.com/questions/2295311/css-list-item-width-height-does-not-work
+ * -------------------------------------------------------------------------- */
+#user-page .tabbar {
+    left: 80px;
+    position: absolute;
+    top: 107px;
+} 
+
+.tabbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tabbar ul li {
+    display: inline;
+    float: left;
+}
+
+.tabbar ul li a {
+    background-color: #F8791B;
+    color: #FFFFFF;
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    margin: 5px 2px 0 0;
+    min-width: 103px;
+    padding: 0 10px 0 10px;
+    text-align: center;
+}
+
+.tabbar ul li a.selected {
+    background-color: #FFFFFF;
+    color: #000000;
+    margin-top: 0;
+    padding-top: 5px;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Tabs
+ * -------------------------------------------------------------------------- */
+#user-page .tab {
     background-color: #FFFFFF;
     height: 404px;
     margin: 0 10px 0 10px;

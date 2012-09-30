@@ -29,8 +29,11 @@ define(['bullsfirst/framework/MessageBus',
 
         routes: {
             '': 'showHomePage',
-            'user': 'showUserPage'
+            'user/:tab': 'showUserPage'
         },
+
+        // Tab displayed on user login (can change when user enters a bookmarked URL)
+        startTab: 'accounts',
 
         initialize: function() {
             this.pages = {
@@ -40,12 +43,16 @@ define(['bullsfirst/framework/MessageBus',
 
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {
-                this.navigate('user', {trigger: true});
+                this.navigate('user/' + this.startTab, {trigger: true});
             }, this);
             MessageBus.on('UserLoggedOutEvent', function() {
                 // Do a full page refresh to start from scratch
                 this.navigate('');
                 window.location.reload();
+            }, this);
+            MessageBus.on('TabSelectionRequest', function(tabInfo) {
+                var tabName = tabInfo.tab.replace('-tab', ''); // strip -tab at the end
+                this.navigate(tabInfo.tabbar + '/' + tabName, {trigger: true});
             }, this);
         },
 
@@ -54,7 +61,18 @@ define(['bullsfirst/framework/MessageBus',
         },
 
         showUserPage: function(tab) {
-            this.showPage(this.pages['user']);
+            // Show user page only if user is logged in
+            // if (UserContext.isUserLoggedIn()) {
+            if (true) {
+                this.showPage(this.pages['user']);
+                this.pages['user'].selectTab(tab + '-tab');
+            }
+            else {
+                // happens when user enters a bookmarked URL
+                this.startTab = tab;
+                this.navigate('');
+                this.showPage(this.pages['home']);
+            }
         },
 
         showPage: function(page) {

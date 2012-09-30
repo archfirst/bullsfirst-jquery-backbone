@@ -20,8 +20,9 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/MessageBus',
-        'bullsfirst/framework/Page'],
-       function(MessageBus, Page) {
+        'bullsfirst/framework/Page',
+        'bullsfirst/views/TabbarView'],
+       function(MessageBus, Page, TabbarView) {
 
     return Page.extend({
         el: '#user-page',
@@ -33,6 +34,7 @@ define(['bullsfirst/framework/MessageBus',
         },
 
         initialize: function() {
+            new TabbarView({el: '#user-page .tabbar'});
         },
 
         logout: function() {
@@ -48,6 +50,17 @@ define(['bullsfirst/framework/MessageBus',
         transfer: function() {
             alert('Transfer');
             return false;
+        },
+
+        selectTab: function(tab) {
+		    this.$el.find('.tab').each(function() {
+                if (this.id === tab) {
+                    $(this).removeClass('nodisplay');
+                }
+                else {
+			        $(this).addClass('nodisplay');	
+                }
+		    });
         }
     });
 });
