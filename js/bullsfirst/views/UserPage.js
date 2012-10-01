@@ -19,14 +19,15 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus',
+define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/views/AccountsTabView',
         'bullsfirst/views/OrdersTabView',
         'bullsfirst/views/PositionsTabView',
         'bullsfirst/views/TabbarView',
         'bullsfirst/views/TransactionsTabView'],
-       function(MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView) {
+       function(UserContext, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView) {
 
     return Page.extend({
         el: '#user-page',
@@ -46,6 +47,7 @@ define(['bullsfirst/framework/MessageBus',
         },
 
         logout: function() {
+            UserContext.reset();
             MessageBus.trigger('UserLoggedOutEvent');
             return false;
         },

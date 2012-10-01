@@ -19,9 +19,13 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus',
-        'bullsfirst/framework/Page'],
-       function(MessageBus, Page) {
+define(['bullsfirst/domain/Credentials',
+        'bullsfirst/domain/UserContext',
+        'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/MessageBus',
+        'bullsfirst/framework/Page',
+        'bullsfirst/services/UserService'],
+       function(Credentials, UserContext, ErrorUtil, MessageBus, Page, UserService) {
     return Page.extend({
         el: '#home-page',
 
@@ -30,14 +34,40 @@ define(['bullsfirst/framework/MessageBus',
             'click #open-account-link': 'openAccount'
         },
 
+        initialize: function() {
+            $("#login-form").validationEngine();
+        },
+
         login: function() {
-            MessageBus.trigger('UserLoggedInEvent');
+            if ($('#login-form').validationEngine('validate')) {
+                UserService.getUser(
+                    this.form2Credentials(), _.bind(this.loginDone, this), ErrorUtil.showError);
+            }
             return false;
+        },
+
+        loginDone: function(data, textStatus, jqXHR) {
+            // Add user to UserContext
+            UserContext.initUser(data);
+            UserContext.initCredentials(this.form2Credentials());
+
+            $('#password')[0].value = ''; // erase password from form
+            MessageBus.trigger('UserLoggedInEvent');
         },
 
         openAccount: function() {
             alert('Open Account');
             return false;
+        },
+
+        // ------------------------------------------------------------
+        // Helper functions
+        // ------------------------------------------------------------
+        // Creates Credentials from the Login form
+        form2Credentials: function() {
+            return new Credentials(
+                $('#username').val(),
+                $('#password').val());
         }
     });
 });
