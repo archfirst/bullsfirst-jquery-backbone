@@ -21,8 +21,12 @@
  */
 define(['bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
-        'bullsfirst/views/TabbarView'],
-       function(MessageBus, Page, TabbarView) {
+        'bullsfirst/views/AccountsTabView',
+        'bullsfirst/views/OrdersTabView',
+        'bullsfirst/views/PositionsTabView',
+        'bullsfirst/views/TabbarView',
+        'bullsfirst/views/TransactionsTabView'],
+       function(MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView) {
 
     return Page.extend({
         el: '#user-page',
@@ -35,6 +39,10 @@ define(['bullsfirst/framework/MessageBus',
 
         initialize: function() {
             new TabbarView({el: '#user-page .tabbar'});
+            new AccountsTabView();
+            new PositionsTabView();
+            new OrdersTabView();
+            new TransactionsTabView();
         },
 
         logout: function() {

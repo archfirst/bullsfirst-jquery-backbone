@@ -26,11 +26,12 @@
  * @colordef  #666666; Grey (label background)
  * @colordef  #7B2A0C; Brown (buttons - selected)
  * @colordef  #9E2B00; Dark Red (link - selected)
- * @colordef  #F04100; Orange (links and buttons - normal state)
+ * @colordef  #F04100; Orange (links and large buttons - normal state)
  * @colordef  #F36733; Light orange (links and buttons - rollover)
+ * @colordef  #F47513; Orange (Medium buttons)
  * @colordef  #F8791B; Gold (Tab - normal state)
  * @colordef  #F89F1B; Gold (home page background, text selection)
- * @colordef  #F8E5C9; Cream (label text)
+ * @colordef  #F8E5C9; Cream (label text, table header text)
  * @colordef  #FBBE39; Yellowish gold (text selection for home page against gold background)
  */
 
@@ -84,6 +85,22 @@ a:focus {
     display:none;
 } 
  
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.number {
+    text-align: right;
+}
+
 /* -----------------------------------------------------------------------------
  * Form Styles
  * -------------------------------------------------------------------------- */
@@ -108,7 +125,7 @@ input[type="text"], input[type="password"] {
  * Buttons
  * -------------------------------------------------------------------------- */
 a.button {
-    background-color: #F04100;
+    color: #FFFFFF;
     display: block;
     text-decoration: none;
     -webkit-transition: background-color 0.3s;
@@ -118,36 +135,71 @@ a.button {
     transition: background-color 0.3s;
 }
 
-a.button:hover {
-    background-color: #F36733;
-}
-
-a.button:active {
-    background-color: #7B2A0C;
-}
-
 a.button span  {
-    color: #FFFFFF;
     display: block;
 }
 
+a.button.person-icon span  {
+    background: url(../img/person-icon.png) no-repeat;
+}
+
+a.button.medium {
+    background-color: #F47513;
+    font-size: 11px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 105px;
+}
+
+a.button.medium:hover {
+    background-color: #F36733;
+}
+
+a.button.medium:active {
+    background-color: #7B2A0C;
+}
+
 a.button.large {
-    width: 110px;
+    background-color: #F04100;
     height: 75px;
+    width: 110px;
+}
+
+a.button.large:hover {
+    background-color: #F36733;
+}
+
+a.button.large:active {
+    background-color: #7B2A0C;
 }
 
 a.button.large span  {
+    background-position: center 13px;
     padding-top: 43px;
     text-align: center;
 }
 
-a.button.large.person-icon span  {
-    background: url(../img/person-icon.png) no-repeat center 13px;
-}
-
 .button-bar a.button {
     float: left;
+}
+
+.button-bar a.button.medium {
+    margin-right: 10px;
+}
+
+.button-bar a.button.large {
     margin-right: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Tables
+ * -------------------------------------------------------------------------- */
+.bf-table thead {
+    background-color: #8C8C8C;
+    color: #F8E5C9;
+    font: 11px/22px Aller;
+    height: 22px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -284,10 +336,10 @@ a.button.large.person-icon span  {
 #user-page header h2 {
     font-size: 14px;
     font-style: italic;
-    left: 79px;
+    left: 78px;
     margin: 0;
     position: absolute;
-    top: 75px;
+    top: 76px;
 }
 
 #user-page header .button-bar {
@@ -298,12 +350,14 @@ a.button.large.person-icon span  {
 
 #user-page .user-info {
     float: right;
-    margin: 7px 12px 0 0;
+    line-height: 11px;
+    margin: 10px 11px 0 0;
 }
 
 #user-page .user-info span {
     font-size: 11px;
     font-style: italic;
+    margin-right: 2px;
 }
 
 #user-page .user-info img {
@@ -359,8 +413,82 @@ a.button.large.person-icon span  {
  * -------------------------------------------------------------------------- */
 #user-page .tab {
     background-color: #FFFFFF;
-    height: 404px;
     margin: 0 10px 0 10px;
+    position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Accounts Tab
+ * -------------------------------------------------------------------------- */
+#accounts-tab h1 {
+    font-size: 18px;
+    left: 60px;
+    line-height: 18px;
+    margin: 0px;
+    position: absolute;
+    top: 30px;
+}
+
+#accounts-tab .button-bar {
+    left: 400px;
+    position: absolute;
+    top: 21px;
+}
+
+#account-table {
+    float: left;
+    margin: 56px 0 0 60px;
+}
+
+#account-table .name {
+    padding: 0 0 0 20px;
+    text-align: left;
+    width: 200px;
+}
+
+#account-table .market-value {
+    padding: 0 0 0 5px;
+    text-align: right;
+    width: 115px;
+}
+
+#account-table .cash {
+    padding: 0;
+    text-align: right;
+    width: 140px;
+}
+
+#account-table .legend {
+    padding: 0 0 0 20px;
+    text-align: center;
+    width: 60px;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Positions Tab
+ * -------------------------------------------------------------------------- */
+#positions-tab h1 {
+    float: left;
+    font-size: 18px;
+    margin: 30px 0 10px 60px;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Orders Tab
+ * -------------------------------------------------------------------------- */
+#orders-tab h1 {
+    float: left;
+    font-size: 18px;
+    margin: 30px 0 10px 60px;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Transactions Tab
+ * -------------------------------------------------------------------------- */
+#transactions-tab h1 {
+    float: left;
+    font-size: 18px;
+    margin: 30px 0 10px 60px;
 }
 
 /* -----------------------------------------------------------------------------

@@ -118,20 +118,53 @@
                 </div>
             </header>
 
-            <section id="accounts-tab" class="tab nodisplay">
-                Accounts
+            <!-- Accounts Tab -->
+            <section id="accounts-tab" class="tab clearfix nodisplay">
+                <h1>Accounts</h1>
+                <div class="button-bar">
+                    <a id="add-account-button" class="button medium" href="#">
+                        <img src="img/plus-icon.png" alt="Add Account" />
+                        Add Account
+                    </a>
+                    <a id="refresh-accounts-button" class="button medium" href="#">
+                        <img src="img/refresh-icon.png" alt="Add Account" />
+                        Refresh
+                    </a>
+                </div>
+
+                <table id="account-table" class="bf-table">
+                    <thead>
+                        <tr>
+                            <th class="name">NAME</th>
+                            <th class="market-value">MARKET VALUE</th>
+                            <th class="cash">CASH</th>
+                            <th class="legend">LEGEND</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="name">Brokerage Account 1</td>
+                            <td class="market-value">$1,999,990.00</td>
+                            <td class="cash">$1,995,826.00</td>
+                            <td class="legend">Gold</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
-            <section id="positions-tab" class="tab nodisplay">
-                Positions
+            <!-- Positions Tab -->
+            <section id="positions-tab" class="tab clearfix nodisplay">
+                <h1>Positions</h1>
             </section>
 
-            <section id="orders-tab" class="tab nodisplay">
-                Orders
+            <!-- Orders Tab -->
+            <section id="orders-tab" class="tab clearfix nodisplay">
+                <h1>Orders</h1>
             </section>
 
-            <section id="transactions-tab" class="tab nodisplay">
-                Accounts
+            <!-- Transactions Tab -->
+            <section id="transactions-tab" class="tab clearfix nodisplay">
+                <h1>Transaction History</h1>
             </section>
         </section>
 
