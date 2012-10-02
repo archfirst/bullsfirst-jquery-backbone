@@ -19,10 +19,11 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus',
+define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/views/HomePage',
         'bullsfirst/views/UserPage'],
-       function(MessageBus, HomePage, UserPage) {
+       function(UserContext, MessageBus, HomePage, UserPage) {
     return Backbone.Router.extend({
 
         pages: {},
@@ -43,7 +44,9 @@ define(['bullsfirst/framework/MessageBus',
 
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {
-                this.navigate('user/' + this.startTab, {trigger: true});
+                MessageBus.trigger(
+                    'TabSelectionRequest',
+                    { tabbar: 'user', tab: this.startTab + '-tab' });
             }, this);
             MessageBus.on('UserLoggedOutEvent', function() {
                 // Do a full page refresh to start from scratch
@@ -62,8 +65,7 @@ define(['bullsfirst/framework/MessageBus',
 
         showUserPage: function(tab) {
             // Show user page only if user is logged in
-            // if (UserContext.isUserLoggedIn()) {
-            if (true) {
+            if (UserContext.isUserLoggedIn()) {
                 this.showPage(this.pages['user']);
                 this.pages['user'].selectTab(tab + '-tab');
             }
