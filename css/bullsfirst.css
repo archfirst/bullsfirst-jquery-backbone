@@ -143,6 +143,14 @@ a.button.person-icon span  {
     background: url(../img/person-icon.png) no-repeat;
 }
 
+a.button.trade-icon span  {
+    background: url(../img/trade-icon.png) no-repeat;
+}
+
+a.button.transfer-icon span  {
+    background: url(../img/transfer-icon.png) no-repeat;
+}
+
 a.button.medium {
     background-color: #F47513;
     font-size: 11px;
@@ -325,21 +333,12 @@ a.button.large span  {
 
 #user-page header h1 {
     background-image: url(../img/logo-small.png);
-    height: 54px;
-    left: 61px;
+    height: 75px;
+    left: 60px;
     margin: 0;
     position: absolute;
     top: 18px;
-    width: 113px;
-}
-
-#user-page header h2 {
-    font-size: 14px;
-    font-style: italic;
-    left: 78px;
-    margin: 0;
-    position: absolute;
-    top: 76px;
+    width: 160px;
 }
 
 #user-page header .button-bar {
@@ -358,10 +357,6 @@ a.button.large span  {
     font-size: 11px;
     font-style: italic;
     margin-right: 2px;
-}
-
-#user-page .user-info img {
-    vertical-align: baseline;
 }
 
 #user-page .user-info a {
