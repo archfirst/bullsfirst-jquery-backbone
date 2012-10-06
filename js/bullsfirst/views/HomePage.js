@@ -31,11 +31,19 @@ define(['bullsfirst/domain/Credentials',
 
         events: {
             'click #login-button': 'login',
+            'keypress #login-form': 'checkEnterKey',
             'click #open-account-link': 'openAccount'
         },
 
         initialize: function() {
             $("#login-form").validationEngine();
+        },
+
+        checkEnterKey: function(event) {
+           if (event.keyCode == $.ui.keyCode.ENTER) {
+               this.login();
+               return false;
+           }
         },
 
         login: function() {

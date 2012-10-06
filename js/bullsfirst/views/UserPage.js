@@ -26,8 +26,9 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/OrdersTabView',
         'bullsfirst/views/PositionsTabView',
         'bullsfirst/views/TabbarView',
-        'bullsfirst/views/TransactionsTabView'],
-       function(UserContext, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView) {
+        'bullsfirst/views/TransactionsTabView',
+        'bullsfirst/views/UsernameView'],
+       function(UserContext, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView, UsernameView) {
 
     return Page.extend({
         el: '#user-page',
@@ -39,6 +40,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         initialize: function() {
+            new UsernameView({model: UserContext.getUser()});
             new TabbarView({el: '#user-page .tabbar'});
             new AccountsTabView();
             new PositionsTabView();
