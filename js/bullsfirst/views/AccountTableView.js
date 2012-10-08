@@ -15,35 +15,33 @@
  */
 
 /**
- * bullsfirst/views/AccountsTabView
+ * bullsfirst/views/AccountTableView
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
-        'bullsfirst/views/AccountTableView'],
-       function(UserContext, AccountTableView) {
+define(['bullsfirst/views/AccountView'],
+       function(AccountView) {
 
     return Backbone.View.extend({
 
-        el: '#accounts-tab',
-
-        events: {
-            'click #add-account-button': 'addAccount',
-            'click #refresh-accounts-button': 'refreshAccounts'
-        },
+        el: '#account-table tbody',
 
         initialize: function(options) {
-            new AccountTableView({collection: UserContext.getBrokerageAccounts()});
+            this.collection.bind('reset', this.render, this);
         },
 
-        addAccount: function() {
-            alert('Add Account');
-            return false;
-        },
+        render: function() {
+            // take out rows that might be sitting in the table
+            this.$el.empty();
 
-        refreshAccounts: function() {
-            alert('Refresh Accounts');
-            return false;
+            // Add new rows from accounts collection. Pass this object as context
+            this.collection.each(function(account, i) {
+                var view = new AccountView({model: account});
+                view.render().$el.find('.legend').addClass('color-' + (i%10));
+                this.$el.append(view.el);
+            }, this);
+
+            return this;
         }
     });
 });

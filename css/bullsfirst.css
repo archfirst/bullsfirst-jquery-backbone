@@ -85,22 +85,6 @@ a:focus {
     display:none;
 } 
  
-.left {
-    text-align: left;
-}
-
-.center {
-    text-align: center;
-}
-
-.right {
-    text-align: right;
-}
-
-.number {
-    text-align: right;
-}
-
 /* -----------------------------------------------------------------------------
  * Form Styles
  * -------------------------------------------------------------------------- */
@@ -203,13 +187,130 @@ a.button.large span  {
 /* -----------------------------------------------------------------------------
  * Tables
  * -------------------------------------------------------------------------- */
-.bf-table thead {
+.bf-table thead tr {
     background-color: #8C8C8C;
     color: #F8E5C9;
     font: 11px/22px Aller;
     height: 22px;
 }
 
+.bf-table tbody tr {
+    border-bottom: 1px solid #E5E5E5;
+    font: 200 12px/25px Aller;
+    height: 25px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Legends
+ * -------------------------------------------------------------------------- */
+.legend {
+    /* border: 1px solid #BFBFBF; */
+    height: 13px;
+    margin: auto;
+    width: 25px;
+}
+
+.color-0 { background-color: #f6bc0c; }
+.color-1 { background-color: #284b70; }
+.color-2 { background-color: #702828; }
+.color-3 { background-color: #5f7143; }
+.color-4 { background-color: #382c6c; }
+.color-5 { background-color: #0271ae; }
+.color-6 { background-color: #1d7554; }
+.color-7 { background-color: #50224f; }
+.color-8 { background-color: #706e41; }
+.color-9 { background-color: #446a73; }
+
+.color-0-gradient {
+   background-color: #f6bc0c;
+   background-image: -webkit-linear-gradient(top left, #fde79c, #f6bc0c); 
+   background-image:    -moz-linear-gradient(top left, #fde79c, #f6bc0c);
+   background-image:     -ms-linear-gradient(top left, #fde79c, #f6bc0c);
+   background-image:      -o-linear-gradient(top left, #fde79c, #f6bc0c);
+   background-image:         linear-gradient(to bottom right, #fde79c, #f6bc0c);
+}
+ 
+.color-1-gradient {
+   background-color: #284b70;
+   background-image: -webkit-linear-gradient(top left, #b9d6f7, #284b70); 
+   background-image:    -moz-linear-gradient(top left, #b9d6f7, #284b70);
+   background-image:     -ms-linear-gradient(top left, #b9d6f7, #284b70);
+   background-image:      -o-linear-gradient(top left, #b9d6f7, #284b70);
+   background-image:         linear-gradient(to bottom right, #b9d6f7, #284b70);
+}
+ 
+.color-2-gradient {
+   background-color: #702828;
+   background-image: -webkit-linear-gradient(top left, #fbb7b5, #702828); 
+   background-image:    -moz-linear-gradient(top left, #fbb7b5, #702828);
+   background-image:     -ms-linear-gradient(top left, #fbb7b5, #702828);
+   background-image:      -o-linear-gradient(top left, #fbb7b5, #702828);
+   background-image:         linear-gradient(to bottom right, #fbb7b5, #702828);
+}
+ 
+.color-3-gradient {
+   background-color: #5f7143;
+   background-image: -webkit-linear-gradient(top left, #b8c0ac, #5f7143); 
+   background-image:    -moz-linear-gradient(top left, #b8c0ac, #5f7143);
+   background-image:     -ms-linear-gradient(top left, #b8c0ac, #5f7143);
+   background-image:      -o-linear-gradient(top left, #b8c0ac, #5f7143);
+   background-image:         linear-gradient(to bottom right, #b8c0ac, #5f7143);
+}
+ 
+.color-4-gradient {
+   background-color: #382c6c;
+   background-image: -webkit-linear-gradient(top left, #a9a3bd, #382c6c); 
+   background-image:    -moz-linear-gradient(top left, #a9a3bd, #382c6c);
+   background-image:     -ms-linear-gradient(top left, #a9a3bd, #382c6c);
+   background-image:      -o-linear-gradient(top left, #a9a3bd, #382c6c);
+   background-image:         linear-gradient(to bottom right, #a9a3bd, #382c6c);
+}
+ 
+.color-5-gradient {
+   background-color: #0271ae;
+   background-image: -webkit-linear-gradient(top left, #98c1dc, #0271ae); 
+   background-image:    -moz-linear-gradient(top left, #98c1dc, #0271ae);
+   background-image:     -ms-linear-gradient(top left, #98c1dc, #0271ae);
+   background-image:      -o-linear-gradient(top left, #98c1dc, #0271ae);
+   background-image:         linear-gradient(to bottom right, #98c1dc, #0271ae);
+}
+ 
+.color-6-gradient {
+   background-color: #1d7554;
+   background-image: -webkit-linear-gradient(top left, #9dc2b3, #1d7554); 
+   background-image:    -moz-linear-gradient(top left, #9dc2b3, #1d7554);
+   background-image:     -ms-linear-gradient(top left, #9dc2b3, #1d7554);
+   background-image:      -o-linear-gradient(top left, #9dc2b3, #1d7554);
+   background-image:         linear-gradient(to bottom right, #9dc2b3, #1d7554);
+}
+ 
+.color-7-gradient {
+   background-color: #50224f;
+   background-image: -webkit-linear-gradient(top left, #b1a1b1, #50224f); 
+   background-image:    -moz-linear-gradient(top left, #b1a1b1, #50224f);
+   background-image:     -ms-linear-gradient(top left, #b1a1b1, #50224f);
+   background-image:      -o-linear-gradient(top left, #b1a1b1, #50224f);
+   background-image:         linear-gradient(to bottom right, #b1a1b1, #50224f);
+}
+ 
+.color-8-gradient {
+   background-color: #706e41;
+   background-image: -webkit-linear-gradient(top left, #c1c0ae, #706e41); 
+   background-image:    -moz-linear-gradient(top left, #c1c0ae, #706e41);
+   background-image:     -ms-linear-gradient(top left, #c1c0ae, #706e41);
+   background-image:      -o-linear-gradient(top left, #c1c0ae, #706e41);
+   background-image:         linear-gradient(to bottom right, #c1c0ae, #706e41);
+}
+ 
+.color-9-gradient {
+   background-color: #446a73;
+   background-image: -webkit-linear-gradient(top left, #adbdc0, #446a73); 
+   background-image:    -moz-linear-gradient(top left, #adbdc0, #446a73);
+   background-image:     -ms-linear-gradient(top left, #adbdc0, #446a73);
+   background-image:      -o-linear-gradient(top left, #adbdc0, #446a73);
+   background-image:         linear-gradient(to bottom right, #adbdc0, #446a73);
+}
+ 
 /* -----------------------------------------------------------------------------
  * Main Container
  * -------------------------------------------------------------------------- */
@@ -453,7 +554,7 @@ a.button.large span  {
     width: 140px;
 }
 
-#account-table .legend {
+#account-table .legend-cell {
     padding: 0 0 0 20px;
     text-align: center;
     width: 60px;

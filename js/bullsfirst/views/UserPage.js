@@ -46,6 +46,11 @@ define(['bullsfirst/domain/UserContext',
             new PositionsTabView();
             new OrdersTabView();
             new TransactionsTabView();
+
+            // Subscribe to events
+            MessageBus.on('UserLoggedInEvent', function() {
+                UserContext.updateAccounts();
+            });
         },
 
         logout: function() {

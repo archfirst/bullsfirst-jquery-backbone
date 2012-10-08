@@ -20,10 +20,12 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/BackboneSyncOverride',
+        'bullsfirst/framework/BackboneViewExtension',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/HomePage',
         'bullsfirst/views/UserPage'],
-       function(UserContext, MessageBus, HomePage, UserPage) {
+       function(UserContext, BackboneSyncOverride, BackboneViewExtension, MessageBus, HomePage, UserPage) {
     return Backbone.Router.extend({
 
         pages: {},
