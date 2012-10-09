@@ -20,8 +20,9 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/views/AccountChartView',
         'bullsfirst/views/AccountTableView'],
-       function(UserContext, AccountTableView) {
+       function(UserContext, AccountChartView, AccountTableView) {
 
     return Backbone.View.extend({
 
@@ -34,6 +35,7 @@ define(['bullsfirst/domain/UserContext',
 
         initialize: function(options) {
             new AccountTableView({collection: UserContext.getBrokerageAccounts()});
+            new AccountChartView({collection: UserContext.getBrokerageAccounts()});
         },
 
         addAccount: function() {
@@ -42,7 +44,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         refreshAccounts: function() {
-            alert('Refresh Accounts');
+            UserContext.updateAccounts();
             return false;
         }
     });
