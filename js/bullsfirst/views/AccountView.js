@@ -19,25 +19,17 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/Formatter',
-        'text!bullsfirst/templates/account.tpl'],
-       function(Formatter, accountTemplate) {
+define(['bullsfirst/views/TemplateManager'],
+       function(TemplateManager) {
 
     return Backbone.View.extend({
 
         tagName: 'tr',
 
         render: function() {
-            // Format account values for display 
             var account = this.model.toJSON();  // returns a copy of the model's attributes
-            account.marketValueFormatted = Formatter.formatMoney(account.marketValue);
-            account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
-
-            // Render using template
-            var hash = {
-                account: account
-            }
-            $(this.el).html(Mustache.to_html(accountTemplate, hash));
+            var template = TemplateManager.getTemplate('account');
+            $(this.el).html(template(account));
             return this;
         }
     });

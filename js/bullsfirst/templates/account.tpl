@@ -1,14 +1,12 @@
-﻿{{#account}}
-<td class="name">
+﻿<td class="name">
     {{name}}
 </td>
 <td class="market-value">
-    {{marketValueFormatted}}
+    {{formatMoney marketValue}}
 </td>
 <td class="cash">
-    {{cashPositionFormatted}}
+    {{formatMoney cashPosition}}
 </td>
 <td class="legend-cell">
     <div class="legend"></div>
 </td>
-{{/account}}

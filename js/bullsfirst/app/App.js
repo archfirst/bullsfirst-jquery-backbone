@@ -21,13 +21,19 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/app/AppRouter'],
-       function(AppRouter) {
+define(['bullsfirst/app/AppRouter',
+        'bullsfirst/framework/BackboneSyncOverride',
+        'bullsfirst/framework/BackboneViewExtension',
+        'bullsfirst/views/TemplateManager'],
+       function(AppRouter, BackboneSyncOverride, BackboneViewExtension, TemplateManager) {
 
     // Set default timeout for AJAX requests to 20 seconds
     // This should be done before instantiating the AppRouter,
     // because the initialization sequence fires AJAX requests
     $.ajaxSetup({timeout: 20000});
+
+    // Load and compile templates
+    TemplateManager.initialize();
 
     // Create the router
     var _appRouter = new AppRouter();
