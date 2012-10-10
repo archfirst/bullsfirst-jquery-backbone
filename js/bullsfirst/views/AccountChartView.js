@@ -19,7 +19,8 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
+define(['bullsfirst/framework/MessageBus'],
+       function(MessageBus) {
 
     var accounts_title = 'All Accounts';
     var accounts_subtitle = 'Click on an account to view positions';
@@ -39,30 +40,48 @@ define(function() {
 
     return Backbone.View.extend({
 
+        chart: null,
+
         el: '#accounts-chart',
 
         initialize: function(options) {
             this.collection.bind('reset', this.render, this);
+
+            // Subscribe to events
+            MessageBus.on('AccountList:mouseover', this.handleMouseOver, this);
+            MessageBus.on('AccountList:mouseout', this.handleMouseOut, this);
+            MessageBus.on('AccountList:click', this.handleClick, this);
+        },
+
+        handleMouseOver: function(accountId) {
+            this.chart.get(accountId).select(true);
+        },
+
+        handleMouseOut: function(accountId) {
+            this.chart.get(accountId).select(false);
+        },
+
+        handleClick: function(accountId) {
+            console.log('click: ' + accountId);
         },
 
         render: function() {
-            var context = this;
-
             // Convert accounts collection to a structure understood by the Highcharts
-            this.accounts = this.collection.map(function(account) {
+            var accounts = this.collection.map(function(account) {
                 return {
+                    id: account.get('id'),
                     name: account.get('name'),
                     y: account.get('marketValue').amount
                 };
             });
 
             // Sort accounts by descending market value and assign colors
-            this.accounts = _.sortBy(this.accounts, function(account) { return -account.y; }) ;
-            _.each(this.accounts, function(account, index) {
+            accounts = _.sortBy(accounts, function(account) { return -account.y; }) ;
+            _.each(accounts, function(account, index) {
                 account.color = colors[index % MAX_POINTS];
             }, this);
 
-            var chart = new Highcharts.Chart({
+            this.chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'accounts-chart',
                     backgroundColor: '#D8D8D8',
@@ -109,11 +128,14 @@ define(function() {
                         size: '95%',
                         point: {
                             events: {
-                                click: function(event) {
-                                    console.log(event.point.name + ' - clicked');
-                                },
                                 mouseOver: function(event) {
-                                    console.log(event.target.name);
+                                    MessageBus.trigger('AccountList:mouseover', event.currentTarget.id);
+                                },
+                                mouseOut: function(event) {
+                                    MessageBus.trigger('AccountList:mouseout', event.currentTarget.id);
+                                },
+                                click: function(event) {
+                                    MessageBus.trigger('AccountList:click', event.currentTarget.id);
                                 }
                             }
                         }
@@ -122,7 +144,7 @@ define(function() {
                 series: [{
                     type: 'pie',
                     name: 'All Accounts',
-                    data: context.accounts
+                    data: accounts
                 }]
             });
 

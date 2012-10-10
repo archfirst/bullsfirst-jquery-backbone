@@ -19,12 +19,43 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/views/TemplateManager'],
-       function(TemplateManager) {
+define(['bullsfirst/framework/MessageBus',
+        'bullsfirst/views/TemplateManager'],
+       function(MessageBus, TemplateManager) {
 
     return Backbone.View.extend({
 
         tagName: 'tr',
+
+        events: {
+            'mouseover': 'sendMouseOverMessage',
+            'mouseout': 'sendMouseOutMessage',
+            'click': 'sendClickMessage'
+        },
+
+        sendMouseOverMessage: function() {
+            MessageBus.trigger('AccountList:mouseover', this.model.id);
+        },
+
+        sendMouseOutMessage: function() {
+            MessageBus.trigger('AccountList:mouseout', this.model.id);
+        },
+
+        sendClickMessage: function() {
+            MessageBus.trigger('AccountList:click', this.model.id);
+        },
+
+        handleMouseOver: function() {
+            this.$el.addClass('selected');
+        },
+
+        handleMouseOut: function() {
+            this.$el.removeClass('selected');
+        },
+
+        handleClick: function() {
+            console.log('AccountView.handleClick: ' + this.model.id);
+        },
 
         render: function() {
             var account = this.model.toJSON();  // returns a copy of the model's attributes
