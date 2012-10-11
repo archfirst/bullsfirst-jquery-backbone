@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/Formatter',
-        'text!bullsfirst/templates/account.tpl'],
+        'text!bullsfirst/templates/account.txt'],
        function(Formatter, accountTemplate) {
 
     var templates;
