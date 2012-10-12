@@ -1,4 +1,7 @@
-﻿<td class="name">
+﻿<td class="left-column invisible">
+    <i class="icon-edit"></i>
+</td>
+<td class="name">
     {{name}}
 </td>
 <td class="market-value">
@@ -9,4 +12,6 @@
 </td>
 <td class="legend-cell">
     <div class="legend"></div>
+</td>
+<td class="right-column">
 </td>

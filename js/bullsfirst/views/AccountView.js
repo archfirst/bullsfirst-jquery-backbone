@@ -30,7 +30,8 @@ define(['bullsfirst/framework/MessageBus',
         events: {
             'mouseover': 'sendMouseOverMessage',
             'mouseout': 'sendMouseOutMessage',
-            'click': 'sendClickMessage'
+            'click': 'sendClickMessage',
+            'click .icon-edit': 'handleEditClick'
         },
 
         sendMouseOverMessage: function() {
@@ -45,12 +46,20 @@ define(['bullsfirst/framework/MessageBus',
             MessageBus.trigger('AccountList:click', this.model.id);
         },
 
+        handleEditClick: function() {
+            console.log('AccountView.handleEditClick: ' + this.model.id);
+            MessageBus.trigger('AccountList:editClick', this.model.id);
+            return false;
+        },
+
         handleMouseOver: function() {
             this.$el.addClass('selected');
+            this.$el.find('.left-column').removeClass('invisible');
         },
 
         handleMouseOut: function() {
             this.$el.removeClass('selected');
+            this.$el.find('.left-column').addClass('invisible');
         },
 
         handleClick: function() {

@@ -28,7 +28,7 @@
  * @colordef  #9E2B00; Dark Red (link - selected)
  * @colordef  #F04100; Orange (links and large buttons - normal state)
  * @colordef  #F36733; Light orange (links and buttons - rollover)
- * @colordef  #F47513; Orange (Medium buttons)
+ * @colordef  #F47513; Orange (Medium buttons, edit icon)
  * @colordef  #F8791B; Gold (Tab - normal state)
  * @colordef  #F89F1B; Gold (home page background, text selection)
  * @colordef  #F8E5C9; Cream (label text, table header text)
@@ -82,8 +82,12 @@ a:focus {
  * General Purpose Classes
  * -------------------------------------------------------------------------- */
 .nodisplay {
-    display:none;
-} 
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
  
 /* -----------------------------------------------------------------------------
  * Form Styles
@@ -187,14 +191,14 @@ a.button.large span  {
 /* -----------------------------------------------------------------------------
  * Tables
  * -------------------------------------------------------------------------- */
-.bf-table thead tr {
+.bf-table th {
     background-color: #8C8C8C;
     color: #F8E5C9;
     font: 11px/22px Aller;
     height: 22px;
 }
 
-.bf-table tbody tr {
+.bf-table td {
     border-bottom: 1px solid #E5E5E5;
     font: 200 12px/25px Aller;
     height: 25px;
@@ -537,7 +541,21 @@ a.button.large span  {
 
 #account-table {
     float: left;
-    margin: 56px 0 0 60px;
+    margin: 56px 0 0 30px;
+}
+
+#account-table tbody tr {
+    cursor: pointer;
+}
+
+#account-table .left-column {
+    background: none;
+    border: none;
+    color: #F47513;
+    font-size: 19px;
+    padding: 0;
+    text-align: center;
+    width: 30px;
 }
 
 #account-table .name {
@@ -564,10 +582,22 @@ a.button.large span  {
     width: 60px;
 }
 
+#account-table .right-column {
+    background: none;
+    border: none;
+    width: 20px;
+}
+
+/* Disable highlighting of left and right columns on selection */
+#account-table tbody tr.selected .left-column,
+#account-table tbody tr.selected .right-column {
+    background-color: #FFFFFF;
+}
+
 #accounts-chart {
     float: left;
     height: 303px;
-    margin: 56px 0 20px 20px;
+    margin: 56px 0 20px 0;
     width: 240px;
 }
 
