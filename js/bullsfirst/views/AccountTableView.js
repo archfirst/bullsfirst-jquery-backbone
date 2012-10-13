@@ -64,7 +64,7 @@ define(['bullsfirst/framework/MessageBus',
             // Create views for each account
             _.each(accounts, function(account, i) {
                 var view = new AccountView({model: account});
-                view.render().$el.find('.legend').addClass('color-' + (i%10));
+                view.render().$el.find('.legend').addClass('color-' + (i%10) + '-gradient');
                 this.$el.append(view.el);
                 this.childViews[account.id] = view;
             }, this);

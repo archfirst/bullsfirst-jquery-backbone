@@ -26,16 +26,16 @@ define(['bullsfirst/framework/MessageBus'],
     var accounts_subtitle = 'Click on an account to view positions';
     var MAX_POINTS = 10;
     var colors = [
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#fde79c'], [1, '#f6bc0c']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b9d6f7'], [1, '#284b70']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#fbb7b5'], [1, '#702828']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b8c0ac'], [1, '#5f7143']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#a9a3bd'], [1, '#382c6c']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#98c1dc'], [1, '#0271ae']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#9dc2b3'], [1, '#1d7554']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b1a1b1'], [1, '#50224f']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#c1c0ae'], [1, '#706e41']] },
-        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#adbdc0'], [1, '#446a73']] }
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#fde79c'], [1, '#f6bc0c']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#b9d6f7'], [1, '#284b70']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#fbb7b5'], [1, '#702828']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#b8c0ac'], [1, '#5f7143']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#a9a3bd'], [1, '#382c6c']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#98c1dc'], [1, '#0271ae']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#9dc2b3'], [1, '#1d7554']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#b1a1b1'], [1, '#50224f']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#c1c0ae'], [1, '#706e41']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1, gradientUnits: "objectBoundingBox"}, stops: [[0, '#adbdc0'], [1, '#446a73']] }
     ];
 
     return Backbone.View.extend({
@@ -125,6 +125,7 @@ define(['bullsfirst/framework/MessageBus'],
                             enabled: false  // disable labels on each pie
                         },
                         shadow: false,
+                        borderColor: 'none',
                         size: '95%',
                         point: {
                             events: {

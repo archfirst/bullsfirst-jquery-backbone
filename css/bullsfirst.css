@@ -43,11 +43,11 @@ p {
 }
 
 h1 {
-    font: 200 24px Aller;
+    font: normal normal 24px Aller;
 }
 
 h2 {
-    font: 200 16px Aller;
+    font: normal normal 16px Aller;
 }
 
 a {
@@ -85,10 +85,6 @@ a:focus {
     display: none;
 }
 
-.invisible {
-    visibility: hidden;
-}
- 
 /* -----------------------------------------------------------------------------
  * Form Styles
  * -------------------------------------------------------------------------- */
@@ -96,10 +92,10 @@ label {
     background-color: #666666;
     color: #F8E5C9;
     display: block;
-    font: 11px Aller;
-    height: 9px;
-    padding: 6px 9px 10px 7px;
-    width: 65px;
+    font: 11px/25px Aller;
+    height: 25px;
+    padding-left: 9px;
+    width: 71px;
 }
 
 input[type="text"], input[type="password"] {
@@ -194,13 +190,13 @@ a.button.large span  {
 .bf-table th {
     background-color: #8C8C8C;
     color: #F8E5C9;
-    font: 11px/22px Aller;
+    font: bold normal 11px/22px Aller;
     height: 22px;
 }
 
 .bf-table td {
     border-bottom: 1px solid #E5E5E5;
-    font: 200 12px/25px Aller;
+    font: normal normal 12px/25px Aller;
     height: 25px;
 }
 
@@ -398,7 +394,7 @@ a.button.large span  {
     left: 477px;
     position: absolute;
     top: 108px;
-    width: 353px;
+    width: 380px;
 }
 
 #home-page #intro-section h1 {
@@ -407,12 +403,11 @@ a.button.large span  {
 }
 
 #home-page #intro-section h2 {
-    margin: 5px 0 15px 0;
+    margin: 7px 0 15px 0;
 }
 
 #home-page #intro-section p.features, #home-page #intro-section ul {
-    font: 200 16px Aller;
-    line-height: 26px;
+    font: 16px/26px Aller;
 }
 
 #home-page #intro-section ul {
@@ -426,7 +421,7 @@ a.button.large span  {
 #home-page #intro-section p.open-account {
     background: url(../img/popsicle.png) no-repeat right center;
     line-height: 30px;
-    margin-top: 16px;
+    margin-top: 18px;
     width: 137px;
 }
 
@@ -463,13 +458,18 @@ a.button.large span  {
 }
 
 #user-page .user-info span {
-    font-size: 11px;
+    font-size: 12px;
     font-style: italic;
     margin-right: 2px;
 }
 
+#user-page .user-info img {
+    position: relative;
+    top: -1px;
+}
+
 #user-page .user-info a {
-    font-size: 11px;
+    font-size: 12px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -505,6 +505,10 @@ a.button.large span  {
     text-align: center;
 }
 
+.tabbar ul li a:hover {
+    background-color: #F36733;
+}
+
 .tabbar ul li a.selected {
     background-color: #FFFFFF;
     color: #000000;
@@ -525,9 +529,8 @@ a.button.large span  {
  * User Page - Accounts Tab
  * -------------------------------------------------------------------------- */
 #accounts-tab h1 {
-    font-size: 18px;
+    font: normal normal 18px/18px Aller;
     left: 60px;
-    line-height: 18px;
     margin: 0px;
     position: absolute;
     top: 30px;
@@ -606,7 +609,7 @@ a.button.large span  {
  * -------------------------------------------------------------------------- */
 #positions-tab h1 {
     float: left;
-    font-size: 18px;
+    font: normal normal 18px/18px Aller;
     margin: 30px 0 10px 60px;
 }
 
@@ -615,7 +618,7 @@ a.button.large span  {
  * -------------------------------------------------------------------------- */
 #orders-tab h1 {
     float: left;
-    font-size: 18px;
+    font: normal normal 18px/18px Aller;
     margin: 30px 0 10px 60px;
 }
 
@@ -624,7 +627,7 @@ a.button.large span  {
  * -------------------------------------------------------------------------- */
 #transactions-tab h1 {
     float: left;
-    font-size: 18px;
+    font: normal normal 18px/18px Aller;
     margin: 30px 0 10px 60px;
 }
 
