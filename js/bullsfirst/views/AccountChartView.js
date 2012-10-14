@@ -105,7 +105,7 @@ define(['bullsfirst/framework/MessageBus'],
                     align: 'left',
                     verticalAlign: 'bottom',
                     style: {
-                        font: '200 italic 11px Aller',
+                        font: 'italic 11px Aller',
                         color: '#3F3F3F'
                     },
                     floating: true,

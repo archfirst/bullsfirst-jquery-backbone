@@ -21,8 +21,9 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/AccountChartView',
-        'bullsfirst/views/AccountTableView'],
-       function(UserContext, AccountChartView, AccountTableView) {
+        'bullsfirst/views/AccountTableView',
+        'bullsfirst/views/AccountTotalsView'],
+       function(UserContext, AccountChartView, AccountTableView, AccountTotalsView) {
 
     return Backbone.View.extend({
 
@@ -35,6 +36,7 @@ define(['bullsfirst/domain/UserContext',
 
         initialize: function(options) {
             new AccountTableView({collection: UserContext.getBrokerageAccounts()});
+            new AccountTotalsView({collection: UserContext.getBrokerageAccounts()});
             new AccountChartView({collection: UserContext.getBrokerageAccounts()});
         },
 
