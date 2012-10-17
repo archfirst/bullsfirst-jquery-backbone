@@ -30,8 +30,11 @@ define(['bullsfirst/framework/MessageBus',
         events: {
             'mouseover': 'sendMouseOverMessage',
             'mouseout': 'sendMouseOutMessage',
-            'click': 'sendClickMessage',
-            'click .icon-edit': 'handleEditClick'
+            'click': 'sendDrillDownkMessage',
+            'click .icon-edit': 'handleEditClick',
+            'click .icon-save': 'saveName',
+            'keypress .edit':	'saveNameOnEnter',
+            'blur .edit': 'stopEditing'
         },
 
         sendMouseOverMessage: function() {
@@ -42,14 +45,30 @@ define(['bullsfirst/framework/MessageBus',
             MessageBus.trigger('AccountList:mouseout', this.model.id);
         },
 
-        sendClickMessage: function() {
-            MessageBus.trigger('AccountList:click', this.model.id);
+        sendDrillDownkMessage: function() {
+            MessageBus.trigger('AccountList:drillDown', this.model.id);
         },
 
         handleEditClick: function() {
-            console.log('AccountView.handleEditClick: ' + this.model.id);
-            MessageBus.trigger('AccountList:editClick', this.model.id);
+            this.$el.find('.name').addClass('editing');
+            this.$el.find('input').focus();
+            MessageBus.trigger('AccountList:editingAccount', this.model.id);
             return false;
+        },
+
+        saveName: function() {
+            console.log('Save name');
+            this.stopEditing();
+        },
+
+        saveNameOnEnter: function(e) {
+            if (e.which === ENTER_KEY) {
+                this.saveName();
+            }
+        },
+
+        stopEditing: function() {
+            this.$el.find('.name').removeClass('editing');
         },
 
         handleMouseOver: function() {
@@ -62,8 +81,8 @@ define(['bullsfirst/framework/MessageBus',
             this.$el.find('.left-column').addClass('invisible');
         },
 
-        handleClick: function() {
-            console.log('AccountView.handleClick: ' + this.model.id);
+        handleDrillDown: function() {
+            console.log('AccountView.handleDrillDown: ' + this.model.id);
         },
 
         render: function() {

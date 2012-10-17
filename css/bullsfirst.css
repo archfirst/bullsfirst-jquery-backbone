@@ -570,6 +570,21 @@ a.button.large span  {
     width: 200px;
 }
 
+#account-table .name .edit input {
+    height: 17px;
+    margin: 0;
+    width: 160px;
+}
+
+#account-table .name .edit i {
+    background: none;
+    border: none;
+    color: #F47513;
+    font-size: 19px;
+    text-align: center;
+    width: 30px;
+}
+
 #account-table .market-value {
     padding-left: 5px;
     text-align: right;
@@ -614,6 +629,22 @@ a.button.large span  {
 /* Footer text is bold */
 #account-table tfoot tr:last-child td {
     font: bold normal 12px/25px Aller;
+}
+
+/* Enable viewing of name in view mode */
+#account-table tbody td.name .view {
+    display: block;
+}
+#account-table tbody td.name .edit {
+    display: none;
+}
+
+/* Enable editing of name in edit mode */
+#account-table tbody td.name.editing .view {
+    display: none;
+}
+#account-table tbody td.name.editing .edit {
+    display: block;
 }
 
 #accounts-chart {

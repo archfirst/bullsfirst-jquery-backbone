@@ -50,7 +50,7 @@ define(['bullsfirst/framework/MessageBus'],
             // Subscribe to events
             MessageBus.on('AccountList:mouseover', this.handleMouseOver, this);
             MessageBus.on('AccountList:mouseout', this.handleMouseOut, this);
-            MessageBus.on('AccountList:click', this.handleClick, this);
+            MessageBus.on('AccountList:drillDown', this.handleDrillDown, this);
         },
 
         handleMouseOver: function(accountId) {
@@ -61,8 +61,8 @@ define(['bullsfirst/framework/MessageBus'],
             this.chart.get(accountId).select(false);
         },
 
-        handleClick: function(accountId) {
-            console.log('click: ' + accountId);
+        handleDrillDown: function(accountId) {
+            console.log('Drill down: ' + accountId);
         },
 
         render: function() {
@@ -136,7 +136,7 @@ define(['bullsfirst/framework/MessageBus'],
                                     MessageBus.trigger('AccountList:mouseout', event.currentTarget.id);
                                 },
                                 click: function(event) {
-                                    MessageBus.trigger('AccountList:click', event.currentTarget.id);
+                                    MessageBus.trigger('AccountList:drillDown', event.currentTarget.id);
                                 }
                             }
                         }

@@ -2,7 +2,11 @@
     <i class="icon-edit"></i>
 </td>
 <td class="name">
-    {{name}}
+    <div class="view">{{name}}</div>
+	<div class="edit">
+        <input type="text" value="{{name}}">
+		<i class="icon-save"></i>
+    </div>
 </td>
 <td class="market-value">
     {{formatMoney marketValue}}
