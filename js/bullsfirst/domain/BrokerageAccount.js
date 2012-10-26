@@ -45,7 +45,7 @@ define(['bullsfirst/domain/Position',
 
             var positionCollection = new Positions();
 
-            positionArray.forEach(function(rawPosition) {
+            _.each(positionArray, function(rawPosition) {
                 if (typeof rawPosition.children !== 'undefined') {
                     rawPosition.children = this.positionArrayToCollection(rawPosition.children);
                 };

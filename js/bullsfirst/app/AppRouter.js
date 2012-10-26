@@ -20,10 +20,11 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/HomePage',
         'bullsfirst/views/UserPage'],
-       function(UserContext, MessageBus, HomePage, UserPage) {
+       function(UserContext, Message, MessageBus, HomePage, UserPage) {
     return Backbone.Router.extend({
 
         pages: {},
@@ -45,7 +46,7 @@ define(['bullsfirst/domain/UserContext',
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {
                 MessageBus.trigger(
-                    'TabSelectionRequest',
+                    Message.TabSelectionRequest,
                     { tabbar: 'user', tab: this.startTab + '-tab' });
             }, this);
             MessageBus.on('UserLoggedOutEvent', function() {
@@ -53,7 +54,7 @@ define(['bullsfirst/domain/UserContext',
                 this.navigate('');
                 window.location.reload();
             }, this);
-            MessageBus.on('TabSelectionRequest', function(tabInfo) {
+            MessageBus.on(Message.TabSelectionRequest, function(tabInfo) {
                 var tabName = tabInfo.tab.replace('-tab', ''); // strip -tab at the end
                 this.navigate(tabInfo.tabbar + '/' + tabName, {trigger: true});
             }, this);

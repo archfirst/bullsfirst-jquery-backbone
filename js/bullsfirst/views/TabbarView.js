@@ -19,8 +19,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus'],
-       function(MessageBus) {
+define(['bullsfirst/framework/Message',
+        'bullsfirst/framework/MessageBus'],
+       function(Message, MessageBus) {
 
     return Backbone.View.extend({
         events: {
@@ -29,13 +30,13 @@ define(['bullsfirst/framework/MessageBus'],
 
         initialize: function() {
             // Subscribe to events
-            MessageBus.on('TabSelectionRequest', this.selectTab, this);
+            MessageBus.on(Message.TabSelectionRequest, this.selectTab, this);
         },
 
         handleClick: function(event) {
             event.preventDefault();
             MessageBus.trigger(
-                'TabSelectionRequest',
+                Message.TabSelectionRequest,
                 { tabbar: this.$el.data('tabbar'), tab: $(event.target).data('tab') });
             return false;
         },

@@ -31,10 +31,10 @@ define(['bullsfirst/framework/MessageBus',
             'mouseover': 'sendMouseOverMessage',
             'mouseout': 'sendMouseOutMessage',
             'click': 'sendDrillDownkMessage',
-            'click .icon-edit': 'handleEditClick',
+            'click .icon-edit': 'startEditing',
+            'blur .edit': 'stopEditing',
             'click .icon-save': 'saveName',
-            'keypress .edit':	'saveNameOnEnter',
-            'blur .edit': 'stopEditing'
+            'keypress .edit':	'saveNameOnEnter'
         },
 
         sendMouseOverMessage: function() {
@@ -49,10 +49,16 @@ define(['bullsfirst/framework/MessageBus',
             MessageBus.trigger('AccountList:drillDown', this.model.id);
         },
 
-        handleEditClick: function() {
+        startEditing: function() {
             this.$el.find('.name').addClass('editing');
             this.$el.find('input').focus();
-            MessageBus.trigger('AccountList:editingAccount', this.model.id);
+            MessageBus.trigger('AccountList:startEditing', this.model.id);
+            return false;
+        },
+
+        stopEditing: function() {
+            this.$el.find('.name').removeClass('editing');
+            MessageBus.trigger('AccountList:stopEditing', this.model.id);
             return false;
         },
 
@@ -61,14 +67,11 @@ define(['bullsfirst/framework/MessageBus',
             this.stopEditing();
         },
 
-        saveNameOnEnter: function(e) {
-            if (e.which === ENTER_KEY) {
+        saveNameOnEnter: function(event) {
+            if (event.keyCode == $.ui.keyCode.ENTER) {
                 this.saveName();
+                return false;
             }
-        },
-
-        stopEditing: function() {
-            this.$el.find('.name').removeClass('editing');
         },
 
         handleMouseOver: function() {
