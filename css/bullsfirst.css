@@ -582,6 +582,7 @@ a.button.large span  {
     color: #F47513;
     font-size: 19px;
     text-align: center;
+    vertical-align: bottom;
     width: 30px;
 }
 

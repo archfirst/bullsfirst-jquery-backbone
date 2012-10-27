@@ -19,9 +19,12 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus',
+define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/MessageBus',
+        'bullsfirst/services/AccountService',
         'bullsfirst/views/TemplateManager'],
-       function(MessageBus, TemplateManager) {
+       function(UserContext, ErrorUtil, MessageBus, AccountService, TemplateManager) {
 
     return Backbone.View.extend({
 
@@ -32,9 +35,8 @@ define(['bullsfirst/framework/MessageBus',
             'mouseout': 'sendMouseOutMessage',
             'click': 'sendDrillDownkMessage',
             'click .icon-edit': 'startEditing',
-            'blur .edit': 'stopEditing',
-            'click .icon-save': 'saveName',
-            'keypress .edit':	'saveNameOnEnter'
+            'click .icon-save': 'validateInput',
+            'keypress .edit': 'handleKeyPress',
         },
 
         sendMouseOverMessage: function() {
@@ -51,7 +53,7 @@ define(['bullsfirst/framework/MessageBus',
 
         startEditing: function() {
             this.$el.find('.name').addClass('editing');
-            this.$el.find('input').focus();
+            this.$el.find('.nameField').val(this.model.get('name')).focus();
             MessageBus.trigger('AccountList:startEditing', this.model.id);
             return false;
         },
@@ -62,16 +64,30 @@ define(['bullsfirst/framework/MessageBus',
             return false;
         },
 
-        saveName: function() {
-            console.log('Save name');
-            this.stopEditing();
-        },
-
-        saveNameOnEnter: function(event) {
+        handleKeyPress: function(event) {
             if (event.keyCode == $.ui.keyCode.ENTER) {
-                this.saveName();
+                this.validateInput();
                 return false;
             }
+            else if (event.keyCode == $.ui.keyCode.ESCAPE) {
+                this.stopEditing();
+                return false;
+            }
+        },
+
+        validateInput: function() {
+            var newName = this.$el.find('.nameField').val();
+            if (typeof newName !== 'undefined' && newName != null && newName.length > 0) {
+                this.stopEditing();
+
+                // Change name of brokerage account
+                AccountService.changeName(
+                    this.model.id, this.$el.find('.nameField').val(), this.changeNameDone, ErrorUtil.showError);
+            }
+        },
+
+        changeNameDone: function(data, textStatus, jqXHR) {
+            UserContext.updateAccounts();
         },
 
         handleMouseOver: function() {
