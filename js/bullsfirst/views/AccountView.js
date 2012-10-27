@@ -34,9 +34,9 @@ define(['bullsfirst/domain/UserContext',
             'mouseover': 'sendMouseOverMessage',
             'mouseout': 'sendMouseOutMessage',
             'click': 'sendDrillDownkMessage',
-            'click .icon-edit': 'startEditing',
+            'click .left-column': 'startEditing', /* click on icon-edit is not detected on chrome */
             'click .icon-save': 'validateInput',
-            'keypress .edit': 'handleKeyPress',
+            'keydown .nameField': 'handleKeyDown' /* keypress for Escape is not detected on chrome */
         },
 
         sendMouseOverMessage: function() {
@@ -64,7 +64,7 @@ define(['bullsfirst/domain/UserContext',
             return false;
         },
 
-        handleKeyPress: function(event) {
+        handleKeyDown: function(event) {
             if (event.keyCode == $.ui.keyCode.ENTER) {
                 this.validateInput();
                 return false;
@@ -92,12 +92,12 @@ define(['bullsfirst/domain/UserContext',
 
         handleMouseOver: function() {
             this.$el.addClass('selected');
-            this.$el.find('.left-column').removeClass('invisible');
+            this.$el.find('.icon-edit').removeClass('invisible');
         },
 
         handleMouseOut: function() {
             this.$el.removeClass('selected');
-            this.$el.find('.left-column').addClass('invisible');
+            this.$el.find('.icon-edit').addClass('invisible');
         },
 
         handleDrillDown: function() {

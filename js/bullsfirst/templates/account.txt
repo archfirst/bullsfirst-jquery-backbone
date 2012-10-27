@@ -1,5 +1,5 @@
-﻿<td class="left-column invisible">
-    <i class="icon-edit"></i>
+﻿<td class="left-column">
+    <i class="icon-edit invisible"></i>
 </td>
 <td class="name">
     <div class="view">{{name}}</div>
