@@ -19,8 +19,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus'],
-       function(MessageBus) {
+define(['bullsfirst/framework/Message',
+        'bullsfirst/framework/MessageBus'],
+       function(Message, MessageBus) {
 
     var accounts_title = 'All Accounts';
     var accounts_subtitle = 'Click on an account to view positions';
@@ -48,9 +49,9 @@ define(['bullsfirst/framework/MessageBus'],
             this.collection.bind('reset', this.render, this);
 
             // Subscribe to events
-            MessageBus.on('AccountList:mouseover', this.handleMouseOver, this);
-            MessageBus.on('AccountList:mouseout', this.handleMouseOut, this);
-            MessageBus.on('AccountList:drillDown', this.handleDrillDown, this);
+            MessageBus.on(Message.AccountListMouseOver, this.handleMouseOver, this);
+            MessageBus.on(Message.AccountListMouseOut, this.handleMouseOut, this);
+            MessageBus.on(Message.AccountListDrillDown, this.handleDrillDown, this);
         },
 
         handleMouseOver: function(accountId) {
@@ -130,13 +131,13 @@ define(['bullsfirst/framework/MessageBus'],
                         point: {
                             events: {
                                 mouseOver: function(event) {
-                                    MessageBus.trigger('AccountList:mouseover', event.currentTarget.id);
+                                    MessageBus.trigger(Message.AccountListMouseOver, event.currentTarget.id);
                                 },
                                 mouseOut: function(event) {
-                                    MessageBus.trigger('AccountList:mouseout', event.currentTarget.id);
+                                    MessageBus.trigger(Message.AccountListMouseOut, event.currentTarget.id);
                                 },
                                 click: function(event) {
-                                    MessageBus.trigger('AccountList:drillDown', event.currentTarget.id);
+                                    MessageBus.trigger(Message.AccountListDrillDown, event.currentTarget.id);
                                 }
                             }
                         }

@@ -19,9 +19,10 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus',
+define(['bullsfirst/framework/Message',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/views/AccountView'],
-       function(MessageBus, AccountView) {
+       function(Message, MessageBus, AccountView) {
 
     return Backbone.View.extend({
 
@@ -34,9 +35,9 @@ define(['bullsfirst/framework/MessageBus',
             this.collection.bind('reset', this.render, this);
 
             // Subscribe to events
-            MessageBus.on('AccountList:mouseover', this.handleMouseOver, this);
-            MessageBus.on('AccountList:mouseout', this.handleMouseOut, this);
-            MessageBus.on('AccountList:drillDown', this.handleDrillDown, this);
+            MessageBus.on(Message.AccountListMouseOver, this.handleMouseOver, this);
+            MessageBus.on(Message.AccountListMouseOut, this.handleMouseOut, this);
+            MessageBus.on(Message.AccountListDrillDown, this.handleDrillDown, this);
         },
 
         handleMouseOver: function(accountId) {

@@ -21,10 +21,11 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/services/AccountService',
         'bullsfirst/views/TemplateManager'],
-       function(UserContext, ErrorUtil, MessageBus, AccountService, TemplateManager) {
+       function(UserContext, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {
 
     return Backbone.View.extend({
 
@@ -40,27 +41,27 @@ define(['bullsfirst/domain/UserContext',
         },
 
         sendMouseOverMessage: function() {
-            MessageBus.trigger('AccountList:mouseover', this.model.id);
+            MessageBus.trigger(Message.AccountListMouseOver, this.model.id);
         },
 
         sendMouseOutMessage: function() {
-            MessageBus.trigger('AccountList:mouseout', this.model.id);
+            MessageBus.trigger(Message.AccountListMouseOut, this.model.id);
         },
 
         sendDrillDownkMessage: function() {
-            MessageBus.trigger('AccountList:drillDown', this.model.id);
+            MessageBus.trigger(Message.AccountListDrillDown, this.model.id);
         },
 
         startEditing: function() {
             this.$el.find('.name').addClass('editing');
             this.$el.find('.nameField').val(this.model.get('name')).focus();
-            MessageBus.trigger('AccountList:startEditing', this.model.id);
+            MessageBus.trigger(Message.AccountListStartEditing, this.model.id);
             return false;
         },
 
         stopEditing: function() {
             this.$el.find('.name').removeClass('editing');
-            MessageBus.trigger('AccountList:stopEditing', this.model.id);
+            MessageBus.trigger(Message.AccountListStopEditing, this.model.id);
             return false;
         },
 

@@ -20,6 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/views/AccountsTabView',
@@ -28,7 +29,7 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/TabbarView',
         'bullsfirst/views/TransactionsTabView',
         'bullsfirst/views/UsernameView'],
-       function(UserContext, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView, UsernameView) {
+       function(UserContext, Message, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView, UsernameView) {
 
     return Page.extend({
         el: '#user-page',
@@ -48,14 +49,14 @@ define(['bullsfirst/domain/UserContext',
             new TransactionsTabView();
 
             // Subscribe to events
-            MessageBus.on('UserLoggedInEvent', function() {
+            MessageBus.on(Message.UserLoggedInEvent, function() {
                 UserContext.updateAccounts();
             });
         },
 
         logout: function() {
             UserContext.reset();
-            MessageBus.trigger('UserLoggedOutEvent');
+            MessageBus.trigger(Message.UserLoggedOutEvent);
             return false;
         },
 

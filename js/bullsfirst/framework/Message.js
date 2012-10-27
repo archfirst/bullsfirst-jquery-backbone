@@ -22,5 +22,13 @@
  * @author Naresh Bhatia
  */
 define({
+    AccountListDrillDown: 'AccountList:drillDown',
+    AccountListMouseOut: 'AccountList:mouseout',
+    AccountListMouseOver: 'AccountList:mouseover',
+    AccountListStartEditing: 'AccountList:startEditing',
+    AccountListStopEditing: 'AccountList:stopEditing',
+    SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
+    UserLoggedInEvent: 'UserLoggedInEvent',
+    UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

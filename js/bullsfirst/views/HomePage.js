@@ -22,10 +22,11 @@
 define(['bullsfirst/domain/Credentials',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/services/UserService'],
-       function(Credentials, UserContext, ErrorUtil, MessageBus, Page, UserService) {
+       function(Credentials, UserContext, ErrorUtil, Message, MessageBus, Page, UserService) {
     return Page.extend({
         el: '#home-page',
 
@@ -60,7 +61,7 @@ define(['bullsfirst/domain/Credentials',
             UserContext.initCredentials(this.form2Credentials());
 
             $('#password')[0].value = ''; // erase password from form
-            MessageBus.trigger('UserLoggedInEvent');
+            MessageBus.trigger(Message.UserLoggedInEvent);
         },
 
         openAccount: function() {

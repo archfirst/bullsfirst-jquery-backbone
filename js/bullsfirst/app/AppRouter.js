@@ -44,12 +44,12 @@ define(['bullsfirst/domain/UserContext',
             };
 
             // Subscribe to events
-            MessageBus.on('UserLoggedInEvent', function() {
+            MessageBus.on(Message.UserLoggedInEvent, function() {
                 MessageBus.trigger(
                     Message.TabSelectionRequest,
                     { tabbar: 'user', tab: this.startTab + '-tab' });
             }, this);
-            MessageBus.on('UserLoggedOutEvent', function() {
+            MessageBus.on(Message.UserLoggedOutEvent, function() {
                 // Do a full page refresh to start from scratch
                 this.navigate('');
                 window.location.reload();

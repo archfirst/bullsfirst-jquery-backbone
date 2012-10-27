@@ -32,8 +32,9 @@ define(['bullsfirst/domain/BaseAccount',
         'bullsfirst/domain/User',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Formatter',
+        'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus'],
-       function(BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus) {
+       function(BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, Message, MessageBus) {
 
     // Module level variables act as singletons
     var _user = new User();
@@ -63,7 +64,7 @@ define(['bullsfirst/domain/BaseAccount',
 
         setSelectedAccount: function(account) {
             _selectedAccount = account;
-            MessageBus.trigger('SelectedAccountChanged', _selectedAccount);
+            MessageBus.trigger(Message.SelectedAccountChanged, _selectedAccount);
         },
 
         setSelectedAccountId: function(accountId) {
