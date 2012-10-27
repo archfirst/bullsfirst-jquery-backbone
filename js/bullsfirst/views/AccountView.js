@@ -61,6 +61,7 @@ define(['bullsfirst/domain/UserContext',
 
         stopEditing: function() {
             this.$el.find('.name').removeClass('editing');
+            this.handleMouseOut(); // force deselection of this account in case cursor is on some other account
             MessageBus.trigger(Message.AccountListStopEditing, this.model.id);
             return false;
         },

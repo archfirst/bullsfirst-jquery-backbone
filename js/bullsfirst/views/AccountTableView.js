@@ -31,6 +31,8 @@ define(['bullsfirst/framework/Message',
         // map of accountId to AccountView
         childViews: {},
 
+        editMode: false,
+
         initialize: function(options) {
             this.collection.bind('reset', this.render, this);
 
@@ -38,18 +40,26 @@ define(['bullsfirst/framework/Message',
             MessageBus.on(Message.AccountListMouseOver, this.handleMouseOver, this);
             MessageBus.on(Message.AccountListMouseOut, this.handleMouseOut, this);
             MessageBus.on(Message.AccountListDrillDown, this.handleDrillDown, this);
+            MessageBus.on(Message.AccountListStartEditing, function() {this.editMode = true; }, this);
+            MessageBus.on(Message.AccountListStopEditing, function() {this.editMode = false; }, this);
         },
 
         handleMouseOver: function(accountId) {
-            this.childViews[accountId].handleMouseOver();
+            if (!this.editMode) {
+                this.childViews[accountId].handleMouseOver();
+            }
         },
 
         handleMouseOut: function(accountId) {
-            this.childViews[accountId].handleMouseOut();
+            if (!this.editMode) {
+                this.childViews[accountId].handleMouseOut();
+            }
         },
 
         handleDrillDown: function(accountId) {
-            this.childViews[accountId].handleDrillDown();
+            if (!this.editMode) {
+                this.childViews[accountId].handleDrillDown();
+            }
         },
 
         render: function() {
