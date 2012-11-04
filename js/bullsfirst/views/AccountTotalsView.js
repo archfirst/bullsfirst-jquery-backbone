@@ -27,7 +27,7 @@ define(['bullsfirst/framework/Formatter'],
         el: '#account-table tfoot',
 
         initialize: function(options) {
-            this.collection.bind('reset', this.render, this);
+            this.collection.on('reset', this.render, this);
         },
 
         render: function() {

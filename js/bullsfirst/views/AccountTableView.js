@@ -34,7 +34,7 @@ define(['bullsfirst/framework/Message',
         editMode: false,
 
         initialize: function(options) {
-            this.collection.bind('reset', this.render, this);
+            this.collection.on('reset', this.render, this);
 
             // Subscribe to events
             MessageBus.on(Message.AccountListMouseOver, this.handleMouseOver, this);
