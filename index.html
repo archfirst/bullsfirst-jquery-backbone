@@ -155,14 +155,49 @@
                         </tr>
                     </tfoot>
                 </table>
-
                 <div id="accounts-chart"></div>
+            
             </section>
 
             <!-- Positions Tab -->
             <section id="positions-tab" class="tab clearfix nodisplay">
-                <h1>Positions</h1>
+
+                <div class="select-bar">
+                    <select id="postab-account-selector"></select>
+                </div>                 
+
+                <div class="button-bar">
+                    <a id="pos-update" class="button medium" href="#">
+                        <img src="img/refresh-icon.png" alt="Refresh Accounts" />
+                        Refresh
+                    </a>
+                </div>
+
+
+                <h1>Positions for <strong><span id="postab-selected-account-name"></span></strong></h1>
+
+                <table id="positions-table" class="bf-table zebra">
+                    <thead>
+                        <tr>
+                            <th class="pos_tbl_name">Name</th>
+                            <th class="pos_tbl_symbol">Symbol</th>
+                            <th class="pos_tbl_quantity pull-right">Quantity</th>
+                            <th class="pos_tbl_last_trade pull-right">Last Trade</th>
+                            <th class="pos_tbl_market_value pull-right">Market Value</th>
+                            <th class="pos_tbl_price_paid pull-right">Price Paid</th>
+                            <th class="pos_tbl_total_cost pull-right">Total Cost</th>
+                            <th class="pos_tbl_gain pull-right">Gain</th>
+                            <th class="pos_tbl_gain_percent pull-right">Gain %</th>
+                            <th class="pos_tbl_actions center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+    
+
             </section>
+
+
 
             <!-- Orders Tab -->
             <section id="orders-tab" class="tab clearfix nodisplay">

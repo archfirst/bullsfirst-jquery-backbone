@@ -22,9 +22,17 @@
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/HomePage',
-        'bullsfirst/views/UserPage'],
-       function(UserContext, MessageBus, HomePage, UserPage) {
+        'bullsfirst/views/UserPage',
+        'bullsfirst/domain/Credentials',
+        'bullsfirst/services/UserService'],
+       function(UserContext, MessageBus, HomePage, UserPage, Credentials, UserService) {
     return Backbone.Router.extend({
+
+        debug: {
+            username: null, 
+            password: null,
+            tab: null
+        },
 
         pages: {},
 
@@ -34,7 +42,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         // Tab displayed on user login (can change when user enters a bookmarked URL)
-        startTab: 'accounts',
+        startTab: 'positions',
 
         initialize: function() {
             this.pages = {
@@ -65,6 +73,10 @@ define(['bullsfirst/domain/UserContext',
 
         showUserPage: function(tab) {
             // Show user page only if user is logged in
+            if(this.debug.username != null){
+                UserContext.getCredentials().set({username: this.debug.username, password:this.debug.password});
+            }
+
             if (UserContext.isUserLoggedIn()) {
                 this.showPage(this.pages['user']);
                 this.pages['user'].selectTab(tab + '-tab');
@@ -78,7 +90,24 @@ define(['bullsfirst/domain/UserContext',
         },
 
         showPage: function(page) {
-            // if page is already visible, do nothing
+            
+            if(this.debug.username != null){
+                c = new Credentials(this.debug.username, this.debug.password);
+                UserService.getUser(
+                    c, 
+                    $.proxy(
+                    function(data){
+                        UserContext.initUser(data);
+                        UserContext.initCredentials(c);
+                        console.log()
+                        //MessageBus.trigger('TabSelectionRequest', {tabbar:'user', tab: this.debug.tab + "-tab"});
+                        MessageBus.trigger('UserLoggedInEvent');
+                    }, this),
+                    function(){ alert("login error"); }
+                );
+            }
+            
+           // if page is already visible, do nothing
             if (page.isVisible()) return;
 
             // else hide all pages and show the desired one

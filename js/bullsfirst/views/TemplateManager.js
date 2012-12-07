@@ -20,8 +20,10 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/Formatter',
-        'text!bullsfirst/templates/account.txt'],
-       function(Formatter, accountTemplate) {
+        'text!bullsfirst/templates/account-selector.txt',
+        'text!bullsfirst/templates/account.txt',
+        'text!bullsfirst/templates/position.txt'],
+       function(Formatter, accountSelector, accountTemplate, positionTemplate) {
 
     var templates;
 
@@ -29,7 +31,9 @@ define(['bullsfirst/framework/Formatter',
         initialize: function() {
             this._registerHelpers();
             this.templates = {
-                'account': Handlebars.compile(accountTemplate)
+                'account-selector': Handlebars.compile(accountSelector),
+                'account': Handlebars.compile(accountTemplate),
+                'position': Handlebars.compile(positionTemplate)
             };
         },
 
