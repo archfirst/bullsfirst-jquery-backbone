@@ -37,11 +37,6 @@ define(['bullsfirst/app/AppRouter',
 
     // Create the router
     var _appRouter = new AppRouter();
-
-    // force username/password to allow page reloads
-    _appRouter.debug.username = "wflintstone";
-    _appRouter.debug.password = "cool";
-    _appRouter.debug.tab = "positions";
     
     
     // Begin monitoring hashchange events and dispatching routes.
