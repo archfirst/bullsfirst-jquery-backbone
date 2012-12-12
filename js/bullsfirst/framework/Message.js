@@ -22,11 +22,14 @@
  * @author Naresh Bhatia
  */
 define({
-    AccountListDrillDown: 'AccountList:drillDown',
-    AccountListMouseOut: 'AccountList:mouseout',
-    AccountListMouseOver: 'AccountList:mouseover',
-    AccountListStartEditing: 'AccountList:startEditing',
-    AccountListStopEditing: 'AccountList:stopEditing',
+    AccountClickRaw: 'Account:clickRaw',
+    AccountClick: 'Account:click',
+    AccountMouseOutRaw: 'Account:mouseoutRaw',
+    AccountMouseOut: 'Account:mouseout',
+    AccountMouseOverRaw: 'Account:mouseoverRaw',
+    AccountMouseOver: 'Account:mouseover',
+    AccountClickEditIconRaw: 'Account:clickEditIconRaw',
+    AccountStoppedEditing: 'Account:stoppedEditing',
     SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
     UserLoggedInEvent: 'UserLoggedInEvent',

@@ -131,30 +131,65 @@
                     </a>
                 </div>
 
-                <table id="account-table" class="bf-table">
-                    <thead>
-                        <tr>
-                            <th class="left-column"></th>
-                            <th class="name">NAME</th>
-                            <th class="market-value">MARKET VALUE</th>
-                            <th class="cash">CASH</th>
-                            <th class="legend-cell">LEGEND</th>
-                            <th class="right-column"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td class="left-column"></td>
-                            <td class="name"></td>
-                            <td class="market-value"></td>
-                            <td class="cash"></td>
-                            <td class="legend-cell"></td>
-                            <td class="right-column"></td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div id="account-table-clipped-wrapper">
+                    <div id="account-table-unclipped-wrapper">
+                        <div class="account-table-transitioning-view">
+                            <table id="account-table" class="bf-table">
+                                <thead>
+                                    <tr>
+                                        <th class="left-column"></th>
+                                        <th class="name">NAME</th>
+                                        <th class="market-value">MARKET VALUE</th>
+                                        <th class="cash">CASH</th>
+                                        <th class="legend-cell">LEGEND</th>
+                                        <th class="right-column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="left-column"></td>
+                                        <td class="name"></td>
+                                        <td class="market-value"></td>
+                                        <td class="cash"></td>
+                                        <td class="legend-cell"></td>
+                                        <td class="right-column"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="account-table-transitioning-view">
+                            <table id="account-detail-table" class="bf-table">
+                                <thead>
+                                    <tr>
+                                        <th class="left-column"></th>
+                                        <th class="name">NAME</th>
+                                        <th class="market-value">MARKET VALUE</th>
+                                        <th class="cash">CASH</th>
+                                        <th class="legend-cell">LEGEND</th>
+                                        <th class="right-column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="left-column"></td>
+                                        <td class="name">test</td>
+                                        <td class="market-value">test</td>
+                                        <td class="cash">test</td>
+                                        <td class="legend-cell">test</td>
+                                        <td class="right-column"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div> <!-- account-table-unclipped-wrapper -->
+                </div> <!-- account-table-clipped-wrapper -->
+
 
                 <div id="accounts-chart"></div>
             </section>

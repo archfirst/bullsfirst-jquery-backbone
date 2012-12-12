@@ -49,9 +49,8 @@ define(['bullsfirst/framework/Message',
             this.collection.on('reset', this.render, this);
 
             // Subscribe to events
-            MessageBus.on(Message.AccountListMouseOver, this.handleMouseOver, this);
-            MessageBus.on(Message.AccountListMouseOut, this.handleMouseOut, this);
-            MessageBus.on(Message.AccountListDrillDown, this.handleDrillDown, this);
+            MessageBus.on(Message.AccountMouseOver, this.handleMouseOver, this);
+            MessageBus.on(Message.AccountMouseOut, this.handleMouseOut, this);
         },
 
         handleMouseOver: function(accountId) {
@@ -60,10 +59,6 @@ define(['bullsfirst/framework/Message',
 
         handleMouseOut: function(accountId) {
             this.chart.get(accountId).select(false);
-        },
-
-        handleDrillDown: function(accountId) {
-            console.log('Drill down: ' + accountId);
         },
 
         render: function() {
@@ -131,13 +126,13 @@ define(['bullsfirst/framework/Message',
                         point: {
                             events: {
                                 mouseOver: function(event) {
-                                    MessageBus.trigger(Message.AccountListMouseOver, event.currentTarget.id);
+                                    MessageBus.trigger(Message.AccountMouseOverRaw, event.currentTarget.id);
                                 },
                                 mouseOut: function(event) {
-                                    MessageBus.trigger(Message.AccountListMouseOut, event.currentTarget.id);
+                                    MessageBus.trigger(Message.AccountMouseOutRaw, event.currentTarget.id);
                                 },
                                 click: function(event) {
-                                    MessageBus.trigger(Message.AccountListDrillDown, event.currentTarget.id);
+                                    MessageBus.trigger(Message.AccountClickRaw, event.currentTarget.id);
                                 }
                             }
                         }

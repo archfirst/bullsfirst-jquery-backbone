@@ -20,9 +20,9 @@
  * @author Naresh Bhatia
  */
 require(['bullsfirst/app/App'],
-        function(App) {
+        function (App) {
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Load Crockford's JSON library if browser does not have native support
         Modernizr.load({
             test: window.JSON,

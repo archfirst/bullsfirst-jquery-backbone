@@ -546,9 +546,43 @@ a.button.large span  {
     top: 21px;
 }
 
-#account-table {
+/* -----------------------------------------------------------------------------
+ * User Page - Accounts Tab - Account Table Wrapper
+ * -------------------------------------------------------------------------- */
+#account-table-clipped-wrapper {
+    float: left;
+    overflow: hidden;
+    width: 615px;  /* 30px margin-left + 585px table width */
+}
+
+#account-table-unclipped-wrapper {
     float: left;
     margin: 56px 0 0 30px;
+    position: relative;
+    width: 1200px;  /* 585 + 30 (margin) + 585 */
+}
+
+.account-table-transitioning-view {
+    float: left;
+    position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Accounts Tab - Account Table
+ *
+ * Column       Padding + Width = Total
+ * left-column     0    +   30  =   30
+ * name           20    +  185  =  205
+ * market-value    0    +  125  =  125
+ * cash            0    +  125  =  125
+ * legend-cell    20    +   60  =   80
+ * right-column    0    +   20  =   20
+ * -----------------------------------
+ * Total                           585
+ * -------------------------------------------------------------------------- */
+#account-table {
+    table-layout: fixed;
+    width: 585px;
 }
 
 #account-table tbody tr {
@@ -567,13 +601,13 @@ a.button.large span  {
 #account-table .name {
     padding-left: 20px;
     text-align: left;
-    width: 200px;
+    width: 185px;
 }
 
 #account-table .name .edit input {
     height: 17px;
     margin: 0;
-    width: 160px;
+    width: 145px;
 }
 
 #account-table .name .edit i {
@@ -587,15 +621,13 @@ a.button.large span  {
 }
 
 #account-table .market-value {
-    padding-left: 5px;
     text-align: right;
-    width: 115px;
+    width: 125px;
 }
 
 #account-table .cash {
-    padding-left: 5px;
     text-align: right;
-    width: 140px;
+    width: 125px;
 }
 
 #account-table .legend-cell {
@@ -648,6 +680,23 @@ a.button.large span  {
     display: block;
 }
 
+/* -----------------------------------------------------------------------------
+ * User Page - Accounts Tab - Account Detail Table
+ *
+ * Column       Padding + Width = Total
+ * ????           ??    +   ??  =   ??
+ * -----------------------------------
+ * Total                           585
+ * -------------------------------------------------------------------------- */
+#account-detail-table {
+    margin-left: 30px;
+    table-layout: fixed;
+    width: 585px;
+}
+
+/* -----------------------------------------------------------------------------
+ * User Page - Accounts Tab - Account Chart
+ * -------------------------------------------------------------------------- */
 #accounts-chart {
     float: left;
     height: 303px;

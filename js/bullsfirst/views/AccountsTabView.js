@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/AccountChartView',
-        'bullsfirst/views/AccountTableView',
-        'bullsfirst/views/AccountTotalsView'],
-       function(UserContext, AccountChartView, AccountTableView, AccountTotalsView) {
+        'bullsfirst/views/AccountTableWrapperView'],
+       function (UserContext, AccountChartView, AccountTableWrapperView) {
 
     return Backbone.View.extend({
 
@@ -34,18 +33,17 @@ define(['bullsfirst/domain/UserContext',
             'click #refresh-accounts-button': 'refreshAccounts'
         },
 
-        initialize: function(options) {
-            new AccountTableView({collection: UserContext.getBrokerageAccounts()});
-            new AccountTotalsView({collection: UserContext.getBrokerageAccounts()});
-            new AccountChartView({collection: UserContext.getBrokerageAccounts()});
+        initialize: function (options) {
+            new AccountTableWrapperView({el: '#account-table-unclipped-wrapper'});
+            new AccountChartView({ collection: UserContext.getBrokerageAccounts() });
         },
 
-        addAccount: function() {
+        addAccount: function () {
             alert('Add Account');
             return false;
         },
 
-        refreshAccounts: function() {
+        refreshAccounts: function () {
             UserContext.updateAccounts();
             return false;
         }

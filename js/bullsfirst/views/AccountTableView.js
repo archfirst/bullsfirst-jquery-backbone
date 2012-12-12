@@ -37,28 +37,37 @@ define(['bullsfirst/framework/Message',
             this.collection.on('reset', this.render, this);
 
             // Subscribe to events
-            MessageBus.on(Message.AccountListMouseOver, this.handleMouseOver, this);
-            MessageBus.on(Message.AccountListMouseOut, this.handleMouseOut, this);
-            MessageBus.on(Message.AccountListDrillDown, this.handleDrillDown, this);
-            MessageBus.on(Message.AccountListStartEditing, function() {this.editMode = true; }, this);
-            MessageBus.on(Message.AccountListStopEditing, function() {this.editMode = false; }, this);
+            MessageBus.on(Message.AccountMouseOverRaw, this.handleMouseOverRaw, this);
+            MessageBus.on(Message.AccountMouseOutRaw, this.handleMouseOutRaw, this);
+            MessageBus.on(Message.AccountClickRaw, this.handleClickRaw, this);
+            MessageBus.on(Message.AccountClickEditIconRaw, this.handleClickEditIconRaw, this);
+            MessageBus.on(Message.AccountStoppedEditing, function() { this.editMode = false; }, this);
         },
 
-        handleMouseOver: function(accountId) {
+        handleMouseOverRaw: function(accountId) {
             if (!this.editMode) {
                 this.childViews[accountId].handleMouseOver();
+                MessageBus.trigger(Message.AccountMouseOver, accountId);
             }
         },
 
-        handleMouseOut: function(accountId) {
+        handleMouseOutRaw: function(accountId) {
             if (!this.editMode) {
                 this.childViews[accountId].handleMouseOut();
+                MessageBus.trigger(Message.AccountMouseOut, accountId);
             }
         },
 
-        handleDrillDown: function(accountId) {
+        handleClickRaw: function(accountId) {
             if (!this.editMode) {
-                this.childViews[accountId].handleDrillDown();
+                MessageBus.trigger(Message.AccountClick, accountId);
+            }
+        },
+
+        handleClickEditIconRaw: function(accountId) {
+            if (!this.editMode) {
+                this.editMode = true;
+                this.childViews[accountId].handleClickEditIcon();
             }
         },
 
