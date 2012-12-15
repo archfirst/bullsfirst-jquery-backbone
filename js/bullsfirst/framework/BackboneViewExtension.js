@@ -23,6 +23,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     Backbone.View.prototype.close = function() {
         // Remove DOM element associated with this view and clean up associated events
@@ -35,6 +36,6 @@ define(function() {
         if (this.onClose){
             this.onClose();
         }
-    }
+    };
 
 });

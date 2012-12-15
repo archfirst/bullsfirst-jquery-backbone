@@ -23,6 +23,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     return {
         showError: function(message) {
@@ -32,7 +33,7 @@ define(function() {
                 buttons: {
                     'Ok': function() {
                         // make sure we always add this line in our handlers
-                        $(this).dialog("close");
+                        $(this).dialog('close');
                     }
                 }
             });

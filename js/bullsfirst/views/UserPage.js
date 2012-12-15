@@ -29,10 +29,18 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/TabbarView',
         'bullsfirst/views/TransactionsTabView',
         'bullsfirst/views/UsernameView'],
-       function(UserContext, Message, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView, TransactionsTabView, UsernameView) {
+       function(UserContext, Message, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView,
+                TransactionsTabView, UsernameView) {
+    'use strict';
 
     return Page.extend({
         el: '#user-page',
+        usernameView: null,
+        tabbarView: null,
+        accountsTabView: null,
+        positionsTabView: null,
+        ordersTabView: null,
+        transactionsTabView: null,
 
         events: {
             'click #sign-out': 'logout',
@@ -41,12 +49,12 @@ define(['bullsfirst/domain/UserContext',
         },
 
         initialize: function() {
-            new UsernameView({model: UserContext.getUser()});
-            new TabbarView({el: '#user-page .tabbar'});
-            new AccountsTabView();
-            new PositionsTabView();
-            new OrdersTabView();
-            new TransactionsTabView();
+            this.usernameView = new UsernameView({model: UserContext.getUser()});
+            this.tabbarView = new TabbarView({el: '#user-page .tabbar'});
+            this.accountsTabView = new AccountsTabView();
+            this.positionsTabView = new PositionsTabView();
+            this.ordersTabView = new OrdersTabView();
+            this.transactionsTabView = new TransactionsTabView();
 
             // Subscribe to events
             MessageBus.on(Message.UserLoggedInEvent, function() {
@@ -61,24 +69,22 @@ define(['bullsfirst/domain/UserContext',
         },
 
         trade: function() {
-            alert('Trade');
             return false;
         },
 
         transfer: function() {
-            alert('Transfer');
             return false;
         },
 
         selectTab: function(tab) {
-		    this.$el.find('.tab').each(function() {
+            this.$el.find('.tab').each(function() {
                 if (this.id === tab) {
                     $(this).removeClass('nodisplay');
                 }
                 else {
-			        $(this).addClass('nodisplay');	
+                    $(this).addClass('nodisplay');
                 }
-		    });
+            });
         }
     });
 });

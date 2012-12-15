@@ -24,6 +24,7 @@
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/AjaxUtil'],
        function(UserContext, AjaxUtil) {
+    'use strict';
 
     Backbone._sync = Backbone.sync;
 
@@ -35,12 +36,12 @@ define(['bullsfirst/domain/UserContext',
             };
         }
         Backbone._sync(method, model, options);
-    }
+    };
 
     // Helper function to get a value from a Backbone object as a property
     // or as a function.
     var getValue = function(object, prop) {
-        if (!(object && object[prop])) return null;
+        if (!(object && object[prop])) { return null; }
         return _.isFunction(object[prop]) ? object[prop]() : object[prop];
     };
 });

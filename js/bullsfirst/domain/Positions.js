@@ -21,6 +21,7 @@
  */
 define(['bullsfirst/domain/Position'],
        function(Position) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: Position

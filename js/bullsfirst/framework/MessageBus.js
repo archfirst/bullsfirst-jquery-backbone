@@ -22,6 +22,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     var _messageBus = _.extend({}, Backbone.Events);
 
@@ -34,8 +35,8 @@ define(function() {
             _messageBus.off(events, callback, context);
         },
 
-        trigger: function(events) {
+        trigger: function(/*events*/) {
             _messageBus.trigger.apply(_messageBus, arguments);
         }
-    }
+    };
 });

@@ -32,6 +32,7 @@
 define(['bullsfirst/domain/Position',
         'bullsfirst/domain/Positions'],
        function(Position, Positions) {
+    'use strict';
 
     return Backbone.Model.extend({
 
@@ -48,7 +49,7 @@ define(['bullsfirst/domain/Position',
             _.each(positionArray, function(rawPosition) {
                 if (typeof rawPosition.children !== 'undefined') {
                     rawPosition.children = this.positionArrayToCollection(rawPosition.children);
-                };
+                }
                 positionCollection.add(new Position(rawPosition));
             }, this);
 

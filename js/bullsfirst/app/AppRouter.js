@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,8 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/HomePage',
         'bullsfirst/views/UserPage'],
        function(UserContext, Message, MessageBus, HomePage, UserPage) {
+    'use strict';
+
     return Backbone.Router.extend({
 
         pages: {},
@@ -61,26 +63,26 @@ define(['bullsfirst/domain/UserContext',
         },
 
         showHomePage: function() {
-            this.showPage(this.pages['home']);
+            this.showPage(this.pages.home);
         },
 
         showUserPage: function(tab) {
             // Show user page only if user is logged in
             if (UserContext.isUserLoggedIn()) {
-                this.showPage(this.pages['user']);
-                this.pages['user'].selectTab(tab + '-tab');
+                this.showPage(this.pages.user);
+                this.pages.user.selectTab(tab + '-tab');
             }
             else {
                 // happens when user enters a bookmarked URL
                 this.startTab = tab;
                 this.navigate('');
-                this.showPage(this.pages['home']);
+                this.showPage(this.pages.home);
             }
         },
 
         showPage: function(page) {
             // if page is already visible, do nothing
-            if (page.isVisible()) return;
+            if (page.isVisible()) { return; }
 
             // else hide all pages and show the desired one
             $.when(this.hideAllPages()).then(
@@ -91,7 +93,7 @@ define(['bullsfirst/domain/UserContext',
         hideAllPages: function() {
             return _.filter(
                 _.map(this.pages, function(page) { return page.hide(); }),
-                function (promise) { return promise != null });
+                function(promise) { return promise !== null; });
         }
     });
 });

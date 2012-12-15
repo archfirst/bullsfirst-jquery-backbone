@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +26,7 @@ define(['bullsfirst/app/AppRouter',
         'bullsfirst/framework/BackboneViewExtension',
         'bullsfirst/views/TemplateManager'],
        function(AppRouter, BackboneSyncOverride, BackboneViewExtension, TemplateManager) {
+    'use strict';
 
     // Set default timeout for AJAX requests to 20 seconds
     // This should be done before instantiating the AppRouter,

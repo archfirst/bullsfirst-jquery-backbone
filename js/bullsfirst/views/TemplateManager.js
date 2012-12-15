@@ -22,13 +22,14 @@
 define(['bullsfirst/framework/Formatter',
         'text!bullsfirst/templates/account.txt'],
        function(Formatter, accountTemplate) {
+    'use strict';
 
-    var templates;
+    var _templates;
 
     return {
         initialize: function() {
             this._registerHelpers();
-            this.templates = {
+            _templates = {
                 'account': Handlebars.compile(accountTemplate)
             };
         },
@@ -40,7 +41,7 @@ define(['bullsfirst/framework/Formatter',
         },
 
         getTemplate: function(name) {
-            return this.templates[name];
+            return _templates[name];
         }
     };
 });

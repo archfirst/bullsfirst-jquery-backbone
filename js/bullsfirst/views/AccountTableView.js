@@ -23,6 +23,7 @@ define(['bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/AccountView'],
        function(Message, MessageBus, AccountView) {
+    'use strict';
 
     return Backbone.View.extend({
 
@@ -33,7 +34,7 @@ define(['bullsfirst/framework/Message',
 
         editMode: false,
 
-        initialize: function(options) {
+        initialize: function() {
             this.collection.on('reset', this.render, this);
 
             // Subscribe to events

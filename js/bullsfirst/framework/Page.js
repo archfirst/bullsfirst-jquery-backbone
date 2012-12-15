@@ -20,6 +20,8 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
+
     return Backbone.View.extend({
         hide: function() {
             if (!this.isVisible()) {
@@ -37,7 +39,7 @@ define(function() {
             }
             var deferred = $.Deferred(_.bind(function(dfd) {
                     this.$el.fadeIn('fast', dfd.resolve);
-                }, this))
+                }, this));
             return deferred.promise();
         },
 

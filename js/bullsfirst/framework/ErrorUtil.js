@@ -23,10 +23,11 @@
  */
 define(['bullsfirst/framework/AlertUtil'],
        function(AlertUtil) {
+    'use strict';
 
     return {
-        showError: function(jqXHR, textStatus, errorThrown) {
-            if (jqXHR.getResponseHeader('Content-Type') == 'application/json') {
+        showError: function(jqXHR /*, textStatus, errorThrown */) {
+            if (jqXHR.getResponseHeader('Content-Type') === 'application/json') {
                 AlertUtil.showError(JSON.parse(jqXHR.responseText).detail);
             }
             else {
@@ -36,7 +37,7 @@ define(['bullsfirst/framework/AlertUtil'],
 
         // Note that Backbone sends different parameters to callbacks
         showBackboneError: function(model, jqXHR) {
-            if (jqXHR.getResponseHeader('Content-Type') == 'application/json') {
+            if (jqXHR.getResponseHeader('Content-Type') === 'application/json') {
                 AlertUtil.showError(JSON.parse(jqXHR.responseText).detail);
             }
             else {

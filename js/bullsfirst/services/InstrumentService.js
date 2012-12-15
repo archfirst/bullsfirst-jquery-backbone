@@ -20,6 +20,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     return {
         getInstruments: function(doneCallbacks, failCallbacks) {
