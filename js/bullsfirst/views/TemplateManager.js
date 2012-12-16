@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/Formatter',
-        'text!bullsfirst/templates/account.txt'],
+        'text!bullsfirst/templates/account.html'],
        function(Formatter, accountTemplate) {
     'use strict';
 
