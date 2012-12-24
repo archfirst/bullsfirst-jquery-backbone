@@ -35,7 +35,7 @@ define(['bullsfirst/framework/Message',
         editMode: false,
 
         initialize: function() {
-            this.collection.on('reset', this.render, this);
+            this.collection.on('reset', this.handleReset, this);
 
             // Subscribe to events
             MessageBus.on(Message.AccountMouseOverRaw, this.handleMouseOverRaw, this);
@@ -43,6 +43,10 @@ define(['bullsfirst/framework/Message',
             MessageBus.on(Message.AccountClickRaw, this.handleClickRaw, this);
             MessageBus.on(Message.AccountClickEditIconRaw, this.handleClickEditIconRaw, this);
             MessageBus.on(Message.AccountStoppedEditing, function() { this.editMode = false; }, this);
+        },
+
+        handleReset: function() {
+            this.renderAll();
         },
 
         handleMouseOverRaw: function(accountId) {
@@ -72,9 +76,13 @@ define(['bullsfirst/framework/Message',
             }
         },
 
-        render: function() {
-            // take out rows that might be sitting in the table
-            this.$el.empty();
+        renderAll: function() {
+            // Remove existing child views
+            for (var accountId in this.childViews) {
+                if (this.childViews.hasOwnProperty(accountId)) {
+                    this.childViews[accountId].remove();
+                }
+            }
             this.childViews = {};
 
             // Sort accounts by descending market value
@@ -82,15 +90,19 @@ define(['bullsfirst/framework/Message',
                 return -(account.get('marketValue').amount);
             }) ;
 
-            // Create views for each account
+            // Create new views for each account
             _.each(accounts, function(account, i) {
-                var view = new AccountView({model: account});
-                view.render().$el.find('.legend').addClass('color-' + (i%10) + '-gradient');
-                this.$el.append(view.el);
-                this.childViews[account.id] = view;
+                this.renderAccount(account, i);
             }, this);
 
             return this;
+        },
+
+        renderAccount: function(account, index) {
+            var view = new AccountView({model: account});
+            view.render().$el.find('.legend').addClass('color-' + (index%10) + '-gradient');
+            this.$el.append(view.el);
+            this.childViews[account.id] = view;
         }
     });
 });

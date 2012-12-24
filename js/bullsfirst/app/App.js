@@ -23,9 +23,8 @@
  */
 define(['bullsfirst/app/AppRouter',
         'bullsfirst/framework/BackboneSyncOverride',
-        'bullsfirst/framework/BackboneViewExtension',
         'bullsfirst/views/TemplateManager'],
-       function(AppRouter, BackboneSyncOverride, BackboneViewExtension, TemplateManager) {
+       function(AppRouter, BackboneSyncOverride, TemplateManager) {
     'use strict';
 
     // Set default timeout for AJAX requests to 20 seconds
