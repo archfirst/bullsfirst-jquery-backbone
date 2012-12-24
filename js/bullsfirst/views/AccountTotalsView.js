@@ -25,8 +25,6 @@ define(['bullsfirst/framework/Formatter'],
 
     return Backbone.View.extend({
 
-        el: '#account-table tfoot',
-
         initialize: function() {
             this.collection.on('reset', this.render, this);
         },

@@ -23,8 +23,6 @@ define(function() {
     'use strict';
 
     return Backbone.View.extend({
-        el: '.username-view',
-
         initialize: function() {
             this.model.on('change', this.render, this);
         },

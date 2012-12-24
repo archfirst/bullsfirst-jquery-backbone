@@ -38,9 +38,9 @@ define(['bullsfirst/domain/UserContext',
 
         initialize: function() {
             this.accountTableView =
-                new AccountTableView({ collection: UserContext.getBrokerageAccounts() });
+                new AccountTableView({el: '#account-table tbody', collection: UserContext.getBrokerageAccounts()});
             this.accountTotalsView =
-                new AccountTotalsView({ collection: UserContext.getBrokerageAccounts() });
+                new AccountTotalsView({el: '#account-table tfoot', collection: UserContext.getBrokerageAccounts()});
 
             // Subscribe to events
             MessageBus.on(Message.AccountClick, function() {

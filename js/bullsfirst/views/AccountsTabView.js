@@ -27,7 +27,6 @@ define(['bullsfirst/domain/UserContext',
 
     return Backbone.View.extend({
 
-        el: '#accounts-tab',
         accountTableWrapperView: null,
         accountChartView: null,
 
@@ -40,7 +39,7 @@ define(['bullsfirst/domain/UserContext',
             this.accountTableWrapperView =
                 new AccountTableWrapperView({el: '#account-table-unclipped-wrapper'});
             this.accountChartView =
-                new AccountChartView({ collection: UserContext.getBrokerageAccounts() });
+                new AccountChartView({el: '#accounts-chart', collection: UserContext.getBrokerageAccounts()});
         },
 
         addAccount: function() {

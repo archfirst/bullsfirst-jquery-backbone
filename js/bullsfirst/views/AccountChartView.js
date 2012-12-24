@@ -44,8 +44,6 @@ define(['bullsfirst/framework/Message',
 
         chart: null,
 
-        el: '#accounts-chart',
-
         initialize: function() {
             this.collection.on('reset', this.render, this);
 

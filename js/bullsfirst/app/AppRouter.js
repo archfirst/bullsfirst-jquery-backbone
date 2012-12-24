@@ -41,8 +41,8 @@ define(['bullsfirst/domain/UserContext',
 
         initialize: function() {
             this.pages = {
-                'home': new HomePage(),
-                'user': new UserPage()
+                'home': new HomePage({el: '#home-page'}),
+                'user': new UserPage({el: '#user-page'})
             };
 
             // Subscribe to events

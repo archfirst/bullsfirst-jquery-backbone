@@ -30,8 +30,6 @@ define(['bullsfirst/domain/Credentials',
     'use strict';
 
     return Page.extend({
-        el: '#home-page',
-
         events: {
             'click #login-button': 'login',
             'keypress #login-form': 'checkEnterKey',

@@ -27,8 +27,6 @@ define(['bullsfirst/framework/Message',
 
     return Backbone.View.extend({
 
-        el: '#account-table tbody',
-
         // map of accountId to AccountView
         childViews: {},
 
