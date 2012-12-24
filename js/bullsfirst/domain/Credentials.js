@@ -27,6 +27,8 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
+
     function Credentials(username, password) {
         this.username = username;
         this.password = password;
@@ -35,16 +37,16 @@ define(function() {
     Credentials.prototype.set = function(attributes) {
         this.username = attributes.username;
         this.password = attributes.password;
-    }
+    };
 
     Credentials.prototype.clear = function() {
         this.username = undefined;
         this.password = undefined;
-    }
+    };
 
     Credentials.prototype.isInitialized = function() {
         return (typeof this.username !== 'undefined' && typeof this.password !== 'undefined');
-    }
+    };
 
     return Credentials;
 });

@@ -21,6 +21,7 @@
  */
 require(['bullsfirst/app/App'],
         function(App) {
+    'use strict';
 
     $(document).ready(function() {
         // Load Crockford's JSON library if browser does not have native support

@@ -32,8 +32,10 @@ define(['bullsfirst/domain/BaseAccount',
         'bullsfirst/domain/User',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Formatter',
+        'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus'],
-       function(BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus) {
+       function(BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, Message, MessageBus) {
+    'use strict';
 
     // Module level variables act as singletons
     var _user = new User();
@@ -63,7 +65,7 @@ define(['bullsfirst/domain/BaseAccount',
 
         setSelectedAccount: function(account) {
             _selectedAccount = account;
-            MessageBus.trigger('SelectedAccountChanged', _selectedAccount);
+            MessageBus.trigger(Message.SelectedAccountChanged, _selectedAccount);
         },
 
         setSelectedAccountId: function(accountId) {
@@ -103,7 +105,7 @@ define(['bullsfirst/domain/BaseAccount',
             {
                 this.setSelectedAccount(_brokerageAccounts.get(_selectedAccount.id));
             }
-            if (_selectedAccount === null && _brokerageAccounts.length != 0)
+            if (_selectedAccount === null && _brokerageAccounts.length !== 0)
             {
                 this.setSelectedAccount(_brokerageAccounts.at(0));
             }
@@ -115,21 +117,21 @@ define(['bullsfirst/domain/BaseAccount',
             var accounts = [];
 
             // Add brokerage accounts
-            _brokerageAccounts.each(function(account, i) {
+            _brokerageAccounts.each(function(account) {
                 accounts.push(
                     new BaseAccount({
                         id: account.id,
                         displayString: account.get('name') + ' - ' + Formatter.formatMoney(account.get('cashPosition'))
-                    }))
+                    }));
             });
 
             // Add external accounts
-            _externalAccounts.each(function(account, i) {
+            _externalAccounts.each(function(account) {
                 accounts.push(
                     new BaseAccount({
                         id: account.id,
                         displayString: account.get('name') + ' (External)'
-                    }))
+                    }));
             });
 
             // Reset base accounts

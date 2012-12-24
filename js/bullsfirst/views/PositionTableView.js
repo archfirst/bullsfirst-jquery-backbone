@@ -57,7 +57,7 @@ define(['bullsfirst/framework/MessageBus',
             }, this);
 
             // Display as TreeTable
-            //$("#positions-table").treeTable();
+            $("#positions-table").treeTable();
 
             return this;
 		},

@@ -20,20 +20,24 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/Formatter',
-        'text!bullsfirst/templates/account-selector.txt',
-        'text!bullsfirst/templates/account.txt',
-        'text!bullsfirst/templates/position.txt'],
-       function(Formatter, accountSelector, accountTemplate, positionTemplate) {
 
-    var templates;
+    'text!bullsfirst/templates/account-selector.html',
+    'text!bullsfirst/templates/account.html',
+    'text!bullsfirst/templates/position.html'],
+    function(Formatter, accountSelector, accountTemplate, positionTemplate) {
+        'use strict';
+
+    var _templates;
 
     return {
         initialize: function() {
             this._registerHelpers();
-            this.templates = {
+
+            _templates = {
                 'account-selector': Handlebars.compile(accountSelector),
                 'account': Handlebars.compile(accountTemplate),
                 'position': Handlebars.compile(positionTemplate)
+
             };
         },
 
@@ -44,7 +48,7 @@ define(['bullsfirst/framework/Formatter',
         },
 
         getTemplate: function(name) {
-            return this.templates[name];
+            return _templates[name];
         }
     };
 });

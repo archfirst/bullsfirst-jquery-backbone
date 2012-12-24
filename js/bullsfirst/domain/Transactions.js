@@ -21,6 +21,7 @@
  */
 define(['bullsfirst/domain/Transaction'],
        function(Transaction) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: Transaction,

@@ -24,6 +24,7 @@
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/AjaxUtil'],
        function(UserContext, AjaxUtil) {
+    'use strict';
 
     // Module level variables act as singletons
     var _url = '/bfoms-javaee/rest/secure/accounts';

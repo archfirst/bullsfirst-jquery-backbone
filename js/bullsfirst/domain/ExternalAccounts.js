@@ -21,6 +21,7 @@
  */
 define(['bullsfirst/domain/ExternalAccount'],
        function(ExternalAccount) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: ExternalAccount,

@@ -21,6 +21,7 @@
  */
 define(['bullsfirst/domain/BrokerageAccount'],
        function(BrokerageAccount) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: BrokerageAccount,

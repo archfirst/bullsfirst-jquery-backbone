@@ -19,8 +19,10 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus'],
-       function(MessageBus) {
+define(['bullsfirst/framework/Message',
+        'bullsfirst/framework/MessageBus'],
+       function(Message, MessageBus) {
+    'use strict';
 
     return Backbone.View.extend({
         events: {
@@ -29,29 +31,30 @@ define(['bullsfirst/framework/MessageBus'],
 
         initialize: function() {
             // Subscribe to events
-            MessageBus.on('TabSelectionRequest', this.selectTab, this);
+            MessageBus.on(Message.TabSelectionRequest, this.selectTab, this);
         },
 
         handleClick: function(event) {
             event.preventDefault();
             MessageBus.trigger(
-                'TabSelectionRequest',
+                Message.TabSelectionRequest,
                 { tabbar: this.$el.data('tabbar'), tab: $(event.target).data('tab') });
             return false;
         },
 
         selectTab: function(tabInfo) {
-            if (tabInfo.tabbar !== this.$el.data('tabbar'))
+            if (tabInfo.tabbar !== this.$el.data('tabbar')) {
                 return;
+            }
 
-		    this.$el.find('a').each(function() {
+            this.$el.find('a').each(function() {
                 if ($(this).data('tab') === tabInfo.tab) {
-                    $(this).addClass("selected");
+                    $(this).addClass('selected');
                 }
                 else {
-			        $(this).removeClass("selected");	
+                    $(this).removeClass('selected');
                 }
-		    });
+            });
         }
     });
 });

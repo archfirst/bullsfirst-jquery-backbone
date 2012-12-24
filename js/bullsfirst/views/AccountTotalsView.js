@@ -21,13 +21,14 @@
  */
 define(['bullsfirst/framework/Formatter'],
        function(Formatter) {
+    'use strict';
 
     return Backbone.View.extend({
 
         el: '#account-table tfoot',
 
-        initialize: function(options) {
-            this.collection.bind('reset', this.render, this);
+        initialize: function() {
+            this.collection.on('reset', this.render, this);
         },
 
         render: function() {

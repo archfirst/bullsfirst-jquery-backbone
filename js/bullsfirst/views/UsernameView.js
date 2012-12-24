@@ -20,6 +20,8 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
+
     return Backbone.View.extend({
         el: '.username-view',
 

@@ -22,6 +22,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     return {
         /**

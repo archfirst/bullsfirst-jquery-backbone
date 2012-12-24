@@ -19,9 +19,11 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/MessageBus',
+define(['bullsfirst/framework/Message',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/views/AccountView'],
-       function(MessageBus, AccountView) {
+       function(Message, MessageBus, AccountView) {
+    'use strict';
 
     return Backbone.View.extend({
 
@@ -30,25 +32,44 @@ define(['bullsfirst/framework/MessageBus',
         // map of accountId to AccountView
         childViews: {},
 
-        initialize: function(options) {
-            this.collection.bind('reset', this.render, this);
+        editMode: false,
+
+        initialize: function() {
+            this.collection.on('reset', this.render, this);
 
             // Subscribe to events
-            MessageBus.on('AccountList:mouseover', this.handleMouseOver, this);
-            MessageBus.on('AccountList:mouseout', this.handleMouseOut, this);
-            MessageBus.on('AccountList:drillDown', this.handleDrillDown, this);
+            MessageBus.on(Message.AccountMouseOverRaw, this.handleMouseOverRaw, this);
+            MessageBus.on(Message.AccountMouseOutRaw, this.handleMouseOutRaw, this);
+            MessageBus.on(Message.AccountClickRaw, this.handleClickRaw, this);
+            MessageBus.on(Message.AccountClickEditIconRaw, this.handleClickEditIconRaw, this);
+            MessageBus.on(Message.AccountStoppedEditing, function() { this.editMode = false; }, this);
         },
 
-        handleMouseOver: function(accountId) {
-            this.childViews[accountId].handleMouseOver();
+        handleMouseOverRaw: function(accountId) {
+            if (!this.editMode) {
+                this.childViews[accountId].handleMouseOver();
+                MessageBus.trigger(Message.AccountMouseOver, accountId);
+            }
         },
 
-        handleMouseOut: function(accountId) {
-            this.childViews[accountId].handleMouseOut();
+        handleMouseOutRaw: function(accountId) {
+            if (!this.editMode) {
+                this.childViews[accountId].handleMouseOut();
+                MessageBus.trigger(Message.AccountMouseOut, accountId);
+            }
         },
 
-        handleDrillDown: function(accountId) {
-            this.childViews[accountId].handleDrillDown();
+        handleClickRaw: function(accountId) {
+            if (!this.editMode) {
+                MessageBus.trigger(Message.AccountClick, accountId);
+            }
+        },
+
+        handleClickEditIconRaw: function(accountId) {
+            if (!this.editMode) {
+                this.editMode = true;
+                this.childViews[accountId].handleClickEditIcon();
+            }
         },
 
         render: function() {

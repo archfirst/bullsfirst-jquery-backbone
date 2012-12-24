@@ -15,21 +15,23 @@
  */
 
 /**
- * bullsfirst/domain/Transaction
+ * bullsfirst/framework/Message
  *
- * Attributes:
- *   accountId: int
- *   accountName: String
- *   transactionId: int,
- *   creationTime: Date
- *   type: String,
- *   description: String
- *   amount: Money
+ * Enumeration of messages
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
-    return Backbone.Model.extend({
-    });
+define({
+    AccountClickRaw: 'Account:clickRaw',
+    AccountClick: 'Account:click',
+    AccountMouseOutRaw: 'Account:mouseoutRaw',
+    AccountMouseOut: 'Account:mouseout',
+    AccountMouseOverRaw: 'Account:mouseoverRaw',
+    AccountMouseOver: 'Account:mouseover',
+    AccountClickEditIconRaw: 'Account:clickEditIconRaw',
+    AccountStoppedEditing: 'Account:stoppedEditing',
+    SelectedAccountChanged: 'SelectedAccountChanged',
+    TabSelectionRequest: 'TabSelectionRequest',
+    UserLoggedInEvent: 'UserLoggedInEvent',
+    UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

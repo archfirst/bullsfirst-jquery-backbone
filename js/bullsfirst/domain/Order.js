@@ -36,6 +36,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     return Backbone.Model.extend({
 
@@ -45,15 +46,16 @@ define(function() {
         parse: function(response) {
             response.executionPrice = this.calculateExecutionPrice(response);
             response.isActive =
-                response.status == 'New' ||
-                response.status == 'PartiallyFilled' ||
-                response.status == 'PendingNew';
+                response.status === 'New' ||
+                response.status === 'PartiallyFilled' ||
+                response.status === 'PendingNew';
             return response;
         },
 
         calculateExecutionPrice: function(response) {
-            if (typeof response.executions === 'undefined' || response.executions.length == 0)
+            if (typeof response.executions === 'undefined' || response.executions.length === 0) {
                 return null;
+            }
 
             var totalPrice = 0;
             var totalQuantity = 0;
@@ -64,7 +66,7 @@ define(function() {
             var executionPrice = {
                 amount: totalPrice / totalQuantity,
                 currency: 'USD'
-            }
+            };
             return executionPrice;
         }
     });

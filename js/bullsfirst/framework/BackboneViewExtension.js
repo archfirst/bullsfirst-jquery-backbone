@@ -23,13 +23,19 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     Backbone.View.prototype.close = function() {
+        // Remove DOM element associated with this view and clean up associated events
         this.remove();
+
+        // Unbind callbacks bound to this view
         this.unbind();
+
+        // Allow view to unbind callbacks bound to other objects (e.g. the model)
         if (this.onClose){
             this.onClose();
         }
-    }
+    };
 
 });

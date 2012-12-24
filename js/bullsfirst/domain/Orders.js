@@ -21,6 +21,7 @@
  */
 define(['bullsfirst/domain/Order'],
        function(Order) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: Order,

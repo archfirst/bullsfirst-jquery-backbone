@@ -20,6 +20,7 @@
  * @author Naresh Bhatia
  */
 define(function() {
+    'use strict';
 
     return Backbone.Model.extend({
         urlRoot: '/bfexch-javaee/rest/market_prices',

@@ -19,11 +19,14 @@
  *
  * @author Naresh Bhatia
  */
+
 define(['bullsfirst/domain/UserContext',	
         'bullsfirst/views/PositionSelectedAccountView',
 		'bullsfirst/views/AccountSelectorView',
         'bullsfirst/views/PositionTableView'],
        function(UserContext, PositionSelectedAccountView, AccountSelectorView, PositionTableView) {
+
+    'use strict';
 
     return Backbone.View.extend({
 
@@ -32,7 +35,7 @@ define(['bullsfirst/domain/UserContext',
         initialize: function(options) {
     	    new AccountSelectorView({
         	    el: '#postab-account-selector',
-        	    collection: UserContext.getBrokerageAccounts()
+        	    collection: UserContext.getBrokerageAccounts() 
             });
 
             new PositionSelectedAccountView({

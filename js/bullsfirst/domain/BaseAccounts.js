@@ -21,6 +21,7 @@
  */
 define(['bullsfirst/domain/BaseAccount'],
        function(BaseAccount) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: BaseAccount
