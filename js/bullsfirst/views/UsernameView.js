@@ -19,18 +19,23 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'backbone'
+    ],
+    function() {
+        'use strict';
 
-    return Backbone.View.extend({
-        initialize: function() {
-            this.model.on('change', this.render, this);
-        },
+        return Backbone.View.extend({
+            initialize: function() {
+                this.model.on('change', this.render, this);
+            },
 
-        render: function() {
-            this.$el.html(
-                this.model.get('firstName') + ' ' +
-                this.model.get('lastName'));
-        }
-    });
-});
+            render: function() {
+                this.$el.html(
+                    this.model.get('firstName') + ' ' +
+                    this.model.get('lastName'));
+            }
+        });
+    }
+);

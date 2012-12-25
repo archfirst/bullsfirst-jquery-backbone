@@ -21,49 +21,54 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'jqueryformat'
+    ],
+    function() {
+        'use strict';
 
-    return {
-        formatMoney: function(money) {
-            if ((typeof money === 'undefined') || (money === null)) {
-                return '';
-            }
-            else {
-                return '$' + $.format.number(money.amount, '#,##0.00');
-            }
-        },
-
-        // Formats a fraction as a percentage.
-        // For example formatPercent(0.25) = "25.00%"
-        formatPercent: function(fraction, digits) {
-            if ((typeof fraction === 'undefined') || (fraction === null)) {
-                return '';
-            }
-            else {
-                if (typeof digits === 'undefined') {
-                    digits = 2;
+        return {
+            formatMoney: function(money) {
+                if ((typeof money === 'undefined') || (money === null)) {
+                    return '';
                 }
-                return (fraction * 100).toFixed(digits) + '%';
-            }
-        },
+                else {
+                    return '$' + $.format.number(money.amount, '#,##0.00');
+                }
+            },
 
-        formatMoment2Date: function(m) {
-            if ((typeof m === 'undefined') || (m === null)) {
-                return '';
-            }
-            else {
-                return m.format('MM/DD/YYYY');
-            }
-        },
+            // Formats a fraction as a percentage.
+            // For example formatPercent(0.25) = "25.00%"
+            formatPercent: function(fraction, digits) {
+                if ((typeof fraction === 'undefined') || (fraction === null)) {
+                    return '';
+                }
+                else {
+                    if (typeof digits === 'undefined') {
+                        digits = 2;
+                    }
+                    return (fraction * 100).toFixed(digits) + '%';
+                }
+            },
 
-        formatMoment2DateTime: function(m) {
-            if ((typeof m === 'undefined') || (m === null)) {
-                return '';
+            formatMoment2Date: function(m) {
+                if ((typeof m === 'undefined') || (m === null)) {
+                    return '';
+                }
+                else {
+                    return m.format('MM/DD/YYYY');
+                }
+            },
+
+            formatMoment2DateTime: function(m) {
+                if ((typeof m === 'undefined') || (m === null)) {
+                    return '';
+                }
+                else {
+                    return m.format('MM/DD/YYYY hh:mm:ss A');
+                }
             }
-            else {
-                return m.format('MM/DD/YYYY hh:mm:ss A');
-            }
-        }
-    };
-});
+        };
+    }
+);

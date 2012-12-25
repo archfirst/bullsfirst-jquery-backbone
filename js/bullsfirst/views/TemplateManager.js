@@ -19,29 +19,34 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/Formatter',
-        'text!bullsfirst/templates/account.html'],
-       function(Formatter, accountTemplate) {
-    'use strict';
+define(
+    [
+        'bullsfirst/framework/Formatter',
+        'text!bullsfirst/templates/account.html',
+        'handlebars'
+    ],
+    function(Formatter, accountTemplate) {
+        'use strict';
 
-    var _templates;
+        var _templates;
 
-    return {
-        initialize: function() {
-            this._registerHelpers();
-            _templates = {
-                'account': Handlebars.compile(accountTemplate)
-            };
-        },
+        return {
+            initialize: function() {
+                this._registerHelpers();
+                _templates = {
+                    'account': Handlebars.compile(accountTemplate)
+                };
+            },
 
-        _registerHelpers : function() {
-            Handlebars.registerHelper('formatMoney', function(money) {
-                return Formatter.formatMoney(money);
-            });
-        },
+            _registerHelpers : function() {
+                Handlebars.registerHelper('formatMoney', function(money) {
+                    return Formatter.formatMoney(money);
+                });
+            },
 
-        getTemplate: function(name) {
-            return _templates[name];
-        }
-    };
-});
+            getTemplate: function(name) {
+                return _templates[name];
+            }
+        };
+    }
+);

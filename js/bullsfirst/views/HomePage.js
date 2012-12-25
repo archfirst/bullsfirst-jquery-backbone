@@ -19,63 +19,69 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/Credentials',
+define(
+    [
+        'bullsfirst/domain/Credentials',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
-        'bullsfirst/services/UserService'],
-       function(Credentials, UserContext, ErrorUtil, Message, MessageBus, Page, UserService) {
-    'use strict';
+        'bullsfirst/services/UserService',
+        'jqueryui',
+        'jqueryValidationEngineRules'
+    ],
+    function(Credentials, UserContext, ErrorUtil, Message, MessageBus, Page, UserService) {
+        'use strict';
 
-    return Page.extend({
-        events: {
-            'click #login-button': 'login',
-            'keypress #login-form': 'checkEnterKey',
-            'click #open-account-link': 'openAccount'
-        },
+        return Page.extend({
+            events: {
+                'click #login-button': 'login',
+                'keypress #login-form': 'checkEnterKey',
+                'click #open-account-link': 'openAccount'
+            },
 
-        initialize: function() {
-            $('#login-form').validationEngine();
-        },
+            initialize: function() {
+                $('#login-form').validationEngine();
+            },
 
-        checkEnterKey: function(event) {
-           if (event.keyCode === $.ui.keyCode.ENTER) {
-               this.login();
-               return false;
-           }
-        },
+            checkEnterKey: function(event) {
+               if (event.keyCode === $.ui.keyCode.ENTER) {
+                   this.login();
+                   return false;
+               }
+            },
 
-        login: function() {
-            if ($('#login-form').validationEngine('validate')) {
-                UserService.getUser(
-                    this.form2Credentials(), _.bind(this.loginDone, this), ErrorUtil.showError);
+            login: function() {
+                if ($('#login-form').validationEngine('validate')) {
+                    UserService.getUser(
+                        this.form2Credentials(), _.bind(this.loginDone, this), ErrorUtil.showError);
+                }
+                return false;
+            },
+
+            loginDone: function(data /* , textStatus, jqXHR */) {
+                // Add user to UserContext
+                UserContext.initUser(data);
+                UserContext.initCredentials(this.form2Credentials());
+
+                $('#password')[0].value = ''; // erase password from form
+                MessageBus.trigger(Message.UserLoggedInEvent);
+            },
+
+            openAccount: function() {
+                return false;
+            },
+
+            // ------------------------------------------------------------
+            // Helper functions
+            // ------------------------------------------------------------
+            // Creates Credentials from the Login form
+            form2Credentials: function() {
+                return new Credentials(
+                    $('#username').val(),
+                    $('#password').val());
             }
-            return false;
-        },
-
-        loginDone: function(data /* , textStatus, jqXHR */) {
-            // Add user to UserContext
-            UserContext.initUser(data);
-            UserContext.initCredentials(this.form2Credentials());
-
-            $('#password')[0].value = ''; // erase password from form
-            MessageBus.trigger(Message.UserLoggedInEvent);
-        },
-
-        openAccount: function() {
-            return false;
-        },
-
-        // ------------------------------------------------------------
-        // Helper functions
-        // ------------------------------------------------------------
-        // Creates Credentials from the Login form
-        form2Credentials: function() {
-            return new Credentials(
-                $('#username').val(),
-                $('#password').val());
-        }
-    });
-});
+        });
+    }
+);

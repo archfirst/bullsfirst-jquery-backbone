@@ -21,32 +21,37 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'base64encode'
+    ],
+    function() {
+        'use strict';
 
-    return {
-        /**
-         * Sets the password header in the request. This is needed only for the get user
-         * REST request.
-         */
-        setPasswordHeader: function(xhr, password) {
-            xhr.setRequestHeader('password', password);
-        },
+        return {
+            /**
+             * Sets the password header in the request. This is needed only for the get user
+             * REST request.
+             */
+            setPasswordHeader: function(xhr, password) {
+                xhr.setRequestHeader('password', password);
+            },
 
-        /**
-         * Sets an Authorization header in the request. We force this header in every
-         * request to avoid being challenged by the server for credentials (the server
-         * sends a 401 Unauthorized error along with a WWW-Authenticate header to do this).
-         * Specifically, we don't rely on username/password settings in the jQuery.ajax()
-         * call since they cause an unnecessary roundtrip to the server resulting in a 401
-         * before sending the Authorization header.
-         */
-        setAuthorizationHeader: function(xhr, credentials) {
-            xhr.setRequestHeader(
-                'Authorization',
-                'Basic ' + base64_encode(
-                    credentials.username + ':' +
-                    credentials.password));
-        }
-    };
-});
+            /**
+             * Sets an Authorization header in the request. We force this header in every
+             * request to avoid being challenged by the server for credentials (the server
+             * sends a 401 Unauthorized error along with a WWW-Authenticate header to do this).
+             * Specifically, we don't rely on username/password settings in the jQuery.ajax()
+             * call since they cause an unnecessary roundtrip to the server resulting in a 401
+             * before sending the Authorization header.
+             */
+            setAuthorizationHeader: function(xhr, credentials) {
+                xhr.setRequestHeader(
+                    'Authorization',
+                    'Basic ' + base64_encode(
+                        credentials.username + ':' +
+                        credentials.password));
+            }
+        };
+    }
+);

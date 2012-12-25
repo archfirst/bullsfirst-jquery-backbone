@@ -19,29 +19,34 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/Formatter'],
-       function(Formatter) {
-    'use strict';
+define(
+    [
+        'bullsfirst/framework/Formatter',
+        'backbone'
+    ],
+    function(Formatter) {
+        'use strict';
 
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        initialize: function() {
-            this.collection.on('reset', this.render, this);
-        },
+            initialize: function() {
+                this.collection.on('reset', this.render, this);
+            },
 
-        render: function() {
-            // Calculate totals
-            var totalMarketValue = { amount: 0, currency: 'USD'};
-            var totalCash = { amount: 0, currency: 'USD'};
-            this.collection.each(function(account) {
-                totalMarketValue.amount += account.get('marketValue').amount;
-                totalCash.amount += account.get('cashPosition').amount;
-            });
+            render: function() {
+                // Calculate totals
+                var totalMarketValue = { amount: 0, currency: 'USD'};
+                var totalCash = { amount: 0, currency: 'USD'};
+                this.collection.each(function(account) {
+                    totalMarketValue.amount += account.get('marketValue').amount;
+                    totalCash.amount += account.get('cashPosition').amount;
+                });
 
-            this.$el.find('.market-value').html(Formatter.formatMoney(totalMarketValue));
-            this.$el.find('.cash').html(Formatter.formatMoney(totalCash));
+                this.$el.find('.market-value').html(Formatter.formatMoney(totalMarketValue));
+                this.$el.find('.cash').html(Formatter.formatMoney(totalCash));
 
-            return this;
-        }
-    });
-});
+                return this;
+            }
+        });
+    }
+);

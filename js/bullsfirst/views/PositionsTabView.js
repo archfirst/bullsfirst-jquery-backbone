@@ -19,9 +19,14 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'backbone'
+    ],
+    function() {
+        'use strict';
 
-    return Backbone.View.extend({
-    });
-});
+        return Backbone.View.extend({
+        });
+    }
+);
