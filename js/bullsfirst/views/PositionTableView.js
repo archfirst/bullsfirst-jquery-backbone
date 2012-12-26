@@ -23,13 +23,15 @@
 
 define(['bullsfirst/framework/MessageBus',
         'bullsfirst/views/PositionView'],
-	   	function(MessageBus, PositionView) {
+        function(MessageBus, PositionView) {
 
-   	return Backbone.View.extend({
+        'use strict';
+        
+    return Backbone.View.extend({
 
-   		el: '#positions-table tbody',
+        el: '#positions-table tbody',
 
-	  	initialize: function(options) {
+        initialize: function(options) {
             //this.collection.bind('reset', this.render, this);
             MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
                 this.collection = selectedAccount.get('positions');
@@ -73,5 +75,5 @@ define(['bullsfirst/framework/MessageBus',
             }, this);
         }
 
-   	});
+    });
  });

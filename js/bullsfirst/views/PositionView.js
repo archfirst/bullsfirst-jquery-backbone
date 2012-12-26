@@ -27,6 +27,8 @@ define(['bullsfirst/domain/Position',
         'bullsfirst/views/TemplateManager'],
         function(Position, UserContext, Formatter, MessageBus, TemplateManager) {
 
+        'use strict';
+
     return Backbone.View.extend({
 
         tagName: 'tr',
@@ -58,13 +60,11 @@ define(['bullsfirst/domain/Position',
 
             // Set up flags for conditionals
             position.isInstrumentPosition = typeof position.lotId === 'undefined';
-            position.isLot = !position.isInstrumentPosition
+            position.isLot = !position.isInstrumentPosition;
             position.isTradable = position.isInstrumentPosition && position.instrumentSymbol !== 'CASH';
 
             // Render using template
-            var hash = {
-                position: position
-            }
+            var hash = {position: position};
             
             var template = TemplateManager.getTemplate('position');
             $(this.el).html(template(hash));
