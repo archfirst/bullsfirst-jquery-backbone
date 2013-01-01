@@ -37,7 +37,8 @@ define(['bullsfirst/app/AppRouter',
 
     // Create the router
     var _appRouter = new AppRouter();
-
+    
+    
     // Begin monitoring hashchange events and dispatching routes.
     // This triggers the default route (''), which in turn
     // invokes AppRouter.showHomePage()

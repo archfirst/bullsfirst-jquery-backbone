@@ -24,6 +24,6 @@ define(['bullsfirst/domain/Position'],
     'use strict';
 
     return Backbone.Collection.extend({
-        model: Position
+        model: Position,
     });
 });

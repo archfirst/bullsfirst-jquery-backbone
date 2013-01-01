@@ -26,7 +26,6 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/UserPage'],
        function(UserContext, Message, MessageBus, HomePage, UserPage) {
     'use strict';
-
     return Backbone.Router.extend({
 
         pages: {},
