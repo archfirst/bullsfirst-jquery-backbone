@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         trailing      : true,
         maxparams     : 10,
         maxdepth      : 2,
-        maxstatements : 10,
+        maxstatements : 30,
         maxcomplexity : 10,
         maxlen        : 150,
 

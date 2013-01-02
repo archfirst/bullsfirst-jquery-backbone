@@ -67,6 +67,10 @@ require.config({
             exports: 'Handlebars'
         },
 
+        jqueryalerts: {
+            deps: ['jquery']
+        },
+
         jqueryformat: {
             deps: ['jquery']
         },

@@ -19,57 +19,63 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(
+    [
+        'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/TemplateManager'],
-       function(UserContext, Formatter, MessageBus, TemplateManager) {
+        'bullsfirst/views/TemplateManager'
+    ],
+    function(UserContext, Formatter, MessageBus, TemplateManager) {
+        'use strict';
 
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        events: {
-            'change': 'setSelectedAccount'
-        },
+            events: {
+                'change': 'setSelectedAccount'
+            },
 
-        initialize: function(options) {
-            this.collection.bind('reset', this.render, this);
+            initialize: function(/* options */) {
+                this.collection.bind('reset', this.render, this);
 
-            // Subscribe to events
-            MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
-                this.$el.val(selectedAccount.id);
-            }, this);
-        },
+                // Subscribe to events
+                MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
+                    this.$el.val(selectedAccount.id);
+                }, this);
+            },
 
-        setSelectedAccount: function(event) {
-            UserContext.setSelectedAccountId(event.target.value);
-            return false;
-        },
+            setSelectedAccount: function(event) {
+                UserContext.setSelectedAccountId(event.target.value);
+                return false;
+            },
 
-        render: function() {
-            // Take out entries that might be sitting in the dropdown
-            this.$el.empty();
+            render: function() {
+                // Take out entries that might be sitting in the dropdown
+                this.$el.empty();
 
-            // Add new entries from accounts collection. Pass this object as context
-            this.collection.each(function(accountModel, i) {
-                // Format account values for display 
-                var account = accountModel.toJSON()  // returns a copy of the model's attributes
-                account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
+                // Add new entries from accounts collection. Pass this object as context
+                this.collection.each(function(accountModel) {
+                    // Format account values for display
+                    var account = accountModel.toJSON();  // returns a copy of the model's attributes
+                    account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
 
-                // Render using template
-                var hash = {
-                    account: account
+                    // Render using template
+                    var hash = {
+                        account: account
+                    };
+
+                    var template = TemplateManager.getTemplate('account-selector');
+                    $(this.el).append(template(hash));
+
+                }, this);
+
+                // Select the selected account
+                if (UserContext.getSelectedAccount()) {
+                    this.$el.val(UserContext.getSelectedAccount().id);
                 }
 
-                var template = TemplateManager.getTemplate('account-selector');
-                $(this.el).append(template(hash));
-
-            }, this);
-
-            // Select the selected account
-            if (UserContext.getSelectedAccount())
-                this.$el.val(UserContext.getSelectedAccount().id);
-
-            return this;
-        }
-    });
-});
+                return this;
+            }
+        });
+    }
+);

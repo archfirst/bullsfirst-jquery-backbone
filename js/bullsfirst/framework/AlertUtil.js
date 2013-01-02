@@ -22,7 +22,11 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
+define(
+    [
+        'jqueryalerts'
+    ],
+    function() {
     'use strict';
 
     return {

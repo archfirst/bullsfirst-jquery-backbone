@@ -32,20 +32,26 @@ define(
 
         return Backbone.View.extend({
 
+            accountSelectorView: null,
+            positionSelectedAccountView: null,
+            positionTableView: null,
+
             el: '#positions-tab',
 
             initialize: function(/* options */) {
-                new AccountSelectorView({
+                this.accountSelectorView = new AccountSelectorView({
                     el: '#postab-account-selector',
                     collection: UserContext.getBrokerageAccounts()
                 });
 
-                new PositionSelectedAccountView({
+                this.positionSelectedAccountView = new PositionSelectedAccountView({
                     el: '#postab-selected-account-name',
                     collection: UserContext.getBrokerageAccounts()
                 });
 
-                new PositionTableView({collection: UserContext.getBrokerageAccounts()});
+                this.positionTableView = new PositionTableView({
+                    collection: UserContext.getBrokerageAccounts()
+                });
             },
 
             updatePositions: function() {
