@@ -22,10 +22,12 @@
 define(
     [
         'bullsfirst/framework/Formatter',
+        'handlebars',
         'text!bullsfirst/templates/account.html',
-        'handlebars'
+        'text!bullsfirst/templates/account-selector.html',
+        'text!bullsfirst/templates/position.html'
     ],
-    function(Formatter, accountTemplate) {
+    function(Formatter, Handlebars, accountTemplate, accountSelectorTemplate, positionTemplate) {
         'use strict';
 
         var _templates;
@@ -34,7 +36,9 @@ define(
             initialize: function() {
                 this._registerHelpers();
                 _templates = {
-                    'account': Handlebars.compile(accountTemplate)
+                    'account': Handlebars.compile(accountTemplate),
+                    'account-selector': Handlebars.compile(accountSelectorTemplate),
+                    'position': Handlebars.compile(positionTemplate)
                 };
             },
 

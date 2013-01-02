@@ -36,6 +36,21 @@
  */
 
 /* -----------------------------------------------------------------------------
+ * Library Overrides
+ * -------------------------------------------------------------------------- */
+.treeTable tr.collapsed td a.expander {
+  background-image: url(images/ui-icons_666666_256x240.png);
+  background-position:-30px -20px;
+  border-bottom: 0;
+}
+
+.treeTable tr.expanded td a.expander {
+  background-image: url(images/ui-icons_666666_256x240.png);
+  background-position:-60px -20px;
+  border-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
  * Primary Styles
  * -------------------------------------------------------------------------- */
 p {
@@ -779,8 +794,6 @@ a.button.large span  {
     font: normal normal 18px/18px Aller;
     margin: 30px 0 10px 60px;
 }
-
-
 
 /* -----------------------------------------------------------------------------
  * User Page - Transactions Tab

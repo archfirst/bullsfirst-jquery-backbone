@@ -20,15 +20,11 @@
 }
 
 .treeTable tr.collapsed td a.expander {
-  background-image: url(images/ui-icons_666666_256x240.png);
-  background-position:-30px -20px;
-  border-bottom: 0;
+  background-image: url(../images/toggle-expand-dark.png);
 }
 
 .treeTable tr.expanded td a.expander {
-  background-image: url(images/ui-icons_666666_256x240.png);
-  background-position:-60px -20px;
-  border-bottom: 0;
+  background-image: url(../images/toggle-collapse-dark.png);
 }
 
 /* jquery.treeTable.sortable

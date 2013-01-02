@@ -25,7 +25,7 @@ define(
     [
         'base64encode'
     ],
-    function() {
+    function(base64Encode) {
         'use strict';
 
         return {
@@ -48,7 +48,7 @@ define(
             setAuthorizationHeader: function(xhr, credentials) {
                 xhr.setRequestHeader(
                     'Authorization',
-                    'Basic ' + base64_encode(
+                    'Basic ' + base64Encode(
                         credentials.username + ':' +
                         credentials.password));
             }

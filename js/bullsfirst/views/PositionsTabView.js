@@ -21,12 +21,37 @@
  */
 define(
     [
-        'backbone'
+        'backbone',
+        'bullsfirst/domain/UserContext',
+        'bullsfirst/views/PositionSelectedAccountView',
+        'bullsfirst/views/AccountSelectorView',
+        'bullsfirst/views/PositionTableView'
     ],
-    function() {
+    function(Backbone, UserContext, PositionSelectedAccountView, AccountSelectorView, PositionTableView) {
         'use strict';
 
         return Backbone.View.extend({
+
+            el: '#positions-tab',
+
+            initialize: function(/* options */) {
+                new AccountSelectorView({
+                    el: '#postab-account-selector',
+                    collection: UserContext.getBrokerageAccounts()
+                });
+
+                new PositionSelectedAccountView({
+                    el: '#postab-selected-account-name',
+                    collection: UserContext.getBrokerageAccounts()
+                });
+
+                new PositionTableView({collection: UserContext.getBrokerageAccounts()});
+            },
+
+            updatePositions: function() {
+                UserContext.updateAccounts();
+            }
+
         });
     }
 );

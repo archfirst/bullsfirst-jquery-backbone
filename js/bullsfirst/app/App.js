@@ -21,26 +21,29 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/app/AppRouter',
+define(
+    [
+        'bullsfirst/app/AppRouter',
         'bullsfirst/framework/BackboneSyncOverride',
-        'bullsfirst/views/TemplateManager'],
-       function(AppRouter, BackboneSyncOverride, TemplateManager) {
-    'use strict';
+        'bullsfirst/views/TemplateManager'
+    ],
+    function(AppRouter, BackboneSyncOverride, TemplateManager) {
+        'use strict';
 
-    // Set default timeout for AJAX requests to 20 seconds
-    // This should be done before instantiating the AppRouter,
-    // because the initialization sequence fires AJAX requests
-    $.ajaxSetup({timeout: 20000});
+        // Set default timeout for AJAX requests to 20 seconds
+        // This should be done before instantiating the AppRouter,
+        // because the initialization sequence fires AJAX requests
+        $.ajaxSetup({timeout: 20000});
 
-    // Load and compile templates
-    TemplateManager.initialize();
+        // Load and compile templates
+        TemplateManager.initialize();
 
-    // Create the router
-    var _appRouter = new AppRouter();
-    
-    
-    // Begin monitoring hashchange events and dispatching routes.
-    // This triggers the default route (''), which in turn
-    // invokes AppRouter.showHomePage()
-    Backbone.history.start();
-});
+        // Create the router
+        var _appRouter = new AppRouter();
+        
+        // Begin monitoring hashchange events and dispatching routes.
+        // This triggers the default route (''), which in turn
+        // invokes AppRouter.showHomePage()
+        Backbone.history.start();
+    }
+);

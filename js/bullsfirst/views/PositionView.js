@@ -20,56 +20,60 @@
  * @author Naresh Bhatia
  */
 
-define(['bullsfirst/domain/Position',
+define(
+    [
+        'bullsfirst/domain/Position',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/TemplateManager'],
-        function(Position, UserContext, Formatter, MessageBus, TemplateManager) {
-
+        'bullsfirst/views/TemplateManager',
+        'moment'
+    ],
+    function(Position, UserContext, Formatter, MessageBus, TemplateManager, moment) {
         'use strict';
 
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        tagName: 'tr',
+            tagName: 'tr',
 
-        events: {
-            'click .pos_trade': 'requestTrade'
-        },
+            events: {
+                'click .pos_trade': 'requestTrade'
+            },
 
-        requestTrade: function(event) {
-            MessageBus.trigger('TradeRequest', {
-                action: $(event.target).data('action'),
-                quantity: this.model.get('quantity'),
-                symbol: this.model.get('instrumentSymbol')
-            });
+            requestTrade: function(event) {
+                MessageBus.trigger('TradeRequest', {
+                    action: $(event.target).data('action'),
+                    quantity: this.model.get('quantity'),
+                    symbol: this.model.get('instrumentSymbol')
+                });
 
-            return false;
-        },
+                return false;
+            },
 
-        render: function() {
-            // Format position values for display 
-            var position = this.model.toJSON();  // returns a copy of the model's attributes
-            position.lotCreationTimeFormatted = Formatter.formatMoment2Date(moment(position.lotCreationTime));
-            position.marketValueFormatted = Formatter.formatMoney(position.marketValue);
-            position.lastTradeFormatted = Formatter.formatMoney(position.lastTrade);
-            position.pricePaidFormatted = Formatter.formatMoney(position.pricePaid);
-            position.totalCostFormatted = Formatter.formatMoney(position.totalCost);
-            position.gainFormatted = Formatter.formatMoney(position.gain);
-            position.gainPercentFormatted = Formatter.formatPercent(position.gainPercent);
+            render: function() {
+                // Format position values for display
+                var position = this.model.toJSON();  // returns a copy of the model's attributes
+                position.lotCreationTimeFormatted = Formatter.formatMoment2Date(moment(position.lotCreationTime));
+                position.marketValueFormatted = Formatter.formatMoney(position.marketValue);
+                position.lastTradeFormatted = Formatter.formatMoney(position.lastTrade);
+                position.pricePaidFormatted = Formatter.formatMoney(position.pricePaid);
+                position.totalCostFormatted = Formatter.formatMoney(position.totalCost);
+                position.gainFormatted = Formatter.formatMoney(position.gain);
+                position.gainPercentFormatted = Formatter.formatPercent(position.gainPercent);
 
-            // Set up flags for conditionals
-            position.isInstrumentPosition = typeof position.lotId === 'undefined';
-            position.isLot = !position.isInstrumentPosition;
-            position.isTradable = position.isInstrumentPosition && position.instrumentSymbol !== 'CASH';
+                // Set up flags for conditionals
+                position.isInstrumentPosition = typeof position.lotId === 'undefined';
+                position.isLot = !position.isInstrumentPosition;
+                position.isTradable = position.isInstrumentPosition && position.instrumentSymbol !== 'CASH';
 
-            // Render using template
-            var hash = {position: position};
-            
-            var template = TemplateManager.getTemplate('position');
-            $(this.el).html(template(hash));
+                // Render using template
+                var hash = {position: position};
+                
+                var template = TemplateManager.getTemplate('position');
+                $(this.el).html(template(hash));
 
-            return this;
-        }
-    });
-});
+                return this;
+            }
+        });
+    }
+);

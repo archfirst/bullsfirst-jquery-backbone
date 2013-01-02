@@ -23,6 +23,7 @@ require.config({
         jqueryui:                    'vendor/jquery-ui-1.8.23.custom.min',
         jqueryValidationEngine:      'vendor/jquery.validationEngine-2.5.2',
         jqueryValidationEngineRules: 'vendor/jquery.validationEngine-en-2.5.2',
+        jqueryTreeTable:             'vendor/jquery.treeTable-20121109',
 
         // Underscore
         underscore:                  'vendor/underscore-1.4.3',
@@ -42,7 +43,7 @@ require.config({
         jqueryformat:                'vendor/jquery.format-1.2',
 
         // Date library
-        moment:                      'vendor/moment-1.6.2',
+        moment:                      'vendor/moment-1.7.2',
 
         // jQuery Alerts (http://www.codeproject.com/Articles/295236/jQuery-UI-Alerts-Dialog-using-ThemeRollers)
         jqueryalerts:                'vendor/jquery.alerts',
@@ -57,22 +58,38 @@ require.config({
             exports: 'Backbone'
         },
 
-        base64encode: ['utf8encode'],
+        base64encode: {
+            deps: ['utf8encode'],
+            exports: 'base64_encode'
+        },
 
         handlebars: {
             exports: 'Handlebars'
         },
 
-        jqueryformat: ['jquery'],
-
-        jqueryui: ['jquery'],
-
-        jqueryValidationEngine: {
-            deps: ['jquery'],
-            exports: '$.validationEngine'
+        jqueryformat: {
+            deps: ['jquery']
         },
 
-        jqueryValidationEngineRules: ['jqueryValidationEngine'],
+        jqueryTreeTable: {
+            deps: ['jquery']
+        },
+
+        jqueryui: {
+            deps: ['jquery']
+        },
+
+        jqueryValidationEngine: {
+            deps: ['jquery']
+        },
+
+        jqueryValidationEngineRules: {
+            deps: ['jqueryValidationEngine']
+        },
+
+        moment: {
+            exports: 'moment'
+        },
 
         underscore: {
             exports: '_'

@@ -21,59 +21,63 @@
  */
 
 
-define(['bullsfirst/framework/MessageBus',
-        'bullsfirst/views/PositionView'],
-        function(MessageBus, PositionView) {
-
+define(
+    [
+        'bullsfirst/framework/MessageBus',
+        'bullsfirst/views/PositionView',
+        'jqueryTreeTable'
+    ],
+    function(MessageBus, PositionView) {
         'use strict';
         
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        el: '#positions-table tbody',
+            el: '#positions-table tbody',
 
-        initialize: function(options) {
-            //this.collection.bind('reset', this.render, this);
-            MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
-                this.collection = selectedAccount.get('positions');
-                this.collection.bind('reset', this.render, this);
-                this.render();
-            }, this);
-		},
+            initialize: function(/* options */) {
+                //this.collection.bind('reset', this.render, this);
+                MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
+                    this.collection = selectedAccount.get('positions');
+                    this.collection.bind('reset', this.render, this);
+                    this.render();
+                }, this);
+            },
 
-		render: function() {
-			this.$el.empty();
-			this.collection.each(function(position, i) {
-                var positionId = 'position-' + position.get('instrumentSymbol');
-                var view = new PositionView({
-                    model: position,
-                    id: positionId,
-                    className: (i % 2) ? "" : "alt"
-                });
-                this.$el.append(view.render().el);
+            render: function() {
+                this.$el.empty();
+                this.collection.each(function(position, i) {
+                    var positionId = 'position-' + position.get('instrumentSymbol');
+                    var view = new PositionView({
+                        model: position,
+                        id: positionId,
+                        className: (i % 2) ? '' : 'alt'
+                    });
+                    this.$el.append(view.render().el);
 
-                // Add rows for children
-                var children = position.get('children');
-                if (children) {
-                    this._renderChildren(children, positionId);
-                }
-            }, this);
+                    // Add rows for children
+                    var children = position.get('children');
+                    if (children) {
+                        this._renderChildren(children, positionId);
+                    }
+                }, this);
 
-            // Display as TreeTable
-            $("#positions-table").treeTable();
+                // Display as TreeTable
+                $('#positions-table').treeTable();
 
-            return this;
-		},
+                return this;
+            },
 
-		_renderChildren: function(children, positionId) {
-            children.each(function(child, i) {
-                var view = new PositionView({
-                    model: child,
-                    id: 'lot-' + child.get('lotId'),
-                    className: 'child-of-' + positionId
-                });
-                this.$el.append(view.render().el);
-            }, this);
-        }
+            _renderChildren: function(children, positionId) {
+                children.each(function(child) {
+                    var view = new PositionView({
+                        model: child,
+                        id: 'lot-' + child.get('lotId'),
+                        className: 'child-of-' + positionId
+                    });
+                    this.$el.append(view.render().el);
+                }, this);
+            }
 
-    });
- });
+        });
+     }
+);
