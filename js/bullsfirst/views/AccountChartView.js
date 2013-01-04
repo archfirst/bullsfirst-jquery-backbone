@@ -21,11 +21,13 @@
  */
 define(
     [
+        'backbone',
         'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
-        'highcharts'
+        'highcharts',
+        'underscore'
     ],
-    function(Message, MessageBus) {
+    function(Backbone, Message, MessageBus, Highcharts, _) {
         'use strict';
 
         var ACCOUNTS_TITLE = 'All Accounts';

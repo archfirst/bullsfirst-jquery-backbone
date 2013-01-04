@@ -21,10 +21,10 @@
  */
 define(
     [
-        'bullsfirst/framework/Formatter',
-        'backbone'
+        'backbone',
+        'bullsfirst/framework/Formatter'
     ],
-    function(Formatter) {
+    function(Backbone, Formatter) {
         'use strict';
 
         return Backbone.View.extend({

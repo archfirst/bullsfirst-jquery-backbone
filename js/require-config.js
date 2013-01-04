@@ -67,6 +67,10 @@ require.config({
             exports: 'Handlebars'
         },
 
+        highcharts: {
+            exports: 'Highcharts'
+        },
+
         jqueryalerts: {
             deps: ['jquery']
         },

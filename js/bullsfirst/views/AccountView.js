@@ -19,107 +19,112 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/services/AccountService',
-        'bullsfirst/views/TemplateManager'],
-       function(UserContext, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {
-    'use strict';
+        'bullsfirst/views/TemplateManager'
+    ],
+    function(Backbone, UserContext, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {
+        'use strict';
 
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        tagName: 'tr',
+            tagName: 'tr',
 
-        events: {
-            'mouseover': 'handleMouseOverRaw',
-            'mouseout': 'handleMouseOutRaw',
-            'click': 'handleClickRaw',
-            'click .left-column': 'handleClickEditIconRaw', /* click on icon-edit is not detected on chrome */
-            'click .icon-save': 'handleClickSaveIconRaw',
-            'keydown .nameField': 'handleKeyDownOnNameRaw' /* keypress for Escape is not detected on chrome */
-        },
+            events: {
+                'mouseover': 'handleMouseOverRaw',
+                'mouseout': 'handleMouseOutRaw',
+                'click': 'handleClickRaw',
+                'click .left-column': 'handleClickEditIconRaw', /* click on icon-edit is not detected on chrome */
+                'click .icon-save': 'handleClickSaveIconRaw',
+                'keydown .nameField': 'handleKeyDownOnNameRaw' /* keypress for Escape is not detected on chrome */
+            },
 
-        handleMouseOverRaw: function() {
-            MessageBus.trigger(Message.AccountMouseOverRaw, this.model.id);
-            return false;
-        },
+            handleMouseOverRaw: function() {
+                MessageBus.trigger(Message.AccountMouseOverRaw, this.model.id);
+                return false;
+            },
 
-        handleMouseOver: function() {
-            this.$el.addClass('selected');
-            this.$el.find('.icon-edit').removeClass('invisible');
-        },
+            handleMouseOver: function() {
+                this.$el.addClass('selected');
+                this.$el.find('.icon-edit').removeClass('invisible');
+            },
 
-        handleMouseOutRaw: function() {
-            MessageBus.trigger(Message.AccountMouseOutRaw, this.model.id);
-            return false;
-        },
+            handleMouseOutRaw: function() {
+                MessageBus.trigger(Message.AccountMouseOutRaw, this.model.id);
+                return false;
+            },
 
-        handleMouseOut: function() {
-            this.$el.removeClass('selected');
-            this.$el.find('.icon-edit').addClass('invisible');
-        },
+            handleMouseOut: function() {
+                this.$el.removeClass('selected');
+                this.$el.find('.icon-edit').addClass('invisible');
+            },
 
-        handleClickRaw: function() {
-            MessageBus.trigger(Message.AccountClickRaw, this.model.id);
-            return false;
-        },
+            handleClickRaw: function() {
+                MessageBus.trigger(Message.AccountClickRaw, this.model.id);
+                return false;
+            },
 
-        handleClickEditIconRaw: function() {
-            MessageBus.trigger(Message.AccountClickEditIconRaw, this.model.id);
-            return false;
-        },
+            handleClickEditIconRaw: function() {
+                MessageBus.trigger(Message.AccountClickEditIconRaw, this.model.id);
+                return false;
+            },
 
-        handleClickEditIcon: function() {
-            this.$el.find('.name').addClass('editing');
-            this.$el.find('.nameField').val(this.model.get('name')).focus();
-        },
+            handleClickEditIcon: function() {
+                this.$el.find('.name').addClass('editing');
+                this.$el.find('.nameField').val(this.model.get('name')).focus();
+            },
 
-        handleClickSaveIconRaw: function() {
-            this.validateInput();
-            return false;
-        },
-
-        handleKeyDownOnNameRaw: function(event) {
-            if (event.keyCode === $.ui.keyCode.ENTER) {
+            handleClickSaveIconRaw: function() {
                 this.validateInput();
                 return false;
+            },
+
+            handleKeyDownOnNameRaw: function(event) {
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    this.validateInput();
+                    return false;
+                }
+                else if (event.keyCode === $.ui.keyCode.ESCAPE) {
+                    this.stopEditing();
+                    return false;
+                }
+
+                // If not one of the keycodes above, let the event bubble up for the input box
+            },
+
+            validateInput: function() {
+                var newName = this.$el.find('.nameField').val();
+                if (typeof newName !== 'undefined' && newName !== null && newName.length > 0) {
+                    this.stopEditing();
+
+                    // Change name of brokerage account
+                    AccountService.changeName(
+                        this.model.id, this.$el.find('.nameField').val(), this.changeNameDone, ErrorUtil.showError);
+                }
+            },
+
+            stopEditing: function() {
+                this.$el.find('.name').removeClass('editing');
+                MessageBus.trigger(Message.AccountStoppedEditing, this.model.id);
+                this.handleMouseOutRaw(); // force deselection of this account in case cursor is on some other account
+            },
+
+            changeNameDone: function(/* data, textStatus, jqXHR */) {
+                UserContext.updateAccounts();
+            },
+
+            render: function() {
+                var account = this.model.toJSON();  // returns a copy of the model's attributes
+                var template = TemplateManager.getTemplate('account');
+                $(this.el).html(template(account));
+                return this;
             }
-            else if (event.keyCode === $.ui.keyCode.ESCAPE) {
-                this.stopEditing();
-                return false;
-            }
-
-            // If not one of the keycodes above, let the event bubble up for the input box
-        },
-
-        validateInput: function() {
-            var newName = this.$el.find('.nameField').val();
-            if (typeof newName !== 'undefined' && newName !== null && newName.length > 0) {
-                this.stopEditing();
-
-                // Change name of brokerage account
-                AccountService.changeName(
-                    this.model.id, this.$el.find('.nameField').val(), this.changeNameDone, ErrorUtil.showError);
-            }
-        },
-
-        stopEditing: function() {
-            this.$el.find('.name').removeClass('editing');
-            MessageBus.trigger(Message.AccountStoppedEditing, this.model.id);
-            this.handleMouseOutRaw(); // force deselection of this account in case cursor is on some other account
-        },
-
-        changeNameDone: function(/* data, textStatus, jqXHR */) {
-            UserContext.updateAccounts();
-        },
-
-        render: function() {
-            var account = this.model.toJSON();  // returns a copy of the model's attributes
-            var template = TemplateManager.getTemplate('account');
-            $(this.el).html(template(account));
-            return this;
-        }
-    });
-});
+        });
+    }
+);

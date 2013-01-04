@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/views/PositionsTableView
+ * bullsfirst/views/PositionTableView
  *
  * @author Naresh Bhatia
  */
@@ -23,11 +23,12 @@
 
 define(
     [
+        'backbone',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/PositionView',
         'jqueryTreeTable'
     ],
-    function(MessageBus, PositionView) {
+    function(Backbone, MessageBus, PositionView) {
         'use strict';
         
         return Backbone.View.extend({

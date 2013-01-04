@@ -29,7 +29,7 @@ define(
     [
         'backbone'
     ],
-    function() {
+    function(Backbone) {
         'use strict';
         return Backbone.Model.extend({
         });

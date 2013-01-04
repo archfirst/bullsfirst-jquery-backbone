@@ -21,13 +21,15 @@
  */
 define(
     [
+        'backbone',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/HomePage',
-        'bullsfirst/views/UserPage'
+        'bullsfirst/views/UserPage',
+        'underscore'
     ],
-    function(UserContext, Message, MessageBus, HomePage, UserPage) {
+    function(Backbone, UserContext, Message, MessageBus, HomePage, UserPage, _) {
         'use strict';
 
         return Backbone.Router.extend({

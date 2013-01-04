@@ -21,27 +21,33 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
-        'bullsfirst/framework/AjaxUtil'],
-       function(UserContext, AjaxUtil) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/UserContext',
+        'bullsfirst/framework/AjaxUtil',
+        'underscore'
+    ],
+    function(Backbone, UserContext, AjaxUtil, _) {
+        'use strict';
 
-    Backbone._sync = Backbone.sync;
+        Backbone._sync = Backbone.sync;
 
-    Backbone.sync = function(method, model, options) {
-        var url = options.url || getValue(model, 'url');
-        if (url && (url.indexOf('/secure/') > 0)) {
-            options.beforeSend = function(xhr) {
-                AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
-            };
-        }
-        Backbone._sync(method, model, options);
-    };
+        Backbone.sync = function(method, model, options) {
+            var url = options.url || getValue(model, 'url');
+            if (url && (url.indexOf('/secure/') > 0)) {
+                options.beforeSend = function(xhr) {
+                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                };
+            }
+            Backbone._sync(method, model, options);
+        };
 
-    // Helper function to get a value from a Backbone object as a property
-    // or as a function.
-    var getValue = function(object, prop) {
-        if (!(object && object[prop])) { return null; }
-        return _.isFunction(object[prop]) ? object[prop]() : object[prop];
-    };
-});
+        // Helper function to get a value from a Backbone object as a property
+        // or as a function.
+        var getValue = function(object, prop) {
+            if (!(object && object[prop])) { return null; }
+            return _.isFunction(object[prop]) ? object[prop]() : object[prop];
+        };
+    }
+);

@@ -35,39 +35,44 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'backbone'
+    ],
+    function(Backbone) {
+        'use strict';
 
-    return Backbone.Model.extend({
+        return Backbone.Model.extend({
 
-        // Initialize calculated fields
-        // We are intentionally not parsing executions into a backbone collection,
-        // just to show that it is possible to use the executions array as is.
-        parse: function(response) {
-            response.executionPrice = this.calculateExecutionPrice(response);
-            response.isActive =
-                response.status === 'New' ||
-                response.status === 'PartiallyFilled' ||
-                response.status === 'PendingNew';
-            return response;
-        },
+            // Initialize calculated fields
+            // We are intentionally not parsing executions into a backbone collection,
+            // just to show that it is possible to use the executions array as is.
+            parse: function(response) {
+                response.executionPrice = this.calculateExecutionPrice(response);
+                response.isActive =
+                    response.status === 'New' ||
+                    response.status === 'PartiallyFilled' ||
+                    response.status === 'PendingNew';
+                return response;
+            },
 
-        calculateExecutionPrice: function(response) {
-            if (typeof response.executions === 'undefined' || response.executions.length === 0) {
-                return null;
+            calculateExecutionPrice: function(response) {
+                if (typeof response.executions === 'undefined' || response.executions.length === 0) {
+                    return null;
+                }
+
+                var totalPrice = 0;
+                var totalQuantity = 0;
+                response.executions.forEach(function(execution) {
+                    totalPrice += execution.price.amount * execution.quantity;
+                    totalQuantity += execution.quantity;
+                });
+                var executionPrice = {
+                    amount: totalPrice / totalQuantity,
+                    currency: 'USD'
+                };
+                return executionPrice;
             }
-
-            var totalPrice = 0;
-            var totalQuantity = 0;
-            response.executions.forEach(function(execution) {
-                totalPrice += execution.price.amount * execution.quantity;
-                totalQuantity += execution.quantity;
-            });
-            var executionPrice = {
-                amount: totalPrice / totalQuantity,
-                currency: 'USD'
-            };
-            return executionPrice;
-        }
-    });
-});
+        });
+    }
+);

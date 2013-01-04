@@ -19,38 +19,43 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Message',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/AccountTableView',
-        'bullsfirst/views/AccountTotalsView'],
-       function(UserContext, Message, MessageBus, AccountTableView, AccountTotalsView) {
-    'use strict';
+        'bullsfirst/views/AccountTotalsView'
+    ],
+    function(Backbone, UserContext, Message, MessageBus, AccountTableView, AccountTotalsView) {
+        'use strict';
 
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        accountTableView: null,
-        accountTotalsView: null,
+            accountTableView: null,
+            accountTotalsView: null,
 
-        events: {
-            'click #account-detail-table': 'transitionToParentView'
-        },
+            events: {
+                'click #account-detail-table': 'transitionToParentView'
+            },
 
-        initialize: function() {
-            this.accountTableView =
-                new AccountTableView({el: '#account-table tbody', collection: UserContext.getBrokerageAccounts()});
-            this.accountTotalsView =
-                new AccountTotalsView({el: '#account-table tfoot', collection: UserContext.getBrokerageAccounts()});
+            initialize: function() {
+                this.accountTableView =
+                    new AccountTableView({el: '#account-table tbody', collection: UserContext.getBrokerageAccounts()});
+                this.accountTotalsView =
+                    new AccountTotalsView({el: '#account-table tfoot', collection: UserContext.getBrokerageAccounts()});
 
-            // Subscribe to events
-            MessageBus.on(Message.AccountClick, function() {
-                // TODO: can we avoid the hardcoded pixel value below?
-                this.$el.find('.account-table-transitioning-view').animate({ left: '-615px' });
-            }, this);
-        },
+                // Subscribe to events
+                MessageBus.on(Message.AccountClick, function() {
+                    // TODO: can we avoid the hardcoded pixel value below?
+                    this.$el.find('.account-table-transitioning-view').animate({ left: '-615px' });
+                }, this);
+            },
 
-        transitionToParentView: function() {
-            this.$el.find('.account-table-transitioning-view').animate({ left: '0px' });
-        }
-    });
-});
+            transitionToParentView: function() {
+                this.$el.find('.account-table-transitioning-view').animate({ left: '0px' });
+            }
+        });
+    }
+);

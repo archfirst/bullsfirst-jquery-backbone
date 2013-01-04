@@ -19,42 +19,47 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/Message',
-        'bullsfirst/framework/MessageBus'],
-       function(Message, MessageBus) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/framework/Message',
+        'bullsfirst/framework/MessageBus'
+    ],
+    function(Backbone, Message, MessageBus) {
+        'use strict';
 
-    return Backbone.View.extend({
-        events: {
-            'click a': 'handleClick'
-        },
+        return Backbone.View.extend({
+            events: {
+                'click a': 'handleClick'
+            },
 
-        initialize: function() {
-            // Subscribe to events
-            MessageBus.on(Message.TabSelectionRequest, this.selectTab, this);
-        },
+            initialize: function() {
+                // Subscribe to events
+                MessageBus.on(Message.TabSelectionRequest, this.selectTab, this);
+            },
 
-        handleClick: function(event) {
-            event.preventDefault();
-            MessageBus.trigger(
-                Message.TabSelectionRequest,
-                { tabbar: this.$el.data('tabbar'), tab: $(event.target).data('tab') });
-            return false;
-        },
+            handleClick: function(event) {
+                event.preventDefault();
+                MessageBus.trigger(
+                    Message.TabSelectionRequest,
+                    { tabbar: this.$el.data('tabbar'), tab: $(event.target).data('tab') });
+                return false;
+            },
 
-        selectTab: function(tabInfo) {
-            if (tabInfo.tabbar !== this.$el.data('tabbar')) {
-                return;
+            selectTab: function(tabInfo) {
+                if (tabInfo.tabbar !== this.$el.data('tabbar')) {
+                    return;
+                }
+
+                this.$el.find('a').each(function() {
+                    if ($(this).data('tab') === tabInfo.tab) {
+                        $(this).addClass('selected');
+                    }
+                    else {
+                        $(this).removeClass('selected');
+                    }
+                });
             }
-
-            this.$el.find('a').each(function() {
-                if ($(this).data('tab') === tabInfo.tab) {
-                    $(this).addClass('selected');
-                }
-                else {
-                    $(this).removeClass('selected');
-                }
-            });
-        }
-    });
-});
+        });
+    }
+);

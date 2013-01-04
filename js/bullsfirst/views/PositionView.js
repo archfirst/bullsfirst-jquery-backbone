@@ -22,6 +22,7 @@
 
 define(
     [
+        'backbone',
         'bullsfirst/domain/Position',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
@@ -29,7 +30,7 @@ define(
         'bullsfirst/views/TemplateManager',
         'moment'
     ],
-    function(Position, UserContext, Formatter, MessageBus, TemplateManager, moment) {
+    function(Backbone, Position, UserContext, Formatter, MessageBus, TemplateManager, moment) {
         'use strict';
 
         return Backbone.View.extend({

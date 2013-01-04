@@ -21,9 +21,10 @@
  */
 define(
     [
-        'backbone'
+        'backbone',
+        'underscore'
     ],
-    function() {
+    function(Backbone, _) {
         'use strict';
 
         return Backbone.View.extend({

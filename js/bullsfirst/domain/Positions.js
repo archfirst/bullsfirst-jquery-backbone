@@ -21,9 +21,10 @@
  */
 define(
     [
+        'backbone',
         'bullsfirst/domain/Position'
     ],
-    function(Position) {
+    function(Backbone, Position) {
         'use strict';
 
         return Backbone.Collection.extend({

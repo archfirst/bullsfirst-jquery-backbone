@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         unused        : true,
         strict        : true,
         trailing      : true,
-        maxparams     : 10,
+        maxparams     : 20,
         maxdepth      : 2,
         maxstatements : 30,
         maxcomplexity : 10,
@@ -84,21 +84,21 @@ module.exports = function(grunt) {
         white         : false,
 
         globals: {
-          _: true,
           define: true,
           require: true,
-          base64_encode: true,
-          Backbone: true,
-          Handlebars: true,
-          Highcharts: true,
           Modernizr: true
         }
       }
     }
   });
 
-  // Load the plugin that provides the "lint" task.
+  // Load plugins
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
   grunt.registerTask('default', ['jshint']);

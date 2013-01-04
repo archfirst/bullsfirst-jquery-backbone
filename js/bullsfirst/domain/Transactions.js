@@ -19,12 +19,17 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/Transaction'],
-       function(Transaction) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/Transaction'
+    ],
+    function(Backbone, Transaction) {
+        'use strict';
 
-    return Backbone.Collection.extend({
-        model: Transaction,
-        url: '/bfoms-javaee/rest/secure/transactions'
-    });
-});
+        return Backbone.Collection.extend({
+            model: Transaction,
+            url: '/bfoms-javaee/rest/secure/transactions'
+        });
+    }
+);

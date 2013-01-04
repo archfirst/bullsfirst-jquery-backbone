@@ -19,12 +19,17 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/BrokerageAccount'],
-       function(BrokerageAccount) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/BrokerageAccount'
+    ],
+    function(Backbone, BrokerageAccount) {
+        'use strict';
 
-    return Backbone.Collection.extend({
-        model: BrokerageAccount,
-        url: '/bfoms-javaee/rest/secure/brokerage_accounts'
-    });
-});
+        return Backbone.Collection.extend({
+            model: BrokerageAccount,
+            url: '/bfoms-javaee/rest/secure/brokerage_accounts'
+        });
+    }
+);

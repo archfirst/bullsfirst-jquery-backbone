@@ -19,15 +19,19 @@
  *
  * @author Naresh Bhatia
  */
-require(['bullsfirst/app/App'],
-        function(App) {
-    'use strict';
+require(
+    [
+        'bullsfirst/app/App'
+    ],
+    function() {
+        'use strict';
 
-    $(document).ready(function() {
-        // Load Crockford's JSON library if browser does not have native support
-        Modernizr.load({
-            test: window.JSON,
-            nope: 'js/vendor/json2.js'
+        $(document).ready(function() {
+            // Load Crockford's JSON library if browser does not have native support
+            Modernizr.load({
+                test: window.JSON,
+                nope: 'js/vendor/json2.js'
+            });
         });
-    });
-});
+    }
+);

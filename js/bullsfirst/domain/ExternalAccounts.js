@@ -19,12 +19,17 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/ExternalAccount'],
-       function(ExternalAccount) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/ExternalAccount'
+    ],
+    function(Backbone, ExternalAccount) {
+        'use strict';
 
-    return Backbone.Collection.extend({
-        model: ExternalAccount,
-        url: '/bfoms-javaee/rest/secure/external_accounts'
-    });
-});
+        return Backbone.Collection.extend({
+            model: ExternalAccount,
+            url: '/bfoms-javaee/rest/secure/external_accounts'
+        });
+    }
+);

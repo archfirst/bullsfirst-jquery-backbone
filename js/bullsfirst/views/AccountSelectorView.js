@@ -21,12 +21,13 @@
  */
 define(
     [
+        'backbone',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/TemplateManager'
     ],
-    function(UserContext, Formatter, MessageBus, TemplateManager) {
+    function(Backbone, UserContext, Formatter, MessageBus, TemplateManager) {
         'use strict';
 
         return Backbone.View.extend({

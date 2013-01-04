@@ -28,10 +28,11 @@ define(
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/services/UserService',
+        'underscore',
         'jqueryui',
         'jqueryValidationEngineRules'
     ],
-    function(Credentials, UserContext, ErrorUtil, Message, MessageBus, Page, UserService) {
+    function(Credentials, UserContext, ErrorUtil, Message, MessageBus, Page, UserService, _) {
         'use strict';
 
         return Page.extend({

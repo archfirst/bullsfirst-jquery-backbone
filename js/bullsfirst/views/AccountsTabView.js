@@ -19,36 +19,41 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/UserContext',
         'bullsfirst/views/AccountChartView',
-        'bullsfirst/views/AccountTableWrapperView'],
-       function(UserContext, AccountChartView, AccountTableWrapperView) {
+        'bullsfirst/views/AccountTableWrapperView'
+    ],
+    function(Backbone, UserContext, AccountChartView, AccountTableWrapperView) {
     'use strict';
 
-    return Backbone.View.extend({
+        return Backbone.View.extend({
 
-        accountTableWrapperView: null,
-        accountChartView: null,
+            accountTableWrapperView: null,
+            accountChartView: null,
 
-        events: {
-            'click #add-account-button': 'addAccount',
-            'click #refresh-accounts-button': 'refreshAccounts'
-        },
+            events: {
+                'click #add-account-button': 'addAccount',
+                'click #refresh-accounts-button': 'refreshAccounts'
+            },
 
-        initialize: function() {
-            this.accountTableWrapperView =
-                new AccountTableWrapperView({el: '#account-table-unclipped-wrapper'});
-            this.accountChartView =
-                new AccountChartView({el: '#accounts-chart', collection: UserContext.getBrokerageAccounts()});
-        },
+            initialize: function() {
+                this.accountTableWrapperView =
+                    new AccountTableWrapperView({el: '#account-table-unclipped-wrapper'});
+                this.accountChartView =
+                    new AccountChartView({el: '#accounts-chart', collection: UserContext.getBrokerageAccounts()});
+            },
 
-        addAccount: function() {
-            return false;
-        },
+            addAccount: function() {
+                return false;
+            },
 
-        refreshAccounts: function() {
-            UserContext.updateAccounts();
-            return false;
-        }
-    });
-});
+            refreshAccounts: function() {
+                UserContext.updateAccounts();
+                return false;
+            }
+        });
+    }
+);

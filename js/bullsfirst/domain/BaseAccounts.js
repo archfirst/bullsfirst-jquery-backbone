@@ -19,11 +19,16 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/BaseAccount'],
-       function(BaseAccount) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/BaseAccount'
+    ],
+    function(Backbone, BaseAccount) {
+        'use strict';
 
-    return Backbone.Collection.extend({
-        model: BaseAccount
-    });
-});
+        return Backbone.Collection.extend({
+            model: BaseAccount
+        });
+    }
+);

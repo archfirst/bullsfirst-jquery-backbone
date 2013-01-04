@@ -29,31 +29,37 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/Position',
-        'bullsfirst/domain/Positions'],
-       function(Position, Positions) {
-    'use strict';
+define(
+    [
+        'backbone',
+        'bullsfirst/domain/Position',
+        'bullsfirst/domain/Positions',
+        'underscore'
+    ],
+    function(Backbone, Position, Positions, _) {
+        'use strict';
 
-    return Backbone.Model.extend({
+        return Backbone.Model.extend({
 
-        // Parse positions into a backbone collection
-        parse: function(response) {
-            response.positions = this.positionArrayToCollection(response.positions);
-            return response;
-        },
+            // Parse positions into a backbone collection
+            parse: function(response) {
+                response.positions = this.positionArrayToCollection(response.positions);
+                return response;
+            },
 
-        positionArrayToCollection: function(positionArray) {
+            positionArrayToCollection: function(positionArray) {
 
-            var positionCollection = new Positions();
+                var positionCollection = new Positions();
 
-            _.each(positionArray, function(rawPosition) {
-                if (typeof rawPosition.children !== 'undefined') {
-                    rawPosition.children = this.positionArrayToCollection(rawPosition.children);
-                }
-                positionCollection.add(new Position(rawPosition));
-            }, this);
+                _.each(positionArray, function(rawPosition) {
+                    if (typeof rawPosition.children !== 'undefined') {
+                        rawPosition.children = this.positionArrayToCollection(rawPosition.children);
+                    }
+                    positionCollection.add(new Position(rawPosition));
+                }, this);
 
-            return positionCollection;
-        }
-    });
-});
+                return positionCollection;
+            }
+        });
+    }
+);
