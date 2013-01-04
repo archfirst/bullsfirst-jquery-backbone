@@ -4,6 +4,29 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    // ### compass
+    // grunt-contrib-compass npm task
+    compass: {
+      dev: {
+        options: {
+          sassDir: "src/app/sass",
+          cssDir: "src/app/css",
+          imagesDir: "src/app/img",
+          javascriptsDir: "src/app",
+          environment: "development"
+        }
+      },
+      dist: {
+        options: {
+          sassDir: "dist/app/sass",
+          cssDir: "dist/app/css",
+          imagesDir: "dist/app/img",
+          javascriptsDir: "dist/app",
+          environment: "production"
+        }
+      }
+    },
+
     // ### jshint
     // JSHint options for the lint task
     jshint: {
