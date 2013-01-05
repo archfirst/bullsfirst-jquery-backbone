@@ -4,25 +4,42 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    // ### clean
+    // grunt-contrib-clean npm task
+    // Deletes the <string> paths in the array
+    clean: {
+      clean: ['src/css', 'dist']
+    },
+
     // ### compass
     // grunt-contrib-compass npm task
     compass: {
       dev: {
         options: {
-          sassDir: "src/sass",
-          cssDir: "src/css",
-          imagesDir: "src/img",
-          javascriptsDir: "src/js",
-          environment: "development"
+          sassDir: 'src/sass',
+          cssDir: 'src/css',
+          imagesDir: 'src/img',
+          javascriptsDir: 'src/js',
+          environment: 'development'
         }
       },
       dist: {
         options: {
-          sassDir: "dist/sass",
-          cssDir: "dist/css",
-          imagesDir: "dist/img",
-          javascriptsDir: "dist/js",
-          environment: "production"
+          sassDir: 'dist/sass',
+          cssDir: 'dist/css',
+          imagesDir: 'dist/img',
+          javascriptsDir: 'dist/js',
+          environment: 'production'
+        }
+      }
+    },
+
+    // ### copy
+    // grunt-contrib-copy npm task
+    copy: {
+      cssImages: {
+        files: {
+          'src/css/images/': ['src/sass/images/*']
         }
       }
     },
@@ -30,7 +47,7 @@ module.exports = function(grunt) {
     // ### jshint
     // JSHint options for the lint task
     jshint: {
-      all: ["js/main.js", "js/bullsfirst/**/*.js"],
+      all: ['src/js/main.js', 'src/js/bullsfirst/**/*.js'],
       options: {
         // Enforcing Options
         bitwise       : true,
@@ -46,7 +63,7 @@ module.exports = function(grunt) {
         noempty       : true,
         nonew         : true,
         plusplus      : true,
-        quotmark      : "single",
+        quotmark      : 'single',
         regexp        : true,
         undef         : true,
         unused        : true,
@@ -124,5 +141,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:cssImages']);
 };

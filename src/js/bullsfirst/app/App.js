@@ -21,6 +21,7 @@
  *
  * @author Naresh Bhatia
  */
+/*jshint nonew:false */
 define(
     [
         'backbone',
@@ -40,7 +41,7 @@ define(
         TemplateManager.initialize();
 
         // Create the router
-        var _appRouter = new AppRouter();
+        new AppRouter();
         
         // Begin monitoring hashchange events and dispatching routes.
         // This triggers the default route (''), which in turn
