@@ -9,19 +9,19 @@ module.exports = function(grunt) {
     compass: {
       dev: {
         options: {
-          sassDir: "src/app/sass",
-          cssDir: "src/app/css",
-          imagesDir: "src/app/img",
-          javascriptsDir: "src/app",
+          sassDir: "src/sass",
+          cssDir: "src/css",
+          imagesDir: "src/img",
+          javascriptsDir: "src/js",
           environment: "development"
         }
       },
       dist: {
         options: {
-          sassDir: "dist/app/sass",
-          cssDir: "dist/app/css",
-          imagesDir: "dist/app/img",
-          javascriptsDir: "dist/app",
+          sassDir: "dist/sass",
+          cssDir: "dist/css",
+          imagesDir: "dist/img",
+          javascriptsDir: "dist/js",
           environment: "production"
         }
       }
