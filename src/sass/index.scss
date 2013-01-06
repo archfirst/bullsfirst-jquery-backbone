@@ -1,18 +1,47 @@
-/*--- Fonts ---*/
+/**
+ * Copyright 2012 Archfirst
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * index.scss
+ * Master style sheet for the Bullsfirst application - imports all partials.
+ *
+ * @author Naresh Bhatia
+ */
+
+// -----------------------------------------------------------------------------
+// Fonts
+// -----------------------------------------------------------------------------
 @import "aller";
 @import "font-awesome";
 
-/*--- Normalization ---*/
+// -----------------------------------------------------------------------------
+// Vendor Stylesheets
+// -----------------------------------------------------------------------------
 @import "compass";
 @import "normalize";
-
-/*--- Vendor stylesheets ---*/
 @import "main";
 @import "jquery-ui-1.8.23.custom";
 @import "jquery.treeTable-20121109";
 @import "validationEngine.jquery-2.5.2";
 
-/*--- Application stylesheets ---*/
+// -----------------------------------------------------------------------------
+// Application Stylesheets
+// -----------------------------------------------------------------------------
 @import "bullsfirst";
 
-/*--- Widget stylesheets ---*/
+// -----------------------------------------------------------------------------
+// Widget Stylesheets
+// -----------------------------------------------------------------------------

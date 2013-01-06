@@ -20,6 +20,7 @@ module.exports = function(grunt) {
           cssDir: 'src/css',
           imagesDir: 'src/img',
           javascriptsDir: 'src/js',
+          noLineComments: true,
           environment: 'development'
         }
       },
@@ -29,6 +30,7 @@ module.exports = function(grunt) {
           cssDir: 'dist/css',
           imagesDir: 'dist/img',
           javascriptsDir: 'dist/js',
+          noLineComments: true,
           environment: 'production'
         }
       }

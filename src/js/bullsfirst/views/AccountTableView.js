@@ -103,7 +103,7 @@ define(
 
             renderAccount: function(account, index) {
                 var view = new AccountView({model: account});
-                view.render().$el.find('.legend').addClass('color-' + (index%10) + '-gradient');
+                view.render().$el.find('.legend').addClass('legend-' + (index%10) + '-gradient');
                 this.$el.append(view.el);
                 this.childViews[account.id] = view;
             }

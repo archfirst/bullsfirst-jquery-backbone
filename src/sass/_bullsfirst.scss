@@ -1,39 +1,8 @@
-﻿/**
- * Copyright 2012 Archfirst
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * bullsfirst.css
- * The styles in this file represent all basic styles for the Bullsfirst application.
- * It includes the basic styles for all pages and any overrides for normalize.css.
- *
- * @author Naresh Bhatia
- *
- * @colordef  #333333; Grey (container background)
- * @colordef  #404040; Grey (login form background)
- * @colordef  #666666; Grey (label background)
- * @colordef  #7B2A0C; Brown (buttons - selected)
- * @colordef  #9E2B00; Dark Red (link - selected)
- * @colordef  #F04100; Orange (links and large buttons - normal state)
- * @colordef  #F36733; Light orange (links and buttons - rollover)
- * @colordef  #F47513; Orange (Medium buttons, edit icon)
- * @colordef  #F8791B; Gold (Tab - normal state)
- * @colordef  #F89F1B; Gold (home page background, text selection)
- * @colordef  #F8E5C9; Cream (label text, table header text)
- * @colordef  #FBBE39; Yellowish gold (text selection for home page against gold background)
- */
+﻿/* -----------------------------------------------------------------------------
+ * _bullsfirst.scss
+ * -------------------------------------------------------------------------- */
+@import "colors";
+@import "css3-custom";
 
 /* -----------------------------------------------------------------------------
  * Library Overrides
@@ -75,17 +44,17 @@ a:link, a:visited, a:hover, a:active {
 
 /* unvisited and visited link */
 a:link, a:visited {
-    color:#F04100;
+    color: $link-color;
 }
 
 /* mouse over link */
 a:hover {
-    color:#F36733;
+    color: $link-hover-color;
 }
 
 /* selected link */
 a:active {
-    color:#9E2B00;
+    color: $link-active-color;
 }
 
 /* override normalize.css setting of thin dotted to improve look */
@@ -104,8 +73,8 @@ a:focus {
  * Form Styles
  * -------------------------------------------------------------------------- */
 label {
-    background-color: #666666;
-    color: #F8E5C9;
+    background-color: $label-background-color;
+    color: $label-text-color;
     display: block;
     font: 11px/25px Aller;
     height: 25px;
@@ -124,7 +93,7 @@ input[type="text"], input[type="password"] {
  * Buttons
  * -------------------------------------------------------------------------- */
 a.button {
-    color: #FFFFFF;
+    color: $white;
     display: block;
     text-decoration: none;
     -webkit-transition: background-color 0.3s;
@@ -155,7 +124,7 @@ a.button.transfer-icon span  {
 }
 
 a.button.medium {
-    background-color: #F47513;
+    background-color: $button-medium-color;
     font-size: 11px;
     height: 25px;
     line-height: 25px;
@@ -164,25 +133,25 @@ a.button.medium {
 }
 
 a.button.medium:hover {
-    background-color: #F36733;
+    background-color: $button-hover-color;
 }
 
 a.button.medium:active {
-    background-color: #7B2A0C;
+    background-color: $button-active-color;
 }
 
 a.button.large {
-    background-color: #F04100;
+    background-color: $button-large-color;
     height: 75px;
     width: 110px;
 }
 
 a.button.large:hover {
-    background-color: #F36733;
+    background-color: $button-hover-color;
 }
 
 a.button.large:active {
-    background-color: #7B2A0C;
+    background-color: $button-active-color;
 }
 
 a.button.large span  {
@@ -211,139 +180,77 @@ a.button.large span  {
 }
 
 .bf-table thead th {
-    background-color: #8C8C8C;
-    color: #F8E5C9;
+    background-color: $table-header-background-color;
+    color: $table-header-text-color;
     font: bold normal 11px/22px Aller;
     height: 22px;
 }
 
 .bf-table tbody td,
 .bf-table tbody td a {
-    border-bottom: 1px solid #E5E5E5;
+    border-bottom: 1px solid $table-row-separator-color;
     font: normal normal 12px/25px Aller;
     height: 25px;
 }
 
 .bf-table tbody tr.selected {
-    background-color: #D8D8D8;
+    background-color: $table-row-selected-color;
 }
 
 /* -----------------------------------------------------------------------------
  * Legends
  * -------------------------------------------------------------------------- */
 .legend {
-    /* border: 1px solid #BFBFBF; */
     height: 13px;
     margin: auto;
     width: 25px;
 }
 
-.color-0 { background-color: #f6bc0c; }
-.color-1 { background-color: #284b70; }
-.color-2 { background-color: #702828; }
-.color-3 { background-color: #5f7143; }
-.color-4 { background-color: #382c6c; }
-.color-5 { background-color: #0271ae; }
-.color-6 { background-color: #1d7554; }
-.color-7 { background-color: #50224f; }
-.color-8 { background-color: #706e41; }
-.color-9 { background-color: #446a73; }
+.legend-0-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-0-start-color, $legend-0-end-color);
+}
 
-.color-0-gradient {
-   background-color: #f6bc0c;
-   background-image: -webkit-linear-gradient(top left, #fde79c, #f6bc0c); 
-   background-image:    -moz-linear-gradient(top left, #fde79c, #f6bc0c);
-   background-image:     -ms-linear-gradient(top left, #fde79c, #f6bc0c);
-   background-image:      -o-linear-gradient(top left, #fde79c, #f6bc0c);
-   background-image:         linear-gradient(to bottom right, #fde79c, #f6bc0c);
+.legend-1-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-1-start-color, $legend-1-end-color);
 }
- 
-.color-1-gradient {
-   background-color: #284b70;
-   background-image: -webkit-linear-gradient(top left, #b9d6f7, #284b70); 
-   background-image:    -moz-linear-gradient(top left, #b9d6f7, #284b70);
-   background-image:     -ms-linear-gradient(top left, #b9d6f7, #284b70);
-   background-image:      -o-linear-gradient(top left, #b9d6f7, #284b70);
-   background-image:         linear-gradient(to bottom right, #b9d6f7, #284b70);
+
+.legend-2-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-2-start-color, $legend-2-end-color);
 }
- 
-.color-2-gradient {
-   background-color: #702828;
-   background-image: -webkit-linear-gradient(top left, #fbb7b5, #702828); 
-   background-image:    -moz-linear-gradient(top left, #fbb7b5, #702828);
-   background-image:     -ms-linear-gradient(top left, #fbb7b5, #702828);
-   background-image:      -o-linear-gradient(top left, #fbb7b5, #702828);
-   background-image:         linear-gradient(to bottom right, #fbb7b5, #702828);
+
+.legend-3-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-3-start-color, $legend-3-end-color);
 }
- 
-.color-3-gradient {
-   background-color: #5f7143;
-   background-image: -webkit-linear-gradient(top left, #b8c0ac, #5f7143); 
-   background-image:    -moz-linear-gradient(top left, #b8c0ac, #5f7143);
-   background-image:     -ms-linear-gradient(top left, #b8c0ac, #5f7143);
-   background-image:      -o-linear-gradient(top left, #b8c0ac, #5f7143);
-   background-image:         linear-gradient(to bottom right, #b8c0ac, #5f7143);
+
+.legend-4-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-4-start-color, $legend-4-end-color);
 }
- 
-.color-4-gradient {
-   background-color: #382c6c;
-   background-image: -webkit-linear-gradient(top left, #a9a3bd, #382c6c); 
-   background-image:    -moz-linear-gradient(top left, #a9a3bd, #382c6c);
-   background-image:     -ms-linear-gradient(top left, #a9a3bd, #382c6c);
-   background-image:      -o-linear-gradient(top left, #a9a3bd, #382c6c);
-   background-image:         linear-gradient(to bottom right, #a9a3bd, #382c6c);
+
+.legend-5-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-5-start-color, $legend-5-end-color);
 }
- 
-.color-5-gradient {
-   background-color: #0271ae;
-   background-image: -webkit-linear-gradient(top left, #98c1dc, #0271ae); 
-   background-image:    -moz-linear-gradient(top left, #98c1dc, #0271ae);
-   background-image:     -ms-linear-gradient(top left, #98c1dc, #0271ae);
-   background-image:      -o-linear-gradient(top left, #98c1dc, #0271ae);
-   background-image:         linear-gradient(to bottom right, #98c1dc, #0271ae);
+
+.legend-6-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-6-start-color, $legend-6-end-color);
 }
- 
-.color-6-gradient {
-   background-color: #1d7554;
-   background-image: -webkit-linear-gradient(top left, #9dc2b3, #1d7554); 
-   background-image:    -moz-linear-gradient(top left, #9dc2b3, #1d7554);
-   background-image:     -ms-linear-gradient(top left, #9dc2b3, #1d7554);
-   background-image:      -o-linear-gradient(top left, #9dc2b3, #1d7554);
-   background-image:         linear-gradient(to bottom right, #9dc2b3, #1d7554);
+
+.legend-7-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-7-start-color, $legend-7-end-color);
 }
- 
-.color-7-gradient {
-   background-color: #50224f;
-   background-image: -webkit-linear-gradient(top left, #b1a1b1, #50224f); 
-   background-image:    -moz-linear-gradient(top left, #b1a1b1, #50224f);
-   background-image:     -ms-linear-gradient(top left, #b1a1b1, #50224f);
-   background-image:      -o-linear-gradient(top left, #b1a1b1, #50224f);
-   background-image:         linear-gradient(to bottom right, #b1a1b1, #50224f);
+
+.legend-8-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-8-start-color, $legend-8-end-color);
 }
- 
-.color-8-gradient {
-   background-color: #706e41;
-   background-image: -webkit-linear-gradient(top left, #c1c0ae, #706e41); 
-   background-image:    -moz-linear-gradient(top left, #c1c0ae, #706e41);
-   background-image:     -ms-linear-gradient(top left, #c1c0ae, #706e41);
-   background-image:      -o-linear-gradient(top left, #c1c0ae, #706e41);
-   background-image:         linear-gradient(to bottom right, #c1c0ae, #706e41);
+
+.legend-9-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-9-start-color, $legend-9-end-color);
 }
- 
-.color-9-gradient {
-   background-color: #446a73;
-   background-image: -webkit-linear-gradient(top left, #adbdc0, #446a73); 
-   background-image:    -moz-linear-gradient(top left, #adbdc0, #446a73);
-   background-image:     -ms-linear-gradient(top left, #adbdc0, #446a73);
-   background-image:      -o-linear-gradient(top left, #adbdc0, #446a73);
-   background-image:         linear-gradient(to bottom right, #adbdc0, #446a73);
-}
- 
+
 /* -----------------------------------------------------------------------------
  * Main Container
  * -------------------------------------------------------------------------- */
 .container {
-    background-color: #333333;
+    background-color: $container-background-color;
     margin: auto;
     width: 960px;
 }
@@ -352,7 +259,7 @@ a.button.large span  {
  * Home Page
  * -------------------------------------------------------------------------- */
 #home-page {
-    background: #F89F1B url(../img/horns.png) no-repeat right bottom;
+    background: $brand-color url(../img/horns.png) no-repeat right bottom;
     height: 541px;
     margin: 10px 10px 0 10px;
     position: relative;
@@ -379,11 +286,11 @@ a.button.large span  {
 
 /* Override selection color for gold background */
 #home-page ::-moz-selection  {
-    background: #FBBE39;
+    background: $text-selection-alternate-color;
 }
 
 #home-page ::selection  {
-    background: #FBBE39;
+    background: $text-selection-alternate-color;
 }
 
 /* -----------------------------------------------------------------------------
@@ -401,7 +308,7 @@ a.button.large span  {
 }
 
 #login-form {
-    background-color: #404040;
+    background-color: $form-background-color;
     height: 247px;
     padding: 35px 15px 0 15px;
     width: 270px;
@@ -422,7 +329,7 @@ a.button.large span  {
 }
 
 #home-page #intro-section h1 {
-    color: #FFFFFF;
+    color: $white;
     margin: 0;
 }
 
@@ -453,7 +360,7 @@ a.button.large span  {
  * User Page - Header
  * -------------------------------------------------------------------------- */
 #user-page header {
-    background-color: #F89F1B;
+    background-color: $brand-color;
     height: 137px;
     margin: 10px 10px 0 10px;
     position: relative;
@@ -518,8 +425,8 @@ a.button.large span  {
 }
 
 .tabbar ul li a {
-    background-color: #F8791B;
-    color: #FFFFFF;
+    background-color: $tab-color;
+    color: $white;
     display: block;
     height: 25px;
     line-height: 25px;
@@ -530,12 +437,12 @@ a.button.large span  {
 }
 
 .tabbar ul li a:hover {
-    background-color: #F36733;
+    background-color: $button-hover-color;
 }
 
 .tabbar ul li a.selected {
-    background-color: #FFFFFF;
-    color: #000000;
+    background-color: $white;
+    color: $black;
     margin-top: 0;
     padding-top: 5px;
 }
@@ -544,7 +451,7 @@ a.button.large span  {
  * User Page - Tabs
  * -------------------------------------------------------------------------- */
 #user-page .tab {
-    background-color: #FFFFFF;
+    background-color: $white;
     margin: 0 10px 0 10px;
     position: relative;
 }
@@ -612,7 +519,7 @@ a.button.large span  {
 #account-table .left-column {
     background: none;
     border: none;
-    color: #F47513;
+    color: $icon-color;
     font-size: 19px;
     text-align: center;
     width: 30px;
@@ -633,7 +540,7 @@ a.button.large span  {
 #account-table .name .edit i {
     background: none;
     border: none;
-    color: #F47513;
+    color: $icon-color;
     font-size: 19px;
     text-align: center;
     vertical-align: bottom;
@@ -664,7 +571,7 @@ a.button.large span  {
 
 /* Last row - dark grey border bottom */
 #account-table tbody tr:last-child td {
-    border-bottom: 3px solid #8C8C8C;
+    border-bottom: 3px solid $table-totals-separator-color;
 }
 
 /* Last row - no border bottom for left and right columns */
@@ -676,7 +583,7 @@ a.button.large span  {
 /* Disable highlighting of left and right columns on selection */
 #account-table tbody tr.selected .left-column,
 #account-table tbody tr.selected .right-column {
-    background-color: #FFFFFF;
+    background-color: $white;
 }
 
 /* Footer text is bold */
@@ -736,30 +643,30 @@ a.button.large span  {
 #positions-table {
     float: left;
     margin: 10px 0 0 80px;
-    width:800px;
+    width: 800px;
 }
 
 #positions-table th {
-    padding-left:3px;
+    padding-left: 3px;
     text-align: left;
     text-transform: uppercase;
 }
 
 #positions-table .pull-right {
-    text-align:right;
+    text-align: right;
 }
 
 
 #positions-table .center {
-    text-align:center;
+    text-align: center;
 }
 
 #positions-tab table td {
-    padding:3px 0 3px 3px;
+    padding: 3px 0 3px 3px;
 }
 
 #positions-table .number {
-    text-align:right;
+    text-align: right;
 }
 
 #positions-tab .button-bar {
@@ -769,17 +676,17 @@ a.button.large span  {
 }
 
 #positions-tab .select-bar{
-    left:80px;
+    left: 80px;
     position: absolute;
-    top:21px;
+    top: 21px;
 }
 
 #postab-account-selector {
-    background-color:#F47513;
-    border:0;
-    color:#FFFFFF;
-    width:280px;
-    padding:3px;
+    background-color: $selector-fancy-color;
+    border: 0;
+    color: $white;
+    width: 280px;
+    padding: 3px;
 }
 
 #postab-account-selector selected {
@@ -808,7 +715,7 @@ a.button.large span  {
  * Footer
  * -------------------------------------------------------------------------- */
 footer {
-    color: #FFFFFF;
+    color: $white;
     font: italic 10px Aller;
     height: 43px;
     margin: 7px 0 0 70px;
