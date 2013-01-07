@@ -36,7 +36,7 @@ define(
 
             events: {
                 'click .js-add-account-button': 'addAccount',
-                'click .js-refresh-accounts-button': 'refreshAccounts'
+                'click .js-refresh-button': 'refreshAccounts'
             },
 
             initialize: function() {

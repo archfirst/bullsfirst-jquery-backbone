@@ -39,7 +39,7 @@ define(
             el: '#positions-tab',
 
             events: {
-                'click .js-refresh-accounts-button': 'refreshAccounts'
+                'click .js-refresh-button': 'refreshAccounts'
             },
 
             initialize: function(/* options */) {
