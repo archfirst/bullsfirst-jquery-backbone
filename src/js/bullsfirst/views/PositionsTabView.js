@@ -38,6 +38,10 @@ define(
 
             el: '#positions-tab',
 
+            events: {
+                'click .js-refresh-accounts-button': 'refreshAccounts'
+            },
+
             initialize: function(/* options */) {
                 this.accountSelectorView = new AccountSelectorView({
                     el: '#postab-account-selector',
@@ -54,8 +58,9 @@ define(
                 });
             },
 
-            updatePositions: function() {
+            refreshAccounts: function() {
                 UserContext.updateAccounts();
+                return false;
             }
 
         });

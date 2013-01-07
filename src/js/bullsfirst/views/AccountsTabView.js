@@ -35,8 +35,8 @@ define(
             accountChartView: null,
 
             events: {
-                'click #add-account-button': 'addAccount',
-                'click #refresh-accounts-button': 'refreshAccounts'
+                'click .js-add-account-button': 'addAccount',
+                'click .js-refresh-accounts-button': 'refreshAccounts'
             },
 
             initialize: function() {
