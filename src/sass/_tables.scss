@@ -1,0 +1,24 @@
+/* -----------------------------------------------------------------------------
+ * tables
+ * -------------------------------------------------------------------------- */
+.bf-table th, .bf-table td {
+    padding: 0;
+}
+
+.bf-table thead th {
+    background-color: $table-header-background-color;
+    color: $table-header-text-color;
+    font: bold normal 11px/22px Aller;
+    height: 22px;
+}
+
+.bf-table tbody td,
+.bf-table tbody td a {
+    border-bottom: 1px solid $table-row-separator-color;
+    font: normal normal 12px/25px Aller;
+    height: 25px;
+}
+
+.bf-table tbody tr.selected {
+    background-color: $table-row-selected-color;
+}

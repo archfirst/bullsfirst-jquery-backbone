@@ -1,0 +1,111 @@
+﻿/* -----------------------------------------------------------------------------
+ * general
+ * -------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+ * Library Overrides
+ * -------------------------------------------------------------------------- */
+.treeTable tr.collapsed td a.expander {
+  background-image: url(images/ui-icons_666666_256x240.png);
+  background-position:-30px -20px;
+  border-bottom: 0;
+}
+
+.treeTable tr.expanded td a.expander {
+  background-image: url(images/ui-icons_666666_256x240.png);
+  background-position:-60px -20px;
+  border-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * Primary Styles
+ * -------------------------------------------------------------------------- */
+p {
+    margin: 6px 0 0 0;
+}
+
+h1 {
+    font: normal normal 24px Aller;
+}
+
+h2 {
+    font: normal normal 16px Aller;
+}
+
+a {
+    font-size: 14px;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+
+/* unvisited and visited link */
+a:link, a:visited {
+    color: $link-color;
+}
+
+/* mouse over link */
+a:hover {
+    color: $link-hover-color;
+}
+
+/* selected link */
+a:active {
+    color: $link-active-color;
+}
+
+/* override normalize.css setting of thin dotted to improve look */
+a:focus {
+    outline: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * General Purpose Classes
+ * -------------------------------------------------------------------------- */
+.nodisplay {
+    display: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Form Styles
+ * -------------------------------------------------------------------------- */
+label {
+    background-color: $label-background-color;
+    color: $label-text-color;
+    display: block;
+    font: 11px/25px Aller;
+    height: 25px;
+    padding-left: 9px;
+    width: 71px;
+}
+
+input[type="text"], input[type="password"] {
+    height: 21px;
+    margin-bottom: 10px;
+    padding: 1px;
+    width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+ * Main Container
+ * -------------------------------------------------------------------------- */
+.container {
+    background-color: $container-background-color;
+    margin: auto;
+    width: 960px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Footer
+ * -------------------------------------------------------------------------- */
+footer {
+    color: $white;
+    font: italic 10px Aller;
+    height: 43px;
+    margin: 7px 0 0 70px;
+}
+
+footer a {
+    font: italic 10px Aller;
+}

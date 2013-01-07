@@ -1,0 +1,48 @@
+/* -----------------------------------------------------------------------------
+ * legends
+ * -------------------------------------------------------------------------- */
+.legend {
+    height: 13px;
+    margin: auto;
+    width: 25px;
+}
+
+.legend-0-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-0-start-color, $legend-0-end-color);
+}
+
+.legend-1-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-1-start-color, $legend-1-end-color);
+}
+
+.legend-2-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-2-start-color, $legend-2-end-color);
+}
+
+.legend-3-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-3-start-color, $legend-3-end-color);
+}
+
+.legend-4-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-4-start-color, $legend-4-end-color);
+}
+
+.legend-5-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-5-start-color, $legend-5-end-color);
+}
+
+.legend-6-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-6-start-color, $legend-6-end-color);
+}
+
+.legend-7-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-7-start-color, $legend-7-end-color);
+}
+
+.legend-8-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-8-start-color, $legend-8-end-color);
+}
+
+.legend-9-gradient {
+    @include linear-gradient(top left, to bottom right, $legend-9-start-color, $legend-9-end-color);
+}

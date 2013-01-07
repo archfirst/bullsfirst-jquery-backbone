@@ -1,0 +1,60 @@
+/* -----------------------------------------------------------------------------
+ * positions-tab
+ * -------------------------------------------------------------------------- */
+#positions-tab h1 {
+    float: left;
+    font: normal normal 18px/18px Aller;
+    margin: 60px 0 10px 80px;
+}
+
+#positions-table {
+    float: left;
+    margin: 10px 0 0 80px;
+    width: 800px;
+}
+
+#positions-table th {
+    padding-left: 3px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#positions-table .pull-right {
+    text-align: right;
+}
+
+#positions-table .center {
+    text-align: center;
+}
+
+#positions-tab table td {
+    padding: 3px 0 3px 3px;
+}
+
+#positions-table .number {
+    text-align: right;
+}
+
+#positions-tab .button-bar {
+    left: 776px;
+    position: absolute;
+    top: 46px;
+}
+
+#positions-tab .select-bar{
+    left: 80px;
+    position: absolute;
+    top: 21px;
+}
+
+#postab-account-selector {
+    background-color: $selector-fancy-color;
+    border: 0;
+    color: $white;
+    width: 280px;
+    padding: 3px;
+}
+
+#postab-account-selector selected {
+    text-decoration: italics;
+}

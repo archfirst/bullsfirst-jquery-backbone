@@ -1,0 +1,82 @@
+/* -----------------------------------------------------------------------------
+ * buttons
+ * -------------------------------------------------------------------------- */
+a.button {
+    color: $white;
+    display: block;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+
+a.button span  {
+    display: block;
+}
+
+a.button.person-icon span  {
+    background: url(../img/person-icon.png) no-repeat;
+}
+
+a.button.refresh-icon span  {
+    background: url(../img/refresh-icon.png) no-repeat;
+}
+
+a.button.trade-icon span  {
+    background: url(../img/trade-icon.png) no-repeat;
+}
+
+a.button.transfer-icon span  {
+    background: url(../img/transfer-icon.png) no-repeat;
+}
+
+a.button.medium {
+    background-color: $button-medium-color;
+    font-size: 11px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 105px;
+}
+
+a.button.medium:hover {
+    background-color: $button-hover-color;
+}
+
+a.button.medium:active {
+    background-color: $button-active-color;
+}
+
+a.button.large {
+    background-color: $button-large-color;
+    height: 75px;
+    width: 110px;
+}
+
+a.button.large:hover {
+    background-color: $button-hover-color;
+}
+
+a.button.large:active {
+    background-color: $button-active-color;
+}
+
+a.button.large span  {
+    background-position: center 13px;
+    padding-top: 43px;
+    text-align: center;
+}
+
+.button-bar a.button {
+    float: left;
+}
+
+.button-bar a.button.medium {
+    margin-right: 10px;
+}
+
+.button-bar a.button.large {
+    margin-right: 20px;
+}
