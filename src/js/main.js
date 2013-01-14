@@ -19,6 +19,8 @@
  *
  * @author Naresh Bhatia
  */
+
+// Configure RequireJS
 require.config({
     // Initialize the application with the main application file
     deps: ['main'],
@@ -111,19 +113,28 @@ require.config({
     }
 });
 
+// Kick off the application by requiring in the app and starting it
 require(
     [
-        'bullsfirst/app/App'
+        'framework/app',
+        'jquery'
     ],
-    function() {
+    function(app, $) {
         'use strict';
 
+        // Load Crockford's JSON library if browser does not have native support
         $(document).ready(function() {
-            // Load Crockford's JSON library if browser does not have native support
             Modernizr.load({
                 test: window.JSON,
                 nope: 'js/vendor/json2.js'
             });
         });
+
+        // Set default timeout for AJAX requests to 20 seconds
+        // This should be done before instantiating the AppRouter,
+        // because the initialization sequence fires AJAX requests
+        $.ajaxSetup({timeout: 20000});
+
+        app.start();
     }
 );

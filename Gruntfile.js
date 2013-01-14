@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     // ### jshint
     // JSHint options for the lint task
     jshint: {
-      all: ['src/js/main.js', 'src/js/bullsfirst/**/*.js'],
+      all: ['src/js/main.js', 'src/js/app/**/*.js', 'src/js/framework/**/*.js'],
       options: {
         // Enforcing Options
         bitwise       : true,
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         noarg         : true,
         noempty       : true,
         nonew         : true,
-        plusplus      : true,
+        plusplus      : false,
         quotmark      : 'single',
         regexp        : true,
         undef         : true,
@@ -129,6 +129,25 @@ module.exports = function(grunt) {
           define: true,
           require: true,
           Modernizr: true
+        }
+      }
+    },
+
+    // ### watch
+    // Executes the listed targets on file save
+    watch: {
+      jshint: {
+        files: '<%= jshint.all %>',
+        tasks: ['jshint'],
+        options: {
+          interrupt: true
+        }
+      },
+      compass: {
+        files: 'src/sass/*',
+        tasks: ['compass:dev'],
+        options: {
+          interrupt: true
         }
       }
     }

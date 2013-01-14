@@ -19,10 +19,10 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Message',
-        'bullsfirst/framework/MessageBus',
-        'bullsfirst/framework/Page',
+define(['app/domain/UserContext',
+        'app/common/Message',
+        'framework/MessageBus',
+        'framework/Page',
         'bullsfirst/views/AccountsTabView',
         'bullsfirst/views/OrdersTabView',
         'bullsfirst/views/PositionsTabView',

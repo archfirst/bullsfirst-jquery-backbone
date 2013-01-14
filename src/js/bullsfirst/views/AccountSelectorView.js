@@ -22,9 +22,9 @@
 define(
     [
         'backbone',
-        'bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus',
+        'app/domain/UserContext',
+        'framework/Formatter',
+        'framework/MessageBus',
         'bullsfirst/views/TemplateManager'
     ],
     function(Backbone, UserContext, Formatter, MessageBus, TemplateManager) {

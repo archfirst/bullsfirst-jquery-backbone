@@ -1,13 +1,13 @@
 {
-	"name": "bullsfirst-jquery-backbone",
-	"version": "0.1.0",
-	"devDependencies": {
-		"grunt": "~0.4.0",
+    "name": "bullsfirst-jquery-backbone",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.0",
         "grunt-contrib-clean": "~0.4.0a",
         "grunt-contrib-compass": "~0.1.0",
         "grunt-contrib-copy": "~0.3.2",
         "grunt-contrib-jshint": "~0.1.0",
         "grunt-contrib-requirejs": "~0.3.4",
-        "grunt-contrib-watch": "~0.1.4"
-	}
+        "grunt-contrib-watch": "git://github.com/gruntjs/grunt-contrib-watch.git#7a38126c4bb87b9f12aa003fb96b13d638d62ab1"
+    }
 }

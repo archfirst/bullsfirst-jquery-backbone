@@ -90,7 +90,7 @@ input[type="text"], input[type="password"] {
 /* -----------------------------------------------------------------------------
  * Main Container
  * -------------------------------------------------------------------------- */
-.container {
+#container {
     background-color: $container-background-color;
     margin: auto;
     width: 960px;
@@ -100,10 +100,12 @@ input[type="text"], input[type="password"] {
  * Footer
  * -------------------------------------------------------------------------- */
 footer {
+    clear: both;
+    background-color: $container-background-color;
     color: $white;
     font: italic 10px Aller;
     height: 43px;
-    margin: 7px 0 0 70px;
+    padding: 7px 0 0 60px;
 }
 
 footer a {

@@ -22,9 +22,9 @@
 define(
     [
         'backbone',
-        'bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Message',
-        'bullsfirst/framework/MessageBus',
+        'app/domain/UserContext',
+        'app/common/Message',
+        'framework/MessageBus',
         'bullsfirst/views/AccountTableView',
         'bullsfirst/views/AccountTotalsView'
     ],

@@ -22,8 +22,8 @@
 define(
     [
         'backbone',
-        'bullsfirst/framework/Message',
-        'bullsfirst/framework/MessageBus',
+        'app/common/Message',
+        'framework/MessageBus',
         'highcharts',
         'underscore'
     ],

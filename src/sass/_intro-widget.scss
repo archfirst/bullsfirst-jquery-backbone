@@ -1,0 +1,36 @@
+/* -----------------------------------------------------------------------------
+ * intro-widget
+ * -------------------------------------------------------------------------- */
+.intro-section {
+    float: right;
+    margin: 108px 83px 40px 0;
+    width: 380px;
+}
+
+.intro-section h1 {
+    color: $white;
+    margin: 0;
+}
+
+.intro-section h2 {
+    margin: 7px 0 15px 0;
+}
+
+.intro-section p.features, .intro-section ul {
+    font: 16px/26px Aller;
+}
+
+.intro-section ul {
+    margin: 0 0 11px 0;
+}
+
+.intro-section p.side-note {
+    font-style: italic;
+}
+
+.intro-section p.open-account {
+    background: url(../img/popsicle.png) no-repeat right center;
+    line-height: 30px;
+    margin-top: 18px;
+    width: 137px;
+}

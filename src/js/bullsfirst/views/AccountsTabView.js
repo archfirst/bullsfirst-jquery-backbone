@@ -22,7 +22,7 @@
 define(
     [
         'backbone',
-        'bullsfirst/domain/UserContext',
+        'app/domain/UserContext',
         'bullsfirst/views/AccountChartView',
         'bullsfirst/views/AccountTableWrapperView'
     ],

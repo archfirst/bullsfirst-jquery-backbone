@@ -22,7 +22,7 @@
 define(
     [
         'backbone',
-        'bullsfirst/framework/Formatter'
+        'framework/Formatter'
     ],
     function(Backbone, Formatter) {
         'use strict';

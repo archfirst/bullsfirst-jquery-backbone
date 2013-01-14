@@ -24,7 +24,7 @@
 define(
     [
         'backbone',
-        'bullsfirst/framework/MessageBus',
+        'framework/MessageBus',
         'bullsfirst/views/PositionView',
         'jqueryTreeTable'
     ],

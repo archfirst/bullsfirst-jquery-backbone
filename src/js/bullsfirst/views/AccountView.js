@@ -22,11 +22,11 @@
 define(
     [
         'backbone',
-        'bullsfirst/domain/UserContext',
-        'bullsfirst/framework/ErrorUtil',
-        'bullsfirst/framework/Message',
-        'bullsfirst/framework/MessageBus',
-        'bullsfirst/services/AccountService',
+        'app/domain/UserContext',
+        'framework/ErrorUtil',
+        'app/common/Message',
+        'framework/MessageBus',
+        'app/services/AccountService',
         'bullsfirst/views/TemplateManager'
     ],
     function(Backbone, UserContext, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {

@@ -23,10 +23,10 @@
 define(
     [
         'backbone',
-        'bullsfirst/domain/Position',
-        'bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'
+        'app/domain/Position',
+        'app/domain/UserContext',
+        'framework/Formatter',
+        'framework/MessageBus'
     ],
     function(Backbone, Position, UserContext, Formatter, MessageBus) {
         'use strict';
