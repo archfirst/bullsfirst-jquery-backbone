@@ -1,5 +1,5 @@
-﻿/**
- * Copyright 2012 Archfirst
+/**
+ * Copyright 2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,25 @@
  */
 
 /**
- * bullsfirst/views/UsernameView
+ * app/widgets/account-table/AccountTableWidget
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'backbone'
+        'framework/BaseView',
+        'text!app/widgets/account-table/AccountTableTemplate.html'
     ],
-    function(Backbone) {
+    function(BaseView, AccountTableTemplate) {
         'use strict';
 
-        return Backbone.View.extend({
-            initialize: function() {
-                this.model.on('change', this.render, this);
-            },
+        return BaseView.extend({
+            tagName: 'div',
+            className: 'account-table-clipped-wrapper',
 
-            render: function() {
-                this.$el.html(
-                    this.model.get('firstName') + ' ' +
-                    this.model.get('lastName'));
+            template: {
+                name: 'AccountTableTemplate',
+                source: AccountTableTemplate
             }
         });
     }

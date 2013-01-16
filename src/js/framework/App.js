@@ -29,10 +29,11 @@
 define(
     [
         'backbone',
+        'framework/BackboneSyncOverride',
         'framework/Router',
         'jquery'
     ],
-    function(Backbone, Router, $) {
+    function(Backbone, BackboneSyncOverride, Router, $) {
         'use strict';
 
         // The application root. The build process will take care of changing this to '/dist/'.

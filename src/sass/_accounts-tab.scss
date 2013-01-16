@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------------------
  * accounts-tab
  * -------------------------------------------------------------------------- */
-#accounts-tab h1 {
+.accounts-tab h1 {
     font: normal normal 18px/18px Aller;
     left: 60px;
     margin: 0px;
@@ -9,7 +9,7 @@
     top: 30px;
 }
 
-#accounts-tab .button-bar {
+.accounts-tab .button-bar {
     left: 400px;
     position: absolute;
     top: 21px;
@@ -18,13 +18,13 @@
 /* -----------------------------------------------------------------------------
  * Account Table Wrapper
  * -------------------------------------------------------------------------- */
-#account-table-clipped-wrapper {
+.account-table-clipped-wrapper {
     float: left;
     overflow: hidden;
     width: 615px;  /* 30px margin-left + 585px table width */
 }
 
-#account-table-unclipped-wrapper {
+.account-table-unclipped-wrapper {
     float: left;
     margin: 56px 0 0 30px;
     position: relative;
@@ -34,7 +34,7 @@
 /* -----------------------------------------------------------------------------
  * Account Chart
  * -------------------------------------------------------------------------- */
-#accounts-chart {
+.accounts-chart {
     float: left;
     height: 303px;
     margin: 56px 0 20px 0;

@@ -23,10 +23,12 @@
  */
 define(
     [
+        'backbone',
+        'app/domain/UserContext',
         'framework/BaseView',
         'text!app/widgets/header/HeaderTemplate.html'
     ],
-    function(BaseView, HeaderTemplate) {
+    function(Backbone, UserContext, BaseView, HeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -36,6 +38,34 @@ define(
             template: {
                 name: 'HeaderTemplate',
                 source: HeaderTemplate
+            },
+
+            events: {
+                'click .js-signOut': 'logout',
+                'click .js-tradeButton': 'trade',
+                'click .js-transferButton': 'transfer'
+            },
+
+            initialize: function() {
+                this.listenTo(this.model, 'change', this.render);
+            },
+
+            logout: function() {
+                UserContext.reset();
+
+                // Do a full page refresh to start from scratch
+                Backbone.history.navigate('', false);
+                window.location.reload();
+
+                return false;
+            },
+
+            trade: function() {
+                return false;
+            },
+
+            transfer: function() {
+                return false;
             }
         });
     }

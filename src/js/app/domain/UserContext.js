@@ -49,7 +49,7 @@ define(
         var _externalAccounts = new ExternalAccounts();
         var _selectedAccount = null;
 
-        return {
+        var _userContext = {
             getUser: function() { return _user; },
             getCredentials: function() { return _credentials; },
             getBaseAccounts: function() { return _baseAccounts; },
@@ -146,5 +146,12 @@ define(
                 return _credentials.isInitialized();
             }
         };
+
+        // Update accounts whenever user logs in
+        MessageBus.on(Message.UserLoggedInEvent, function() {
+            _userContext.updateAccounts();
+        });
+
+        return _userContext;
     }
 );
