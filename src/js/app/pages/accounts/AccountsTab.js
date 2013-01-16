@@ -22,11 +22,12 @@
 define(
     [
         'framework/BaseView',
+        'app/domain/Repository',
         'app/widgets/account-chart/AccountChartWidget',
         'app/widgets/account-table/AccountTableWidget',
         'text!app/pages/accounts/AccountsTabTemplate.html'
     ],
-    function(BaseView, AccountChartWidget, AccountTableWidget, AccountsTabTemplate) {
+    function(BaseView, Repository, AccountChartWidget, AccountTableWidget, AccountsTabTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -48,7 +49,8 @@ define(
                     {
                         name: 'AccountChartWidget',
                         widget: AccountChartWidget,
-                        element: this.$el
+                        element: this.$el,
+                        collection: Repository.getBrokerageAccounts()
                     }
                 ]);
             }

@@ -144,7 +144,7 @@ module.exports = function(grunt) {
         }
       },
       compass: {
-        files: 'src/sass/*',
+        files: 'src/sass/**/*',
         tasks: ['compass:dev'],
         options: {
           interrupt: true
@@ -163,5 +163,5 @@ module.exports = function(grunt) {
 
   // Default task.
   // grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:cssImages']);
-  grunt.registerTask('default', ['jshint', 'compass:dev']);
+  grunt.registerTask('default', ['clean', 'jshint', 'compass:dev']);
 };
