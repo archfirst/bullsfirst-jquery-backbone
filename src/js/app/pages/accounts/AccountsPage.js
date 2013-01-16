@@ -24,13 +24,13 @@ define(
         'app/common/Message',
         'app/domain/Repository',
         'app/pages/accounts/AccountsTab',
-        'app/widgets/header/HeaderWidget',
         'app/widgets/footer/FooterWidget',
+        'app/widgets/user-page-header/UserPageHeaderWidget',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/pages/accounts/AccountsPageTemplate.html'
     ],
-    function(Message, Repository, AccountsTab, HeaderWidget, FooterWidget, BaseView, MessageBus, AccountsPageTemplate) {
+    function(Message, Repository, AccountsTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, AccountsPageTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -56,8 +56,8 @@ define(
             postRender: function() {
                 this.addWidgets([
                     {
-                        name: 'HeaderWidget',
-                        widget: HeaderWidget,
+                        name: 'UserPageHeaderWidget',
+                        widget: UserPageHeaderWidget,
                         element: this.$el,
                         model: Repository.getUser()
                     },

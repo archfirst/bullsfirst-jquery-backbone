@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/header/HeaderWidget
+ * app/widgets/user-page-header/UserPageHeaderWidget
  *
  * This is the header widget for the user page.
  *
@@ -26,9 +26,9 @@ define(
         'backbone',
         'app/domain/Repository',
         'framework/BaseView',
-        'text!app/widgets/header/HeaderTemplate.html'
+        'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
-    function(Backbone, Repository, BaseView, HeaderTemplate) {
+    function(Backbone, Repository, BaseView, UserPageHeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -36,8 +36,8 @@ define(
             className: 'user-page-header',
 
             template: {
-                name: 'HeaderTemplate',
-                source: HeaderTemplate
+                name: 'UserPageHeaderTemplate',
+                source: UserPageHeaderTemplate
             },
 
             events: {
