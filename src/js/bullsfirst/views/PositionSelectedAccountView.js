@@ -24,11 +24,11 @@ define(
     [
         'backbone',
         'app/domain/Position',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'framework/Formatter',
         'framework/MessageBus'
     ],
-    function(Backbone, Position, UserContext, Formatter, MessageBus) {
+    function(Backbone, Position, Repository, Formatter, MessageBus) {
         'use strict';
 
         return Backbone.View.extend({

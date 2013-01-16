@@ -19,7 +19,7 @@
  *
  * @author Naresh Bhatia
  */
-define(['app/domain/UserContext',
+define(['app/domain/Repository',
         'app/common/Message',
         'framework/MessageBus',
         'framework/Page',
@@ -29,7 +29,7 @@ define(['app/domain/UserContext',
         'bullsfirst/views/TabbarView',
         'bullsfirst/views/TransactionsTabView',
         'bullsfirst/views/UsernameView'],
-       function(UserContext, Message, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView,
+       function(Repository, Message, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TabbarView,
                 TransactionsTabView, UsernameView) {
     'use strict';
 
@@ -48,7 +48,7 @@ define(['app/domain/UserContext',
         },
 
         initialize: function() {
-            this.usernameView = new UsernameView({el: '.username-view', model: UserContext.getUser()});
+            this.usernameView = new UsernameView({el: '.username-view', model: Repository.getUser()});
             this.tabbarView = new TabbarView({el: '#user-page .tabbar'});
             this.accountsTabView = new AccountsTabView({el: '#accounts-tab'});
             this.positionsTabView = new PositionsTabView({el: '#positions-tab'});
@@ -57,12 +57,12 @@ define(['app/domain/UserContext',
 
             // Subscribe to events
             MessageBus.on(Message.UserLoggedInEvent, function() {
-                UserContext.updateAccounts();
+                Repository.updateAccounts();
             });
         },
 
         logout: function() {
-            UserContext.reset();
+            Repository.reset();
             MessageBus.trigger(Message.UserLoggedOutEvent);
             return false;
         },

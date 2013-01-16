@@ -24,11 +24,11 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'framework/BaseView',
         'text!app/widgets/header/HeaderTemplate.html'
     ],
-    function(Backbone, UserContext, BaseView, HeaderTemplate) {
+    function(Backbone, Repository, BaseView, HeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -51,7 +51,7 @@ define(
             },
 
             logout: function() {
-                UserContext.reset();
+                Repository.reset();
 
                 // Do a full page refresh to start from scratch
                 Backbone.history.navigate('', false);

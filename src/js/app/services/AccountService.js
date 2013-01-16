@@ -21,9 +21,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['app/domain/UserContext',
+define(['app/domain/Repository',
         'framework/AjaxUtil'],
-       function(UserContext, AjaxUtil) {
+       function(Repository, AjaxUtil) {
     'use strict';
 
     // Module level variables act as singletons
@@ -35,7 +35,7 @@ define(['app/domain/UserContext',
                 url: _url + '/' + accountId + '/change_name',
                 type: 'POST',
                 beforeSend: function(xhr) {
-                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                    AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 },
                 contentType: 'application/json',
                 data: '{ "newName": "' + newName + '" }'
@@ -48,7 +48,7 @@ define(['app/domain/UserContext',
                 url: _url + '/' + fromAccountId + '/transfer_cash',
                 type: 'POST',
                 beforeSend: function(xhr) {
-                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                    AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 },
                 contentType: 'application/json',
                 data: JSON.stringify(transferCashRequest, null, '\t')
@@ -61,7 +61,7 @@ define(['app/domain/UserContext',
                 url: _url + '/' + fromAccountId + '/transfer_securities',
                 type: 'POST',
                 beforeSend: function(xhr) {
-                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                    AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 },
                 contentType: 'application/json',
                 data: JSON.stringify(transferSecuritiesRequest, null, '\t')

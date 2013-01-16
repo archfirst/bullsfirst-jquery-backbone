@@ -22,13 +22,13 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'app/common/Message',
         'framework/MessageBus',
         'bullsfirst/views/AccountTableView',
         'bullsfirst/views/AccountTotalsView'
     ],
-    function(Backbone, UserContext, Message, MessageBus, AccountTableView, AccountTotalsView) {
+    function(Backbone, Repository, Message, MessageBus, AccountTableView, AccountTotalsView) {
         'use strict';
 
         return Backbone.View.extend({
@@ -42,9 +42,9 @@ define(
 
             initialize: function() {
                 this.accountTableView =
-                    new AccountTableView({el: '#account-table tbody', collection: UserContext.getBrokerageAccounts()});
+                    new AccountTableView({el: '#account-table tbody', collection: Repository.getBrokerageAccounts()});
                 this.accountTotalsView =
-                    new AccountTotalsView({el: '#account-table tfoot', collection: UserContext.getBrokerageAccounts()});
+                    new AccountTotalsView({el: '#account-table tfoot', collection: Repository.getBrokerageAccounts()});
 
                 // Subscribe to events
                 MessageBus.on(Message.AccountClick, function() {

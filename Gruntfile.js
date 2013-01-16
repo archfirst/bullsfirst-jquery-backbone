@@ -162,5 +162,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:cssImages']);
+  // grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:cssImages']);
+  grunt.registerTask('default', ['jshint', 'compass:dev']);
 };

@@ -24,11 +24,11 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'framework/AjaxUtil',
         'underscore'
     ],
-    function(Backbone, UserContext, AjaxUtil, _) {
+    function(Backbone, Repository, AjaxUtil, _) {
         'use strict';
 
         Backbone._sync = Backbone.sync;
@@ -37,7 +37,7 @@ define(
             var url = options.url || getValue(model, 'url');
             if (url && (url.indexOf('/secure/') > 0)) {
                 options.beforeSend = function(xhr) {
-                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                    AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 };
             }
             Backbone._sync(method, model, options);

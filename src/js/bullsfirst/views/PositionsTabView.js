@@ -22,12 +22,12 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'bullsfirst/views/PositionSelectedAccountView',
         'bullsfirst/views/AccountSelectorView',
         'bullsfirst/views/PositionTableView'
     ],
-    function(Backbone, UserContext, PositionSelectedAccountView, AccountSelectorView, PositionTableView) {
+    function(Backbone, Repository, PositionSelectedAccountView, AccountSelectorView, PositionTableView) {
         'use strict';
 
         return Backbone.View.extend({
@@ -45,21 +45,21 @@ define(
             initialize: function(/* options */) {
                 this.accountSelectorView = new AccountSelectorView({
                     el: '#postab-account-selector',
-                    collection: UserContext.getBrokerageAccounts()
+                    collection: Repository.getBrokerageAccounts()
                 });
 
                 this.positionSelectedAccountView = new PositionSelectedAccountView({
                     el: '#postab-selected-account-name',
-                    collection: UserContext.getBrokerageAccounts()
+                    collection: Repository.getBrokerageAccounts()
                 });
 
                 this.positionTableView = new PositionTableView({
-                    collection: UserContext.getBrokerageAccounts()
+                    collection: Repository.getBrokerageAccounts()
                 });
             },
 
             refreshAccounts: function() {
-                UserContext.updateAccounts();
+                Repository.updateAccounts();
                 return false;
             }
 

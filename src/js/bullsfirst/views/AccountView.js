@@ -22,14 +22,14 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'framework/ErrorUtil',
         'app/common/Message',
         'framework/MessageBus',
         'app/services/AccountService',
         'bullsfirst/views/TemplateManager'
     ],
-    function(Backbone, UserContext, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {
+    function(Backbone, Repository, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {
         'use strict';
 
         return Backbone.View.extend({
@@ -116,7 +116,7 @@ define(
             },
 
             changeNameDone: function(/* data, textStatus, jqXHR */) {
-                UserContext.updateAccounts();
+                Repository.updateAccounts();
             },
 
             render: function() {

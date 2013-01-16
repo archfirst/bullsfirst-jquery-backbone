@@ -22,7 +22,7 @@
 define(
     [
         'app/common/Message',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'app/pages/accounts/AccountsTab',
         'app/widgets/header/HeaderWidget',
         'app/widgets/footer/FooterWidget',
@@ -30,7 +30,7 @@ define(
         'framework/MessageBus',
         'text!app/pages/accounts/AccountsPageTemplate.html'
     ],
-    function(Message, UserContext, AccountsTab, HeaderWidget, FooterWidget, BaseView, MessageBus, AccountsPageTemplate) {
+    function(Message, Repository, AccountsTab, HeaderWidget, FooterWidget, BaseView, MessageBus, AccountsPageTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -59,7 +59,7 @@ define(
                         name: 'HeaderWidget',
                         widget: HeaderWidget,
                         element: this.$el,
-                        model: UserContext.getUser()
+                        model: Repository.getUser()
                     },
                     {
                         name: 'AccountsTab',

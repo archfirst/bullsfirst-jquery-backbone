@@ -25,9 +25,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['app/domain/UserContext',
+define(['app/domain/Repository',
         'framework/AjaxUtil'],
-       function(UserContext, AjaxUtil) {
+       function(Repository, AjaxUtil) {
     'use strict';
 
     // Module level variables act as singletons
@@ -42,7 +42,7 @@ define(['app/domain/UserContext',
                 url: _url,
                 type: 'POST',
                 beforeSend: function(xhr) {
-                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                    AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 },
                 contentType: 'application/json',
                 data: '{ "accountName": "' + accountName + '" }'

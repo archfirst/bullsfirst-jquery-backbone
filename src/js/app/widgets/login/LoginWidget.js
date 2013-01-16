@@ -23,7 +23,7 @@ define(
     [
         'app/common/Message',
         'app/domain/Credentials',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'backbone',
         'framework/ErrorUtil',
         'framework/MessageBus',
@@ -34,7 +34,7 @@ define(
         'jqueryui',
         'jqueryValidationEngineRules'
     ],
-    function(Message, Credentials, UserContext, Backbone, ErrorUtil, MessageBus, UserService, BaseView, LoginTemplate, _) {
+    function(Message, Credentials, Repository, Backbone, ErrorUtil, MessageBus, UserService, BaseView, LoginTemplate, _) {
         'use strict';
 
         return BaseView.extend({
@@ -72,9 +72,9 @@ define(
             },
 
             loginDone: function(data /* , textStatus, jqXHR */) {
-                // Add user to UserContext
-                UserContext.initUser(data);
-                UserContext.initCredentials(this.form2Credentials());
+                // Add user to Repository
+                Repository.initUser(data);
+                Repository.initCredentials(this.form2Credentials());
 
                 // Navigate to accounts and fire UserLoggedInEvent
                 Backbone.history.navigate('accounts', true);

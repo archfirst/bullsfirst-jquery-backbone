@@ -22,11 +22,11 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'bullsfirst/views/AccountChartView',
         'bullsfirst/views/AccountTableWrapperView'
     ],
-    function(Backbone, UserContext, AccountChartView, AccountTableWrapperView) {
+    function(Backbone, Repository, AccountChartView, AccountTableWrapperView) {
     'use strict';
 
         return Backbone.View.extend({
@@ -43,7 +43,7 @@ define(
                 this.accountTableWrapperView =
                     new AccountTableWrapperView({el: '#account-table-unclipped-wrapper'});
                 this.accountChartView =
-                    new AccountChartView({el: '#accounts-chart', collection: UserContext.getBrokerageAccounts()});
+                    new AccountChartView({el: '#accounts-chart', collection: Repository.getBrokerageAccounts()});
             },
 
             addAccount: function() {
@@ -51,7 +51,7 @@ define(
             },
 
             refreshAccounts: function() {
-                UserContext.updateAccounts();
+                Repository.updateAccounts();
                 return false;
             }
         });

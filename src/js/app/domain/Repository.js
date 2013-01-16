@@ -15,7 +15,7 @@
  */
 
 /**
- * app/domain/UserContext
+ * app/domain/Repository
  *
  * This is a singleton object that maintains the context of the logged in user.
  * The context consists of the following:
@@ -49,7 +49,7 @@ define(
         var _externalAccounts = new ExternalAccounts();
         var _selectedAccount = null;
 
-        var _userContext = {
+        var _repository = {
             getUser: function() { return _user; },
             getCredentials: function() { return _credentials; },
             getBaseAccounts: function() { return _baseAccounts; },
@@ -149,9 +149,9 @@ define(
 
         // Update accounts whenever user logs in
         MessageBus.on(Message.UserLoggedInEvent, function() {
-            _userContext.updateAccounts();
+            _repository.updateAccounts();
         });
 
-        return _userContext;
+        return _repository;
     }
 );

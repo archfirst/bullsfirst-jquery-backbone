@@ -22,12 +22,12 @@
 define(
     [
         'backbone',
-        'app/domain/UserContext',
+        'app/domain/Repository',
         'framework/Formatter',
         'framework/MessageBus',
         'bullsfirst/views/TemplateManager'
     ],
-    function(Backbone, UserContext, Formatter, MessageBus, TemplateManager) {
+    function(Backbone, Repository, Formatter, MessageBus, TemplateManager) {
         'use strict';
 
         return Backbone.View.extend({
@@ -46,7 +46,7 @@ define(
             },
 
             setSelectedAccount: function(event) {
-                UserContext.setSelectedAccountId(event.target.value);
+                Repository.setSelectedAccountId(event.target.value);
                 return false;
             },
 
@@ -71,8 +71,8 @@ define(
                 }, this);
 
                 // Select the selected account
-                if (UserContext.getSelectedAccount()) {
-                    this.$el.val(UserContext.getSelectedAccount().id);
+                if (Repository.getSelectedAccount()) {
+                    this.$el.val(Repository.getSelectedAccount().id);
                 }
 
                 return this;
