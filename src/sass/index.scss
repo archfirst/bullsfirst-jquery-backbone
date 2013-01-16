@@ -24,47 +24,46 @@
 // -----------------------------------------------------------------------------
 // Fonts
 // -----------------------------------------------------------------------------
-@import "aller";
-@import "font-awesome";
+@import "fonts/aller";
+@import "fonts/font-awesome";
 
 // -----------------------------------------------------------------------------
 // Vendor Stylesheets
 // -----------------------------------------------------------------------------
 @import "compass";
-@import "normalize";
-@import "h5bp";
-@import "jquery-ui-1.8.23.custom";
-@import "jquery.treeTable-20121109";
-@import "validationEngine.jquery-2.5.2";
+@import "vendor/normalize";
+@import "vendor/h5bp";
+@import "vendor/jquery-ui-1.8.23.custom";
+@import "vendor/jquery.treeTable-20121109";
+@import "vendor/validationEngine.jquery-2.5.2";
 
 // -----------------------------------------------------------------------------
 // Application Stylesheets
 // -----------------------------------------------------------------------------
-@import "colors";
-@import "mixins";
-@import "general";
-@import "buttons";
-@import "tables";
-@import "legends";
+@import "common/colors";
+@import "common/mixins";
+@import "common/general";
+@import "common/buttons";
+@import "common/tables";
+@import "common/legends";
 
 // -----------------------------------------------------------------------------
 // Page Stylesheets
 // -----------------------------------------------------------------------------
-@import "home-page";
-@import "user-page";
+@import "pages/home-page";
 
 // -----------------------------------------------------------------------------
 // Tab Stylesheets
 // -----------------------------------------------------------------------------
-@import "accounts-tab";
-@import "positions-tab";
-@import "orders-tab";
-@import "transactions-tab";
+@import "pages/accounts-tab";
+@import "pages/positions-tab";
+@import "pages/orders-tab";
+@import "pages/transactions-tab";
 
 // -----------------------------------------------------------------------------
 // Widget Stylesheets
 // -----------------------------------------------------------------------------
-@import "login-widget";
-@import "intro-widget";
-@import "header-widget";
-@import "account-table-widget";
+@import "widgets/login-widget";
+@import "widgets/intro-widget";
+@import "widgets/user-page-header-widget";
+@import "widgets/account-table-widget";
