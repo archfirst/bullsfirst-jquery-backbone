@@ -54,7 +54,7 @@ define(
             },
 
             postRender: function() {
-                this.addWidgets([
+                this.addChildren([
                     {
                         name: 'UserPageHeaderWidget',
                         widget: UserPageHeaderWidget,

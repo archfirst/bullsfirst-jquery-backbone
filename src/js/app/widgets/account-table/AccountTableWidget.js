@@ -55,7 +55,7 @@ define(
             },
 
             postRender: function() {
-                this.addWidgets([
+                this.addChildren([
                     {
                         name: 'AccountTableBodyView',
                         widget: AccountTableBodyView,

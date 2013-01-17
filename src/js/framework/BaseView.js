@@ -45,17 +45,13 @@ define(
 
         return Backbone.View.extend({
 
-            // ### `childViews`
+            // ### `children`
             //
             // Map of ids to child views
             // The view id is any unique string, e.g. the id of the associated model
-            childViews: {},
+            children: {},
 
-            addChild: function(id, childView) {
-                this.childViews[id] = childView;
-            },
-
-            addWidget: function(widgetSpec) {
+            addChild: function(widgetSpec) {
 
                 var constructorArg = {};
 
@@ -68,28 +64,28 @@ define(
                 }
 
                 var widget = new widgetSpec.widget(constructorArg).render().place(widgetSpec.element);
-                this.addChild(widgetSpec.name, widget);
+                this.children[widgetSpec.name] = widget;
             },
 
-            addWidgets: function(widgetSpecs) {
+            addChildren: function(widgetSpecs) {
                 for (var i = 0, l = widgetSpecs.length; i < l; i++) {
-                    this.addWidget(widgetSpecs[i]);
+                    this.addChild(widgetSpecs[i]);
                 }
             },
 
             removeChild: function(id) {
-                var childViews = this.childViews;
-                childViews[id].remove();
-                delete childViews[id];
+                var children = this.children;
+                children[id].remove();
+                delete children[id];
                 return this;
             },
 
             removeAllChildren: function() {
-                var childViews = this.childViews;
-                for (var id in childViews) {
-                    if (childViews.hasOwnProperty(id)) {
-                        childViews[id].remove();
-                        delete childViews[id];
+                var children = this.children;
+                for (var id in children) {
+                    if (children.hasOwnProperty(id)) {
+                        children[id].remove();
+                        delete children[id];
                     }
                 }
 
