@@ -32,6 +32,29 @@ a.button.transfer-icon span  {
     background: url(../img/transfer-icon.png) no-repeat;
 }
 
+/* -----------------------------------------------------------------------------
+ * button.small
+ * -------------------------------------------------------------------------- */
+a.button.small {
+    background-color: $button-small-color;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 90px;
+}
+
+a.button.small:hover {
+    background-color: $button-hover-color;
+}
+
+a.button.small:active {
+    background-color: $button-active-color;
+}
+
+/* -----------------------------------------------------------------------------
+ * button.medium
+ * -------------------------------------------------------------------------- */
 a.button.medium {
     background-color: $button-medium-color;
     font-size: 11px;
@@ -49,6 +72,9 @@ a.button.medium:active {
     background-color: $button-active-color;
 }
 
+/* -----------------------------------------------------------------------------
+ * button.large
+ * -------------------------------------------------------------------------- */
 a.button.large {
     background-color: $button-large-color;
     height: 75px;
@@ -69,8 +95,15 @@ a.button.large span  {
     text-align: center;
 }
 
+/* -----------------------------------------------------------------------------
+ * button-bar
+ * -------------------------------------------------------------------------- */
 .button-bar a.button {
     float: left;
+}
+
+.button-bar a.button.small {
+    margin-right: 10px;
 }
 
 .button-bar a.button.medium {

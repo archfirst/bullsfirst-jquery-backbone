@@ -4,6 +4,7 @@
 .login-section {
     float: left;
     margin: 181px 0 0 78px;
+    position: relative;
 }
 
 .login-section h1 {
@@ -20,4 +21,10 @@
 
 .login-button {
     margin: 26px auto 0 auto;
+}
+
+.test-login-button {
+    position: absolute;
+    right: 0;
+    top: 0;
 }

@@ -80,7 +80,7 @@ require.config({
         },
 
         jqueryalerts: {
-            deps: ['jquery']
+            deps: ['jqueryui']
         },
 
         jqueryformat: {

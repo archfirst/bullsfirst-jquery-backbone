@@ -24,9 +24,10 @@
  */
 define(
     [
+        'jquery',
         'jqueryalerts'
     ],
-    function() {
+    function($) {
     'use strict';
 
     return {

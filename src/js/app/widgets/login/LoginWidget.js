@@ -49,8 +49,11 @@ define(
 
             events: {
                 'click .login-button': 'login',
+                'click .test-login-button': 'testLogin',
                 'keypress .login-form': 'checkEnterKey'
             },
+
+            enteredCredentials: null,
 
             postPlace: function() {
                 this.loginFormElement.validationEngine();
@@ -64,17 +67,25 @@ define(
             },
 
             login: function() {
+                this.enteredCredentials = this.form2Credentials();
                 if (this.loginFormElement.validationEngine('validate')) {
                     UserService.getUser(
-                        this.form2Credentials(), _.bind(this.loginDone, this), ErrorUtil.showError);
+                        this.enteredCredentials, _.bind(this.loginDone, this), ErrorUtil.showError);
                 }
+                return false;
+            },
+
+            testLogin: function() {
+                this.enteredCredentials = this.getTestCredentials();
+                UserService.getUser(
+                    this.enteredCredentials, _.bind(this.loginDone, this), ErrorUtil.showError);
                 return false;
             },
 
             loginDone: function(data /* , textStatus, jqXHR */) {
                 // Add user to Repository
                 Repository.initUser(data);
-                Repository.initCredentials(this.form2Credentials());
+                Repository.initCredentials(this.enteredCredentials);
 
                 // Navigate to accounts and fire UserLoggedInEvent
                 Backbone.history.navigate('accounts', true);
@@ -89,6 +100,10 @@ define(
                 return new Credentials(
                     this.usernameElement.val(),
                     this.passwordElement.val());
+            },
+
+            getTestCredentials: function() {
+                return new Credentials('test', 'test');
             }
         });
     }
