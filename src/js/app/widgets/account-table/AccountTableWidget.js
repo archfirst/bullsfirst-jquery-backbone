@@ -21,19 +21,58 @@
  */
 define(
     [
+        'app/common/Message',
+        'app/domain/Repository',
+        'app/widgets/account-table/AccountTableBodyView',
+        'app/widgets/account-table/AccountTotalsView',
         'framework/BaseView',
+        'framework/MessageBus',
         'text!app/widgets/account-table/AccountTableTemplate.html'
     ],
-    function(BaseView, AccountTableTemplate) {
+    function(Message, Repository, AccountTableBodyView, AccountTotalsView, BaseView, MessageBus, AccountTableTemplate) {
         'use strict';
 
         return BaseView.extend({
             tagName: 'div',
             className: 'account-table-clipped-wrapper',
+            elements: ['accountTableBody', 'accountTotals'],
 
             template: {
                 name: 'AccountTableTemplate',
                 source: AccountTableTemplate
+            },
+
+            events: {
+                'click .account-detail-table': 'transitionToParentView'
+            },
+
+            initialize: function() {
+                // Subscribe to events
+                MessageBus.on(Message.AccountClick, function() {
+                    // TODO: can we avoid the hardcoded pixel value below?
+                    this.$el.find('.account-table-transitioning-view').animate({ left: '-615px' });
+                }, this);
+            },
+
+            postRender: function() {
+                this.addWidgets([
+                    {
+                        name: 'AccountTableBodyView',
+                        widget: AccountTableBodyView,
+                        element: this.accountTableBodyElement,
+                        collection: Repository.getBrokerageAccounts()
+                    },
+                    {
+                        name: 'AccountTotalsView',
+                        widget: AccountTotalsView,
+                        element: this.accountTotalsElement,
+                        collection: Repository.getBrokerageAccounts()
+                    }
+                ]);
+            },
+
+            transitionToParentView: function() {
+                this.$el.find('.account-table-transitioning-view').animate({ left: '0px' });
             }
         });
     }

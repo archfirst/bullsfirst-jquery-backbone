@@ -1,6 +1,8 @@
 <div class="account-table-unclipped-wrapper">
+
+    {{! Account Table }}
     <div class="account-table-transitioning-view">
-        <table id="account-table" class="bf-table">
+        <table class="account-table bf-table">
             <thead>
                 <tr>
                     <th class="left-column"></th>
@@ -11,23 +13,16 @@
                     <th class="right-column"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="js-accountTableBody">
             </tbody>
-            <tfoot>
-                <tr>
-                    <td class="left-column"></td>
-                    <td class="name"></td>
-                    <td class="market-value"></td>
-                    <td class="cash"></td>
-                    <td class="legend-cell"></td>
-                    <td class="right-column"></td>
-                </tr>
+            <tfoot class="js-accountTotals">
             </tfoot>
         </table>
     </div>
 
+    {{! Account Detail Table (Drill Down) }}
     <div class="account-table-transitioning-view">
-        <table id="account-detail-table" class="bf-table">
+        <table class="account-detail-table bf-table">
             <thead>
                 <tr>
                     <th class="left-column"></th>
@@ -52,4 +47,5 @@
             </tfoot>
         </table>
     </div>
+
 </div>

@@ -39,6 +39,11 @@ define(
                 source: AccountsTabTemplate
             },
 
+            events: {
+                'click .js-add-account-button': 'addAccount',
+                'click .js-refresh-button': 'refreshAccounts'
+            },
+
             postRender: function() {
                 this.addWidgets([
                     {
@@ -53,6 +58,15 @@ define(
                         collection: Repository.getBrokerageAccounts()
                     }
                 ]);
+            },
+
+            addAccount: function() {
+                return false;
+            },
+
+            refreshAccounts: function() {
+                Repository.updateAccounts();
+                return false;
             }
         });
     }

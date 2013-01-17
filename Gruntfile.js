@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     // ### jshint
     // JSHint options for the lint task
     jshint: {
-      all: ['src/js/main.js', 'src/js/app/**/*.js', 'src/js/framework/**/*.js'],
+      all: ['src/js/main.js', 'src/js/config.js', 'src/js/app/**/*.js', 'src/js/framework/**/*.js'],
       options: {
         // Enforcing Options
         bitwise       : true,

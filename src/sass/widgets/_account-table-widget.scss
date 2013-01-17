@@ -20,16 +20,16 @@
  * -----------------------------------
  * Total                           585
  * -------------------------------------------------------------------------- */
-#account-table {
+.account-table {
     table-layout: fixed;
     width: 585px;
 }
 
-#account-table tbody tr {
+.account-table tbody tr {
     cursor: pointer;
 }
 
-#account-table .left-column {
+.account-table .left-column {
     background: none;
     border: none;
     color: $icon-color;
@@ -38,19 +38,19 @@
     width: 30px;
 }
 
-#account-table .name {
+.account-table .name {
     padding-left: 20px;
     text-align: left;
     width: 185px;
 }
 
-#account-table .name .edit input {
+.account-table .name .edit input {
     height: 17px;
     margin: 0;
     width: 145px;
 }
 
-#account-table .name .edit i {
+.account-table .name .edit i {
     background: none;
     border: none;
     color: $icon-color;
@@ -60,63 +60,63 @@
     width: 30px;
 }
 
-#account-table .market-value {
+.account-table .market-value {
     text-align: right;
     width: 125px;
 }
 
-#account-table .cash {
+.account-table .cash {
     text-align: right;
     width: 125px;
 }
 
-#account-table .legend-cell {
+.account-table .legend-cell {
     padding-left: 20px;
     text-align: center;
     width: 60px;
 }
 
-#account-table .right-column {
+.account-table .right-column {
     background: none;
     border: none;
     width: 20px;
 }
 
 /* Last row - dark grey border bottom */
-#account-table tbody tr:last-child td {
+.account-table tbody tr:last-child td {
     border-bottom: 3px solid $table-totals-separator-color;
 }
 
 /* Last row - no border bottom for left and right columns */
-#account-table tbody tr:last-child td.left-column,
-#account-table tbody tr:last-child td.right-column {
+.account-table tbody tr:last-child td.left-column,
+.account-table tbody tr:last-child td.right-column {
     border: none;
 }
 
 /* Disable highlighting of left and right columns on selection */
-#account-table tbody tr.selected .left-column,
-#account-table tbody tr.selected .right-column {
+.account-table tbody tr.selected .left-column,
+.account-table tbody tr.selected .right-column {
     background-color: $white;
 }
 
 /* Footer text is bold */
-#account-table tfoot tr:last-child td {
+.account-table tfoot tr:last-child td {
     font: bold normal 12px/25px Aller;
 }
 
 /* Enable viewing of name in view mode */
-#account-table tbody td.name .view {
+.account-table tbody td.name .view {
     display: block;
 }
-#account-table tbody td.name .edit {
+.account-table tbody td.name .edit {
     display: none;
 }
 
 /* Enable editing of name in edit mode */
-#account-table tbody td.name.editing .view {
+.account-table tbody td.name.editing .view {
     display: none;
 }
-#account-table tbody td.name.editing .edit {
+.account-table tbody td.name.editing .edit {
     display: block;
 }
 
@@ -128,7 +128,7 @@
  * -----------------------------------
  * Total                           585
  * -------------------------------------------------------------------------- */
-#account-detail-table {
+.account-detail-table {
     margin-left: 30px;
     table-layout: fixed;
     width: 585px;

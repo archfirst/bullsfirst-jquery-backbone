@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,37 +15,44 @@
  */
 
 /**
- * bullsfirst/views/AccountTotalsView
+ * app/widgets/account-table/AccountTotalsViewModel
+ *
+ * Model:
+ *   brokerageAccounts: Backbone.Collection
+ *
+ * Attributes:
+ *   totalMarketValue: Money
+ *   totalCash: Money
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'backbone',
-        'framework/Formatter'
+        'backbone'
     ],
-    function(Backbone, Formatter) {
+    function(Backbone) {
         'use strict';
 
-        return Backbone.View.extend({
+        return Backbone.Model.extend({
 
-            initialize: function() {
-                this.collection.on('reset', this.render, this);
+            initialize: function(attributes, options) {
+                this.brokerageAccounts = options.brokerageAccounts;
+                this.listenTo(this.brokerageAccounts, 'reset', this.calculateValues);
+                this.calculateValues();
             },
 
-            render: function() {
-                // Calculate totals
+            calculateValues: function() {
                 var totalMarketValue = { amount: 0, currency: 'USD'};
                 var totalCash = { amount: 0, currency: 'USD'};
-                this.collection.each(function(account) {
+                this.brokerageAccounts.each(function(account) {
                     totalMarketValue.amount += account.get('marketValue').amount;
                     totalCash.amount += account.get('cashPosition').amount;
                 });
 
-                this.$el.find('.market-value').html(Formatter.formatMoney(totalMarketValue));
-                this.$el.find('.cash').html(Formatter.formatMoney(totalCash));
-
-                return this;
+                this.set({
+                    totalMarketValue: totalMarketValue,
+                    totalCash: totalCash
+                });
             }
         });
     }
