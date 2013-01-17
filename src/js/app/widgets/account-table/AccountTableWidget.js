@@ -59,7 +59,7 @@ define(
                     {
                         name: 'AccountTableBodyView',
                         widget: AccountTableBodyView,
-                        element: this.accountTableBodyElement,
+                        el: this.accountTableBodyElement,
                         collection: Repository.getBrokerageAccounts()
                     },
                     {

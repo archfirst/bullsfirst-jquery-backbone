@@ -45,11 +45,16 @@ define(
 
         return Backbone.View.extend({
 
-            // ### `children`
-            //
-            // Map of ids to child views
-            // The view id is any unique string, e.g. the id of the associated model
-            children: {},
+            // Override the constructor to add per-instance configuration
+            constructor: function() {
+                // Create a per instance children property.
+                // It is a map of unique child ids to child views.
+                // The child id can be a number or string, e.g. the id of the associated model
+                this.children = {};
+
+                // Call super
+                Backbone.View.apply(this, arguments);
+            },
 
             addChild: function(widgetSpec) {
 
@@ -63,8 +68,21 @@ define(
                     constructorArg.collection = widgetSpec.collection;
                 }
 
-                var widget = new widgetSpec.widget(constructorArg).render().place(widgetSpec.element);
+                if (widgetSpec.el) {
+                    constructorArg.el = widgetSpec.el;
+                }
+
+                // Create the widget
+                var widget = new widgetSpec.widget(constructorArg).render();
+
+                // If the parent element is supplied, place the widget under the parent
+                if (widgetSpec.element) {
+                    widget.place(widgetSpec.element);
+                }
+
                 this.children[widgetSpec.name] = widget;
+
+                return widget;
             },
 
             addChildren: function(widgetSpecs) {
@@ -73,23 +91,28 @@ define(
                 }
             },
 
-            removeChild: function(id) {
-                var children = this.children;
-                children[id].remove();
-                delete children[id];
-                return this;
+            // Destroys the view and all its children recursively, unbinding their events
+            destroy: function() {
+                this.destroyChildren();
+                this.remove();
             },
 
-            removeAllChildren: function() {
+            // Destroys all the children of this view recursively, unbinding their events
+            destroyChildren: function() {
                 var children = this.children;
                 for (var id in children) {
                     if (children.hasOwnProperty(id)) {
-                        children[id].remove();
+                        children[id].destroy();
                         delete children[id];
                     }
                 }
+            },
 
-                return this;
+            // Destroys the specified child of this view, unbinding its events
+            destroyChild: function(id) {
+                var children = this.children;
+                children[id].destroy();
+                delete children[id];
             },
 
             // ### `render`
@@ -103,12 +126,8 @@ define(
                 // If the model contains a toJSON method, call it to create the context
                 var context = model.toJSON ? model.toJSON() : {};
 
-                // Remove existing children
-                // Commented out because this operation on the DOM seems to continue
-                // even after the statement has returned! As a result, any widgets
-                // added after this statement are also removed. For now, we will call
-                // removeAllChildren() manually when a `pageChange` even is received.
-                // this.removeAllChildren();
+                // Destroy existing children
+                this.destroyChildren();
 
                 this.$el.html(template(context));
                 this._setupElements();

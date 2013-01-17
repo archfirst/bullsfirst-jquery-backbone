@@ -48,8 +48,7 @@ define(
 
                 // Remove this view on a `pageChange` event
                 accountsPage.listenTo(MessageBus, Message.PageChange, function() {
-                    accountsPage.removeAllChildren();
-                    accountsPage.remove();
+                    accountsPage.destroy();
                 });
             },
 

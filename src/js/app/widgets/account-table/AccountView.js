@@ -15,26 +15,31 @@
  */
 
 /**
- * bullsfirst/views/AccountView
+ * app/widgets/account-table/AccountView
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'backbone',
-        'app/domain/Repository',
-        'framework/ErrorUtil',
         'app/common/Message',
-        'framework/MessageBus',
+        'app/domain/Repository',
         'app/services/AccountService',
-        'bullsfirst/views/TemplateManager'
+        'framework/BaseView',
+        'framework/ErrorUtil',
+        'framework/MessageBus',
+        'text!app/widgets/account-table/AccountTemplate.html'
     ],
-    function(Backbone, Repository, ErrorUtil, Message, MessageBus, AccountService, TemplateManager) {
+    function(Message, Repository, AccountService, BaseView, ErrorUtil, MessageBus, AccountTemplate) {
         'use strict';
 
-        return Backbone.View.extend({
+        return BaseView.extend({
 
             tagName: 'tr',
+
+            template: {
+                name: 'AccountTemplate',
+                source: AccountTemplate
+            },
 
             events: {
                 'mouseover': 'handleMouseOverRaw',
@@ -117,13 +122,6 @@ define(
 
             changeNameDone: function(/* data, textStatus, jqXHR */) {
                 Repository.updateAccounts();
-            },
-
-            render: function() {
-                var account = this.model.toJSON();  // returns a copy of the model's attributes
-                var template = TemplateManager.getTemplate('account');
-                $(this.el).html(template(account));
-                return this;
             }
         });
     }
