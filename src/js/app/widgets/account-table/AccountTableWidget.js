@@ -57,16 +57,20 @@ define(
             postRender: function() {
                 this.addChildren([
                     {
-                        name: 'AccountTableBodyView',
-                        widget: AccountTableBodyView,
-                        el: this.accountTableBodyElement,
-                        collection: Repository.getBrokerageAccounts()
+                        id: 'AccountTableBodyView',
+                        viewClass: AccountTableBodyView,
+                        options: {
+                            el: this.accountTableBodyElement,
+                            collection: Repository.getBrokerageAccounts()
+                        }
                     },
                     {
-                        name: 'AccountTotalsView',
-                        widget: AccountTotalsView,
-                        element: this.accountTotalsElement,
-                        collection: Repository.getBrokerageAccounts()
+                        id: 'AccountTotalsView',
+                        viewClass: AccountTotalsView,
+                        parentElement: this.accountTotalsElement,
+                        options: {
+                            collection: Repository.getBrokerageAccounts()
+                        }
                     }
                 ]);
             },

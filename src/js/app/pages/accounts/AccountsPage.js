@@ -55,20 +55,22 @@ define(
             postRender: function() {
                 this.addChildren([
                     {
-                        name: 'UserPageHeaderWidget',
-                        widget: UserPageHeaderWidget,
-                        element: this.$el,
-                        model: Repository.getUser()
+                        id: 'UserPageHeaderWidget',
+                        viewClass: UserPageHeaderWidget,
+                        parentElement: this.$el,
+                        options: {
+                            model: Repository.getUser()
+                        }
                     },
                     {
-                        name: 'AccountsTab',
-                        widget: AccountsTab,
-                        element: this.$el
+                        id: 'AccountsTab',
+                        viewClass: AccountsTab,
+                        parentElement: this.$el
                     },
                     {
-                        name: 'FooterWidget',
-                        widget: FooterWidget,
-                        element: this.$el
+                        id: 'FooterWidget',
+                        viewClass: FooterWidget,
+                        parentElement: this.$el
                     }
                 ]);
             }

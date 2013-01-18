@@ -47,15 +47,17 @@ define(
             postRender: function() {
                 this.addChildren([
                     {
-                        name: 'AccountTableWidget',
-                        widget: AccountTableWidget,
-                        element: this.$el
+                        id: 'AccountTableWidget',
+                        viewClass: AccountTableWidget,
+                        parentElement: this.$el
                     },
                     {
-                        name: 'AccountChartWidget',
-                        widget: AccountChartWidget,
-                        element: this.$el,
-                        collection: Repository.getBrokerageAccounts()
+                        id: 'AccountChartWidget',
+                        viewClass: AccountChartWidget,
+                        parentElement: this.$el,
+                        options: {
+                            collection: Repository.getBrokerageAccounts()
+                        }
                     }
                 ]);
             },

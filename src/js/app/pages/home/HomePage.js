@@ -55,19 +55,19 @@ define(
             postRender: function() {
                 this.addChildren([
                     {
-                        name: 'LoginWidget',
-                        widget: LoginWidget,
-                        element: this.$el
+                        id: 'LoginWidget',
+                        viewClass: LoginWidget,
+                        parentElement: this.$el
                     },
                     {
-                        name: 'IntroWidget',
-                        widget: IntroWidget,
-                        element: this.$el
+                        id: 'IntroWidget',
+                        viewClass: IntroWidget,
+                        parentElement: this.$el
                     },
                     {
-                        name: 'FooterWidget',
-                        widget: FooterWidget,
-                        element: this.$el
+                        id: 'FooterWidget',
+                        viewClass: FooterWidget,
+                        parentElement: this.$el
                     }
                 ]);
             }

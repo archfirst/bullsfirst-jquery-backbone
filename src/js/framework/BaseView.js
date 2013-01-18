@@ -56,38 +56,25 @@ define(
                 Backbone.View.apply(this, arguments);
             },
 
-            addChild: function(widgetSpec) {
+            addChild: function(childSpec) {
 
-                var constructorArg = {};
+                // Create the child
+                var child = new childSpec.viewClass(childSpec.options).render();
 
-                if (widgetSpec.model) {
-                    constructorArg.model = widgetSpec.model;
+                // Add it to the children map
+                this.children[childSpec.id] = child;
+
+                // If the parent element is supplied, place the child under the parent
+                if (childSpec.parentElement) {
+                    child.place(childSpec.parentElement);
                 }
 
-                if (widgetSpec.collection) {
-                    constructorArg.collection = widgetSpec.collection;
-                }
-
-                if (widgetSpec.el) {
-                    constructorArg.el = widgetSpec.el;
-                }
-
-                // Create the widget
-                var widget = new widgetSpec.widget(constructorArg).render();
-
-                // If the parent element is supplied, place the widget under the parent
-                if (widgetSpec.element) {
-                    widget.place(widgetSpec.element);
-                }
-
-                this.children[widgetSpec.name] = widget;
-
-                return widget;
+                return child;
             },
 
-            addChildren: function(widgetSpecs) {
-                for (var i = 0, l = widgetSpecs.length; i < l; i++) {
-                    this.addChild(widgetSpecs[i]);
+            addChildren: function(childSpecs) {
+                for (var i = 0, l = childSpecs.length; i < l; i++) {
+                    this.addChild(childSpecs[i]);
                 }
             },
 

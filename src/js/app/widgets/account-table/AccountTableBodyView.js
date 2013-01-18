@@ -93,10 +93,12 @@ define(
 
             renderAccount: function(account, index) {
                 var view = this.addChild({
-                    name: account.id,
-                    widget: AccountView,
-                    element: this.$el,
-                    model: account
+                    id: account.id,
+                    viewClass: AccountView,
+                    parentElement: this.$el,
+                    options: {
+                        model: account
+                    }
                 });
                 view.$el.find('.legend').addClass('legend-' + (index%10) + '-gradient');
             }
