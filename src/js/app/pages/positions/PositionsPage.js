@@ -43,15 +43,6 @@ define(
                 source: PositionsPageTemplate
             },
 
-            initialize: function() {
-                var positionsPage = this;
-
-                // Remove this view on a `pageChange` event
-                positionsPage.listenTo(MessageBus, Message.PageChange, function() {
-                    positionsPage.destroy();
-                });
-            },
-
             postRender: function() {
                 this.addChildren([
                     {

@@ -43,15 +43,6 @@ define(
                 source: AccountsPageTemplate
             },
 
-            initialize: function() {
-                var accountsPage = this;
-
-                // Remove this view on a `pageChange` event
-                accountsPage.listenTo(MessageBus, Message.PageChange, function() {
-                    accountsPage.destroy();
-                });
-            },
-
             postRender: function() {
                 this.addChildren([
                     {

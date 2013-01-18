@@ -43,15 +43,6 @@ define(
                 source: HomePageTemplate
             },
 
-            initialize: function() {
-                var homePage = this;
-
-                // Remove this view on a `pageChange` event
-                homePage.listenTo(MessageBus, Message.PageChange, function() {
-                    homePage.destroy();
-                });
-            },
-
             postRender: function() {
                 this.addChildren([
                     {

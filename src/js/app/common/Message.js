@@ -22,6 +22,7 @@
  * @author Naresh Bhatia
  */
 define({
+    PageBeforeChange: 'pageBeforeChange',
     PageChange: 'pageChange',
     AccountClickRaw: 'Account:clickRaw',
     AccountClick: 'Account:click',

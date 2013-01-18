@@ -49,17 +49,24 @@ define(
                     page = 'home';
                 }
 
+                // Trigger the `pageBeforeChange` event in the MessageBus
+                MessageBus.trigger(Message.PageBeforeChange, page);
+
                 // Derive page name from route, e.g. `home` becomes `HomePage`
                 var pageName = page[0].toUpperCase() + page.slice(1) + 'Page';
-
-                // Trigger the `pageChange` event in the MessageBus
-                MessageBus.trigger(Message.PageChange);
 
                 // Load the page and render it
                 require(['app/pages/' + page + '/' + pageName], function(PageClass) {
 
-                    new PageClass().render().place('#container');
+                    var pageInstance = new PageClass().render().place('#container');
 
+                    // Remove the page on a `pageBeforeChange` event
+                    pageInstance.listenTo(MessageBus, Message.PageBeforeChange, function() {
+                        pageInstance.destroy();
+                    });
+
+                    // Trigger the `pageChange` event in the MessageBus
+                    MessageBus.trigger(Message.PageChange, page);
                 });
             }
         });

@@ -23,12 +23,14 @@
  */
 define(
     [
-        'backbone',
+        'app/common/Message',
         'app/domain/Repository',
+        'backbone',
         'framework/BaseView',
+        'framework/MessageBus',
         'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
-    function(Backbone, Repository, BaseView, UserPageHeaderTemplate) {
+    function(Message, Repository, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -48,6 +50,9 @@ define(
 
             initialize: function() {
                 this.listenTo(this.model, 'change', this.render);
+
+                // Adjust tab selection on page change
+                this.listenTo(MessageBus, Message.PageChange, this.selectTab);
             },
 
             logout: function() {
@@ -66,6 +71,17 @@ define(
 
             transfer: function() {
                 return false;
+            },
+
+            selectTab: function(page) {
+                this.$el.find('.tabbar a').each(function() {
+                    if ($(this).attr('href') === page) {
+                        $(this).addClass('selected');
+                    }
+                    else {
+                        $(this).removeClass('selected');
+                    }
+                });
             }
         });
     }
