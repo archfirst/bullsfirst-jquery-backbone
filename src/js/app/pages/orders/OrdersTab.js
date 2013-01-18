@@ -1,5 +1,5 @@
-﻿/**
- * Copyright 2012 Archfirst
+/**
+ * Copyright 2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,32 @@
  */
 
 /**
- * bullsfirst/views/TransactionsTabView
+ * app/pages/orders/OrdersTab
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'backbone'
+        'framework/BaseView',
+        'app/domain/Repository',
+        'text!app/pages/orders/OrdersTabTemplate.html'
     ],
-    function(Backbone) {
+    function(BaseView, Repository, OrdersTabTemplate) {
         'use strict';
 
-        return Backbone.View.extend({
+        return BaseView.extend({
+            tagName: 'section',
+            className: 'orders-tab tab clearfix',
+
+            template: {
+                name: 'OrdersTabTemplate',
+                source: OrdersTabTemplate
+            },
+
+            postRender: function() {
+                this.addChildren([
+                ]);
+            }
         });
     }
 );
