@@ -22,16 +22,16 @@
  * @author Naresh Bhatia
  */
 define({
-    PageBeforeChange: 'pageBeforeChange',
-    PageChange: 'pageChange',
-    AccountClickRaw: 'Account:clickRaw',
     AccountClick: 'Account:click',
-    AccountMouseOutRaw: 'Account:mouseoutRaw',
-    AccountMouseOut: 'Account:mouseout',
-    AccountMouseOverRaw: 'Account:mouseoverRaw',
-    AccountMouseOver: 'Account:mouseover',
     AccountClickEditIconRaw: 'Account:clickEditIconRaw',
+    AccountClickRaw: 'Account:clickRaw',
+    AccountMouseOut: 'Account:mouseout',
+    AccountMouseOutRaw: 'Account:mouseoutRaw',
+    AccountMouseOver: 'Account:mouseover',
+    AccountMouseOverRaw: 'Account:mouseoverRaw',
     AccountStoppedEditing: 'Account:stoppedEditing',
+    PageBeforeChange: 'PageBeforeChange',
+    PageChange: 'PageChange',
     SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
     UserLoggedInEvent: 'UserLoggedInEvent',

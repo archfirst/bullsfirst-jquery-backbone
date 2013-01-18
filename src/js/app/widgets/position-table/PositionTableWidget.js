@@ -15,46 +15,43 @@
  */
 
 /**
- * app/pages/positions/PositionsTab
+ * app/widgets/position-table/PositionTableWidget
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'framework/BaseView',
+        'app/common/Message',
         'app/domain/Repository',
-        'app/widgets/position-table/PositionTableWidget',
-        'text!app/pages/positions/PositionsTabTemplate.html'
+        'app/widgets/position-table/PositionTableBodyView',
+        'framework/BaseView',
+        'framework/MessageBus',
+        'text!app/widgets/position-table/PositionTableTemplate.html'
     ],
-    function(BaseView, Repository, PositionTableWidget, PositionsTabTemplate) {
+    function(Message, Repository, PositionTableBodyView, BaseView, MessageBus, PositionTableTemplate) {
         'use strict';
 
         return BaseView.extend({
-            tagName: 'section',
-            className: 'positions-tab tab clearfix',
+            tagName: 'table',
+            className: 'position-table bf-table',
+            elements: ['positionTableBody'],
 
             template: {
-                name: 'PositionsTabTemplate',
-                source: PositionsTabTemplate
-            },
-
-            events: {
-                'click .js-refresh-button': 'refreshAccounts'
+                name: 'PositionTableTemplate',
+                source: PositionTableTemplate
             },
 
             postRender: function() {
                 this.addChildren([
                     {
-                        id: 'PositionTableWidget',
-                        viewClass: PositionTableWidget,
-                        parentElement: this.$el
+                        id: 'PositionTableBodyView',
+                        viewClass: PositionTableBodyView,
+                        options: {
+                            el: this.positionTableBodyElement,
+                            collection: Repository.getBrokerageAccounts()
+                        }
                     }
                 ]);
-            },
-
-            refreshAccounts: function() {
-                Repository.updateAccounts();
-                return false;
             }
         });
     }

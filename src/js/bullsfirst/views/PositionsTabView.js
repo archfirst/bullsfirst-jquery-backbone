@@ -49,7 +49,7 @@ define(
                 });
 
                 this.positionSelectedAccountView = new PositionSelectedAccountView({
-                    el: '#postab-selected-account-name',
+                    el: '.postab-selected-account-name',
                     collection: Repository.getBrokerageAccounts()
                 });
 
