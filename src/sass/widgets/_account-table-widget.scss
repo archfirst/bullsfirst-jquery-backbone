@@ -12,17 +12,17 @@
  *
  * Column       Padding + Width = Total
  * left-column     0    +   30  =   30
- * name           20    +  185  =  205
- * market-value    0    +  125  =  125
- * cash            0    +  125  =  125
+ * name           20    +  180  =  200
+ * market-value    0    +  140  =  140
+ * cash            0    +  140  =  140
  * legend-cell    20    +   60  =   80
  * right-column    0    +   20  =   20
  * -----------------------------------
- * Total                           585
+ * Total                           610
  * -------------------------------------------------------------------------- */
 .account-table {
     table-layout: fixed;
-    width: 585px;
+    width: 610px;
 }
 
 .account-table tbody tr {
@@ -41,13 +41,13 @@
 .account-table .name {
     padding-left: 20px;
     text-align: left;
-    width: 185px;
+    width: 180px;
 }
 
 .account-table .name .edit input {
     height: 17px;
     margin: 0;
-    width: 145px;
+    width: 140px;
 }
 
 .account-table .name .edit i {
@@ -62,12 +62,12 @@
 
 .account-table .market-value {
     text-align: right;
-    width: 125px;
+    width: 140px;
 }
 
 .account-table .cash {
     text-align: right;
-    width: 125px;
+    width: 140px;
 }
 
 .account-table .legend-cell {
@@ -126,10 +126,10 @@
  * Column       Padding + Width = Total
  * ????           ??    +   ??  =   ??
  * -----------------------------------
- * Total                           585
+ * Total                           610
  * -------------------------------------------------------------------------- */
 .account-detail-table {
     margin-left: 30px;
     table-layout: fixed;
-    width: 585px;
+    width: 610px;
 }

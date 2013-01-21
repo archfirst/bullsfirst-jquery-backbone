@@ -49,8 +49,8 @@ define(
             initialize: function() {
                 // Subscribe to events
                 MessageBus.on(Message.AccountClick, function() {
-                    // TODO: can we avoid the hardcoded pixel value below?
-                    this.$el.find('.account-table-transitioning-view').animate({ left: '-615px' });
+                    // Transition 640px to left (table width 610px + margin 30px)
+                    this.$el.find('.account-table-transitioning-view').animate({ left: '-640px' });
                 }, this);
             },
 

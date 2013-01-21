@@ -21,14 +21,14 @@
 .account-table-clipped-wrapper {
     float: left;
     overflow: hidden;
-    width: 615px;  /* 30px margin-left + 585px table width */
+    width: 640px;  /* 30px margin-left + 610px table width */
 }
 
 .account-table-unclipped-wrapper {
     float: left;
     margin: 56px 0 0 30px;
     position: relative;
-    width: 1200px;  /* 585 + 30 (margin) + 585 */
+    width: 1250px;  /* 610 + 30 (margin) + 610 */
 }
 
 /* -----------------------------------------------------------------------------
