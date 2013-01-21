@@ -1,11 +1,9 @@
-﻿{{#position}}
-<td class="left">
-    {{#isInstrumentPosition}}
+﻿<td class="left">
+    {{#if isInstrumentPosition}}
         {{instrumentName}}
-    {{/isInstrumentPosition}}
-    {{#isLot}}
-        {{lotCreationTimeFormatted}}
-    {{/isLot}}
+    {{else}}
+        {{formatDate lotCreationTime}}
+    {{/if}}
 </td>
 <td class="center">
     {{instrumentSymbol}}
@@ -14,27 +12,26 @@
     {{quantity}}
 </td>
 <td class="number">
-    {{lastTradeFormatted}}
+    {{formatMoney lastTrade}}
 </td>
 <td class="number">
-    {{marketValueFormatted}}
+    {{formatMoney marketValue}}
 </td>
 <td class="number">
-    {{pricePaidFormatted}}
+    {{formatMoney pricePaid}}
 </td>
 <td class="number">
-    {{totalCostFormatted}}
+    {{formatMoney totalCost}}
 </td>
 <td class="number">
-    {{gainFormatted}}
+    {{formatMoney gain}}
 </td>
 <td class="number">
-    {{gainPercentFormatted}}
+    {{formatPercent gainPercent}}
 </td>
 <td class="center">
-    {{#isTradable}}
+    {{#if isTradable}}
     <a href="#" class="pos_trade" data-action="Buy">Buy</a> | 
     <a href="#" class="pos_trade" data-action="Sell">Sell</a>
-    {{/isTradable}}
+    {{/if}}
 </td>
-{{/position}}

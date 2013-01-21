@@ -31,8 +31,25 @@ define(
 
         return {
             registerHelpers: function() {
+
+                // formatMoney
                 Handlebars.registerHelper('formatMoney', function(money) {
                     return Formatter.formatMoney(money);
+                });
+
+                // formatPercent
+                Handlebars.registerHelper('formatPercent', function(percent) {
+                    return Formatter.formatPercent(percent);
+                });
+
+                // formatDate
+                Handlebars.registerHelper('formatDate', function(date) {
+                    return Formatter.formatDate(date);
+                });
+
+                // formatDateTime
+                Handlebars.registerHelper('formatDateTime', function(date) {
+                    return Formatter.formatDateTime(date);
                 });
             }
         };

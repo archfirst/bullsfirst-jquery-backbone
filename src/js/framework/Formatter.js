@@ -23,9 +23,10 @@
  */
 define(
     [
+        'moment',
         'jqueryformat'
     ],
-    function() {
+    function(moment) {
         'use strict';
 
         return {
@@ -52,21 +53,21 @@ define(
                 }
             },
 
-            formatMoment2Date: function(m) {
-                if ((typeof m === 'undefined') || (m === null)) {
+            formatDate: function(d) {
+                if ((typeof d === 'undefined') || (d === null)) {
                     return '';
                 }
                 else {
-                    return m.format('MM/DD/YYYY');
+                    return moment(d).format('MM/DD/YYYY');
                 }
             },
 
-            formatMoment2DateTime: function(m) {
-                if ((typeof m === 'undefined') || (m === null)) {
+            formatDateTime: function(d) {
+                if ((typeof d === 'undefined') || (d === null)) {
                     return '';
                 }
                 else {
-                    return m.format('MM/DD/YYYY hh:mm:ss A');
+                    return moment(d).format('MM/DD/YYYY hh:mm:ss A');
                 }
             }
         };

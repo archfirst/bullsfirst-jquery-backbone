@@ -33,6 +33,10 @@
  *   gainPercent: Decimal (e.g. 0.25 = 25%)
  *   children: [Position]
  *
+ * Calculated Attributes:
+ *   isInstrumentPosition: boolean
+ *   isTradable: boolean
+ *
  * @author Naresh Bhatia
  */
 define(
@@ -43,6 +47,17 @@ define(
         'use strict';
 
         return Backbone.Model.extend({
+
+            initialize: function() {
+                
+                // Initialize calculated fields
+                var isInstrumentPosition = typeof this.get('lotId') === 'undefined';
+                var isTradable = isInstrumentPosition && this.get('instrumentSymbol') !== 'CASH';
+                this.set({
+                    isInstrumentPosition: isInstrumentPosition,
+                    isTradable: isTradable
+                });
+            }
         });
     }
 );

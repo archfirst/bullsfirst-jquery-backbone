@@ -34,6 +34,7 @@ define({
     PageChange: 'PageChange',
     SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
+    TradeRequest: 'TradeRequest',
     UserLoggedInEvent: 'UserLoggedInEvent',
     UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

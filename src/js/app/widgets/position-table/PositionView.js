@@ -22,14 +22,11 @@
 define(
     [
         'app/common/Message',
-        'app/domain/Repository',
-        'app/services/AccountService',
         'framework/BaseView',
-        'framework/ErrorUtil',
         'framework/MessageBus',
         'text!app/widgets/position-table/PositionTemplate.html'
     ],
-    function(Message, Repository, AccountService, BaseView, ErrorUtil, MessageBus, PositionTemplate) {
+    function(Message, BaseView, MessageBus, PositionTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -42,86 +39,17 @@ define(
             },
 
             events: {
-                'mouseover': 'handleMouseOverRaw',
-                'mouseout': 'handleMouseOutRaw',
-                'click': 'handleClickRaw',
-                'click .left-column': 'handleClickEditIconRaw', /* click on icon-edit is not detected on chrome */
-                'click .icon-save': 'handleClickSaveIconRaw',
-                'keydown .nameField': 'handleKeyDownOnNameRaw' /* keypress for Escape is not detected on chrome */
+                'click .pos_trade': 'requestTrade'
             },
 
-            handleMouseOverRaw: function() {
-                MessageBus.trigger(Message.PositionMouseOverRaw, this.model.id);
+            requestTrade: function(event) {
+                MessageBus.trigger(Message.TradeRequest, {
+                    action: $(event.target).data('action'),
+                    quantity: this.model.get('quantity'),
+                    symbol: this.model.get('instrumentSymbol')
+                });
+
                 return false;
-            },
-
-            handleMouseOver: function() {
-                this.$el.addClass('selected');
-                this.$el.find('.icon-edit').removeClass('invisible');
-            },
-
-            handleMouseOutRaw: function() {
-                MessageBus.trigger(Message.PositionMouseOutRaw, this.model.id);
-                return false;
-            },
-
-            handleMouseOut: function() {
-                this.$el.removeClass('selected');
-                this.$el.find('.icon-edit').addClass('invisible');
-            },
-
-            handleClickRaw: function() {
-                MessageBus.trigger(Message.PositionClickRaw, this.model.id);
-                return false;
-            },
-
-            handleClickEditIconRaw: function() {
-                MessageBus.trigger(Message.PositionClickEditIconRaw, this.model.id);
-                return false;
-            },
-
-            handleClickEditIcon: function() {
-                this.$el.find('.name').addClass('editing');
-                this.$el.find('.nameField').val(this.model.get('name')).focus();
-            },
-
-            handleClickSaveIconRaw: function() {
-                this.validateInput();
-                return false;
-            },
-
-            handleKeyDownOnNameRaw: function(event) {
-                if (event.keyCode === $.ui.keyCode.ENTER) {
-                    this.validateInput();
-                    return false;
-                }
-                else if (event.keyCode === $.ui.keyCode.ESCAPE) {
-                    this.stopEditing();
-                    return false;
-                }
-
-                // If not one of the keycodes above, let the event bubble up for the input box
-            },
-
-            validateInput: function() {
-                var newName = this.$el.find('.nameField').val();
-                if (typeof newName !== 'undefined' && newName !== null && newName.length > 0) {
-                    this.stopEditing();
-
-                    // Change name of brokerage position
-                    AccountService.changeName(
-                        this.model.id, this.$el.find('.nameField').val(), this.changeNameDone, ErrorUtil.showError);
-                }
-            },
-
-            stopEditing: function() {
-                this.$el.find('.name').removeClass('editing');
-                MessageBus.trigger(Message.PositionStoppedEditing, this.model.id);
-                this.handleMouseOutRaw(); // force deselection of this position in case cursor is on some other position
-            },
-
-            changeNameDone: function(/* data, textStatus, jqXHR */) {
-                Repository.updatePositions();
             }
         });
     }

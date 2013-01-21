@@ -43,7 +43,7 @@ define(
             render: function() {
                 this.destroyChildren();
 
-                this.collection.each(function(position, i) {
+                this.collection.each(function(position) {
                     var positionId = 'position-' + position.get('instrumentSymbol');
                     this.addChild({
                         id: positionId,
@@ -51,8 +51,7 @@ define(
                         parentElement: this.$el,
                         options: {
                             model: position,
-                            id: positionId,
-                            className: (i % 2) ? '' : 'alt'
+                            id: positionId
                         }
                     });
 
@@ -62,9 +61,6 @@ define(
                         this._renderChildren(children, positionId);
                     }
                 }, this);
-
-                // Display as TreeTable
-                $('#positions-table').treeTable();
 
                 return this;
             },

@@ -26,7 +26,8 @@ define(
         'app/widgets/position-table/PositionTableBodyView',
         'framework/BaseView',
         'framework/MessageBus',
-        'text!app/widgets/position-table/PositionTableTemplate.html'
+        'text!app/widgets/position-table/PositionTableTemplate.html',
+        'jqueryTreeTable'
     ],
     function(Message, Repository, PositionTableBodyView, BaseView, MessageBus, PositionTableTemplate) {
         'use strict';
@@ -48,10 +49,13 @@ define(
                         viewClass: PositionTableBodyView,
                         options: {
                             el: this.positionTableBodyElement,
-                            collection: Repository.getBrokerageAccounts()
+                            collection: Repository.getSelectedAccount().get('positions')
                         }
                     }
                 ]);
+
+                // Display as TreeTable
+                this.$el.treeTable();
             }
         });
     }

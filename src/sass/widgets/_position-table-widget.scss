@@ -1,0 +1,31 @@
+/* -----------------------------------------------------------------------------
+ * position-table-widget
+ * -------------------------------------------------------------------------- */
+.position-table {
+    float: left;
+    margin: 10px 0 0 80px;
+    width: 800px;
+}
+
+.position-table th {
+    padding-left: 3px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.position-table .pull-right {
+    text-align: right;
+}
+
+.position-table .center {
+    text-align: center;
+}
+
+/* Why not .position-table */
+.positions-tab table td {
+    padding: 3px 0 3px 3px;
+}
+
+.position-table .number {
+    text-align: right;
+}
