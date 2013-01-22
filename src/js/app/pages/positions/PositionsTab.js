@@ -23,15 +23,18 @@ define(
     [
         'framework/BaseView',
         'app/domain/Repository',
+        'app/widgets/account-selector/AccountSelectorWidget',
         'app/widgets/position-table/PositionTableWidget',
+        'app/widgets/selected-account-name/SelectedAccountNameWidget',
         'text!app/pages/positions/PositionsTabTemplate.html'
     ],
-    function(BaseView, Repository, PositionTableWidget, PositionsTabTemplate) {
+    function(BaseView, Repository, AccountSelectorWidget, PositionTableWidget, SelectedAccountNameWidget, PositionsTabTemplate) {
         'use strict';
 
         return BaseView.extend({
             tagName: 'section',
             className: 'positions-tab tab clearfix',
+            elements: ['selectedAccountName', 'accountSelector'],
 
             template: {
                 name: 'PositionsTabTemplate',
@@ -39,11 +42,27 @@ define(
             },
 
             events: {
-                'click .js-refresh-button': 'refreshAccounts'
+                'click .js-refreshButton': 'refreshAccounts'
             },
 
             postRender: function() {
                 this.addChildren([
+                    {
+                        id: 'AccountSelectorWidget',
+                        viewClass: AccountSelectorWidget,
+                        options: {
+                            el: this.accountSelectorElement,
+                            collection: Repository.getBrokerageAccounts()
+                        }
+                    },
+                    {
+                        id: 'SelectedAccountNameWidget',
+                        viewClass: SelectedAccountNameWidget,
+                        options: {
+                            el: this.selectedAccountNameElement,
+                            model: Repository.getSelectedAccount()
+                        }
+                    },
                     {
                         id: 'PositionTableWidget',
                         viewClass: PositionTableWidget,

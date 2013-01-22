@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 Archfirst
+ * Copyright 2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,36 @@
  */
 
 /**
- * bullsfirst/views/PositionSelectedAccountView
+ * app/widgets/selected-account-name/SelectedAccountNameWidget
  *
- * @author Keith DiMatteo
+ * @author Naresh Bhatia
  */
-
 define(
     [
-        'backbone',
-        'app/domain/Position',
-        'app/domain/Repository',
-        'framework/Formatter',
+        'app/common/Message',
+        'framework/BaseView',
         'framework/MessageBus'
     ],
-    function(Backbone, Position, Repository, Formatter, MessageBus) {
+    function(Message, BaseView, MessageBus) {
         'use strict';
 
-        return Backbone.View.extend({
-            initialize: function(/* options */) {
-                MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
-                    this.accountName = selectedAccount.get('name');
+        return BaseView.extend({
+
+            // Constructor options:
+            //   el: reference to a select emement, e.g. <select class="js-accountSelector account-selector">
+            //   model: selectedAccount
+            initialize: function() {
+                // Subscribe to events
+                MessageBus.on(Message.SelectedAccountChanged, function(selectedAccount) {
+                    this.model = selectedAccount;
                     this.render();
                 }, this);
             },
 
-            render: function(){
-                this.$el.html(this.accountName);
+            render: function() {
+                this.$el.html(this.model.get('name'));
                 return this;
             }
         });
-
     }
 );

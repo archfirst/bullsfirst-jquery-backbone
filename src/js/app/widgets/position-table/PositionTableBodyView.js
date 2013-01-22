@@ -21,24 +21,13 @@
  */
 define(
     [
-        'app/common/Message',
         'app/widgets/position-table/PositionView',
-        'framework/BaseView',
-        'framework/MessageBus'
+        'framework/BaseView'
     ],
-    function(Message, PositionView, BaseView, MessageBus) {
+    function(PositionView, BaseView) {
         'use strict';
 
         return BaseView.extend({
-
-            initialize: function() {
-                // Subscribe to events
-                MessageBus.on(Message.SelectedAccountChanged, function(selectedAccount) {
-                    this.collection = selectedAccount.get('positions');
-                    this.listenTo(this.collection, 'reset', this.render);
-                    this.render();
-                }, this);
-            },
 
             render: function() {
                 this.destroyChildren();

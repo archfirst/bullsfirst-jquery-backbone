@@ -42,6 +42,16 @@ define(
                 source: PositionTableTemplate
             },
 
+            initialize: function() {
+                // Subscribe to events
+                MessageBus.on(Message.SelectedAccountChanged, function(selectedAccount) {
+                    var tableView = this.children.PositionTableBodyView;
+                    tableView.collection = selectedAccount.get('positions');
+                    tableView.render();
+                    this.$el.treeTable();
+                }, this);
+            },
+
             postRender: function() {
                 this.addChildren([
                     {

@@ -15,32 +15,38 @@
  */
 
 /**
- * bullsfirst/views/AccountSelectorView
+ * app/widgets/account-selector/AccountSelectorWidget
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'backbone',
+        'app/common/Message',
         'app/domain/Repository',
+        'framework/BaseView',
         'framework/Formatter',
         'framework/MessageBus',
-        'bullsfirst/views/TemplateManager'
+        'text!app/widgets/account-selector/AccountSelectorTemplate.html'
     ],
-    function(Backbone, Repository, Formatter, MessageBus, TemplateManager) {
+    function(Message, Repository, BaseView, Formatter, MessageBus, AccountSelectorTemplate) {
         'use strict';
 
-        return Backbone.View.extend({
+        return BaseView.extend({
+
+            template: {
+                name: 'AccountSelectorTemplate',
+                source: AccountSelectorTemplate
+            },
 
             events: {
                 'change': 'setSelectedAccount'
             },
 
-            initialize: function(/* options */) {
+            initialize: function() {
                 this.collection.bind('reset', this.render, this);
 
                 // Subscribe to events
-                MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
+                MessageBus.on(Message.SelectedAccountChanged, function(selectedAccount) {
                     this.$el.val(selectedAccount.id);
                 }, this);
             },
@@ -51,23 +57,16 @@ define(
             },
 
             render: function() {
-                // Take out entries that might be sitting in the dropdown
-                this.$el.empty();
+                // Destroy existing children
+                this.destroyChildren();
 
                 // Add new entries from accounts collection. Pass this object as context
-                this.collection.each(function(accountModel) {
-                    // Format account values for display
-                    var account = accountModel.toJSON();  // returns a copy of the model's attributes
-                    account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
+                this.collection.each(function(model) {
 
-                    // Render using template
-                    var hash = {
-                        account: account
-                    };
-
-                    var template = TemplateManager.getTemplate('account-selector');
-                    $(this.el).append(template(hash));
-
+                    var template = this.getTemplate();
+                    var context = model.toJSON();
+                    
+                    this.$el.append(template(context));
                 }, this);
 
                 // Select the selected account

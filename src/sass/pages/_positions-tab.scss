@@ -1,22 +1,10 @@
 /* -----------------------------------------------------------------------------
  * positions-tab
  * -------------------------------------------------------------------------- */
-.positions-tab .select-bar {
-    left: 80px;
+.positions-tab .account-selector {
+    left: 84px;
     position: absolute;
     top: 21px;
-}
-
-#postab-account-selector {
-    background-color: $selector-fancy-color;
-    border: 0;
-    color: $white;
-    width: 280px;
-    padding: 3px;
-}
-
-#postab-account-selector selected {
-    text-decoration: italics;
 }
 
 .positions-tab h1 {
@@ -25,6 +13,10 @@
     margin: 0px;
     position: absolute;
     top: 56px;
+}
+
+.positions-tab .selected-account-name {
+    font-weight: bold;
 }
 
 .positions-tab .button-bar {

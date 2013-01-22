@@ -41,7 +41,7 @@ define(
 
             events: {
                 'click .js-add-account-button': 'addAccount',
-                'click .js-refresh-button': 'refreshAccounts'
+                'click .js-refreshButton': 'refreshAccounts'
             },
 
             postRender: function() {

@@ -1,0 +1,14 @@
+/* -----------------------------------------------------------------------------
+ * account-selector
+ * -------------------------------------------------------------------------- */
+.account-selector {
+    background-color: $selector-fancy-color;
+    border: 0;
+    color: $white;
+    width: 280px;
+    padding: 3px;
+}
+
+.account-selector selected {
+    text-decoration: italics;
+}
