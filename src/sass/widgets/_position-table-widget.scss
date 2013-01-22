@@ -3,29 +3,53 @@
  * -------------------------------------------------------------------------- */
 .position-table {
     float: left;
-    margin: 10px 0 0 80px;
+    margin: 83px 0 0 83px;
+    table-layout: fixed;    
     width: 800px;
 }
 
-.position-table th {
-    padding-left: 3px;
+.position-table .symbol {
+    padding-left: 20px;
     text-align: left;
-    text-transform: uppercase;
+    width: 90px;
 }
 
-.position-table .pull-right {
+.position-table .quantity {
     text-align: right;
+    width: 80px;
 }
 
-.position-table .center {
+.position-table .last-trade {
+    text-align: right;
+    width: 80px;
+}
+
+.position-table .market-value {
+    text-align: right;
+    width: 100px;
+}
+
+.position-table .price-paid {
+    text-align: right;
+    width: 80px;
+}
+
+.position-table .total-cost {
+    text-align: right;
+    width: 100px;
+}
+
+.position-table .gain {
+    text-align: right;
+    width: 100px;
+}
+
+.position-table .gain-percent {
+    text-align: right;
+    width: 75px;
+}
+
+.position-table .actions {
     text-align: center;
-}
-
-/* Why not .position-table */
-.positions-tab table td {
-    padding: 3px 0 3px 3px;
-}
-
-.position-table .number {
-    text-align: right;
+    width: 75px;
 }

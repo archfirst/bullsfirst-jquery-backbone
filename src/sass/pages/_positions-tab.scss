@@ -1,12 +1,6 @@
 /* -----------------------------------------------------------------------------
  * positions-tab
  * -------------------------------------------------------------------------- */
-.positions-tab h1 {
-    float: left;
-    font: normal normal 18px/18px Aller;
-    margin: 60px 0 10px 80px;
-}
-
 .positions-tab .select-bar {
     left: 80px;
     position: absolute;
@@ -23,6 +17,14 @@
 
 #postab-account-selector selected {
     text-decoration: italics;
+}
+
+.positions-tab h1 {
+    font: normal normal 18px/18px Aller;
+    left: 84px;
+    margin: 0px;
+    position: absolute;
+    top: 56px;
 }
 
 .positions-tab .button-bar {
