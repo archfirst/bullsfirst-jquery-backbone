@@ -21,10 +21,10 @@
  */
 define(
     [
-        'backbone',
-        'app/domain/ExternalAccount'
+        'app/domain/ExternalAccount',
+        'backbone'
     ],
-    function(Backbone, ExternalAccount) {
+    function(ExternalAccount, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({

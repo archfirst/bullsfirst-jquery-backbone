@@ -21,14 +21,14 @@
  */
 define(
     [
-        'framework/BaseView',
         'app/domain/Repository',
         'app/widgets/account-selector/AccountSelectorWidget',
         'app/widgets/position-table/PositionTableWidget',
         'app/widgets/selected-account-name/SelectedAccountNameWidget',
+        'framework/BaseView',
         'text!app/pages/positions/PositionsTabTemplate.html'
     ],
-    function(BaseView, Repository, AccountSelectorWidget, PositionTableWidget, SelectedAccountNameWidget, PositionsTabTemplate) {
+    function(Repository, AccountSelectorWidget, PositionTableWidget, SelectedAccountNameWidget, BaseView, PositionsTabTemplate) {
         'use strict';
 
         return BaseView.extend({

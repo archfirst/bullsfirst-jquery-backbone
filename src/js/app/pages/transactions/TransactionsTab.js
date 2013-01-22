@@ -22,10 +22,9 @@
 define(
     [
         'framework/BaseView',
-        'app/domain/Repository',
         'text!app/pages/transactions/TransactionsTabTemplate.html'
     ],
-    function(BaseView, Repository, TransactionsTabTemplate) {
+    function(BaseView, TransactionsTabTemplate) {
         'use strict';
 
         return BaseView.extend({

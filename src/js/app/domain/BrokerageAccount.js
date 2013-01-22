@@ -31,12 +31,12 @@
  */
 define(
     [
-        'backbone',
         'app/domain/Position',
         'app/domain/Positions',
+        'backbone',
         'underscore'
     ],
-    function(Backbone, Position, Positions, _) {
+    function(Position, Positions, Backbone, _) {
         'use strict';
 
         return Backbone.Model.extend({

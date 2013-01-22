@@ -21,10 +21,10 @@
  */
 define(
     [
-        'backbone',
-        'app/domain/Transaction'
+        'app/domain/Transaction',
+        'backbone'
     ],
-    function(Backbone, Transaction) {
+    function(Transaction, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({

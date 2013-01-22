@@ -26,6 +26,7 @@
  */
 define(
     [
+        'app/common/Message',
         'app/domain/BaseAccount',
         'app/domain/BaseAccounts',
         'app/domain/BrokerageAccounts',
@@ -34,11 +35,10 @@ define(
         'app/domain/User',
         'framework/ErrorUtil',
         'framework/Formatter',
-        'app/common/Message',
         'framework/MessageBus',
         'underscore'
     ],
-    function(BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, Message, MessageBus, _) {
+    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons

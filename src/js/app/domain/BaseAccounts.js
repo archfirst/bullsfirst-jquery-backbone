@@ -21,10 +21,10 @@
  */
 define(
     [
-        'backbone',
-        'app/domain/BaseAccount'
+        'app/domain/BaseAccount',
+        'backbone'
     ],
-    function(Backbone, BaseAccount) {
+    function(BaseAccount, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({

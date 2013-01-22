@@ -21,10 +21,10 @@
  */
 define(
     [
-        'backbone',
-        'app/domain/Order'
+        'app/domain/Order',
+        'backbone'
     ],
-    function(Backbone, Order) {
+    function(Order, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({
