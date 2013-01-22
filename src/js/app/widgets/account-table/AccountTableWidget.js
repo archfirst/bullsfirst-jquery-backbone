@@ -47,11 +47,11 @@ define(
             },
 
             initialize: function() {
-                // Subscribe to events
-                MessageBus.on(Message.AccountClick, function() {
+                // Subscribe to `AccountClick` event
+                this.listenTo(MessageBus, Message.AccountClick, function() {
                     // Transition 640px to left (table width 610px + margin 30px)
                     this.$el.find('.account-table-transitioning-view').animate({ left: '-640px' });
-                }, this);
+                });
             },
 
             postRender: function() {

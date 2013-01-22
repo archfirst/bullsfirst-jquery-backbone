@@ -34,14 +34,15 @@ define(
             editMode: false,
 
             initialize: function() {
+                // Subscribe to `reset` event from the collection
                 this.listenTo(this.collection, 'reset', this.handleReset);
 
-                // Subscribe to events
-                MessageBus.on(Message.AccountMouseOverRaw, this.handleMouseOverRaw, this);
-                MessageBus.on(Message.AccountMouseOutRaw, this.handleMouseOutRaw, this);
-                MessageBus.on(Message.AccountClickRaw, this.handleClickRaw, this);
-                MessageBus.on(Message.AccountClickEditIconRaw, this.handleClickEditIconRaw, this);
-                MessageBus.on(Message.AccountStoppedEditing, function() { this.editMode = false; }, this);
+                // Subscribe to mouse and other interaction events on chart and table
+                this.listenTo(MessageBus, Message.AccountMouseOverRaw, this.handleMouseOverRaw);
+                this.listenTo(MessageBus, Message.AccountMouseOutRaw, this.handleMouseOutRaw);
+                this.listenTo(MessageBus, Message.AccountClickRaw, this.handleClickRaw);
+                this.listenTo(MessageBus, Message.AccountClickEditIconRaw, this.handleClickEditIconRaw);
+                this.listenTo(MessageBus, Message.AccountStoppedEditing, function() { this.editMode = false; });
             },
 
             handleReset: function() {

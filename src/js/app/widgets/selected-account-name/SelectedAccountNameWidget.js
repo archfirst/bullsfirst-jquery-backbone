@@ -34,11 +34,11 @@ define(
             //   el: reference to a select emement, e.g. <select class="js-accountSelector account-selector">
             //   model: selectedAccount
             initialize: function() {
-                // Subscribe to events
-                MessageBus.on(Message.SelectedAccountChanged, function(selectedAccount) {
+                // Subscribe to 'SelectedAccountChanged' event
+                this.listenTo(MessageBus, Message.SelectedAccountChanged, function(selectedAccount) {
                     this.model = selectedAccount;
                     this.render();
-                }, this);
+                });
             },
 
             render: function() {

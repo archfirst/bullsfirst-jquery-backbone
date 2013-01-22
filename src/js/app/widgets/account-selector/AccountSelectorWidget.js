@@ -43,12 +43,13 @@ define(
             },
 
             initialize: function() {
+                // Subscribe to `reset` event from the collection
                 this.collection.bind('reset', this.render, this);
 
-                // Subscribe to events
-                MessageBus.on(Message.SelectedAccountChanged, function(selectedAccount) {
+                // Subscribe to `SelectedAccountChanged` event
+                this.listenTo(MessageBus, Message.SelectedAccountChanged, function(selectedAccount) {
                     this.$el.val(selectedAccount.id);
-                }, this);
+                });
             },
 
             setSelectedAccount: function(event) {

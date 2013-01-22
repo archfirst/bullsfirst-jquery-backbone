@@ -59,11 +59,12 @@ define(
             chart: null,
 
             initialize: function() {
+                // Subscribe to `reset` event from the collection
                 this.listenTo(this.collection, 'reset', this.render);
 
-                // Subscribe to events
-                MessageBus.on(Message.AccountMouseOver, this.handleMouseOver, this);
-                MessageBus.on(Message.AccountMouseOut, this.handleMouseOut, this);
+                // Subscribe to mouse events on chart and table
+                this.listenTo(MessageBus, Message.AccountMouseOver, this.handleMouseOver);
+                this.listenTo(MessageBus, Message.AccountMouseOut, this.handleMouseOut);
             },
 
             handleMouseOver: function(accountId) {
