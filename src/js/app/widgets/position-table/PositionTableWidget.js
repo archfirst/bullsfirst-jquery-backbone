@@ -42,6 +42,8 @@ define(
                 source: PositionTableTemplate
             },
 
+            // Constructor options:
+            //   none required
             initialize: function() {
                 // Subscribe to `SelectedAccountChanged` event
                 this.listenTo(MessageBus, Message.SelectedAccountChanged, function(selectedAccount) {

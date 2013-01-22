@@ -48,6 +48,8 @@ define(
                 'click .js-transferButton': 'transfer'
             },
 
+            // Constructor options:
+            //   model: logged in User model
             initialize: function() {
                 this.listenTo(this.model, 'change', this.render);
 

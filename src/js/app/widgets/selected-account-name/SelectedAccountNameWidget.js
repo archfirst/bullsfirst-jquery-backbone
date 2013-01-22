@@ -31,7 +31,7 @@ define(
         return BaseView.extend({
 
             // Constructor options:
-            //   el: reference to a select emement, e.g. <select class="js-accountSelector account-selector">
+            //   el: element where account name should be inserted
             //   model: selectedAccount
             initialize: function() {
                 // Subscribe to 'SelectedAccountChanged' event

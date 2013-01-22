@@ -42,6 +42,9 @@ define(
                 'change': 'setSelectedAccount'
             },
 
+            // Constructor options:
+            //   el: reference to a select element, e.g. <select class="js-accountSelector account-selector">
+            //   collection: collection of BrokerageAccounts
             initialize: function() {
                 // Subscribe to `reset` event from the collection
                 this.collection.bind('reset', this.render, this);

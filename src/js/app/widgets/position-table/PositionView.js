@@ -42,6 +42,13 @@ define(
                 'click .pos_trade': 'requestTrade'
             },
 
+            // Constructor options:
+            //   model: position that needs to be displayed
+            //   id: unique id of the DOM element,
+            //   className: (for lots only) 'child-of-' + DOM id of parent instrument position
+            // initialize: function() {
+            // },
+
             requestTrade: function(event) {
                 MessageBus.trigger(Message.TradeRequest, {
                     action: $(event.target).data('action'),

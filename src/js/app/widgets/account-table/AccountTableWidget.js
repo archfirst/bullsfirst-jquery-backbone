@@ -46,6 +46,8 @@ define(
                 'click .account-detail-table': 'transitionToParentView'
             },
 
+            // Constructor options:
+            //   none required
             initialize: function() {
                 // Subscribe to `AccountClick` event
                 this.listenTo(MessageBus, Message.AccountClick, function() {

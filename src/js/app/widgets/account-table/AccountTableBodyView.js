@@ -33,6 +33,9 @@ define(
         return BaseView.extend({
             editMode: false,
 
+            // Constructor options:
+            //   el: <tbody> element where accounts should be inserted
+            //   collection: collection of brokerage accounts
             initialize: function() {
                 // Subscribe to `reset` event from the collection
                 this.listenTo(this.collection, 'reset', this.handleReset);

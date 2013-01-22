@@ -58,6 +58,8 @@ define(
 
             chart: null,
 
+            // Constructor options:
+            //   collection: collection of BrokerageAccounts
             initialize: function() {
                 // Subscribe to `reset` event from the collection
                 this.listenTo(this.collection, 'reset', this.render);

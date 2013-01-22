@@ -50,6 +50,11 @@ define(
                 'keydown .nameField': 'handleKeyDownOnNameRaw' /* keypress for Escape is not detected on chrome */
             },
 
+            // Constructor options:
+            //   model: brokerage account that needs to be displayed
+            // initialize: function() {
+            // },
+
             handleMouseOverRaw: function() {
                 MessageBus.trigger(Message.AccountMouseOverRaw, this.model.id);
                 return false;

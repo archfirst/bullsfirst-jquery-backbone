@@ -35,6 +35,8 @@ define(
 
         return Backbone.Model.extend({
 
+            // Constructor options:
+            //   collection: collection of brokerage accounts
             initialize: function(attributes, options) {
                 this.brokerageAccounts = options.brokerageAccounts;
                 this.listenTo(this.brokerageAccounts, 'reset', this.calculateValues);

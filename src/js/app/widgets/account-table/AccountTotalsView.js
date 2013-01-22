@@ -36,6 +36,8 @@ define(
                 source: AccountTotalsTemplate
             },
 
+            // Constructor options:
+            //   collection: collection of brokerage accounts
             initialize: function() {
                 this.model = new AccountTotalsViewModel(null, {
                     brokerageAccounts: this.collection

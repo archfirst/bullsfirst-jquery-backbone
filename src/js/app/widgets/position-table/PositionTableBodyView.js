@@ -29,6 +29,12 @@ define(
 
         return BaseView.extend({
 
+            // Constructor options:
+            //   el: <tbody> element where positions should be inserted
+            //   collection: collection of instrument positions for a brokerage acccount
+            // initialize: function() {
+            // },
+
             render: function() {
                 this.destroyChildren();
 
