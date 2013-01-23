@@ -40,7 +40,7 @@ define(
             },
 
             events: {
-                'click .js-add-account-button': 'addAccount',
+                'click .js-addAccountButton': 'addAccount',
                 'click .js-refreshButton': 'refreshAccounts'
             },
 
