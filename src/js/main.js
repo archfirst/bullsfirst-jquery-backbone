@@ -22,10 +22,10 @@
 require(
     [
         'app/common/HandlebarsUtil',
-        'framework/app',
+        'framework/App',
         'jquery'
     ],
-    function(HandlebarsUtil, app, $) {
+    function(HandlebarsUtil, App, $) {
         'use strict';
 
         // Load Crockford's JSON library if browser does not have native support
@@ -45,6 +45,6 @@ require(
         HandlebarsUtil.registerHelpers();
 
         // Kick off the application by requiring in the app and starting it
-        app.start();
+        App.start();
     }
 );
