@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/transactions/TransactionsFilterWidget
+ * app/widgets/transaction-filter/TransactionsFilterWidget
  *
  * @author Alasdair Swan
  */
@@ -23,19 +23,21 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
-        'app/widgets/filter/FilterView',
+        'app/widgets/filter/FilterWidget',
         'backbone',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/widgets/transaction-filter/TransactionsFilterTemplate.html',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterView, Backbone, BaseView, MessageBus, TransactionsFilterTemplate) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, TransactionsFilterTemplate) {
         'use strict';
 
-        return BaseView.extend({
+        return FilterWidget.extend({
             tagName: 'div',
             className: 'transactions',
+
+            tab: 'transactions',
 
             template: {
                 name: 'TransactionsFilterTemplate',
@@ -43,22 +45,18 @@ define(
             },
 
             events: {
-                'click #transactions-filter .js-reset-filters-button' : 'resetFilter',
-                'click #transactions-filter .js-apply-filters-button' : 'applyFilter'
+                'click #transactions-filter .js-reset-filters-button' : 'triggerReset',
+                'click #transactions-filter .js-apply-filters-button' : 'triggerApply'
             },
 
-            resetFilter: function() {
+            triggerReset: function() {
                 MessageBus.trigger(Message.TransactionFilterReset, this.className);
                 return false;
             },
 
-            applyFilter: function(){
+            triggerApply: function(){
                 MessageBus.trigger(Message.TransactionFilterApply, this.className);
                 return false;
-            },
-
-            initialize: function() {
-                // Subscribe to events
             },
 
             render: function(){
@@ -77,21 +75,6 @@ define(
 
                 this.postRender();
                 return this;
-            },
-
-            postRender: function() {
-                this.addChildren([
-                    {
-                        id: 'TransactionsFilterView',
-                        viewClass: FilterView,
-                        parentElement: this.$el,
-                        options: {
-                            el: '#transactions-filter',
-                            tab: 'transactions',
-                            collection: Repository.getBrokerageAccounts()
-                        }
-                    }
-                ]);
             }
         });
     }

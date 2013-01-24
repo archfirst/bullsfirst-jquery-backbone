@@ -15,9 +15,9 @@
  */
 
 /**
- * app/widgets/account-table/AccountView
+ * app/widgets/transaction-table/TransactionView
  *
- * @author Naresh Bhatia
+ * @author Alasdair Swan
  */
 define(
     [

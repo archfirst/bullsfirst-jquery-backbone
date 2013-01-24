@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/views/TransactionsTableView
+ * app/widgets/transaction-table/TransactionsTableView
  *
  * @author Alasdair Swan
  */

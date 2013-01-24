@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/transactions/TransactionsTableWidget
+ * app/widgets/transaction-table/TransactionsTableWidget
  *
  * @author Alasdair Swan
  */
@@ -35,18 +35,10 @@ define(
 
         return BaseView.extend({
             tagName: 'div',
-            //className: 'account-table-clipped-wrapper',
-            //elements: ['accountTableBody', 'accountTotals'],
-
 
             template: {
                 name: 'TransactionsTableTemplate',
                 source: TransactionsTableTemplate
-            },
-
-            initialize: function() {
-                // Subscribe to events
-
             },
 
             postRender: function() {
