@@ -102,6 +102,7 @@ input[type="text"], input[type="password"] {
 .tab {
     background-color: $white;
     margin: 0 10px 0 10px;
+    min-height: 400px;
     position: relative;
 }
 
