@@ -25,12 +25,13 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
+        'app/widgets/trade/TradeWidget',
         'backbone',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
-    function(Message, Repository, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
+    function(Message, Repository, TradeWidget, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -68,6 +69,20 @@ define(
             },
 
             trade: function() {
+                /*MessageBus.trigger(Message.TradeModalOpen, {
+                    id: 'TradeWidget',
+                    viewClass: TradeWidget,
+                    parentElement: this.$el
+                });*/
+
+                this.addChildren([
+                    {
+                        id: 'TradeWidget',
+                        viewClass: TradeWidget,
+                        parentElement: this.$el
+                    }
+                ]);
+
                 return false;
             },
 

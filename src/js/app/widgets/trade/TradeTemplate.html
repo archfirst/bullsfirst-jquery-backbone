@@ -1,0 +1,78 @@
+<form id="trade-form">
+	<div class="modal-field full account">
+	    <label for="trade-accountId">Account</label>
+	    <select id="trade-accountId" name="accountId">
+	    	{{#each accounts}}
+	    		<option value={{this.id}}>{{this.name}} ({{this.valueFormatted}})</option>
+	    	{{/each}}
+	    </select>
+	</div>
+
+	<div class="modal-field">
+	    <label for="symbol">Symbol</label>
+	    <input id="trade-symbol" name="tradeSymbol" type="text" />
+	</div> 
+
+	<div class="modal-field right">
+		<p>Last Trade Price</p>
+		<p class="lastPrice"></p>
+		<input id="last-trade-price" name="lastTradePrice" type="text" class="hidden" />
+	</div>
+
+	<div class="modal-field">
+		<a class="modal-radio button selected" href="#" attr-value="buy">Buy</a>
+		<a class="modal-radio button" href="#" attr-value="sell">Sell</a>
+		<input type="radio" name="buyOrSell" value="buy" checked="checked">
+		<input type="radio" name="buyOrSell" value="sell">
+	</div>
+
+	<div class="modal-field right">
+	    <label for="quantity">Quantity</label>
+	    <input id="trade-quantity" name="tradeQuantity" type="text" />
+	</div> 
+
+	<div class="modal-field">
+	    <label for="trade-orderType">Order Type</label>
+	    <select id="trade-orderType" name="orderType">
+	    	<option value="market">Market</option>
+	    	<option value="limit">Limit</option>
+	    </select>
+	</div>
+
+	<div class="modal-field right">
+	    <label for="trade-term">Term</label>
+	    <select id="trade-term" name="term">
+	    	<option value="goodForTheDay">GoodForTheDay</option>
+	    	<option value="goodTilCancelled">GoodTilCancelled</option>
+	    </select>
+	</div>
+
+	<div class="modal-field">
+	    <label for="limit-price" class="limit-price hidden">Limit</label>
+	    <input id="trade-limitPrice" class="limit-price hidden" name="tradeLimit" type="text" />
+
+		<label for="allOrNone" class="inline">All-or-None</label>
+		<a class="modal-checkbox" attr-value="allOrNone" href="#"></a>
+		<input type="checkbox" name="allOrNone" value="allOrNone" />
+	</div>
+
+	<div class="modal-field right">
+		<label>Trade Cost</label>
+		<span id="tradeCost"></span>
+		
+		<label>Fees</label>
+		<span id="fees"></span>
+		
+		<label>Total Cost</label>
+		<span id="totalCost"></span>
+	</div>
+
+	<div class="modal-field full">
+		<a id="trade-preview-order" class="button large center" href="#">
+			<span class="preview-icon icon-bookmark">
+				<i class="icon-eye-open"></i>
+			</span>
+			<span class="text">Preview Order</span>
+		</a>
+	</div>
+</form>

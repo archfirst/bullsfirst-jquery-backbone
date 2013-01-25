@@ -11,3 +11,9 @@
     background-image:      -o-linear-gradient($direction-old-syntax, $start-color, $end-color);
     background-image:         linear-gradient($direction-new-syntax, $start-color, $end-color);
 }
+
+@mixin inline-left($float){
+	position: relative;
+	display: inline;
+	float: $float;
+}

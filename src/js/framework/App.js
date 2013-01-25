@@ -64,6 +64,12 @@ define(
                     // Get the absolute root.
                     var root = location.protocol + '//' + location.host + appRoot;
 
+                    // Ignore fake links (e.g. buttons, selectbox options)
+                    if ( href.attr.charAt(0) === '#' ){
+                        e.preventDefault();
+                        return;
+                    }
+
                     // Ensure the root is part of the anchor href, meaning it's relative.
                     if (href.prop.slice(0, root.length) === root) {
 

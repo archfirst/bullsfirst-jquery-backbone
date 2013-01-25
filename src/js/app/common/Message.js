@@ -30,11 +30,13 @@ define({
     AccountMouseOver: 'Account:mouseover',
     AccountMouseOverRaw: 'Account:mouseoverRaw',
     AccountStoppedEditing: 'Account:stoppedEditing',
+    ModalLoad: 'Modal:load',
     PageBeforeChange: 'PageBeforeChange',
     PageChange: 'PageChange',
     SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
     TradeRequest: 'TradeRequest',
+    TradeSymbolChange: 'TradeSymbolChange',
     UserLoggedInEvent: 'UserLoggedInEvent',
     UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

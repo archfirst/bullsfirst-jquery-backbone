@@ -25,12 +25,13 @@ define(
         'app/domain/Repository',
         'app/pages/accounts/AccountsTab',
         'app/widgets/footer/FooterWidget',
+        'app/widgets/modal/ModalOverlayView',
         'app/widgets/user-page-header/UserPageHeaderWidget',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/pages/accounts/AccountsPageTemplate.html'
     ],
-    function(Message, Repository, AccountsTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, AccountsPageTemplate) {
+    function(Message, Repository, AccountsTab, FooterWidget, ModalOverlayView, UserPageHeaderWidget, BaseView, MessageBus, AccountsPageTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -61,6 +62,11 @@ define(
                     {
                         id: 'FooterWidget',
                         viewClass: FooterWidget,
+                        parentElement: this.$el
+                    },
+                    {
+                        id: 'ModalOverlayView',
+                        viewClass: ModalOverlayView,
                         parentElement: this.$el
                     }
                 ]);
