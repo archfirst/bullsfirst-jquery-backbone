@@ -22,9 +22,11 @@
 define(
     [
         'framework/BaseView',
+        'app/domain/Repository',
+        'app/widgets/order-filter/OrdersFilterWidget',
         'text!app/pages/orders/OrdersTabTemplate.html'
     ],
-    function(BaseView, OrdersTabTemplate) {
+    function(BaseView, Repository, OrdersFilterWidget, OrdersTabTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -38,6 +40,14 @@ define(
 
             postRender: function() {
                 this.addChildren([
+                    {
+                        id: 'OrdersFilterWidget',
+                        viewClass: OrdersFilterWidget,
+                        parentElement: this.$el,
+                        options: {
+                            collection: Repository.getBrokerageAccounts()
+                        }
+                    }
                 ]);
             }
         });
