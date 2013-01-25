@@ -21,39 +21,39 @@
  */
 define(
     [
-        'app/services/AccountService',
-        'app/services/BrokerageAccountService',
+        'app/common/Message',
         'app/domain/Credentials',
         'app/domain/ExternalAccount',
         'app/domain/ExternalAccounts',
-        'app/common/Message',
-        'framework/MessageBus',
-        'framework/BaseView',
-        'framework/ErrorUtil',
-        'app/domain/User',
-        'app/domain/UserContext',
-        'app/services/UserService',
         'app/domain/Repository',
+        'app/domain/User',
+        'app/services/AccountService',
+        'app/services/BrokerageAccountService',
+        'app/services/UserService',
+        'backbone',
+        'framework/BaseView',
+        'framework/MessageBus',
+        'framework/ErrorUtil',
         'text!app/widgets/open-account-form/OpenAccountFormTemplate.html',
-        'jqueryValidationEngineRules',
+        'underscore',
         'form2js',
         'jqueryToObject',
-        'underscore'
+        'jqueryValidationEngineRules'
     ],
     function (
-        AccountService,
-        BrokerageAccountService,
+        Message,
         Credentials,
         ExternalAccount,
         ExternalAccounts,
-        Message,
-        MessageBus,
-        BaseView,
-        ErrorUtil,
-        User,
-        UserContext,
-        UserService,
         Repository,
+        User,
+        AccountService,
+        BrokerageAccountService,
+        UserService,
+        Backbone,
+        BaseView,
+        MessageBus,
+        ErrorUtil,
         OpenAccountFormTemplate,
         _
     ) {
@@ -90,9 +90,9 @@ define(
 
             createUserDone: function createUserDone(/* data, textStatus, jqXHR */) {
 
-                // Add user to UserContext
-                UserContext.initUser(this.form2User());
-                UserContext.initCredentials(this.form2Credentials());
+                // Add user to Repository
+                Repository.initUser(this.form2User());
+                Repository.initCredentials(this.form2Credentials());
 
                 // Create brokerage account
                 BrokerageAccountService.createBrokerageAccount(
@@ -107,7 +107,7 @@ define(
               var externalAccount = new ExternalAccount({
                 name: 'External Account 1', routingNumber: '022000248', accountNumber: '12345678'
               });
-              UserContext.getExternalAccounts().add(externalAccount);
+              Repository.getExternalAccounts().add(externalAccount);
               externalAccount.save(null, {
                 success: _.bind(this.createExternalAccountDone, this),
                 error: ErrorUtil.showBackboneError
@@ -127,7 +127,7 @@ define(
             },
 
             transferCashDone: function(/* data, textStatus, jqXHR */){
-              // TODO: Erase the form
+              Backbone.history.navigate('accounts', true);
               MessageBus.trigger(Message.UserLoggedInEvent);
             },
 

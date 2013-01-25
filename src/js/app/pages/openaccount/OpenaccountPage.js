@@ -22,12 +22,12 @@
 define(
     [
         'app/widgets/footer/FooterWidget',
-        'app/widgets/open-account-intro/OpenAccountIntroWidget',
         'app/widgets/open-account-form/OpenAccountFormWidget',
+        'app/widgets/open-account-intro/OpenAccountIntroWidget',
         'framework/BaseView',
         'text!app/pages/openaccount/OpenaccountPageTemplate.html'
     ],
-    function(FooterWidget, OpenAccountIntroWidget, OpenAccountFormWidget, BaseView, OpenaccountPageTemplate) {
+    function(FooterWidget, OpenAccountFormWidget, OpenAccountIntroWidget, BaseView, OpenaccountPageTemplate) {
         'use strict';
 
         return BaseView.extend({
