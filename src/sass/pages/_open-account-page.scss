@@ -1,0 +1,50 @@
+/* -----------------------------------------------------------------------------
+ * home-page
+ * -------------------------------------------------------------------------- */
+#open-account-page {
+    background: $brand-color url(../img/horns.png) no-repeat right bottom;
+    margin: 10px 10px 0 10px;
+    position: relative;
+
+    header {
+        left: 76px;
+        position: absolute;
+        top: 15px;
+
+        h1 {
+            background-image: url(../img/logo.png);
+            height: 93px;
+            margin: 0;
+            width: 194px;
+        }
+
+        h2 {
+            font-style: italic;
+            margin: 8px 5px 0 0;
+            text-align: right;
+        }
+
+    }
+
+    .intro-section {
+        float: left;
+        margin-right: 0;
+        margin-left: 70px;
+        margin-top: 200px;
+        width: 380px;
+    }
+
+    .mandatory-text {
+        margin:0 0 10px 0;
+        color: #F8E5C9;
+    }
+}
+
+/* Override selection color for gold background */
+#open-account-page ::-moz-selection  {
+    background: $text-selection-alternate-color;
+}
+
+#open-account-page ::selection  {
+    background: $text-selection-alternate-color;
+}
