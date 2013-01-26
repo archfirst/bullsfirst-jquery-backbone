@@ -1,0 +1,40 @@
+<h1>Open an Account</h1>
+<form id="open-account-form" class="js-openAccountForm">
+    <p class="mandatory-text">All the field below are required.</p>
+    <label for="oa-firstname">First Name</label>
+    <input
+        id="oa-firstname"
+        name="firstName"
+        type="text"
+        class="validate[required,custom[onlyLetterSp]]"
+        placeholder="Enter your first name" />
+    <label for="oa-lastname">Last Name</label>
+    <input
+        id="oa-lastname"
+        name="lastName"
+        type="text"
+        class="validate[required,custom[onlyLetterSp]]"
+        placeholder="Enter your last name" />
+    <label for="oa-username">Username</label>
+    <input
+        id="oa-username"
+        name="username"
+        type="text"
+        class="validate[required]"
+        placeholder= "Enter a username" />
+    <label for="oa-password">Password</label>
+    <input id="oa-password"
+        name="password"
+        type="password"
+        class="validate[required]"
+        placeholder="Enter a password" />
+    <label for="oa-confirmPassword">Confirm Password</label>
+    <input
+        id="oa-confirmPassword"
+        name="confirmPassword"
+        type="password"
+        class="validate[required, equals[oa-password]]"
+        placeholder="Retype the password" />
+    <a id="open-account-button" class="button large open-account popsicle-icon" href="#"><span>Open Account</span></a>
+    <a id="oa-cancel-button" class="button medium" href="home"><span>Cancel</span></a>
+</form>

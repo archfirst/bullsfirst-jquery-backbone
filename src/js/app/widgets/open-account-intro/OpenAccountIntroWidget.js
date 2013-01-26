@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 Archfirst
+ * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,16 @@
  */
 
 /**
- * app/widgets/intro/IntroWidget
+ * app/widgets/login/LoginWidget
  *
  * @author Naresh Bhatia
  */
 define(
     [
         'framework/BaseView',
-        'text!app/widgets/intro/IntroTemplate.html'
+        'text!app/widgets/open-account-intro/OpenAccountIntroTemplate.html'
     ],
-    function(BaseView, IntroTemplate) {
+    function(BaseView, OpenAccountIntroTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -32,8 +32,8 @@ define(
             className: 'intro-section',
 
             template: {
-                name: 'IntroTemplate',
-                source: IntroTemplate
+                name: 'OpenAccountIntroTemplate',
+                source: OpenAccountIntroTemplate
             }
         });
     }
