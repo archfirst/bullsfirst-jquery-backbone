@@ -33,7 +33,7 @@ define(
         return BaseView.extend({
             tagName: 'section',
             id: 'open-account-page',
-            className: 'clearfix',
+            className: 'intro-page clearfix',
 
             template: {
                 name: 'OpenaccountPageTemplate',

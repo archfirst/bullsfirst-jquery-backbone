@@ -76,7 +76,16 @@ define(
 
             events: {
                 'click #open-account-button': 'handleOpenAccountButton',
-                'click #oa-cancel-button': 'handleCancelButton'
+                'click #oa-cancel-button': 'handleCancelButton',
+                'keypress #open-account-form': 'checkEnterKey'
+            },
+
+            checkEnterKey: function checkEnterKey(event) {
+
+              if (event.keyCode === $.ui.keyCode.ENTER) {
+                event.preventDefault();
+                this.handleOpenAccountButton();
+              }
             },
 
             createUser: function createUser() {
