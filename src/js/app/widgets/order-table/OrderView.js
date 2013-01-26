@@ -17,7 +17,7 @@
 /**
  * app/widgets/order-table/OrderView
  *
- * @author Alasdair Swan
+ * @author Sreejesh Karunakaran
  */
 define(
     [

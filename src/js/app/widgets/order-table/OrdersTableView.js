@@ -15,9 +15,9 @@
  */
 
 /**
- * app/widgets/transaction-table/TransactionsTableView
+ * app/widgets/order-table/OrdersTableView
  *
- * @author Alasdair Swan
+ * @author Sreejesh Karunakaran
  */
 define(
     [
