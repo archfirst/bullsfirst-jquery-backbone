@@ -56,9 +56,9 @@ define(
                 var pageName = page[0].toUpperCase() + page.slice(1) + 'Page';
 
                 // Load the page and render it
-                require(['app/pages/' + page + '/' + pageName], function(PageClass) {
+                require(['app/pages/' + page + '/' + pageName], function(PageConstructor) {
 
-                    var pageInstance = new PageClass().render().place('#container');
+                    var pageInstance = new PageConstructor().render().place('#container');
 
                     // Remove the page on a `pageBeforeChange` event
                     pageInstance.listenTo(MessageBus, Message.PageBeforeChange, function() {

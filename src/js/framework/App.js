@@ -28,17 +28,14 @@
 /*jshint nonew:false */
 define(
     [
+        'app/common/AppConfig',
         'backbone',
         'framework/BackboneSyncOverride',
         'framework/Router',
         'jquery'
     ],
-    function(Backbone, BackboneSyncOverride, Router, $) {
+    function(AppConfig, Backbone, BackboneSyncOverride, Router, $) {
         'use strict';
-
-        // The application root. The build process will take care of changing this to '/dist/'.
-        // If you then deploy /dist as a root directory for your application, this should be changed to '/'.
-        var appRoot = '/sree/bullsfirst-jquery-backbone/src/';
 
         return {
             start: function start() {
@@ -47,7 +44,7 @@ define(
                 new Router();
 
                 // Trigger the initial route and enable HTML5 History API support
-                Backbone.history.start({ pushState: true, root: appRoot });
+                Backbone.history.start({ pushState: true, root: AppConfig.appRoot });
 
                 /*!
                 * The following event handler modified from Backbone Boilerplate
@@ -62,14 +59,14 @@ define(
                     var href = { prop: $(this).prop('href'), attr: $(this).attr('href') };
 
                     // Get the absolute root.
-                    var root = location.protocol + '//' + location.host + appRoot;
+                    var root = location.protocol + '//' + location.host + AppConfig.appRoot;
 
                     // Ignore fake links (e.g. buttons, selectbox options)
                     if ( href.attr.charAt(0) === '#' ){
                         e.preventDefault();
                         return;
                     }
-                    
+
                     // Ensure the root is part of the anchor href, meaning it's relative.
                     if (href.prop.slice(0, root.length) === root) {
 

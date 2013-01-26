@@ -52,6 +52,7 @@
 // Page Stylesheets
 // -----------------------------------------------------------------------------
 @import "pages/home-page";
+@import "pages/open-account-page";
 
 // -----------------------------------------------------------------------------
 // Tab Stylesheets
@@ -70,5 +71,6 @@
 @import "widgets/user-page-header-widget";
 @import "widgets/account-table-widget";
 @import "widgets/position-table-widget";
+@import "widgets/open-account-form-widget";
 @import "widgets/filter-widget";
 @import "widgets/order-table-widget";

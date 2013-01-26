@@ -36,6 +36,11 @@ var require = {
         jqueryValidationEngineRules: 'vendor/jquery.validationEngine-en-2.5.2',
         jqueryTreeTable:             'vendor/jquery.treeTable-20121109',
 
+        // Form Serialization
+        // TODO: Find a way to remove these from OpenAccountFormWidget
+        form2js:                     'vendor/form2js',
+        jqueryToObject:              'vendor/jquery.toObject',
+
         // Underscore
         underscore:                  'vendor/underscore-1.4.3',
 
@@ -75,6 +80,14 @@ var require = {
         base64encode: {
             deps: ['utf8encode'],
             exports: 'base64_encode'
+        },
+
+        form2js: {
+            exports: 'form2js'
+        },
+
+        jqueryToObject: {
+            deps: ['form2js']
         },
 
         handlebars: {
