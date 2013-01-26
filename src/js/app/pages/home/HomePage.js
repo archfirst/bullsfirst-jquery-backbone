@@ -36,7 +36,7 @@ define(
         return BaseView.extend({
             tagName: 'section',
             id: 'home-page',
-            className: 'clearfix',
+            className: 'intro-page clearfix',
 
             template: {
                 name: 'HomePageTemplate',
