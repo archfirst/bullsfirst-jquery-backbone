@@ -40,9 +40,10 @@ module.exports = function(grunt) {
     // grunt-contrib-copy npm task
     copy: {
       cssImages: {
-        files: {
-          'src/css/images/': ['src/sass/images/*']
-        }
+        expand: true,
+        cwd: 'src/sass/images/',
+        src: ['**/*'],
+        dest: 'src/css/images/'
       }
     },
 
