@@ -126,8 +126,14 @@ define(
                 // TODO: launch TradePreviewWidget, passing in this object
             },
 
+            /*setCostTotals: function(marketPrice, quantity) {
+                console.log(marketPrice);
+                console.log(quantity);
+            },*/
+
             symbolChanged: function(value) {
                 this._fetchMarketPrice(value);
+                
             },
             
             _fetchMarketPrice: function(symbol) {
@@ -143,6 +149,14 @@ define(
                 $('#trade-form .lastPrice').html(price);
                 $('#last-trade-price').val(price);
 
+                if ( $('#trade-quantity').val() > 0 ) {
+                    //this.setCostTotals(marketPrice.attributes.price, $('#trade-quantity').val() );
+                    //console.log(marketPrice.attributes.price.amount);
+                    //console.log($('#trade-quantity').val());
+                    $('#tradeCost').html('$' + (marketPrice.attributes.price.amount * $('#trade-quantity').val()));
+                    $('#totalCost').html('$' + ((marketPrice.attributes.price.amount * $('#trade-quantity').val()) + 10));
+
+                }
                 /*new LastTradeView({
                     el: '#tradeForm_lastTrade',
                     model: this.marketPrice
