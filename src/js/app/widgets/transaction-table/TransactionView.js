@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 Archfirst
+ * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,29 @@
  */
 
 /**
- * app/widgets/intro/IntroWidget
+ * app/widgets/transaction-table/TransactionView
  *
- * @author Naresh Bhatia
+ * @author Alasdair Swan
  */
 define(
     [
+        'app/common/Message',
+        'app/domain/Repository',
         'framework/BaseView',
-        'text!app/widgets/intro/IntroTemplate.html'
+        'framework/ErrorUtil',
+        'framework/MessageBus',
+        'text!app/widgets/transaction-table/TransactionTemplate.html'
     ],
-    function(BaseView, IntroTemplate) {
+    function(Message, Repository, BaseView, ErrorUtil, MessageBus, TransactionTemplate) {
         'use strict';
 
         return BaseView.extend({
-            tagName: 'section',
-            className: 'intro-section',
+
+            tagName: 'tr',
 
             template: {
-                name: 'IntroTemplate',
-                source: IntroTemplate
+                name: 'TransactionTemplate',
+                source: TransactionTemplate
             }
         });
     }

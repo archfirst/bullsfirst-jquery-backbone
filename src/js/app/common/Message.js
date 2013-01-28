@@ -36,7 +36,9 @@ define({
     SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
     TradeRequest: 'TradeRequest',
-    TradeSymbolChange: 'TradeSymbolChange',
+	TradeSymbolChange: 'TradeSymbolChange',
+    TransactionFilterApply: 'Transaction:clickFilterApply',
+    TransactionFilterReset: 'Transaction:clickFilterReset',
     UserLoggedInEvent: 'UserLoggedInEvent',
     UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

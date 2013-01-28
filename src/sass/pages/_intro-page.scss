@@ -1,0 +1,38 @@
+/* -----------------------------------------------------------------------------
+ * intro-page (includes home-page and open-account-page)
+ * -------------------------------------------------------------------------- */
+.intro-page {
+    background: $brand-color url(../img/horns.png) no-repeat right bottom;
+    margin: 10px 10px 0 10px;
+    position: relative;
+
+    header {
+        left: 76px;
+        position: absolute;
+        top: 15px;
+
+        h1 {
+            background-image: url(../img/logo.png);
+            height: 93px;
+            margin: 0;
+            width: 194px;
+        }
+
+        h2 {
+            font-style: italic;
+            margin: 8px 5px 0 0;
+            text-align: right;
+        }
+
+    }
+
+    /* Override selection color for gold background */
+    ::-moz-selection  {
+        background: $text-selection-alternate-color;
+    }
+
+    ::selection  {
+        background: $text-selection-alternate-color;
+    }
+
+}

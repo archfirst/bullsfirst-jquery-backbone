@@ -15,44 +15,41 @@
  */
 
 /**
- * app/pages/home/HomePage
+ * app/pages/openaccount/OpenaccountPage
  *
- * @author Naresh Bhatia
+ * @author Kanakaraj Venkataswamy
  */
 define(
     [
-        'app/common/Message',
         'app/widgets/footer/FooterWidget',
-        'app/widgets/intro/IntroWidget',
-        'app/widgets/login/LoginWidget',
-        'backbone',
+        'app/widgets/open-account-form/OpenAccountFormWidget',
+        'app/widgets/open-account-intro/OpenAccountIntroWidget',
         'framework/BaseView',
-        'framework/MessageBus',
-        'text!app/pages/home/HomePageTemplate.html'
+        'text!app/pages/openaccount/OpenaccountPageTemplate.html'
     ],
-    function(Message, FooterWidget, IntroWidget, LoginWidget, Backbone, BaseView, MessageBus, HomePageTemplate) {
+    function(FooterWidget, OpenAccountFormWidget, OpenAccountIntroWidget, BaseView, OpenaccountPageTemplate) {
         'use strict';
 
         return BaseView.extend({
             tagName: 'section',
-            id: 'home-page',
+            id: 'open-account-page',
             className: 'intro-page clearfix',
 
             template: {
-                name: 'HomePageTemplate',
-                source: HomePageTemplate
+                name: 'OpenaccountPageTemplate',
+                source: OpenaccountPageTemplate
             },
 
             postRender: function() {
                 this.addChildren([
                     {
-                        id: 'LoginWidget',
-                        viewClass: LoginWidget,
+                        id: 'OpenAccountIntroWidget',
+                        viewClass: OpenAccountIntroWidget,
                         parentElement: this.$el
                     },
                     {
-                        id: 'IntroWidget',
-                        viewClass: IntroWidget,
+                        id: 'OpenAccountFormWidget',
+                        viewClass: OpenAccountFormWidget,
                         parentElement: this.$el
                     },
                     {

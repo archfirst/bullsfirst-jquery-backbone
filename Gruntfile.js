@@ -40,9 +40,10 @@ module.exports = function(grunt) {
     // grunt-contrib-copy npm task
     copy: {
       cssImages: {
-        files: {
-          'src/css/images/': ['src/sass/images/*']
-        }
+        expand: true,
+        cwd: 'src/sass/images/',
+        src: ['**/*'],
+        dest: 'src/css/images/'
       }
     },
 
@@ -162,6 +163,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
-  // grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:cssImages']);
-  grunt.registerTask('default', ['clean', 'jshint', 'compass:dev']);
+  grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:cssImages']);
+  // grunt.registerTask('default', ['clean', 'jshint', 'compass:dev']);
 };

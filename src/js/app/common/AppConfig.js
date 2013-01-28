@@ -15,26 +15,14 @@
  */
 
 /**
- * app/widgets/intro/IntroWidget
+ * app/common/AppConfig
+ *
+ * Provides application configuration variables.
  *
  * @author Naresh Bhatia
  */
-define(
-    [
-        'framework/BaseView',
-        'text!app/widgets/intro/IntroTemplate.html'
-    ],
-    function(BaseView, IntroTemplate) {
-        'use strict';
-
-        return BaseView.extend({
-            tagName: 'section',
-            className: 'intro-section',
-
-            template: {
-                name: 'IntroTemplate',
-                source: IntroTemplate
-            }
-        });
-    }
-);
+define({
+    // The application root. The build process will take care of changing this to '/dist/'.
+    // If you then deploy /dist as a root directory for your application, this should be changed to '/'.
+    appRoot: '/src/'
+});
