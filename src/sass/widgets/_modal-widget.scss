@@ -1,0 +1,191 @@
+/* -----------------------------------------------------------------------------
+ * modals
+ * -------------------------------------------------------------------------- */
+
+ .modal-wrapper {
+  font: 12px/25px Aller;
+ 	width: 291px;
+ 	position: fixed;
+ 	z-index: 99999;
+ 	right: 14px;
+ 	top: 10px;
+
+  &.right {
+    right: 14px;
+  }
+
+  &.left {
+    left: 14px;
+  }
+
+  &.center {
+    right: 0;
+  }
+
+  header {
+   	height: auto;
+   	margin: 10px 10px 30px;
+  }
+
+  section {
+  	margin: 0 9px 0 10px;
+  }
+
+ }
+
+ .modal-close {
+  width: 17px;
+  height: 17px;
+  background: url('../img/modal-close.png');
+  position: absolute;
+  display: inline;
+  top: 0;
+  right: 0;
+ }
+
+ .modal-field {
+ 	@include inline-left(left);
+ 	width: 130px;
+ 	margin-bottom: 10px;
+ }
+
+ .modal-field.full {
+ 	width: 100%;
+  clear: left;
+ }
+
+ .modal-field.left {
+  clear:left;
+ }
+
+ .modal-field.right {
+ 	margin-left: 11px;
+ }
+
+ .modal-field a {
+ 	font-size: 12px;
+ }
+
+ .modal-field p {
+ 	color: $white;
+ }
+
+ .modal-field.trade-costs p {
+ 	width: 65px;
+ 	height: 20px;
+ 	overflow: hidden;
+ 	text-align: right;
+ 	font-size: 12px;
+ 	line-height: 14px;
+ }
+
+ .modal-field label {
+ 	padding-left: 7px;
+ 	width: 64px;
+ }
+
+ .modal-field.right label {
+ 	width: 57px;
+ }
+
+ .modal-field input[type="text"],
+ .modal-field input[type="password"] {
+ 	text-indent: 7px;
+ 	width: 124px;
+ }
+
+ .modal-field input[type="radio"],
+ .modal-field input[type="checkbox"] {
+ 	display: none;
+ }
+
+ .modal-field .sbSelector {
+ 	text-indent: 7px;
+ }
+
+ .modal-field .sbOptions {
+ 	width: 97%;
+ }
+
+ .modal-field.full .sbOptions {
+ 	width: 99%;
+ }
+
+ .modal-field a.button.center {
+ 	margin: 10px auto;
+ 	position: relative;
+ }
+
+ .modal-field a.button.center span {
+ 	padding: 0;
+ }
+
+ .modal-field .preview-icon {
+ 	font-size: 40px;
+ 	position: absolute;
+ 	top: 20px;
+ 	left: 43px;
+ }
+
+ .modal-field a.button .preview-icon i {
+ 	font-size: 22px;
+ 	position: absolute;
+ 	top: -2px;
+ 	left: 2px;
+ 	color: $button-large-color;
+ }
+
+ .modal-field a.button .text {
+ 	line-height: 110px;
+ }
+
+ .modal-field a.modal-radio {
+ 	@include inline-left(left);
+ 	width: 65px;
+ 	height: 50px;
+ 	background: $button-large-color;
+ 	text-align: center;
+ 	line-height: 50px;
+ }
+
+ .modal-field a.modal-radio:hover{
+ 	background: $button-hover-color;
+ }
+
+ .modal-field a.modal-radio.selected {
+ 	background: $button-medium-color;
+ 	border: 2px solid $white;
+ 	width: 61px;
+ 	height: 46px;
+ }
+
+ .modal-field .modal-checkbox {
+ 	@include inline-left(left);
+	width: 20px;
+	height: 25px;
+	padding: 0 0 0 3px;
+ 	line-height: 26px;
+ 	font-size: 17px;
+	color: $white;
+ 	background: $icon-color;
+ }
+
+ .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	background: #3F3F3F;
+	z-index: 99999;
+	display: none;
+ }
+
+ .modal-overlay.show {
+ 	opacity: 0.75;
+ }
+
+ .inline {
+ 	@include inline-left(left);
+ }

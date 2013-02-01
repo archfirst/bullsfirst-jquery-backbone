@@ -1,0 +1,51 @@
+<header>
+  <h2>{{title}}</h2>
+  {{#if closeButton}}
+    <a class="modal-close" href="#"></a>
+  {{/if}}
+</header>
+
+<section>
+  <table>
+    <tr>
+      <th>Account:</th>
+      <td>{{summary.brokerageAccountId}}</td>
+    </tr>
+    <tr>
+      <th>Symbol:</th>
+      <td>{{summary.orderParams.symbol}}</td>
+    </tr>
+    <tr>
+      <th>Action:</th>
+      <td>{{summary.orderParams.side}}</td>
+    </tr>
+    <tr>
+      <th>Quantity:</th>
+      <td>{{summary.orderParams.quantity}}</td>
+    </tr>
+    <tr>
+      <th>Order Type:</th>
+      <td>{{summary.orderParams.type}}</td>
+    </tr>
+    <tr>
+      <th>Term:</th>
+      <td>{{summary.orderParams.term}}</td>
+    </tr>
+    <tr>
+      <th>All-or-None:</th>
+      <td>{{summary.orderParams.allOrNone}}</td>
+    </tr>
+    <tr>
+      <th>Trade Cost:</th>
+      <td>{{summary.orderEstimate.estimatedValue}}</td>
+    </tr>
+    <tr>
+      <th>Fees:</th>
+      <td>+{{summary.orderEstimate.fees}}</td>
+    </tr>
+    <tr>
+      <th>Total Cost:</th>
+      <td>{{summary.orderEstimate.estimatedValueInclFees}}</td>
+    </tr>
+  </table>
+</section>

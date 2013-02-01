@@ -63,6 +63,13 @@
 @import "pages/transactions-tab";
 
 // -----------------------------------------------------------------------------
+// Base Modal Stylesheets
+// -----------------------------------------------------------------------------
+@import "widgets/modal-widget";
+@import "widgets/form-modal";
+@import "widgets/summary-modal";
+
+// -----------------------------------------------------------------------------
 // Widget Stylesheets
 // -----------------------------------------------------------------------------
 @import "widgets/account-selector-widget";
@@ -74,3 +81,4 @@
 @import "widgets/open-account-form-widget";
 @import "widgets/filter-widget";
 @import "widgets/order-table-widget";
+@import "widgets/transfer-widget";

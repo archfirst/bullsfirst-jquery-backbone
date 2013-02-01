@@ -1,0 +1,17 @@
+.summary-modal {
+  background: $brand-color;
+  border: 10px solid $container-background-color;
+  -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+      background-clip: padding-box;
+
+  header {
+    background: $brand-color;
+    color: $container-background-color;
+  }
+
+  th {
+    text-align: left;
+  }
+
+}
