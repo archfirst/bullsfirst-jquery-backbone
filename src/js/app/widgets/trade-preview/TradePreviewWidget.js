@@ -51,14 +51,17 @@ define(
                 this.model.set('brokerageAccountId', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
 
                 //this.listenTo(this.model, 'change', this.render);
-                $.extend( this.settings, {
+
+                this.settings = {
                     id: this.id,
                     title: 'Trade Summary',
                     type: 'trade-summary',
                     overlay: true,
                     draggable: false,
+                    closeButton: true,
+                    position: 'center',
                     summary: this.model.toJSON()
-                });
+                };
 
                 return this;
 

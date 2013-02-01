@@ -46,15 +46,6 @@ define(
                 source: ModalTemplate
             },
 
-            settings: {
-                title: '',
-                type: '',
-                overlay: false,
-                closeButton: true,
-                draggable: false,
-                position: 'center'
-            },
-
             applySettings: function(settings){
                 if ( $('.modal-overlay').css('display') === 'none' ) {
                   $('.modal-overlay').show();
@@ -91,9 +82,11 @@ define(
                   e.preventDefault();
                 }
 
-                $('#' + this.id).remove();
+                this.destroy();
 
-                $('.modal-overlay').hide();
+                // $('#' + this.id).remove();
+
+                // $('.modal-overlay').hide();
 
             },
 

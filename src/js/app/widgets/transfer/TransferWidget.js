@@ -27,6 +27,7 @@ define(
         'app/domain/Repository',
         'app/services/AccountService',
         'app/services/InstrumentService',
+        'app/widgets/add-external-account/AddExternalAccountWidget',
         'app/widgets/modal/ModalWidget',
         'framework/AlertUtil',
         'framework/ErrorUtil',
@@ -40,6 +41,7 @@ define(
         Repository,
         AccountService,
         InstrumentService,
+        AddExternalAccountWidget,
         ModalWidget,
         AlertUtil,
         ErrorUtil,
@@ -69,19 +71,28 @@ define(
             }()),
 
             addExternalAcoount: function () {
-                AlertUtil.showError('Under Construction');
+
+                this.addChildren([
+                    {
+                        id: 'AddExternalAccountWidget',
+                        viewClass: AddExternalAccountWidget,
+                        parentElement: $('body')
+                    }
+                ]);
                 return false;
             },
 
             initialize: function() {
 
-                $.extend( this.settings, {
+                this.settings = {
                     id: this.id,
                     title: 'Transfer',
                     type: 'trade',
-                    position: 'right',
-                    draggable: false
-                });
+                    overlay: false,
+                    closeButton: true,
+                    draggable: true,
+                    position: 'right'
+                };
 
               },
 
@@ -199,6 +210,10 @@ define(
                 // Subscribe to events
                 this.listenTo(MessageBus, Message.ModalLoad, function(){
                     applySettings(settings);
+                });
+
+                this.listenTo(MessageBus, Message.ExternalAccountsUpdated, function() {
+                  that.render();
                 });
 
                 $(window).on('keyup', function(e) {

@@ -128,17 +128,15 @@ define(
                     }
                 };
 
-                /*this.listenTo(MessageBus, Message.TradeModalOpen, function(){
-                   console.log('open me');
-                });*/
-
-                //this.listenTo(this.model, 'change', this.render);
-                $.extend( this.settings, {
+                this.settings = {
                     id: this.id,
                     title: 'Trade',
                     type: 'trade',
-                    draggable: true
-                });
+                    overlay: false,
+                    draggable: true,
+                    closeButton: true,
+                    position: 'center'
+                };
 
                 return this;
             },
