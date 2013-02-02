@@ -113,6 +113,8 @@ define(
                 {
                     this.setSelectedAccount(_brokerageAccounts.at(0));
                 }
+
+                MessageBus.trigger(Message.ExternalAccountsUpdated);
             },
 
             // Update base accounts (combination of brokerage + external accounts)

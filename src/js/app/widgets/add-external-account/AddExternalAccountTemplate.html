@@ -1,0 +1,47 @@
+<header>
+  <h2>{{title}}</h2>
+  {{#if closeButton}}
+    <a class="modal-close" href="#"></a>
+  {{/if}}
+</header>
+
+<section>
+    <form id="add-external-account-form">
+        <div class="modal-field full account">
+            <label for="addextacnt_name">Account Name</label>
+            <input
+                type="text"
+                id="addextacnt_name"
+                name="name"
+                class="validate[required] stretchInput">
+        </div>
+
+        <div class="modal-field full">
+            <label for="addextacnt_routingNumber">Routing Number</label>
+            <input
+                id="addextacnt_routingNumber"
+                name="routingNumber"
+                type="text"
+                class="validate[required] stretchInput">
+        </div>
+
+        <div class="modal-field full">
+            <label for="addextacnt_accountNumber">Account Number</label>
+            <input
+                id="addextacnt_accountNumber"
+                name="accountNumber"
+                type="text"
+                class="validate[required] stretchInput">
+        </div>
+
+        <div class="modal-field full">
+          <a id="add_external_account_button" class="button large center" href="#">
+            <span class="add-icon icon-tag">
+              <i></i>
+            </span>
+            <span class="text">Add Account</span>
+          </a>
+        </div>
+
+    </form>
+</section>

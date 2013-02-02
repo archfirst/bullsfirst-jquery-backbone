@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,25 +15,24 @@
  */
 
 /**
- * app/services/InstrumentService
+ * app/widgets/account-table/AccountTotalsViewModel
+ *
+ * Model:
+ *   brokerageAccounts: Backbone.Collection
+ *
+ * Attributes:
+ *   totalMarketValue: Money
+ *   totalCash: Money
  *
  * @author Naresh Bhatia
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'backbone'
+    ],
+    function(Backbone) {
+        'use strict';
 
-    return {
-        getInstruments: function(doneCallbacks, failCallbacks, context) {
-
-            // Handle an optional context parameter.
-            // Allows us to pass an execution context for callbacks
-            context = context || this;
-
-            $.ajax({
-              url: '/bfexch-javaee/rest/instruments',
-              context: context
-            })
-            .then(doneCallbacks, failCallbacks);
-        }
-    };
-});
+        return Backbone.Model.extend();
+    }
+);

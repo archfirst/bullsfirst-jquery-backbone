@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,25 +15,25 @@
  */
 
 /**
- * app/services/InstrumentService
+ * bullsfirst/framework/JqueryExtensions
  *
- * @author Naresh Bhatia
+ * jQuery extension functions
+ *
+ * @author Vikas Goyal
  */
-define(function() {
+$.fn.serializeForm = function () {
     'use strict';
-
-    return {
-        getInstruments: function(doneCallbacks, failCallbacks, context) {
-
-            // Handle an optional context parameter.
-            // Allows us to pass an execution context for callbacks
-            context = context || this;
-
-            $.ajax({
-              url: '/bfexch-javaee/rest/instruments',
-              context: context
-            })
-            .then(doneCallbacks, failCallbacks);
+    var o = {},
+        a = this.serializeArray();
+    $.each(a, function () {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
         }
-    };
-});
+    });
+    return o;
+};
