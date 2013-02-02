@@ -1,5 +1,5 @@
-﻿/**
- * Copyright 2012 Archfirst
+/**
+ * Copyright 2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,20 @@
  */
 
 /**
- * app/services/InstrumentService
+ * app/widgets/modal/ModalOverlayView
  *
- * @author Naresh Bhatia
+ * @author Alasdair Swan
  */
-define(function() {
-    'use strict';
+define(
+    [
+        'framework/BaseView'
+    ],
+    function(BaseView) {
+        'use strict';
 
-    return {
-        getInstruments: function(doneCallbacks, failCallbacks, context) {
-
-            // Handle an optional context parameter.
-            // Allows us to pass an execution context for callbacks
-            context = context || this;
-
-            $.ajax({
-              url: '/bfexch-javaee/rest/instruments',
-              context: context
-            })
-            .then(doneCallbacks, failCallbacks);
-        }
-    };
-});
+        return BaseView.extend({
+            tagName: 'div',
+            className: 'modal-overlay'
+        });
+    }
+);

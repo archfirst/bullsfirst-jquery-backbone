@@ -1,0 +1,123 @@
+#transfer-tabbar {
+    left: 0;
+    top: 0;
+    height: 50px;
+    position: relative;
+    font: 14px/25px Aller;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline;
+            float: left;
+
+            a {
+                background-color: #F8791B;
+                color: #FFFFFF;
+                display: block;
+                height: 44px;
+                line-height: 44px;
+                margin: 0px 0px 0 0;
+                width: 130px;
+                text-align: center;
+                font-size: 14px;
+                border-width:3px;
+                border-color: transparent;
+                border-style:solid;
+
+                &:hover {
+                    background-color: #F36733;
+                }
+
+                &.selected {
+                    background-color: red;
+                    color: white;
+                    margin-top: 0;
+                    border-width:3px;
+                    border-color: white;
+                    border-style:solid;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+#transfer-form {
+    margin-top: 11px;
+    height: 281px;
+    width: 271px;
+
+    input[type="text"] {
+        height: 20px;
+        width: 98%;
+
+        &.lastField {
+            margin-bottom: 15px;
+        }
+    }
+
+    label {
+        width: 87px;
+    }
+}
+
+#hboxContainer {
+    height: 100%;
+    width: 100%;
+    zoom: 1;
+
+    &:before, &:after {
+      content: "";
+      display: table;
+    }
+
+    &:after {
+      clear: both;
+    }
+
+    div {
+        width: 47%;
+        float: left;
+
+        &.symbol {
+            margin-right: 14px;
+        }
+    }
+
+}
+
+#price {
+    margin-bottom: 15px;
+}
+
+#add-external-account-button {
+    font-size: 12px;
+    display: block;
+    color: #F47513;
+    background-image: url(../img/add-external-acct.png);
+    background-position:0px 3px;
+    background-size: 18px;
+    background-repeat: no-repeat;
+
+    span {
+        position: relative;
+        left: 23px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+#process-transfer-button {
+    margin: 9px auto 20px;
+    font-size:14px;
+}

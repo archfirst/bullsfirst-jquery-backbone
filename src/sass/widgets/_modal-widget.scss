@@ -1,0 +1,231 @@
+/* -----------------------------------------------------------------------------
+ * modals
+ * -------------------------------------------------------------------------- */
+
+ .modal-wrapper {
+  font: 12px/25px Aller;
+ 	width: 291px;
+ 	position: absolute;
+ 	z-index: 499;
+ 	right: 14px;
+ 	top: 10px;
+
+  &.right {
+    right: 14px;
+  }
+
+  &.left {
+    left: 14px;
+  }
+
+  &.center {
+    right: 0;
+  }
+
+  &.summary-modal {
+    background: $brand-color;
+    border: 10px solid $container-background-color;
+    -moz-background-clip: padding;
+      -webkit-background-clip: padding;
+        background-clip: padding-box;
+
+    header {
+      background: $brand-color;
+      color: $container-background-color;
+    }
+
+    th {
+      text-align: left;
+    }
+
+  }
+
+  header {
+   	height: auto;
+   	margin: 10px 10px 30px;
+  }
+
+  section {
+  	margin: 0 9px 0 10px;
+  }
+
+ }
+
+ .modal-close {
+  width: 17px;
+  height: 17px;
+  background: url('../img/modal-close.png');
+  position: absolute;
+  display: inline;
+  top: 0;
+  right: 0;
+ }
+
+ .modal-field {
+ 	@include inline-left(left);
+ 	width: 130px;
+ 	margin-bottom: 10px;
+
+  &.full {
+
+  	width: 100%;
+    clear: left;
+
+    input[type="text"] {
+      width: 100%;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      height: 28px;
+    }
+
+    .sbOptions {
+      width: 99%;
+    }
+
+  }
+
+  &.left {
+    clear: left;
+  }
+
+  &.right {
+    margin-left: 11px;
+
+    label {
+      width: 57px;
+    }
+  }
+
+  &.trade-costs {
+
+    p {
+      width: 65px;
+      height: 20px;
+      overflow: hidden;
+      text-align: right;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+  }
+
+  a {
+    font-size: 12px;
+
+    &.button {
+
+      &.center {
+
+      	margin: 10px auto;
+      	position: relative;
+
+        span {
+        	padding: 0;
+        }
+
+      }
+
+      .preview-icon i {
+        font-size: 22px;
+        position: absolute;
+        top: -2px;
+        left: 2px;
+        color: $button-large-color;
+      }
+
+      .text {
+        line-height: 110px;
+      }
+
+    }
+
+    &.modal-radio {
+      @include inline-left(left);
+      width: 65px;
+      height: 50px;
+      background: $button-large-color;
+      text-align: center;
+      line-height: 50px;
+
+      &:hover{
+        background: $button-hover-color;
+      }
+
+      &.selected {
+        background: $button-medium-color;
+        border: 2px solid $white;
+        width: 61px;
+        height: 46px;
+      }
+
+    }
+
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    text-indent: 7px;
+    width: 124px;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  label {
+    padding: 0 7px;
+  }
+
+  p {
+    color: $white;
+  }
+
+  .modal-checkbox {
+    @include inline-left(left);
+    width: 20px;
+    height: 25px;
+    padding: 0 0 0 3px;
+    line-height: 26px;
+    font-size: 17px;
+    color: $white;
+    background: $icon-color;
+  }
+
+  .preview-icon {
+    font-size: 40px;
+    position: absolute;
+    top: 20px;
+    left: 43px;
+  }
+
+  .sbSelector {
+    text-indent: 7px;
+  }
+
+  .sbOptions {
+    width: 97%;
+  }
+
+ }
+
+ .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+  opacity: 0.75;
+	width: 100%;
+	background: #3F3F3F;
+	z-index: 499;
+
+  .show {
+   	opacity: 0.75;
+  }
+
+ }
+
+ .inline {
+ 	@include inline-left(left);
+ }

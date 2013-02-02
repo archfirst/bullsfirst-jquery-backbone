@@ -35,6 +35,7 @@ var require = {
         jqueryValidationEngine:      'vendor/jquery.validationEngine-2.5.2',
         jqueryValidationEngineRules: 'vendor/jquery.validationEngine-en-2.5.2',
         jqueryTreeTable:             'vendor/jquery.treeTable-20121109',
+        jqueryExtensions:            'framework/JqueryExtensions',
 
         // Form Serialization
         // TODO: Find a way to remove these from OpenAccountFormWidget
@@ -60,7 +61,7 @@ var require = {
 
         // Date library
         moment:                      'vendor/moment-1.7.2',
-        
+
         // Formatting select boxes
         jqueryselectbox:             'vendor/jquery.selectbox-0.2',
 
@@ -105,7 +106,7 @@ var require = {
         jqueryformat: {
             deps: ['jquery']
         },
-        
+
         jqueryselectbox: {
             deps: ['jquery']
         },

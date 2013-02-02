@@ -51,6 +51,16 @@ define(
                 Handlebars.registerHelper('formatDateTime', function(date) {
                     return Formatter.formatDateTime(date);
                 });
+
+                Handlebars.registerHelper('ifEqual', function (left, right, options) {
+                    if (Handlebars.Utils.isEmpty(left) ||
+                        Handlebars.Utils.isEmpty(right) ||
+                        (left !== right)) {
+                        return options.inverse(this);
+                    } else {
+                        return options.fn(this);
+                    }
+                });
             }
         };
     }
