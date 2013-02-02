@@ -17,10 +17,10 @@
 /**
  * app/domain/Repository
  *
- * This is a singleton object that maintains the context of the logged in user.
- * The context consists of the following:
- *   user: User
- *   credentials: Credentials
+ * This is a singleton object that maintains the domain layer of the application.
+ * Domain objects in this layer generally live beyond the life of views in the
+ * presentation layer. When views are created, they are generally connected to
+ * domain objects that are already present in this repository.
  *
  * @author Naresh Bhatia
  */
