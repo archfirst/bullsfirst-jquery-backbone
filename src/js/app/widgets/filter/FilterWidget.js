@@ -107,7 +107,7 @@ define(
                 // Process filter criteria to server format
 				var filterCriteria = {},
                     orderId = $('#order-filter-orderno').val(),
-                    accountId = $('#order-filter-accountId').val(),
+                    accountId = $('#orders-filter-accountId').val(),
                     symbol = $('#order-filter-symbol').val(),
                     sides,
                     statuses;
