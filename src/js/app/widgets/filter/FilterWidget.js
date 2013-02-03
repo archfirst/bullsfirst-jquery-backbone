@@ -51,8 +51,6 @@ define(
                 MessageBus.on(Message.TransactionFilterApply, this.updateTransactions, this);
                 MessageBus.on('UpdateTransactions', this.updateTransactions, this);
                 
-                MessageBus.on(Message.OrderFilterReset, this.resetFilter, this);
-                MessageBus.on(Message.OrderFilterApply, this.updateOrders, this);
             },
 
             resetDatepicker: function(tab){
@@ -101,61 +99,8 @@ define(
 
 				// Send OrderFilterChanged message with filter criteria
 				MessageBus.trigger('TransactionFilterChanged', filterCriteria);
-			},
-            
-            updateOrders: function( tab ) {
-                // Process filter criteria to server format
-				var filterCriteria = {},
-                    orderId = $('#order-filter-orderno').val(),
-                    accountId = $('#orders-filter-accountId').val(),
-                    symbol = $('#order-filter-symbol').val(),
-                    sides,
-                    statuses;
-
-                if ( accountId > 0 ) {
-                    filterCriteria.accountId = accountId;
-                }
-
-                if ( orderId > 0 ) {
-                    filterCriteria.orderId = orderId;
-                }
-                                
-                statuses = $.map($('#order-filter-status li input[type="checkbox"]:checked'), function(n){
-                    return n.value;
-                }).join(',');
-                
-                sides = $.map($('#order-filter-action li input[type="checkbox"]:checked'), function(n){
-                    return n.value;
-                }).join(',');
-                
-                if(statuses){
-                    filterCriteria.statuses = statuses;
-                }
-                
-                if(symbol){
-                    filterCriteria.symbol = symbol;
-                }
-                
-                if(sides){
-                    filterCriteria.sides = sides;
-                }
-                
-
-				if ( $('#' + tab + '-fromDate').val().length > 0 ) {
-					filterCriteria.fromDate = moment( $('#' + tab + '-fromDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				if ( $('#' + tab + '-toDate').val().length > 0 ) {
-					filterCriteria.toDate = moment( $('#' + tab + '-toDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-                
-                
-
-				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger('OrderFilterChanged', filterCriteria);
-            
-            
-            }
+			}
+                        
         });
     }
 );
