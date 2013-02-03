@@ -1,27 +1,56 @@
 <div id="orders-filter" class="filter-wrapper clearfix">
 	<div class="filter-form">
 	    <form id="orders-filter-form">
-	        
-	        <div class="filter-field account">
-	            <label for="filter-accountId">Account</label>
-	            <select id="orders-filter-accountId" name="accountId">
-	            	<option value="">All Accounts</option>
-	            	{{#each accounts}}
-	            		<option value={{this.id}}>{{this.name}}</option>
-	            	{{/each}}
-	            </select>
-	        </div>
-
-	        <div class="filter-field">
-	            <label for="filter-fromDate">From</label>
-	            <input id="orders-fromDate" class="datepicker" name="fromDate" type="text" />
-	        </div> 
-
-	        <div class="filter-field">
-	            <label for="filter-toDate">To</label>
-	            <input id="orders-toDate" class="datepicker" name="toDate" type="text" />
-	        </div> 
-
+	        <ul class="orders-filter-list">
+                <li>
+                    <div class="filter-field account">
+                        <label for="filter-accountId">Account</label>
+                        <select id="orders-filter-accountId" name="accountId">
+                            <option value="">All Accounts</option>
+                            {{#each accounts}}
+                                <option value={{this.id}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </li>
+                <li class="filter-field order">
+                    <label for="order-filter-orderno">Order #</label>
+                    <input type="text" id="order-filter-orderno" placeholder="Optional" ></input>
+                </li>
+                <li class="filter-field symbol">
+                    <label for="order-filter-symbol">Symbol</label>
+                    <input type="text" id="order-filter-symbol" placeholder="Optional"></input>
+                </li>
+                <li class="filter-field">
+                    <div class="filter-field">
+                        <label for="filter-fromDate">From</label>
+                        <input id="orders-fromDate" class="datepicker" name="fromDate" type="text" />
+                    </div> 
+                </li>
+                <li class="filter-field">    
+                    <div class="filter-field">
+                        <label for="filter-toDate">To</label>
+                        <input id="orders-toDate" class="datepicker" name="toDate" type="text" />
+                    </div> 
+                </li>
+                <li class="action filter-field">
+                    <label for="order-filter-action">Order Action</label>
+                    <ul class="order-filter-action" id="order-filter-action">
+                        <li><input id="ord-buy" type="checkbox" name="ord-action" value="Buy" /><label for="ord-buy">Buy</label></li>
+                        <li><input id="ord-sell" type="checkbox" name="ord-action" value="Sell" /><label for="ord-sell">Sell</label></li>
+                    </ul>
+                </li>
+                <li class="status filter-field">
+                    <label for="order-filter-status">Order Status</label>
+                    <ul class="order-filter-status" id="order-filter-status">
+                        <li><input id="ord-done" type="checkbox" name="ord-status" value="DoneForDay" /><label for="ord-done">DoneForDay</label></li>
+                        <li><input id="ord-partial" type="checkbox" name="ord-status" value="PartiallyFilled" /><label for="ord-partial">Partially Filled</label></li>
+                        <li><input id="ord-cancel" type="checkbox" name="ord-status" value="Canceled" /><label for="ord-cancel">Cancelled</label></li>
+                        <li><input id="ord-filled" type="checkbox" name="ord-status" value="Filled" /><label for="ord-filled">Filled</label></li>
+                        <li><input id="ord-new" type="checkbox" name="ord-status" value="New" /><label for="ord-new">New</label></li>
+                    </ul>
+                </li>
+            </ul>
 	    </form>
 	</div>
 
