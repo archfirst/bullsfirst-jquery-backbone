@@ -84,10 +84,10 @@ define(
             },
             resetOrderAction: function(){
                 
-                $('#order-filter-action li input[type="checkbox"]').attr('checked', false);
+                $('.order-filter-action li input[type="checkbox"]').attr('checked', false);
             },
             resetOrderStatus: function(){
-                $('#order-filter-status li input[type="checkbox"]').attr('checked', false);
+                $('.order-filter-status li input[type="checkbox"]').attr('checked', false);
             },
             
             updateOrders: function( tab ) {
@@ -107,11 +107,11 @@ define(
                     filterCriteria.orderId = orderId;
                 }
                                 
-                statuses = $.map($('#order-filter-status li input[type="checkbox"]:checked'), function(n){
+                statuses = $.map($('.order-filter-status li input[type="checkbox"]:checked'), function(n){
                     return n.value;
                 }).join(',');
                 
-                sides = $.map($('#order-filter-action li input[type="checkbox"]:checked'), function(n){
+                sides = $.map($('.order-filter-action li input[type="checkbox"]:checked'), function(n){
                     return n.value;
                 }).join(',');
                 
