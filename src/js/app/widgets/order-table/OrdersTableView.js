@@ -66,6 +66,8 @@ define(
 
             renderOrder: function(order){
                 
+                var className = (order.attributes.status === 'Canceled')? 'faded' : '';
+                
                 // Format order values for display
                 order.attributes.creationTimeFormatted = Formatter.formatDateTime( moment(order.attributes.creationTime) );
                 order.attributes.limitPriceFormatted = Formatter.formatMoney(order.attributes.limitPrice);
@@ -76,7 +78,8 @@ define(
                     viewClass: OrderView,
                     parentElement: this.$el.selector,
                     options: {
-                        model: order
+                        model: order,
+                        className: className
                     }
                 });
 
