@@ -215,15 +215,13 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-  opacity: 0;
+  opacity: 0.75;
 	width: 100%;
 	background: #3F3F3F;
 	z-index: 499;
-  display: none;
 
   .show {
    	opacity: 0.75;
-    display: block;
   }
 
  }
