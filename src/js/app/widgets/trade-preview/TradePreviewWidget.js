@@ -27,82 +27,55 @@ define(
         'app/domain/Repository',
         'app/services/InstrumentService',
         'app/widgets/modal/ModalWidget',
-        'app/widgets/trade/TradeView',
         'framework/ErrorUtil',
-        'framework/MessageBus'
+        'framework/MessageBus',
+        'text!app/widgets/trade-preview/TradePreviewTemplate.html'
     ],
-    function(Message, Repository, InstrumentService, ModalWidget, TradeView, ErrorUtil, MessageBus) {
+    function(Message, Repository, InstrumentService, ModalWidget, ErrorUtil, MessageBus, TradePreviewTemplate) {
         'use strict';
 
         return ModalWidget.extend({
-            id: 'trade-modal',
-            className: 'modal-wrapper right',
+            id: 'trade-summary',
+            className: 'modal-wrapper summary-modal',
+
+            template: {
+                name: 'TradePreviewTemplate',
+                source: TradePreviewTemplate
+            },
 
             initialize: function() {
                 /*this.listenTo(MessageBus, Message.TradeModalOpen, function(){
                    console.log('open me');
                 });*/
 
-                //this.listenTo(this.model, 'change', this.render);
-                $.extend( this.settings, {
-                    id: this.id,
-                    title: 'Trade',
-                    type: 'trade',
-                    draggable: true
-                });
-            },
+                this.model.set('brokerageAccountId', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
 
-            postRender: function() {
-                this.addChildren([
-                    {
-                        id: 'TradeView',
-                        viewClass: TradeView,
-                        parentElement: this.$el,
-                        options: {
-                            collection: Repository.getBrokerageAccounts()
-                        }
-                    }
-                ]);
-                
+                //this.listenTo(this.model, 'change', this.render);
+
+                this.settings = {
+                    id: this.id,
+                    title: 'Trade Summary',
+                    type: 'trade-summary',
+                    overlay: true,
+                    draggable: false,
+                    closeButton: true,
+                    position: 'center',
+                    summary: this.model.toJSON()
+                };
+
+                return this;
+
             },
 
             postPlace: function(){
+
+                this._postPlace();
+
                 MessageBus.trigger(Message.ModalLoad);
 
-                // init the symbol autocomplete field
-                InstrumentService.getInstruments(this._initSymbolField, ErrorUtil.showError);
-                this._initFormStyles();
-            },
-
-            _initFormStyles: function(){
-                $('#trade-accountId').selectbox();
-                $('#trade-orderType').selectbox();
-                $('#trade-term').selectbox();
-            },
-
-            _initSymbolField: function(data) {
-                var instruments = $.map(data, function(instrument) {
-                    return {
-                        label: instrument.symbol + ' (' + instrument.name + ')',
-                        value: instrument.symbol
-                    };
-                });
-
-                $('#trade-symbol').autocomplete({
-                  source: function( request, response ) {
-                    var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
-                    
-                    response( $.grep( instruments, function( item ){
-                        return matcher.test(item.label);
-                    }) );
-                  },
-                  select: function( event, ui ) {
-                    MessageBus.trigger(Message.TradeSymbolChange, ui.item.value);
-                  }
-                });
-
-                return instruments;
+                return this;
             }
+
         });
     }
 );

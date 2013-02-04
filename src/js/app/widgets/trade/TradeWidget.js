@@ -75,7 +75,9 @@ define(
             },
 
             _initFormStyles: function(){
-                $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
+                $('#trade-accountId').selectbox();
+                $('#trade-orderType').selectbox();
+                $('#trade-term').selectbox();
             },
 
             _initSymbolField: function(data) {

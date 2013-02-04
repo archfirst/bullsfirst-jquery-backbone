@@ -5,7 +5,7 @@
 // Linear gradient support with vendor prefixing
 @mixin linear-gradient($direction-old-syntax, $direction-new-syntax, $start-color, $end-color) {
     background-color: $end-color;
-    background-image: -webkit-linear-gradient($direction-old-syntax, $start-color, $end-color); 
+    background-image: -webkit-linear-gradient($direction-old-syntax, $start-color, $end-color);
     background-image:    -moz-linear-gradient($direction-old-syntax, $start-color, $end-color);
     background-image:     -ms-linear-gradient($direction-old-syntax, $start-color, $end-color);
     background-image:      -o-linear-gradient($direction-old-syntax, $start-color, $end-color);
@@ -13,7 +13,7 @@
 }
 
 @mixin inline-left($float){
-	position: relative;
-	display: inline;
-	float: $float;
+  position: relative;
+  display: inline;
+  float: $float;
 }

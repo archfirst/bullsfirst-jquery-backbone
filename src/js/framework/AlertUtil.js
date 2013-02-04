@@ -31,6 +31,20 @@ define(
     'use strict';
 
     return {
+
+        showConfirmation: function(message) {
+            $.alert(message, {
+                title: 'Confirmation',
+                icon: 'check',
+                buttons: {
+                    'Ok': function() {
+                        // make sure we always add this line in our handlers
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        },
+
         showError: function(message) {
             $.alert(message, {
                 title: 'Error',

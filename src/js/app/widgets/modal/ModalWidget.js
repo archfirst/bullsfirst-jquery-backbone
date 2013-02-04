@@ -25,12 +25,13 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
+        'app/widgets/modal/ModalOverlayView',
         'backbone',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/widgets/modal/ModalTemplate.html'
     ],
-    function(Message, Repository, Backbone, BaseView, MessageBus, ModalTemplate) {
+    function(Message, Repository, ModalOverlayView, Backbone, BaseView, MessageBus, ModalTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -45,15 +46,6 @@ define(
                 source: ModalTemplate
             },
 
-            settings: {
-                title: '',
-                type: '',
-                overlay: false,
-                closeButton: true,
-                draggable: false,
-                position: 'center'
-            },
-
             applySettings: function(settings){
                 if ( $('.modal-overlay').css('display') === 'none' ) {
                   $('.modal-overlay').show();
@@ -62,7 +54,7 @@ define(
                 if (settings.overlay) {
                   $('.modal-overlay').addClass('show');
                 }
-                
+
                 if (settings.style) {
                   $('#' + settings.id).addClass(settings.style);
                 }
@@ -73,18 +65,57 @@ define(
 
             },
 
+            centerModal: function() {
+
+              var top = ($(window).height() - this.$el.height()) / 2;
+              var left = ($(window).width() - this.$el.width()) / 2;
+
+              this.$el.css({
+                top: top,
+                left: left
+              });
+
+            },
+
             closeModal: function(e) {
                 if (e) {
                   e.preventDefault();
                 }
 
-                $('#' + this.id).remove();
+                this.destroy();
 
-                $('.modal-overlay').hide();
+                // $('#' + this.id).remove();
 
-                if ( $('.modal-overlay').hasClass('show') ) {
-                    $('.modal-overlay').removeClass('show');
-                }
+                // $('.modal-overlay').hide();
+
+            },
+
+            postPlace: function() {
+              this._postPlace();
+            },
+
+            _postPlace: function() {
+              if (this.settings.position === 'center') {
+                this.centerModal();
+              }
+            },
+
+            postRender: function(settings) {
+              this._postRender(settings);
+            },
+
+            _postRender: function(settings) {
+
+              if (settings.overlay) {
+                this.addChildren([
+                  {
+                    id: 'ModalOverlayView',
+                    viewClass: ModalOverlayView,
+                    parentElement: $('body')
+                  }
+                ]);
+              }
+
             },
 
             render: function() {
@@ -93,7 +124,7 @@ define(
                     settings = this.settings,
                     applySettings = this.applySettings,
                     modalView = this;
-        
+
                 // Destroy existing children
                 this.destroyChildren();
 
@@ -112,6 +143,7 @@ define(
                 });
 
                 this.postRender(settings);
+
                 return this;
             }
         });
