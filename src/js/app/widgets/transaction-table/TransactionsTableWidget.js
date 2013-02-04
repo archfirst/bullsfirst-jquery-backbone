@@ -46,9 +46,9 @@ define(
                     {
                         id: 'TransactionsTableView',
                         viewClass: TransactionsTableView,
-                        el: '#transactions-table tbody',
+                        el: '.transactions-table tbody',
                         options: {
-                            el: '#transactions-table tbody',
+                            el: '.transactions-table tbody',
                             tab: 'transactions',
                             collection: new Transactions()
                         }

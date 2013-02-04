@@ -31,6 +31,7 @@ define({
     AccountMouseOverRaw: 'Account:mouseoverRaw',
     AccountStoppedEditing: 'Account:stoppedEditing',
     ExternalAccountsUpdated: 'ExternalAccounts:Updated',
+    FilterLoaded: 'FilterLoaded',
     PageBeforeChange: 'PageBeforeChange',
     PageChange: 'PageChange',
     SelectedAccountChanged: 'SelectedAccountChanged',

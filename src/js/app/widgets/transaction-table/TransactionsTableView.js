@@ -67,6 +67,9 @@ define(
                 // Format transaction values for display
                 transaction.attributes.creationTimeFormatted = Formatter.formatDateTime( moment(transaction.attributes.creationTime) );
                 transaction.attributes.amountFormatted = Formatter.formatMoney(transaction.attributes.amount);
+                if ( transaction.attributes.amount.amount < 0 ) {
+                    transaction.attributes.negativeAmount = true;
+                }
 
                 var view = this.addChild({
                     id: transaction.id,
