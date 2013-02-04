@@ -35,6 +35,7 @@ define({
     PageChange: 'PageChange',
     SelectedAccountChanged: 'SelectedAccountChanged',
     TabSelectionRequest: 'TabSelectionRequest',
+    TradeCostUpdate: 'TradeCostUpdate',
     TradeRequest: 'TradeRequest',
 	TradeSymbolChange: 'TradeSymbolChange',
     TransactionFilterApply: 'Transaction:clickFilterApply',

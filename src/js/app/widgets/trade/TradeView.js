@@ -57,6 +57,7 @@ define(
 				this.render();
                 //this.collection.bind('reset', this.render, this);
                 this.listenTo(MessageBus, Message.TradeSymbolChange, this.symbolChanged);
+                this.listenTo(MessageBus, Message.TradeCostUpdate, this.setCostTotals);
 			},
 
             render: function(){
@@ -126,14 +127,21 @@ define(
                 // TODO: launch TradePreviewWidget, passing in this object
             },
 
-            /*setCostTotals: function(marketPrice, quantity) {
-                console.log(marketPrice);
-                console.log(quantity);
-            },*/
+            setCostTotals: function(marketPrice, quantity) {
+                var fees = 10,
+                    tradeCost = {
+                        amount: marketPrice * quantity
+                    },
+                    tradeTotal = {
+                        amount: tradeCost.amout + fees
+                    };
+
+                $('#tradeCost').html( Formatter.formatMoney(tradeCost) );
+                $('#totalCost').html( Formatter.formatMoney(tradeTotal) );
+            },
 
             symbolChanged: function(value) {
                 this._fetchMarketPrice(value);
-                
             },
             
             _fetchMarketPrice: function(symbol) {
@@ -145,17 +153,13 @@ define(
             },
 
             _marketPriceFetched: function(marketPrice) {
+
                 var price = Formatter.formatMoney(marketPrice.attributes.price);
                 $('#trade-form .lastPrice').html(price);
                 $('#last-trade-price').val(price);
 
                 if ( $('#trade-quantity').val() > 0 ) {
-                    //this.setCostTotals(marketPrice.attributes.price, $('#trade-quantity').val() );
-                    //console.log(marketPrice.attributes.price.amount);
-                    //console.log($('#trade-quantity').val());
-                    $('#tradeCost').html('$' + (marketPrice.attributes.price.amount * $('#trade-quantity').val()));
-                    $('#totalCost').html('$' + ((marketPrice.attributes.price.amount * $('#trade-quantity').val()) + 10));
-
+                    MessageBus.trigger( Message.TradeCostUpdate, marketPrice.attributes.price.amount, $('#trade-quantity').val() );
                 }
                 /*new LastTradeView({
                     el: '#tradeForm_lastTrade',
