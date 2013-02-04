@@ -38,6 +38,10 @@ define(
             id: 'trade-modal',
             className: 'modal-wrapper right',
 
+            events: {
+                'click a.trade-edit-order' : 'closeModal'
+            },
+
             initialize: function() {
                 /*this.listenTo(MessageBus, Message.TradeModalOpen, function(){
                    console.log('open me');

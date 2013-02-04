@@ -86,7 +86,7 @@ define(
 
                 // $('#' + this.id).remove();
 
-                // $('.modal-overlay').hide();
+                $('.modal-overlay').hide();
 
             },
 

@@ -38,6 +38,23 @@
       text-align: left;
     }
 
+    table {
+      width: 99%;
+    }
+
+    tr:nth-child(odd) {
+      background: $text-selection-alternate-color;
+      poacity: 0.3;
+    }
+
+    .cost-summary {
+      background: $label-text-color !important;
+    }
+
+    .cost-total {
+      background: $white !important;
+    }
+
   }
 
   header {
@@ -100,7 +117,7 @@
   &.trade-costs {
 
     p {
-      width: 65px;
+      width: auto;
       height: 20px;
       overflow: hidden;
       text-align: right;
@@ -215,10 +232,11 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-  opacity: 0.75;
+  opacity: 0;
 	width: 100%;
 	background: #3F3F3F;
-	z-index: 499;
+	z-index: 489;
+  display: none;
 
   .show {
    	opacity: 0.75;

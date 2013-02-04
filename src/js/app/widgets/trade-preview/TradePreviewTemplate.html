@@ -35,17 +35,30 @@
       <th>All-or-None:</th>
       <td>{{summary.orderParams.allOrNone}}</td>
     </tr>
-    <tr>
+    <tr class="cost-summary">
       <th>Trade Cost:</th>
       <td>{{summary.orderEstimate.estimatedValue}}</td>
     </tr>
-    <tr>
+    <tr class="cost-summary">
       <th>Fees:</th>
       <td>+{{summary.orderEstimate.fees}}</td>
     </tr>
-    <tr>
+    <tr class="cost-total">
       <th>Total Cost:</th>
       <td>{{summary.orderEstimate.estimatedValueInclFees}}</td>
     </tr>
   </table>
+
+  <div class="modal-field full">
+    <a id="trade-preview-order" class="button large center" href="#">
+      <span class="preview-icon icon-bookmark">
+        <i class="icon-star-empty"></i>
+      </span>
+      <span class="text">Submit Order</span>
+    </a>
+    <a class="trade-edit-order button large center" href="#">
+      <span class="icon-arrow-left"></span>
+      <span class="text">Edit Order</span>
+    </a>
+  </div>
 </section>
