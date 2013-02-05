@@ -62,7 +62,7 @@
  }
 
  .modal-field {
- 	@include inline-left(left);
+ 	@include inline-float(left);
  	width: 130px;
  	margin-bottom: 10px;
 
@@ -141,7 +141,7 @@
     }
 
     &.modal-radio {
-      @include inline-left(left);
+      @include inline-float(left);
       width: 65px;
       height: 50px;
       background: $button-large-color;
@@ -183,7 +183,7 @@
   }
 
   .modal-checkbox {
-    @include inline-left(left);
+    @include inline-float(left);
     width: 20px;
     height: 25px;
     padding: 0 0 0 3px;
@@ -227,5 +227,5 @@
  }
 
  .inline {
- 	@include inline-left(left);
+ 	@include inline-float(left);
  }

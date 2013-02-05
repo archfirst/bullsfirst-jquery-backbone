@@ -12,7 +12,7 @@
     background-image:         linear-gradient($direction-new-syntax, $start-color, $end-color);
 }
 
-@mixin inline-left($float){
+@mixin inline-float($float){
   position: relative;
   display: inline;
   float: $float;

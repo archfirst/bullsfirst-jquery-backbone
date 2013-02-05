@@ -25,11 +25,10 @@ define(
         'app/widgets/transaction-table/TransactionView',
         'framework/BaseView',
         'framework/Formatter',
-        'framework/MessageBus',
-        'moment'
+        'framework/MessageBus'
     ],
     
-    function( Message, TransactionView, BaseView, Formatter, MessageBus, moment ) {
+    function( Message, TransactionView, BaseView, Formatter, MessageBus ) {
         'use strict';
         
 
@@ -44,7 +43,6 @@ define(
 					this.collection.fetch({data: filterCriteria});
 				}, this);
 
-				this.render();
 			},
 
 			render: function(){
@@ -64,9 +62,10 @@ define(
 
             renderTransaction: function(transaction){
                 
-                // Format transaction values for display
-                transaction.attributes.creationTimeFormatted = Formatter.formatDateTime( moment(transaction.attributes.creationTime) );
-                transaction.attributes.amountFormatted = Formatter.formatMoney(transaction.attributes.amount);
+                // Set boolean if negative value so can add styling class
+                if ( transaction.attributes.amount.amount < 0 ) {
+                    transaction.attributes.negativeAmount = true;
+                }
 
                 var view = this.addChild({
                     id: transaction.id,

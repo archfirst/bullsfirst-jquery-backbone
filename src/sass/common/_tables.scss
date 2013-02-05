@@ -20,6 +20,10 @@
     height: 25px;
 }
 
+.bf-table .negative {
+    color: $button-large-color;
+}
+
 .bf-table tbody tr.selected {
     background-color: $table-row-selected-color;
 }
