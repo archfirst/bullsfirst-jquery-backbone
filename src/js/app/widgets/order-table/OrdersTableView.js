@@ -66,16 +66,20 @@ define(
 
             renderOrder: function(order){
                 
+                var className = (order.attributes.status === 'Canceled')? 'faded' : '';
+                
                 // Format order values for display
                 order.attributes.creationTimeFormatted = Formatter.formatDateTime( moment(order.attributes.creationTime) );
-                order.attributes.amountFormatted = Formatter.formatMoney(order.attributes.amount);
-
+                order.attributes.limitPriceFormatted = Formatter.formatMoney(order.attributes.limitPrice);
+                order.attributes.executionPriceFormatted = Formatter.formatMoney(order.attributes.executions.price);
+                
                 var view = this.addChild({
                     id: order.id,
                     viewClass: OrderView,
                     parentElement: this.$el.selector,
                     options: {
-                        model: order
+                        model: order,
+                        className: className
                     }
                 });
 
