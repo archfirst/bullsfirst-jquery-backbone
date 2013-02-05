@@ -208,6 +208,9 @@
     font-size: 17px;
     color: $white;
     background: $icon-color;
+    &.empty::before {
+      content: '';
+    }
   }
 
   .preview-icon {
@@ -238,8 +241,12 @@
 	z-index: 489;
   display: none;
 
-  .show {
+  &.show {
    	opacity: 0.75;
+  }
+
+  &.stacked {
+    z-index: 499;
   }
 
  }

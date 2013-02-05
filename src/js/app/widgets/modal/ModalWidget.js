@@ -83,11 +83,7 @@ define(
                 }
 
                 this.destroy();
-
-                // $('#' + this.id).remove();
-
-                $('.modal-overlay').hide();
-
+                this.updateModal('.modal-overlay');
             },
 
             postPlace: function() {
@@ -145,6 +141,14 @@ define(
                 this.postRender(settings);
 
                 return this;
+            },
+
+            updateModal: function(modal) {
+                if ( ! $(modal).hasClass('stacked') ) {
+                    $(modal).hide();
+                } else {
+                    $(modal).removeClass('stacked show');
+                }
             }
         });
     }

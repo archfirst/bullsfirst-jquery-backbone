@@ -26,12 +26,14 @@ define(
         'app/common/Message',
         'app/domain/Repository',
         'app/services/InstrumentService',
+        'app/services/OrderService',
         'app/widgets/modal/ModalWidget',
         'framework/ErrorUtil',
         'framework/MessageBus',
-        'text!app/widgets/trade-preview/TradePreviewTemplate.html'
+        'text!app/widgets/trade-preview/TradePreviewTemplate.html',
+        'underscore'
     ],
-    function(Message, Repository, InstrumentService, ModalWidget, ErrorUtil, MessageBus, TradePreviewTemplate) {
+    function(Message, Repository, InstrumentService, OrderService, ModalWidget, ErrorUtil, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
         return ModalWidget.extend({
@@ -43,12 +45,15 @@ define(
                 source: TradePreviewTemplate
             },
 
-            initialize: function() {
-                /*this.listenTo(MessageBus, Message.TradeModalOpen, function(){
-                   console.log('open me');
-                });*/
+            events: {
+                'click .modal-close' : 'closeModal',
+                'click .trade-submit-order' : 'submitOrder',
+                'click .trade-edit-order' : 'closeModal'
+            },
 
-                this.model.set('brokerageAccountId', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
+            initialize: function() {
+
+                this.model.set('brokerageAccountName', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
 
                 //this.listenTo(this.model, 'change', this.render);
 
@@ -74,6 +79,26 @@ define(
                 MessageBus.trigger(Message.ModalLoad);
 
                 return this;
+            },
+
+            submitOrder: function(){
+
+                var attr = this.model.attributes,
+                    orderRequest = {
+                        brokerageAccountId: attr.brokerageAccountId,
+                        orderParams: attr.orderParams
+                    };
+
+                // Create brokerage account
+                OrderService.createOrder( orderRequest, _.bind(this.orderComplete, this), ErrorUtil.showError);
+            },
+
+            orderComplete: function() {
+                // Show the order
+                MessageBus.trigger('UpdateOrders');
+                MessageBus.trigger('UserTabSelectionRequest', 'orders');
+
+                this.closeModal();
             }
 
         });

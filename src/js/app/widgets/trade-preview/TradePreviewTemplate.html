@@ -9,7 +9,7 @@
   <table>
     <tr>
       <th>Account:</th>
-      <td>{{summary.brokerageAccountId}}</td>
+      <td>{{summary.brokerageAccountName}}</td>
     </tr>
     <tr>
       <th>Symbol:</th>
@@ -33,7 +33,13 @@
     </tr>
     <tr>
       <th>All-or-None:</th>
-      <td>{{summary.orderParams.allOrNone}}</td>
+      <td>
+        {{#if summary.orderParams.allOrNone}}
+          true
+        {{else}}
+          false
+        {{/if}}
+      </td>
     </tr>
     <tr class="cost-summary">
       <th>Trade Cost:</th>
@@ -50,7 +56,7 @@
   </table>
 
   <div class="modal-field full">
-    <a id="trade-preview-order" class="button large center" href="#">
+    <a class="trade-submit-order button large center" href="#">
       <span class="preview-icon icon-bookmark">
         <i class="icon-star-empty"></i>
       </span>
