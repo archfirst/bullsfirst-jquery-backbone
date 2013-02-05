@@ -76,14 +76,14 @@ define(
                     'change .modal-field select' : 'selectDropdown',
                     'change #trade-orderType' : 'toggleLimitField',
                     'change #trade-quantity': 'updateQuantity',
-                    'click' : 'blur',
+                    'click' : 'blurForm',
                     'click .modal-checkbox' : 'selectCheckbox',
                     'click .modal-radio' : 'selectRadio',
                     'click #trade-preview-order' : 'previewOrder'
                 });
             }()),
 
-            blur: function(e) {
+            blurForm: function(e) {
                 if ( e.target.tagName.toUpperCase() !== 'INPUT') {
                     $(document.activeElement).blur();
                 }
@@ -115,7 +115,7 @@ define(
                         };
 
                         $('#tradeCost').html(estimatedValue);
-                        $('#fees-field').html(fees);
+                        $('#fees-field, #fees').html(fees);
                         $('#totalCost').html(estimatedValueInclFees);
 
                     }, ErrorUtil.showError);
