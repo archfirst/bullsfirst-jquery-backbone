@@ -32,6 +32,8 @@ define({
     AccountStoppedEditing: 'Account:stoppedEditing',
 	ExternalAccountsUpdated: 'ExternalAccounts:Updated',
 	ModalLoad: 'Modal:load',
+    OrderFilterApply: 'Order:clickFilterApply',
+    OrderFilterReset: 'Order:clickFilterReset',
     PageBeforeChange: 'PageBeforeChange',
     PageChange: 'PageChange',
     SelectedAccountChanged: 'SelectedAccountChanged',

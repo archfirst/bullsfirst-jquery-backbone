@@ -27,15 +27,16 @@ define(
         'app/widgets/order-table/OrdersTableView',
         'framework/BaseView',
         'framework/MessageBus',
-        'text!app/widgets/order-table/OrdersTableTemplate.html'
+        'text!app/widgets/order-table/OrdersTableTemplate.html',
+        'jqueryTreeTable'
     ],
     function(Message, Repository, Orders, OrdersTableView,
         BaseView, MessageBus, OrdersTableTemplate) {
         'use strict';
 
         return BaseView.extend({
-            tagName: 'div',
-
+            tagName: 'table',
+            className: 'orders-table bf-table',
             template: {
                 name: 'OrdersTableTemplate',
                 source: OrdersTableTemplate
@@ -46,15 +47,16 @@ define(
                     {
                         id: 'OrdersTableView',
                         viewClass: OrdersTableView,
-                        el: '#orders-table tbody',
+                        el: '.orders-table tbody',
                         options: {
-                            el: '#orders-table tbody',
+                            el: '.orders-table tbody',
                             tab: 'orders',
                             collection: new Orders()
                         }
                     }
                    
                 ]);
+                this.$el.treeTable();
             }
         });
     }
