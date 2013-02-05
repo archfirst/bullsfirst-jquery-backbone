@@ -1,5 +1,5 @@
 	<td class="center">
-	    {{creationTimeFormatted}}
+	    {{formatDateTime creationTime}}
 	</td>
 	<td class="left">
 	    {{accountName}}
@@ -11,5 +11,5 @@
 	    {{description}}
 	</td>
 	<td class="number {{#if negativeAmount}}negative{{/if}}">
-	    {{amountFormatted}}
+	    {{formatMoney amount}}
 	</td>
