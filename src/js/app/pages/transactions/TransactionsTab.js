@@ -21,13 +21,13 @@
  */
 define(
     [
-        'framework/BaseView',
         'app/domain/Repository',
         'app/widgets/transaction-filter/TransactionsFilterWidget',
         'app/widgets/transaction-table/TransactionsTableWidget',
+        'framework/BaseView',
         'text!app/pages/transactions/TransactionsTabTemplate.html'
     ],
-    function(BaseView,  Repository, TransactionsFilterWidget, TransactionsTableWidget, TransactionsTabTemplate) {
+    function(Repository, TransactionsFilterWidget, TransactionsTableWidget, BaseView, TransactionsTabTemplate) {
         'use strict';
 
         return BaseView.extend({

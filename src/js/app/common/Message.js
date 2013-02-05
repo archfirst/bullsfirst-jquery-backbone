@@ -31,6 +31,7 @@ define({
     AccountMouseOverRaw: 'Account:mouseoverRaw',
     AccountStoppedEditing: 'Account:stoppedEditing',
     ExternalAccountsUpdated: 'ExternalAccounts:Updated',
+	FilterLoaded: 'FilterLoaded',
     OrderFilterApply: 'Order:clickFilterApply',
     OrderFilterReset: 'Order:clickFilterReset',
     PageBeforeChange: 'PageBeforeChange',
