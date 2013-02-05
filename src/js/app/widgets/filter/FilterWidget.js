@@ -51,6 +51,7 @@ define(
                 MessageBus.on(Message.TransactionFilterReset, this.resetFilter, this);
                 MessageBus.on(Message.TransactionFilterApply, this.updateTransactions, this);
                 MessageBus.on('UpdateTransactions', this.updateTransactions, this);
+                
             },
 
             resetDatepicker: function(tab){
@@ -99,6 +100,7 @@ define(
 				// Send OrderFilterChanged message with filter criteria
 				MessageBus.trigger('TransactionFilterChanged', filterCriteria);
 			}
+                        
         });
     }
 );

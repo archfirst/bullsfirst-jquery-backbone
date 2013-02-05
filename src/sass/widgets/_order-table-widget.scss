@@ -1,11 +1,11 @@
-#orders-table {
+.orders-table {
 	margin: 0 40px 28px 80px;
 	width: 820px;
 }
 
-#orders-table tr td:last-child { padding-right: 20px; }
+.orders-table tr td:last-child { padding-right: 20px; }
 
-#orders-table:after {
+.orders-table:after {
 	content: "";
 	width: 820px;
 	height: 1px;
@@ -15,10 +15,14 @@
 	bottom: 14px;
 	left: 80px;
 }
-#orders-table .center {
+.orders-table .center {
 	text-align: center;
 }
 
-#orders-table .number {
+.orders-table .number {
 	text-align: right;
+}
+
+.orders-table .faded{
+    background-color: $table-row-faded;
 }
