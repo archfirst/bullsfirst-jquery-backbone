@@ -83,7 +83,7 @@ define(
 			updateTransactions: function(tab) {
                 // Process filter criteria to server format
 				var filterCriteria = {},
-                    accountId = $('#' + tab + '-filter-accountId').val();
+                    accountId = $('.js-' + tab + '-filter-accountId').val();
 
                 if ( accountId > 0 ) {
                     filterCriteria.accountId = accountId;
