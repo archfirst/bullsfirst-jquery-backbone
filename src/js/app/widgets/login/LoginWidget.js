@@ -88,8 +88,7 @@ define(
                 Repository.initCredentials(this.enteredCredentials);
 
                 // Navigate to accounts and fire UserLoggedInEvent
-                //Backbone.history.navigate('accounts', true);
-                Backbone.history.navigate('transactions', true);
+                Backbone.history.navigate('accounts', true);
                 MessageBus.trigger(Message.UserLoggedInEvent);
             },
 
