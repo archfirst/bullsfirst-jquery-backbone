@@ -25,12 +25,13 @@ define(
         'app/domain/Repository',
         'app/pages/orders/OrdersTab',
         'app/widgets/footer/FooterWidget',
+        'app/widgets/modal/ModalOverlayView',
         'app/widgets/user-page-header/UserPageHeaderWidget',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/pages/orders/OrdersPageTemplate.html'
     ],
-    function(Message, Repository, OrdersTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, OrdersPageTemplate) {
+    function(Message, Repository, OrdersTab, FooterWidget, ModalOverlayView, UserPageHeaderWidget, BaseView, MessageBus, OrdersPageTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -61,6 +62,11 @@ define(
                     {
                         id: 'FooterWidget',
                         viewClass: FooterWidget,
+                        parentElement: this.$el
+                    },
+                    {
+                        id: 'ModalOverlayView',
+                        viewClass: ModalOverlayView,
                         parentElement: this.$el
                     }
                 ]);

@@ -39,9 +39,6 @@ define(
             className: 'modal-wrapper right',
 
             initialize: function() {
-                /*this.listenTo(MessageBus, Message.TradeModalOpen, function(){
-                   console.log('open me');
-                });*/
 
                 //this.listenTo(this.model, 'change', this.render);
                 $.extend( this.settings, {

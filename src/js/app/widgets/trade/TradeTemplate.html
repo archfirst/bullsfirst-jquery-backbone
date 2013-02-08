@@ -10,7 +10,7 @@
     <form id="trade-form">
     	<div class="modal-field full account">
     	    <label for="trade-accountId">Account</label>
-    	    <select id="trade-accountId" name="accountId">
+    	    <select id="trade-accountId" name="brokerageAccountId">
     	    	{{#each accounts}}
     	    		<option value={{this.id}}>{{this.name}} ({{this.valueFormatted}})</option>
     	    	{{/each}}
@@ -22,7 +22,7 @@
     	    <input id="trade-symbol" name="tradeSymbol" type="text" />
     	</div>
 
-    	<div class="modal-field right">
+    	<div class="modal-field right lastTradePrice">
     		<p>Last Trade Price</p>
     		<p class="lastPrice"></p>
     		<input id="last-trade-price" name="lastTradePrice" type="text" class="hidden" />
@@ -37,28 +37,28 @@
 
     	<div class="modal-field right">
     	    <label for="quantity">Quantity</label>
-    	    <input id="trade-quantity" name="tradeQuantity" type="text" />
+    	    <input id="trade-quantity" name="quantity" type="text" />
     	</div>
 
     	<div class="modal-field">
     	    <label for="trade-orderType">Order Type</label>
-    	    <select id="trade-orderType" name="orderType">
-    	    	<option value="market">Market</option>
-    	    	<option value="limit">Limit</option>
+    	    <select id="trade-orderType" name="type">
+    	    	<option value="Market">Market</option>
+    	    	<option value="Limit">Limit</option>
     	    </select>
     	</div>
 
     	<div class="modal-field right">
-    	    <label for="trade-term">Term</label>
+    	    <label for="term">Term</label>
     	    <select id="trade-term" name="term">
-    	    	<option value="goodForTheDay">GoodForTheDay</option>
-    	    	<option value="goodTilCancelled">GoodTilCancelled</option>
+    	    	<option value="GoodForTheDay">GoodForTheDay</option>
+    	    	<option value="GoodTilCanceled">GoodTilCanceled</option>
     	    </select>
     	</div>
 
     	<div class="modal-field">
     	    <label for="limit-price" class="limit-price hidden">Limit</label>
-    	    <input id="trade-limitPrice" class="limit-price hidden" name="tradeLimit" type="text" />
+    	    <input id="trade-limitPrice" class="limit-price hidden" name="limitPrice" type="text" />
 
     		<label for="allOrNone" class="inline">All-or-None</label>
     		<a class="modal-checkbox" attr-value="allOrNone" href="#"></a>

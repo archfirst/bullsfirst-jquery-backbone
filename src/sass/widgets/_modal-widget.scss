@@ -31,11 +31,32 @@
 
     header {
       background: $brand-color;
-      color: $container-background-color;
+      color: $black;
     }
 
     th {
       text-align: left;
+      padding-left: 16px;
+    }
+
+    table {
+      width: 99%;
+    }
+
+    tr:nth-child(odd) {
+      background: $modal-table-stripe;
+    }
+
+    .cost-summary {
+      background: $modal-table-costs !important;
+
+      &:first-child {
+        margin-top: 20px;
+      }
+    }
+
+    .cost-total {
+      background: $modal-table-total !important;
     }
 
   }
@@ -57,8 +78,8 @@
   background: url('../img/modal-close.png');
   position: absolute;
   display: inline;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 9px;
  }
 
  .modal-field {
@@ -100,7 +121,7 @@
   &.trade-costs {
 
     p {
-      width: 65px;
+      width: auto;
       height: 20px;
       overflow: hidden;
       text-align: right;
@@ -126,12 +147,33 @@
 
       }
 
+      &.medium {
+        i {
+          font-size: 18px;
+          line-height: 5px;
+        }
+
+        span {
+          display: inline;
+        }
+
+        .text {
+          font-size: 12px;
+          line-height: 0;
+        }
+      }
+
       .preview-icon i {
         font-size: 22px;
         position: absolute;
         top: -2px;
         left: 2px;
         color: $button-large-color;
+
+        &.icon-star-empty {
+          top: -6px;
+          left: 3px;
+        }
       }
 
       .text {
@@ -178,6 +220,17 @@
     padding: 0 7px;
   }
 
+  &.lastTradePrice {
+    p:first-child {
+      margin-top: 24px;
+    }
+
+    p {
+      margin-top: 0;
+      line-height: 14px;;
+    }
+  }
+
   p {
     color: $white;
   }
@@ -191,6 +244,9 @@
     font-size: 17px;
     color: $white;
     background: $icon-color;
+    &.empty::before {
+      content: '';
+    }
   }
 
   .preview-icon {
@@ -215,13 +271,18 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-  opacity: 0.75;
+  opacity: 0;
 	width: 100%;
 	background: #3F3F3F;
-	z-index: 499;
+	z-index: 489;
+  display: none;
 
-  .show {
+  &.show {
    	opacity: 0.75;
+  }
+
+  &.stacked {
+    z-index: 499;
   }
 
  }
