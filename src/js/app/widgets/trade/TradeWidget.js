@@ -75,7 +75,6 @@ define(
                     'blur .modal-field input[type="text"]' : 'updateOrder',
                     'change .modal-field select' : 'selectDropdown',
                     'change #trade-orderType' : 'toggleLimitField',
-                    'change #trade-symbol' : 'checkTypedSymbol',
                     'click .modal-checkbox' : 'selectCheckbox',
                     'click .modal-radio' : 'selectRadio',
                     'click #trade-preview-order' : 'previewOrder',
@@ -415,12 +414,15 @@ define(
                         return matcher.test(item.label);
                     }) );
                   },
+                  change: function( event ) {
+                    tradeWidget.checkTypedSymbol(event);
+                  },
                   select: function( event, ui ) {
                     tradeWidget.symbolChanged(ui.item.value);
                   }
                 });
 
-                return instruments;
+                return this.instruments;
             },
 
             _marketPriceFetched: function(marketPrice) {
