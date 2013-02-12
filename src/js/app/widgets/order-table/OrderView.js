@@ -23,21 +23,35 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
+        'app/services/OrderService',
         'framework/BaseView',
         'framework/ErrorUtil',
         'framework/MessageBus',
-        'text!app/widgets/order-table/OrderTemplate.html'
+        'text!app/widgets/order-table/OrderTemplate.html',
+        'underscore'
     ],
-    function(Message, Repository, BaseView, ErrorUtil, MessageBus, OrderTemplate) {
+    function(Message, Repository, OrderService, BaseView, ErrorUtil, MessageBus, OrderTemplate, _) {
         'use strict';
 
         return BaseView.extend({
 
             tagName: 'tr',
 
+            events: {
+                'click .order_cancel': 'cancelOrder'
+            },
+
             template: {
                 name: 'OrderTemplate',
                 source: OrderTemplate
+            },
+
+            cancelOrder: function() {
+                OrderService.cancelOrder( this.model.id, _.bind(this.cancelOrderDone, this), ErrorUtil.showError);
+                return false;
+            },
+            cancelOrderDone: function() {
+                MessageBus.trigger( Message.UpdateOrders );
             }
         });
     }
