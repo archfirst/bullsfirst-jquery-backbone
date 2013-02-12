@@ -72,24 +72,50 @@ define(
                 // Clone the prototype's events object, then extend it
                 // TODO: figure out a better way to do this without instantiating a new object
                 return _.extend(_.clone(new ModalWidget().events), {
-                    'blur .modal-field input[type="text"]' : 'loseFocus',
+                    'blur .modal-field input[type="text"]' : 'updateOrder',
                     'change .modal-field select' : 'selectDropdown',
                     'change #trade-orderType' : 'toggleLimitField',
-                    'change #trade-quantity': 'updateQuantity',
-                    'click' : 'blurForm',
+                    'change #trade-symbol' : 'checkTypedSymbol',
                     'click .modal-checkbox' : 'selectCheckbox',
                     'click .modal-radio' : 'selectRadio',
-                    'click #trade-preview-order' : 'previewOrder'
+                    'click #trade-preview-order' : 'previewOrder',
+                    'mousedown' : 'blurForm'
                 });
             }()),
 
             blurForm: function(e) {
                 if ( e.target.tagName.toUpperCase() !== 'INPUT') {
+                    e.preventDefault();
                     $(document.activeElement).blur();
                 }
             },
 
-            createEstimate: function() {
+            checkTypedSymbol: function(e) {
+                var that = this,
+                    input = $(e.target).val().toUpperCase(),
+                    match = false;
+
+                if (input.length > 0) {
+                    $(this.instruments).each(function(){
+                        if ( this.value === input ) {
+                            match = true;
+
+                        }
+                    });
+                }
+
+                if (match) {
+                    that.orderRequest.orderParams.symbol = input;
+                    $(e.target).val(input);
+                    that.symbolChanged(input);
+                    that.createEstimate();
+                } else {
+                    that.symbolNotRecognized();
+                }
+                
+            },
+
+            createEstimate: function(callback) {
 
                 var tradeWidget = this;
 
@@ -103,7 +129,6 @@ define(
                 if (this.validateOrder()) {
 
                     OrderEstimateService.createOrderEstimate(this.orderRequest, function(response) {
-
                         var estimatedValue = Formatter.formatMoney(response.estimatedValue);
                         var fees = Formatter.formatMoney(response.fees);
                         var estimatedValueInclFees = Formatter.formatMoney(response.estimatedValueInclFees);
@@ -119,6 +144,10 @@ define(
                         $('#totalCost').html(estimatedValueInclFees);
 
                     }, ErrorUtil.showError);
+                }
+
+                if ( callback instanceof Function ) {
+                    callback();
                 }
             },
 
@@ -149,29 +178,6 @@ define(
                 return this;
             },
 
-            loseFocus: function(e) {
-                var tradeWidget = this,
-                    target = e.target,
-                    name = $(target).attr('name');
-
-                switch ( name ) {
-                    case 'brokerageAccountId':
-                    case 'tradeSymbol':
-                        break;
-                    case 'limitPrice':
-                        tradeWidget.orderRequest.orderParams[name] = {
-                            amount: $(target).val(),
-                            currency: tradeWidget.marketPrice.attributes.price.currency
-                        };
-                        break;
-                    default:
-                        tradeWidget.orderRequest.orderParams[name] = $(target).val();
-                }
-
-                this.createEstimate();
-                return this;
-            },
-
             postPlace: function(){
                 MessageBus.trigger(Message.ModalLoad);
 
@@ -186,7 +192,6 @@ define(
             },
 
             previewOrder: function(){
-
                 if (this.validateOrder()) {
                     var orderRequest = this.orderRequest;
 
@@ -202,8 +207,7 @@ define(
                         }
                     ]);
 
-                    $('.modal-overlay').addClass('show');
-                    $('.modal-overlay').addClass('stacked');
+                    $('.modal-overlay').addClass('show stacked');
                 }
             },
 
@@ -270,7 +274,6 @@ define(
             },
 
             selectDropdown: function(e) {
-
                 var tradeWidget = this,
                     target = $(e.target),
                     name = $(target).attr('name');
@@ -298,16 +301,28 @@ define(
                 $(':radio[value=' + target.attr('attr-value') + ']').attr('checked', true);
 
                 this.orderRequest.orderParams.side = target.text();
-
                 this.createEstimate();
 
                 return this;
             },
 
             symbolChanged: function(value) {
+                this.orderRequest.orderParams.symbol = value;
                 this._fetchMarketPrice(value);
             },
 
+            symbolNotRecognized: function() {
+                var zero = '$0.00';
+                this.symbolChanged(null);
+                this.createEstimate(function(){
+                    $('#trade-form .lastPrice').html('');
+                    $('#last-trade-price').val(0);
+                    $('#tradeCost').html(zero);
+                    $('#fees-field, #fees').html(zero);
+                    $('#totalCost').html(zero);
+                });
+            },
+            
             toggleLimitField: function(e){
                 if ( $(e.target).val().toLowerCase() === 'limit' ) {
                     $('.limit-price').removeClass('hidden');
@@ -320,11 +335,32 @@ define(
                 return this;
             },
 
-            updateQuantity: function(e) {
+            updateOrder: function(e) {
 
-              this.orderRequest.orderParams.quantity = $(e.currentTarget).val();
-              this.createEstimate();
+                var tradeWidget = this,
+                    target = e.target,
+                    name = $(target).attr('name');
 
+                switch ( name ) {
+                    case 'brokerageAccountId':
+                    case 'tradeSymbol':
+                        break;
+                    case 'limitPrice':
+                        tradeWidget.orderRequest.orderParams[name] = {
+                            amount: $(target).val(),
+                            currency: tradeWidget.marketPrice.attributes.price.currency
+                        };
+                        break;
+                    default:
+                        tradeWidget.orderRequest.orderParams[name] = $(target).val();
+                }
+
+                // tradeSymbol field is a special case
+                if ( name !== 'tradeSymbol') {
+                    this.createEstimate();
+                }
+
+                return this;
             },
 
             validateOrder: function() {
@@ -369,6 +405,8 @@ define(
                     };
                 });
 
+                this.instruments = instruments;
+
                 $('#trade-symbol').autocomplete({
                   source: function( request, response ) {
                     var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
@@ -391,11 +429,6 @@ define(
                 $('#last-trade-price').val(price);
 
                 this.createEstimate();
-
-                /*new LastTradeView({
-                    el: '#tradeForm_lastTrade',
-                    model: this.marketPrice
-                }).render();*/
             }
 
         });
