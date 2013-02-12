@@ -52,6 +52,13 @@ define(
                     return Formatter.formatDateTime(date);
                 });
 
+                Handlebars.registerHelper('isOrderActive', function(status, options) {
+                    if ( status === 'New' || status === 'PartiallyFilled' || status === 'PendingNew' )
+                    {
+                        return options.fn(this);
+                    }
+                });
+
                 Handlebars.registerHelper('ifEqual', function (left, right, options) {
                     if (Handlebars.Utils.isEmpty(left) ||
                         Handlebars.Utils.isEmpty(right) ||

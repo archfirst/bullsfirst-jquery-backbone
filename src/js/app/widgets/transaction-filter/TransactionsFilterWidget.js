@@ -45,8 +45,8 @@ define(
             },
 
             events: {
-                'click #transactions-filter .js-reset-filters-button' : 'triggerReset',
-                'click #transactions-filter .js-apply-filters-button' : 'triggerApply'
+                'click .transactions-filter .js-reset-filters-button' : 'triggerReset',
+                'click .transactions-filter .js-apply-filters-button' : 'triggerApply'
             },
 
             triggerReset: function() {

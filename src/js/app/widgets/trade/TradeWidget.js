@@ -61,7 +61,7 @@ define(
 
         return ModalWidget.extend({
             id: 'trade-modal',
-            className: 'modal-wrapper right form-modal',
+            className: 'modal-wrapper form-modal',
 
             template: {
                 name: 'TradeTemplate',

@@ -32,6 +32,7 @@ define({
     AccountStoppedEditing: 'Account:stoppedEditing',
 	ExternalAccountsUpdated: 'ExternalAccounts:Updated',
 	ModalLoad: 'Modal:load',
+	FilterLoaded: 'FilterLoaded',
     OrderFilterApply: 'Order:clickFilterApply',
     OrderFilterReset: 'Order:clickFilterReset',
     PageBeforeChange: 'PageBeforeChange',
@@ -43,6 +44,7 @@ define({
 	TradeSymbolChange: 'TradeSymbolChange',
     TransactionFilterApply: 'Transaction:clickFilterApply',
     TransactionFilterReset: 'Transaction:clickFilterReset',
+    UpdateOrders: 'UpdateOrders',
     UserLoggedInEvent: 'UserLoggedInEvent',
     UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

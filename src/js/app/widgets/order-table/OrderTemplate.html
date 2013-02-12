@@ -28,7 +28,9 @@
     <td class="center">
 	    {{status}}
 	</td>
-    <td class="center">
-	    
+    <td class="action-button">
+        {{#isOrderActive status}}
+            <a href="#" class="order_cancel" data-action="Cancel">Cancel</a>
+        {{/isOrderActive}}
 	</td>
 
