@@ -44,6 +44,7 @@ define({
 	TradeSymbolChange: 'TradeSymbolChange',
     TransactionFilterApply: 'Transaction:clickFilterApply',
     TransactionFilterReset: 'Transaction:clickFilterReset',
+    UpdateOrders: 'UpdateOrders',
     UserLoggedInEvent: 'UserLoggedInEvent',
     UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

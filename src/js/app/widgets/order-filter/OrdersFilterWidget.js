@@ -50,6 +50,12 @@ define(
                 'click #orders-filter .js-apply-filters-button' : 'triggerApply'
             },
 
+            initialize: function() {
+                this.listenTo(MessageBus, Message.UpdateOrders, function(){
+                    this.updateOrders(this.className);
+                });
+            },
+
             triggerReset: function() {
                 MessageBus.trigger(Message.OrderFilterReset, this.className);
                 return false;
