@@ -53,7 +53,7 @@ define(
                 });
 
                 Handlebars.registerHelper('isOrderActive', function(status, options) {
-                    if ( status === 'New' || status === 'PartiallyFilled' || status === 'PendingNew' )
+                    if ( status === 'New' || status === 'PartiallyFilled' || status === 'PendingNew' ) 
                     {
                         return options.fn(this);
                     }
