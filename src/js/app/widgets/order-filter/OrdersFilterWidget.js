@@ -45,106 +45,55 @@ define(
                 source: OrdersFilterTemplate
             },
 
+            elements:['ordersfilterform','orderfiltersymbol'],
+
             events: {
-                'click #orders-filter .js-reset-filters-button' : 'triggerReset',
-                'click #orders-filter .js-apply-filters-button' : 'triggerApply'
+                'click #orders-filter .js-reset-filters-button' : 'resetFilters',
+                'click #orders-filter .js-apply-filters-button' : 'updateOrders'
             },
 
             initialize: function() {
+
+                FilterWidget.prototype.initialize.call(this);
+                
                 this.listenTo(MessageBus, Message.UpdateOrders, function(){
-                    this.updateOrders(this.className);
+                    this.updateOrders();
                 });
+                
             },
 
-            triggerReset: function() {
-                MessageBus.trigger(Message.OrderFilterReset, this.className);
-                return false;
-            },
-
-            triggerApply: function(){
-                MessageBus.trigger(Message.OrderFilterApply, this.className);
-                return false;
+            postPlace: function() {
+               this._initSymbolField();
             },
             
-            postRender: function(){
-                MessageBus.on(Message.OrderFilterReset, this.resetFilter, this);
-                MessageBus.on(Message.OrderFilterApply, this.updateOrders, this);
-            },
-            
-            resetFilter: function(tab) {
+            resetFilters: function() {
                 //selectbox and datepicker reset inhertied from the filterWidget
-                this.resetSelectbox(tab);
-				this.resetDatepicker(tab);
-                this.resetOrderId();
-                this.resetSymbol();
-                this.resetOrderAction();
-                this.resetOrderStatus();
-			},
-            
-            
-            resetOrderId: function(){
-                $('#order-filter-orderno').val('');
-            },
-            resetSymbol: function(){
-                $('#order-filter-symbol').val('');
-            },
-            resetOrderAction: function(){
-                
-                $('.order-filter-action li input[type="checkbox"]').attr('checked', false);
-            },
-            resetOrderStatus: function(){
-                $('.order-filter-status li input[type="checkbox"]').attr('checked', false);
+                $(this.ordersfilterformElement).find('#orders-filter-accountId').prop('selectedIndex', 0);
+                $(this.ordersfilterformElement).find('input:text').prop('value', '');
+                $(this.ordersfilterformElement).find('#orders-fromDate').datepicker('setDate', new Date());
+                $(this.ordersfilterformElement).find('#orders-toDate').datepicker('setDate', new Date());
+                $(this.ordersfilterformElement).find('input:checkbox').prop('checked', false);
             },
             
-            updateOrders: function( tab ) {
+            updateOrders: function() {
                 // Process filter criteria to server format
-				var filterCriteria = {},
-                    orderId = $('#order-filter-orderno').val(),
-                    accountId = $('#orders-filter-accountId').val(),
-                    symbol = $('#order-filter-symbol').val(),
-                    sides,
-                    statuses;
-
-                if ( accountId > 0 ) {
-                    filterCriteria.accountId = accountId;
+                this.updateFilters($(this.ordersfilterformElement));
+                //var filterCriteria = $(this.ordersfilterformElement).toObject();
+                if (this.filterCriteria.fromDate) {
+                    this.filterCriteria.fromDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
                 }
-
-                if ( orderId > 0 ) {
-                    filterCriteria.orderId = orderId;
+                if (this.filterCriteria.toDate) {
+                    this.filterCriteria.toDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
                 }
-                                
-                statuses = $.map($('.order-filter-status li input[type="checkbox"]:checked'), function(n){
-                    return n.value;
-                }).join(',');
-                
-                sides = $.map($('.order-filter-action li input[type="checkbox"]:checked'), function(n){
-                    return n.value;
-                }).join(',');
-                
-                if(statuses){
-                    filterCriteria.statuses = statuses;
+                if (this.filterCriteria.sides) {
+                    this.filterCriteria.sides = this.filterCriteria.sides.join(',');
                 }
-                
-                if(symbol){
-                    filterCriteria.symbol = symbol;
+                if (this.filterCriteria.statuses) {
+                    this.filterCriteria.statuses = this.filterCriteria.statuses.join(',');
                 }
-                
-                if(sides){
-                    filterCriteria.sides = sides;
-                }
-
-				if ( $('#' + tab + '-fromDate').val().length > 0 ) {
-					filterCriteria.fromDate = moment( $('#' + tab + '-fromDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				if ( $('#' + tab + '-toDate').val().length > 0 ) {
-					filterCriteria.toDate = moment( $('#' + tab + '-toDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger('OrderFilterChanged', filterCriteria);
+                // Send OrderFilterChanged message with filter criteria
+                MessageBus.trigger('OrderFilterChanged',this.filterCriteria);
             },
-
             render: function(){
                 var template = this.getTemplate(),
                     collection = this.collection || {},
@@ -161,6 +110,18 @@ define(
 
                 this.postRender();
                 return this;
+            },
+
+            _initSymbolField: function() {
+                
+                var instruments = Repository.getInstruments();
+
+                $(this.orderfiltersymbolElement).autocomplete({
+                  source: instruments
+                });
+
+                return instruments;
+      
             }
         });
     }

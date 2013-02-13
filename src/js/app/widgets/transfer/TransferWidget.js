@@ -59,6 +59,8 @@ define(
                 source: TransferTemplate
             },
 
+            elements: ['transferSymbol'],
+
             events: (function() {
               // Clone the prototype's events object, then extend it
               // TODO: figure out a better way to do this without instantiating a new object
@@ -98,17 +100,11 @@ define(
 
             populateSymbolField: function () {
                 //get instruments
-                InstrumentService.getInstruments(function (data) {
-                    var instruments = $.map(data, function (instrument) {
-                        return {
-                            label: instrument.symbol + ' (' + instrument.name + ')',
-                            value: instrument.symbol
-                        };
-                    });
-                    $('#symbol').autocomplete({
+                var instruments = Repository.getInstruments();
+                
+                $(this.transferSymbolElement).autocomplete({
                         source: instruments
-                    });
-                }, ErrorUtil.showError);
+                });
             },
 
             processToAccountSelection: function (event) {

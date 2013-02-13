@@ -68,6 +68,8 @@ define(
                 source: TradeTemplate
             },
 
+            elements: ['tradesymbol'],
+
             events: (function() {
                 // Clone the prototype's events object, then extend it
                 // TODO: figure out a better way to do this without instantiating a new object
@@ -182,7 +184,8 @@ define(
 
                 // init the symbol autocomplete field
                 // We want _initSymbolField to recognize the tradeWidget as this, so we pass a context
-                InstrumentService.getInstruments(this._initSymbolField, ErrorUtil.showError, this);
+                //InstrumentService.getInstruments(this._initSymbolField, ErrorUtil.showError, this);
+                this._initSymbolField();
                 this._initFormStyles();
 
                 this.applySettings(this.settings);
@@ -394,19 +397,14 @@ define(
                 $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
             },
 
-            _initSymbolField: function(data) {
+            _initSymbolField: function() {
                 var tradeWidget = this;
 
-                var instruments = $.map(data, function(instrument) {
-                    return {
-                        label: instrument.symbol + ' (' + instrument.name + ')',
-                        value: instrument.symbol
-                    };
-                });
+                var instruments = Repository.getInstruments();
 
                 this.instruments = instruments;
 
-                $('#trade-symbol').autocomplete({
+                $(this.tradesymbolElement).autocomplete({
                   source: function( request, response ) {
                     var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
 

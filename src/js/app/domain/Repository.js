@@ -30,6 +30,7 @@ define(
         'app/domain/BaseAccount',
         'app/domain/BaseAccounts',
         'app/domain/BrokerageAccounts',
+        'app/services/InstrumentService',
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
         'app/domain/User',
@@ -38,7 +39,8 @@ define(
         'framework/MessageBus',
         'underscore'
     ],
-    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus, _) {
+    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts, InstrumentService,
+     Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -48,6 +50,7 @@ define(
         var _brokerageAccounts = new BrokerageAccounts();
         var _externalAccounts = new ExternalAccounts();
         var _selectedAccount = null;
+        var _instruments = null;
 
         var _repository = {
             getUser: function() { return _user; },
@@ -56,6 +59,7 @@ define(
             getBrokerageAccounts: function() { return _brokerageAccounts; },
             getExternalAccounts: function() { return _externalAccounts; },
             getSelectedAccount: function() { return _selectedAccount; },
+            getInstruments: function() { return _instruments; },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },
 
@@ -144,6 +148,19 @@ define(
                 _baseAccounts.reset(accounts);
             },
 
+            updateInstruments: function() {
+                InstrumentService.getInstruments(this._setInstruments, ErrorUtil.showError, this);
+            },
+
+            _setInstruments: function(data) {
+                _instruments = $.map(data, function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
+                });
+            },
+
             isUserLoggedIn: function() {
                 return _credentials.isInitialized();
             }
@@ -152,6 +169,7 @@ define(
         // Update accounts whenever user logs in
         MessageBus.on(Message.UserLoggedInEvent, function() {
             _repository.updateAccounts();
+            _repository.updateInstruments();
         });
 
         return _repository;
