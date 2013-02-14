@@ -75,7 +75,7 @@ define(
           
             styleFormElements: function(tab){
                 // Style select boxes
-                $('.js-' + tab + '-filter-form select').selectbox();
+                $('.js-' + tab + 'filterform select').selectbox();
 
                 // Create date pickers
                 $('.js-' + tab + '-fromDate').datepicker();
