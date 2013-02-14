@@ -25,7 +25,6 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
-        'app/services/InstrumentService',
         'app/services/OrderService',
         'app/widgets/modal/ModalWidget',
         'framework/ErrorUtil',
@@ -33,7 +32,7 @@ define(
         'text!app/widgets/trade-preview/TradePreviewTemplate.html',
         'underscore'
     ],
-    function(Message, Repository, InstrumentService, OrderService, ModalWidget, ErrorUtil, MessageBus, TradePreviewTemplate, _) {
+    function(Message, Repository, OrderService, ModalWidget, ErrorUtil, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
         return ModalWidget.extend({
