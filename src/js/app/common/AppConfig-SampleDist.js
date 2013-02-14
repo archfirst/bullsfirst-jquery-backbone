@@ -18,11 +18,11 @@
  * app/common/AppConfig
  *
  * Provides application configuration variables.
+ * Copy this file to AppConfig-Dist.js and customize to your environment.
  *
  * @author Naresh Bhatia
  */
 define({
-    // The application root. The build process will take care of changing this to '/dist/'.
-    // If you then deploy /dist as a root directory for your application, this should be changed to '/'.
-    appRoot: '/src/'
+    // The application root
+    appRoot: '/apps/bullsfirst-jquery-backbone/'
 });
