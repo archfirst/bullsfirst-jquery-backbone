@@ -5,7 +5,7 @@
                 <li>
                     <div class="filter-field account">
                         <label for="filter-accountId">Account</label>
-                        <select id="orders-filter-accountId" name="accountId">
+                        <select id="orders-filter-accountId" class="js-orders-filter-accountId" name="accountId">
                             <option value="">All Accounts</option>
                             {{#each accounts}}
                                 <option value={{this.id}}>{{this.name}}</option>
@@ -24,13 +24,13 @@
                 <li class="filter-field">
                     <div class="filter-field">
                         <label for="filter-fromDate">From</label>
-                        <input id="orders-fromDate" class="datepicker" name="fromDate" type="text" />
+                        <input id="orders-fromDate" class="js-orders-fromDate datepicker" name="fromDate" type="text" />
                     </div> 
                 </li>
                 <li class="filter-field">    
                     <div class="filter-field">
                         <label for="filter-toDate">To</label>
-                        <input id="orders-toDate" class="datepicker" name="toDate" type="text" />
+                        <input id="orders-toDate" class="js-orders-toDate datepicker" name="toDate" type="text" />
                     </div> 
                 </li>
                 <li class="action filter-field">
