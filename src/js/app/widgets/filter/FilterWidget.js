@@ -48,10 +48,9 @@ define(
 
             postRender: function(){
                 // Subscribe to events
-                MessageBus.on(Message.TransactionFilterReset, this.resetFilter, this);
-                MessageBus.on(Message.TransactionFilterApply, this.updateTransactions, this);
-                MessageBus.on('UpdateTransactions', this.updateTransactions, this);
-                
+                this.listenTo(MessageBus, Message.TransactionFilterReset, this.resetFilter);
+                this.listenTo(MessageBus, Message.TransactionFilterApply, this.updateTransactions);
+                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
             },
 
             updateFilters: function(context){
@@ -102,7 +101,7 @@ define(
 				}
 
 				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger('TransactionFilterChanged', filterCriteria);
+				MessageBus.trigger(Message.TransactionFilterChanged, filterCriteria);
 			}
                         
         });
