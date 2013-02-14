@@ -26,7 +26,6 @@ define(
         'app/common/Message',
         'app/domain/ExternalAccount',
         'app/domain/Repository',
-        'app/services/InstrumentService',
         'app/widgets/modal/ModalWidget',
         'framework/AlertUtil',
         'framework/ErrorUtil',
@@ -37,7 +36,7 @@ define(
         'jqueryToObject',
         'jqueryValidationEngineRules'
     ],
-    function(Message, ExternalAccount, Repository, InstrumentService, ModalWidget, AlertUtil, ErrorUtil, MessageBus, AddExternalAccountTemplate, _) {
+    function(Message, ExternalAccount, Repository, ModalWidget, AlertUtil, ErrorUtil, MessageBus, AddExternalAccountTemplate, _) {
         'use strict';
 
         return ModalWidget.extend({

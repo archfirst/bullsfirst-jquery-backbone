@@ -54,6 +54,10 @@ define(
                 
             },
 
+            updateFilters: function(context){
+                this.filterCriteria = context.toObject();
+            },
+
             resetDatepicker: function(tab){
                 $('.js-' + tab + '-fromDate').datepicker('setDate', new Date());
                 $('.js-' + tab + '-toDate').datepicker('setDate', new Date());

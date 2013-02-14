@@ -33,12 +33,14 @@ define(
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
         'app/domain/User',
+        'app/services/InstrumentService',
         'framework/ErrorUtil',
         'framework/Formatter',
         'framework/MessageBus',
         'underscore'
     ],
-    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus, _) {
+    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
+     Credentials, ExternalAccounts, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -48,6 +50,7 @@ define(
         var _brokerageAccounts = new BrokerageAccounts();
         var _externalAccounts = new ExternalAccounts();
         var _selectedAccount = null;
+        var _instruments = null;
 
         var _repository = {
             getUser: function() { return _user; },
@@ -56,6 +59,7 @@ define(
             getBrokerageAccounts: function() { return _brokerageAccounts; },
             getExternalAccounts: function() { return _externalAccounts; },
             getSelectedAccount: function() { return _selectedAccount; },
+            getInstruments: function() { return _instruments; },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },
 
@@ -144,6 +148,10 @@ define(
                 _baseAccounts.reset(accounts);
             },
 
+            updateInstruments: function() {
+                InstrumentService.getInstruments( function( data ) { _instruments = data; }, ErrorUtil.showError, this);
+            },
+
             isUserLoggedIn: function() {
                 return _credentials.isInitialized();
             }
@@ -152,6 +160,7 @@ define(
         // Update accounts whenever user logs in
         MessageBus.on(Message.UserLoggedInEvent, function() {
             _repository.updateAccounts();
+            _repository.updateInstruments();
         });
 
         return _repository;

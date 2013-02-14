@@ -26,7 +26,6 @@ define(
         'app/common/Message',
         'app/domain/Repository',
         'app/services/AccountService',
-        'app/services/InstrumentService',
         'app/widgets/add-external-account/AddExternalAccountWidget',
         'app/widgets/modal/ModalWidget',
         'framework/AlertUtil',
@@ -40,7 +39,6 @@ define(
         Message,
         Repository,
         AccountService,
-        InstrumentService,
         AddExternalAccountWidget,
         ModalWidget,
         AlertUtil,
@@ -58,6 +56,8 @@ define(
                 name: 'TransferTemplate',
                 source: TransferTemplate
             },
+
+            elements: ['transferSymbol'],
 
             events: (function() {
               // Clone the prototype's events object, then extend it
@@ -98,17 +98,16 @@ define(
 
             populateSymbolField: function () {
                 //get instruments
-                InstrumentService.getInstruments(function (data) {
-                    var instruments = $.map(data, function (instrument) {
-                        return {
-                            label: instrument.symbol + ' (' + instrument.name + ')',
-                            value: instrument.symbol
-                        };
-                    });
-                    $('#symbol').autocomplete({
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
+                });
+                
+                $(this.transferSymbolElement).autocomplete({
                         source: instruments
-                    });
-                }, ErrorUtil.showError);
+                });
             },
 
             processToAccountSelection: function (event) {
