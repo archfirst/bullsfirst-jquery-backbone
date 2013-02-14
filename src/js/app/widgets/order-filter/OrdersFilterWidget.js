@@ -73,6 +73,7 @@ define(
                 $(this.ordersfilterformElement).find('#orders-fromDate').datepicker('setDate', new Date());
                 $(this.ordersfilterformElement).find('#orders-toDate').datepicker('setDate', new Date());
                 $(this.ordersfilterformElement).find('input:checkbox').prop('checked', false);
+                this.updateOrders();
             },
             
             updateOrders: function() {
