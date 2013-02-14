@@ -52,7 +52,7 @@ define(
                     return Formatter.formatDateTime(date);
                 });
 
-                Handlebars.registerHelper('isOrderActive', function(status, options) {
+                Handlebars.registerHelper('ifOrderActive', function(status, options) {
                     if ( status === 'New' || status === 'PartiallyFilled' || status === 'PendingNew' ) {
                         return options.fn(this);
                     }
