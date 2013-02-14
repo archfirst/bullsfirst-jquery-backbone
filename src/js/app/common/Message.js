@@ -34,6 +34,7 @@ define({
 	ModalLoad: 'Modal:load',
 	FilterLoaded: 'FilterLoaded',
     OrderFilterApply: 'Order:clickFilterApply',
+    OrderFilterChanged: 'Order:orderFilterChanged',
     OrderFilterReset: 'Order:clickFilterReset',
     PageBeforeChange: 'PageBeforeChange',
     PageChange: 'PageChange',
@@ -43,8 +44,10 @@ define({
     TradeRequest: 'TradeRequest',
 	TradeSymbolChange: 'TradeSymbolChange',
     TransactionFilterApply: 'Transaction:clickFilterApply',
+    TransactionFilterChanged: 'Transaction:transactionFilterChanged',
     TransactionFilterReset: 'Transaction:clickFilterReset',
     UpdateOrders: 'UpdateOrders',
+    UpdateTransactions: 'UpdateTransactions',
     UserLoggedInEvent: 'UserLoggedInEvent',
     UserLoggedOutEvent: 'UserLoggedOutEvent'
 });

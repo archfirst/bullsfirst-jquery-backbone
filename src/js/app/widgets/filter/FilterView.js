@@ -47,9 +47,9 @@ define(
 
             postRender: function(){
                 // Subscribe to events
-                MessageBus.on(Message.TransactionFilterReset, this.resetFilter, this);
-                MessageBus.on(Message.TransactionFilterApply, this.updateTransactions, this);
-                MessageBus.on('UpdateTransactions', this.updateTransactions, this);
+                this.listenTo(MessageBus, Message.TransactionFilterReset, this.resetFilter);
+                this.listenTo(MessageBus, Message.TransactionFilterApply, this.updateTransactions);
+                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
             },
 
             resetDatepicker: function(tab){
@@ -95,8 +95,8 @@ define(
 					filterCriteria.toDate = moment( $('#' + tab + '-toDate').datepicker('getDate') ).format('YYYY-MM-DD');
 				}
 
-				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger('TransactionFilterChanged', filterCriteria);
+				// Send TransactionFilterChanged message with filter criteria
+				MessageBus.trigger(Message.TransactionFilterChanged, filterCriteria);
 			}
         });
     }

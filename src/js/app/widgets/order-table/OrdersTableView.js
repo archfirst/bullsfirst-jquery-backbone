@@ -39,14 +39,10 @@ define(
 
 				this.collection.bind('reset', this.render, this);
 
-				// Subscribe to events
-				MessageBus.on('OrderFilterChanged', function(filterCriteria) {
-					this.collection.fetch({data: filterCriteria});
-				}, this);
-                
-                this.collection.fetch();
-
-				this.render();
+                // Subscribe to events
+                this.listenTo(MessageBus, Message.OrderFilterChanged, function(filterCriteria) {
+                    this.collection.fetch({data: filterCriteria});
+                });
 			},
 
 			render: function(){

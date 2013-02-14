@@ -93,7 +93,7 @@ define(
                     this.filterCriteria.statuses = this.filterCriteria.statuses.join(',');
                 }
                 // Send OrderFilterChanged message with filter criteria
-                MessageBus.trigger('OrderFilterChanged',this.filterCriteria);
+                MessageBus.trigger(Message.OrderFilterChanged,this.filterCriteria);
             },
             render: function(){
                 var template = this.getTemplate(),

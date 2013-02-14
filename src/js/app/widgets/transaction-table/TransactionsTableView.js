@@ -39,9 +39,9 @@ define(
 				this.collection.bind('reset', this.render, this);
 
 				// Subscribe to events
-				MessageBus.on('TransactionFilterChanged', function(filterCriteria) {
-					this.collection.fetch({data: filterCriteria});
-				}, this);
+                this.listenTo(MessageBus, Message.TransactionFilterChanged, function(filterCriteria) {
+                    this.collection.fetch({data: filterCriteria});
+                });
 
 			},
 
