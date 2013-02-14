@@ -26,7 +26,6 @@ define(
         'app/common/Message',
         'app/domain/MarketPrice',
         'app/domain/Repository',
-        'app/services/InstrumentService',
         'app/services/OrderEstimateService',
         'app/widgets/modal/ModalWidget',
         'app/widgets/trade-preview/TradePreviewViewModel',
@@ -44,7 +43,6 @@ define(
         Message,
         MarketPrice,
         Repository,
-        InstrumentService,
         OrderEstimateService,
         ModalWidget,
         TradePreviewViewModel,
@@ -184,7 +182,6 @@ define(
 
                 // init the symbol autocomplete field
                 // We want _initSymbolField to recognize the tradeWidget as this, so we pass a context
-                //InstrumentService.getInstruments(this._initSymbolField, ErrorUtil.showError, this);
                 this._initSymbolField();
                 this._initFormStyles();
 
@@ -399,8 +396,13 @@ define(
 
             _initSymbolField: function() {
                 var tradeWidget = this;
-
-                var instruments = Repository.getInstruments();
+                
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
+                });
 
                 this.instruments = instruments;
 

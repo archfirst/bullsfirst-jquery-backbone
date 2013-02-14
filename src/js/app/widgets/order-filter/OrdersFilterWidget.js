@@ -114,7 +114,12 @@ define(
 
             _initSymbolField: function() {
                 
-                var instruments = Repository.getInstruments();
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
+                });
 
                 $(this.orderfiltersymbolElement).autocomplete({
                   source: instruments

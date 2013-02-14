@@ -26,7 +26,6 @@ define(
         'app/common/Message',
         'app/domain/Repository',
         'app/services/AccountService',
-        'app/services/InstrumentService',
         'app/widgets/add-external-account/AddExternalAccountWidget',
         'app/widgets/modal/ModalWidget',
         'framework/AlertUtil',
@@ -40,7 +39,6 @@ define(
         Message,
         Repository,
         AccountService,
-        InstrumentService,
         AddExternalAccountWidget,
         ModalWidget,
         AlertUtil,
@@ -100,7 +98,12 @@ define(
 
             populateSymbolField: function () {
                 //get instruments
-                var instruments = Repository.getInstruments();
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
+                });
                 
                 $(this.transferSymbolElement).autocomplete({
                         source: instruments

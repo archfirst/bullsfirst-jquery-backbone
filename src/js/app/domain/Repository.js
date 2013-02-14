@@ -30,17 +30,17 @@ define(
         'app/domain/BaseAccount',
         'app/domain/BaseAccounts',
         'app/domain/BrokerageAccounts',
-        'app/services/InstrumentService',
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
         'app/domain/User',
+        'app/services/InstrumentService',
         'framework/ErrorUtil',
         'framework/Formatter',
         'framework/MessageBus',
         'underscore'
     ],
-    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts, InstrumentService,
-     Credentials, ExternalAccounts, User, ErrorUtil, Formatter, MessageBus, _) {
+    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
+     Credentials, ExternalAccounts, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -149,16 +149,7 @@ define(
             },
 
             updateInstruments: function() {
-                InstrumentService.getInstruments(this._setInstruments, ErrorUtil.showError, this);
-            },
-
-            _setInstruments: function(data) {
-                _instruments = $.map(data, function(instrument) {
-                    return {
-                        label: instrument.symbol + ' (' + instrument.name + ')',
-                        value: instrument.symbol
-                    };
-                });
+                InstrumentService.getInstruments( function( data ) { _instruments = data; }, ErrorUtil.showError, this);
             },
 
             isUserLoggedIn: function() {
