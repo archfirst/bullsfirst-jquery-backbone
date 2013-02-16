@@ -1,11 +1,11 @@
 <div id="orders-filter" class="filter-wrapper clearfix">
 	<div class="filter-form">
-	    <form id="orders-filter-form" class="js-ordersfilterform">
+	    <form id="orders-filter-form" class="js-ordersFilterForm">
 	        <ul class="orders-filter-list">
                 <li>
                     <div class="filter-field account">
                         <label for="filter-accountId">Account</label>
-                        <select id="orders-filter-accountId" class="js-orders-filter-accountId" name="accountId">
+                        <select id="orders-filter-accountId" class="js-ordersFilterAccountId" name="accountId">
                             <option value="">All Accounts</option>
                             {{#each accounts}}
                                 <option value={{this.id}}>{{this.name}}</option>
@@ -19,18 +19,18 @@
                 </li>
                 <li class="filter-field symbol">
                     <label for="order-filter-symbol">Symbol</label>
-                    <input type="text" id="order-filter-symbol" class="js-orderfiltersymbol" name="symbol" placeholder="Optional"></input>
+                    <input type="text" id="order-filter-symbol" class="js-ordersFilterSymbol" name="symbol" placeholder="Optional"></input>
                 </li>
                 <li class="filter-field">
                     <div class="filter-field">
                         <label for="filter-fromDate">From</label>
-                        <input id="orders-fromDate" class="js-orders-fromDate datepicker" name="fromDate" type="text" />
+                        <input id="orders-fromDate" class="js-ordersFromDate datepicker" name="fromDate" type="text" />
                     </div> 
                 </li>
                 <li class="filter-field">    
                     <div class="filter-field">
                         <label for="filter-toDate">To</label>
-                        <input id="orders-toDate" class="js-orders-toDate datepicker" name="toDate" type="text" />
+                        <input id="orders-toDate" class="js-ordersToDate datepicker" name="toDate" type="text" />
                     </div> 
                 </li>
                 <li class="action filter-field">
