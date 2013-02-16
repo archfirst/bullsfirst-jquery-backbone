@@ -70,6 +70,9 @@ define(
                         parentElement: this.$el
                     }
                 ]);
+            },
+            postPlace: function(){
+                MessageBus.trigger(Message.FilterLoaded);
             }
         });
     }
