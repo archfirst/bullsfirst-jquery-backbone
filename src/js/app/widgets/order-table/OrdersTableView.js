@@ -43,6 +43,7 @@ define(
                 this.listenTo(MessageBus, Message.OrderFilterChanged, function(filterCriteria) {
                     this.collection.fetch({data: filterCriteria});
                 });
+                MessageBus.trigger(Message.UpdateOrders);
 			},
 
 			render: function(){
