@@ -37,6 +37,8 @@ define(
         return BaseView.extend({
             tagName: 'table',
             className: 'orders-table bf-table',
+            elements: ['ordersTableBody'],
+
             template: {
                 name: 'OrdersTableTemplate',
                 source: OrdersTableTemplate
@@ -47,15 +49,14 @@ define(
                     {
                         id: 'OrdersTableView',
                         viewClass: OrdersTableView,
-                        el: '.orders-table tbody',
                         options: {
-                            el: '.orders-table tbody',
-                            tab: 'orders',
+                            el: this.ordersTableBodyElement,
                             collection: new Orders()
                         }
                     }
-                   
                 ]);
+
+                // Display as TreeTable
                 this.$el.treeTable();
             }
         });

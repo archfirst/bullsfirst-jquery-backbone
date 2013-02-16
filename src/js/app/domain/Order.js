@@ -49,10 +49,6 @@ define(
             // just to show that it is possible to use the executions array as is.
             parse: function(response) {
                 response.executionPrice = this.calculateExecutionPrice(response);
-                response.isActive =
-                    response.status === 'New' ||
-                    response.status === 'PartiallyFilled' ||
-                    response.status === 'PendingNew';
                 return response;
             },
 

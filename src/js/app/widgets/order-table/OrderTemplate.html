@@ -1,36 +1,35 @@
-	<td class="center">
-	    {{creationTimeFormatted}}
-	</td>
-	<td class="center">
-	    {{accountName}}
-	</td>
-    <td class="center">
-	    {{id}}
-	</td>
-	<td class="center">
-	    {{type}}
-	</td>
-    <td class="center">
-	    {{side}}
-	</td>
-    <td class="center">
-	    {{symbol}}
-	</td>
-    <td class="center">
-	    {{quantity}}
-	</td>
-    <td class="center">
-	    {{limitPriceFormatted}}
-	</td>
-	<td class="center">
-	    {{! execprice}}
-	</td>
-    <td class="center">
-	    {{status}}
-	</td>
-    <td class="action-button">
-        {{#ifOrderActive status}}
-            <a href="#" class="order_cancel" data-action="Cancel">Cancel</a>
-        {{/ifOrderActive}}
-	</td>
-
+<td class="left">
+    {{formatDateTime creationTime}}
+</td>
+<td class="left">
+    {{accountName}}
+</td>
+<td class="number">
+    {{id}}
+</td>
+<td class="center">
+    {{type}}
+</td>
+<td class="center">
+    {{side}}
+</td>
+<td class="center">
+    {{symbol}}
+</td>
+<td class="number">
+    {{quantity}}
+</td>
+<td class="number">
+    {{formatMoney limitPrice}}
+</td>
+<td class="number">
+    {{formatMoney executionPrice}}
+</td>
+<td class="center">
+    {{status}}
+</td>
+<td class="center">
+    {{#ifOrderActive status}}
+        <a href="#" class="order_cancel" data-action="Cancel">Cancel</a>
+    {{/ifOrderActive}}
+</td>

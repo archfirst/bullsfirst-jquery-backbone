@@ -113,8 +113,10 @@ define(
                 var template = this.getTemplate();
                 var model = this.model || {};
 
-                // If the model contains a toJSON method, call it to create the context
-                var context = model.toJSON ? model.toJSON() : {};
+                // If the model contains a toJSON method, call it to create the context.
+                // Otherwise assume that the model contains properties that will be
+                // displayed as is.
+                var context = model.toJSON ? model.toJSON() : model;
 
                 // Destroy existing children
                 this.destroyChildren();
