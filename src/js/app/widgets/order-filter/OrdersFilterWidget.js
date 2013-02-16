@@ -45,7 +45,7 @@ define(
                 source: OrdersFilterTemplate
             },
 
-            elements:['ordersfilterform','orderfiltersymbol'],
+            elements:['ordersFilterForm','ordersFilterSymbol'],
 
             events: {
                 'click #orders-filter .js-reset-filters-button' : 'resetFilters',
@@ -63,28 +63,34 @@ define(
             },
 
             postPlace: function() {
-               this._initSymbolField();
+                this._initSymbolField();
             },
             
             resetFilters: function() {
                 //selectbox and datepicker reset inhertied from the filterWidget
-                $(this.ordersfilterformElement).find('#orders-filter-accountId').prop('selectedIndex', 0);
-                $(this.ordersfilterformElement).find('input:text').prop('value', '');
-                $(this.ordersfilterformElement).find('#orders-fromDate').datepicker('setDate', new Date());
-                $(this.ordersfilterformElement).find('#orders-toDate').datepicker('setDate', new Date());
-                $(this.ordersfilterformElement).find('input:checkbox').prop('checked', false);
+                $(this.ordersFilterFormElement).find('#orders-filter-accountId').prop('selectedIndex', 0);
+                $(this.ordersFilterFormElement).find('input:text').prop('value', '');
+                $(this.ordersFilterFormElement).find('#orders-fromDate').datepicker('setDate', new Date());
+                $(this.ordersFilterFormElement).find('#orders-toDate').datepicker('setDate', new Date());
+                $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
                 this.updateOrders();
             },
             
             updateOrders: function() {
                 // Process filter criteria to server format
-                this.updateFilters($(this.ordersfilterformElement));
-                //var filterCriteria = $(this.ordersfilterformElement).toObject();
+                this.updateFilters($(this.ordersFilterFormElement));
+                
                 if (this.filterCriteria.fromDate) {
                     this.filterCriteria.fromDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
                 }
+                else {
+                    this.filterCriteria.fromDate = moment(new Date()).format('YYYY-MM-DD');
+                }
                 if (this.filterCriteria.toDate) {
                     this.filterCriteria.toDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
+                }
+                else {
+                    this.filterCriteria.toDate = moment(new Date()).format('YYYY-MM-DD');
                 }
                 if (this.filterCriteria.sides) {
                     this.filterCriteria.sides = this.filterCriteria.sides.join(',');
@@ -122,7 +128,7 @@ define(
                     };
                 });
 
-                $(this.orderfiltersymbolElement).autocomplete({
+                $(this.ordersFilterSymbolElement).autocomplete({
                   source: instruments
                 });
 
