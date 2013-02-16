@@ -15,9 +15,12 @@
 
 .bf-table tbody td,
 .bf-table tbody td a {
-    border-bottom: 1px solid $table-row-separator-color;
     font: normal normal 12px/25px Aller;
     height: 25px;
+}
+
+.bf-table tbody td {
+    border-bottom: 1px solid $table-row-separator-color;
 }
 
 .bf-table .negative {
