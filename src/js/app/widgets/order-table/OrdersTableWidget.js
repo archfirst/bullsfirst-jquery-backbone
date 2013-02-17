@@ -22,7 +22,6 @@
 define(
     [
         'app/common/Message',
-        'app/domain/Repository',
         'app/domain/Orders',
         'app/widgets/order-table/OrdersTableView',
         'framework/BaseView',
@@ -30,8 +29,7 @@ define(
         'text!app/widgets/order-table/OrdersTableTemplate.html',
         'jqueryTreeTable'
     ],
-    function(Message, Repository, Orders, OrdersTableView,
-        BaseView, MessageBus, OrdersTableTemplate) {
+    function(Message, Orders, OrdersTableView, BaseView, MessageBus, OrdersTableTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -44,6 +42,17 @@ define(
                 source: OrdersTableTemplate
             },
 
+            initialize: function() {
+
+                this.collection = new Orders();
+                this.collection.bind('reset', this.render, this);
+
+                // Subscribe to events
+                this.listenTo(MessageBus, Message.OrderFilterChanged, function(filterCriteria) {
+                    this.collection.fetch({data: filterCriteria});
+                });
+            },
+
             postRender: function() {
                 this.addChildren([
                     {
@@ -51,7 +60,7 @@ define(
                         viewClass: OrdersTableView,
                         options: {
                             el: this.ordersTableBodyElement,
-                            collection: new Orders()
+                            collection: this.collection
                         }
                     }
                 ]);

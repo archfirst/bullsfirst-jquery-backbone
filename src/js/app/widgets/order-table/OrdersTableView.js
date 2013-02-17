@@ -21,27 +21,14 @@
  */
 define(
     [
-        'app/common/Message',
         'app/widgets/order-table/ExecutionView',
         'app/widgets/order-table/OrderView',
-        'framework/BaseView',
-        'framework/Formatter',
-        'framework/MessageBus'
+        'framework/BaseView'
     ],
-    function(Message, ExecutionView, OrderView, BaseView, Formatter, MessageBus) {
+    function(ExecutionView, OrderView, BaseView) {
         'use strict';
 
         return BaseView.extend({
-
-            initialize: function() {
-
-				this.collection.bind('reset', this.render, this);
-
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.OrderFilterChanged, function(filterCriteria) {
-                    this.collection.fetch({data: filterCriteria});
-                });
-			},
 
             render: function() {
                 this.destroyChildren();
