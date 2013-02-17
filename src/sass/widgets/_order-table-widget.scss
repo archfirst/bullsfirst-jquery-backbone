@@ -2,8 +2,8 @@
  * order-table-widget
  *
  * Column        Padding + Width = Total
- * creation-date   10    +  160  =  170
- * account          0    +  135  =  135
+ * creation-date   10    +  170  =  180
+ * account          0    +  125  =  125
  * order-no         0    +   50  =   50
  * type             0    +   35  =   35
  * action-ro        0    +   50  =   50
@@ -26,12 +26,12 @@
 .orders-table .order-tbl-creation-date {
     padding-left: 10px;
     text-align: left;
-    width: 160px;
+    width: 170px;
 }
 
 .orders-table .order-tbl-account {
     text-align: left;
-    width: 135px;
+    width: 125px;
 }
 
 .orders-table .order-tbl-order-no {
@@ -80,6 +80,6 @@
     width: 45px;
 }
 
-.orders-table .canceled{
+.orders-table .canceled {
     background-color: $table-row-faded;
 }
