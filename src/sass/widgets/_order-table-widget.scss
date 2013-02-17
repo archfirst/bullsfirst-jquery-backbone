@@ -52,7 +52,7 @@
 
 .orders-table .order-tbl-symbol {
     text-align: right;
-    width: 30px;
+    width: 50px;
 }
 
 .orders-table .order-tbl-qty {
@@ -67,15 +67,16 @@
 
 .orders-table .order-tbl-exec-price {
     text-align: right;
-    width: 95px;
+    width: 65px;
 }
 
 .orders-table .order-tbl-status {
     text-align: center;
-    width: 90px;
+    width: 80px;
 }
 
 .orders-table .order-tbl-action {
+    padding-right: 10px;
     text-align: center;
     width: 45px;
 }
