@@ -1,3 +1,22 @@
+/* -----------------------------------------------------------------------------
+ * order-table-widget
+ *
+ * Column        Padding + Width = Total
+ * creation-date   10    +  170  =  180
+ * account          0    +  125  =  125
+ * order-no         0    +   50  =   50
+ * type             0    +   35  =   35
+ * action-ro        0    +   50  =   50
+ * symbol           0    +   50  =   50
+ * qty              0    +   65  =   65
+ * limit-price      0    +   65  =   65
+ * exec-price       0    +   65  =   65
+ * status           0    +   80  =   80
+ * action          10    +   45  =   55
+ * ------------------------------------
+ * Total                            820
+ * -------------------------------------------------------------------------- */
+
 .orders-table {
 	table-layout: fixed;
 	margin: 0 40px 28px 80px;
@@ -7,12 +26,12 @@
 .orders-table .order-tbl-creation-date {
     padding-left: 10px;
     text-align: left;
-    width: 160px;
+    width: 170px;
 }
 
 .orders-table .order-tbl-account {
     text-align: left;
-    width: 115px;
+    width: 125px;
 }
 
 .orders-table .order-tbl-order-no {
@@ -60,6 +79,6 @@
     width: 45px;
 }
 
-.orders-table .canceled{
+.orders-table .canceled {
     background-color: $table-row-faded;
 }
