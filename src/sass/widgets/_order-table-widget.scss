@@ -4,24 +4,60 @@
 	width: 820px;
 }
 
-.orders-table tr td:last-child { padding-right: 20px; }
-
-.orders-table:after {
-	content: "";
-	width: 820px;
-	height: 1px;
-	background: $brand-color;
-	display: block;
-	position: absolute;
-	bottom: 14px;
-	left: 80px;
-}
-.orders-table .center {
-	text-align: center;
+.orders-table .order-tbl-creation-date {
+    padding-left: 10px;
+    text-align: left;
+    width: 160px;
 }
 
-.orders-table .number {
-	text-align: right;
+.orders-table .order-tbl-account {
+    text-align: left;
+    width: 115px;
+}
+
+.orders-table .order-tbl-order-no {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-type {
+    text-align: center;
+    width: 35px;
+}
+
+.orders-table .order-tbl-action-ro {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-symbol {
+    text-align: right;
+    width: 30px;
+}
+
+.orders-table .order-tbl-qty {
+    text-align: right;
+    width: 65px;
+}
+
+.orders-table .order-tbl-limit-price {
+    text-align: right;
+    width: 65px;
+}
+
+.orders-table .order-tbl-exec-price {
+    text-align: right;
+    width: 95px;
+}
+
+.orders-table .order-tbl-status {
+    text-align: center;
+    width: 90px;
+}
+
+.orders-table .order-tbl-action {
+    text-align: center;
+    width: 45px;
 }
 
 .orders-table .canceled{

@@ -1,34 +1,34 @@
-<td class="left">
+<td class="order-tbl-creation-date">
     {{formatDateTime creationTime}}
 </td>
-<td class="left">
+<td class="order-tbl-account">
     {{accountName}}
 </td>
-<td class="number">
+<td class="order-tbl-order-no">
     {{id}}
 </td>
-<td class="center">
+<td class="order-tbl-type">
     {{type}}
 </td>
-<td class="center">
+<td class="order-tbl-action-ro">
     {{side}}
 </td>
-<td class="center">
+<td class="order-tbl-symbol">
     {{symbol}}
 </td>
-<td class="number">
+<td class="order-tbl-qty">
     {{quantity}}
 </td>
-<td class="number">
+<td class="order-tbl-limit-price">
     {{formatMoney limitPrice}}
 </td>
-<td class="number">
+<td class="order-tbl-exec-price">
     {{formatMoney executionPrice}}
 </td>
-<td class="center">
+<td class="order-tbl-status">
     {{status}}
 </td>
-<td class="center">
+<td class="order-tbl-action">
     {{#ifOrderActive status}}
         <a href="#" class="order_cancel" data-action="Cancel">Cancel</a>
     {{/ifOrderActive}}
