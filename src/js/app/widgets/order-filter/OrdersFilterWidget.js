@@ -64,6 +64,8 @@ define(
 
             postPlace: function() {
                 this._initSymbolField();
+                var orderFilter = Repository.getOrderFilters();
+                $(this.ordersFilterSymbolElement).prop('value',orderFilter.OrderFilterCriteria.symbol);
             },
             
             resetFilters: function() {
@@ -78,28 +80,10 @@ define(
             
             updateOrders: function() {
                 // Process filter criteria to server format
-                this.updateFilters($(this.ordersFilterFormElement));
-                
-                if (this.filterCriteria.fromDate) {
-                    this.filterCriteria.fromDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
-                }
-                else {
-                    this.filterCriteria.fromDate = moment(new Date()).format('YYYY-MM-DD');
-                }
-                if (this.filterCriteria.toDate) {
-                    this.filterCriteria.toDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
-                }
-                else {
-                    this.filterCriteria.toDate = moment(new Date()).format('YYYY-MM-DD');
-                }
-                if (this.filterCriteria.sides) {
-                    this.filterCriteria.sides = this.filterCriteria.sides.join(',');
-                }
-                if (this.filterCriteria.statuses) {
-                    this.filterCriteria.statuses = this.filterCriteria.statuses.join(',');
-                }
+                Repository.setOrderFilterCriteria( $(this.ordersFilterFormElement).toObject() );
+                Repository.getOrders();
                 // Send OrderFilterChanged message with filter criteria
-                MessageBus.trigger(Message.OrderFilterChanged,this.filterCriteria);
+                //MessageBus.trigger(Message.OrderFilterChanged,this.filterCriteria);
             },
             render: function(){
                 var template = this.getTemplate(),

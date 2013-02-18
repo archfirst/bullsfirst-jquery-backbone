@@ -32,6 +32,8 @@ define(
         'app/domain/BrokerageAccounts',
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
+        'app/domain/Orders',
+        'app/domain/OrderFilter',
         'app/domain/User',
         'app/services/InstrumentService',
         'framework/ErrorUtil',
@@ -40,7 +42,7 @@ define(
         'underscore'
     ],
     function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
-     Credentials, ExternalAccounts, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
+     Credentials, ExternalAccounts, Orders, OrderFilter, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -51,6 +53,8 @@ define(
         var _externalAccounts = new ExternalAccounts();
         var _selectedAccount = null;
         var _instruments = null;
+        var _orders = new Orders();
+        var _orderFilters = new OrderFilter();
 
         var _repository = {
             getUser: function() { return _user; },
@@ -60,6 +64,17 @@ define(
             getExternalAccounts: function() { return _externalAccounts; },
             getSelectedAccount: function() { return _selectedAccount; },
             getInstruments: function() { return _instruments; },
+            getOrderFilters: function() { return _orderFilters; },
+            getOrders: function() {
+                _orders.fetch({
+                    data: _orderFilters.getOrderFilterCriteria()
+                });
+                return _orders;
+            },
+
+            setOrderFilterCriteria: function( filtercriteria ) {
+                _orderFilters.setOrderFilterCriteria( filtercriteria );
+            },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },
 

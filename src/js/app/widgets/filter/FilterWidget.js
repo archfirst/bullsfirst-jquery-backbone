@@ -53,10 +53,6 @@ define(
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
             },
 
-            updateFilters: function(context){
-                this.filterCriteria = context.toObject();
-            },
-
             resetDatepicker: function(tab){
                 $('.js-' + tab + 'FromDate').datepicker('setDate', new Date());
                 $('.js-' + tab + 'ToDate').datepicker('setDate', new Date());
