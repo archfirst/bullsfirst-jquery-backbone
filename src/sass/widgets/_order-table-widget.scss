@@ -18,9 +18,9 @@
  * -------------------------------------------------------------------------- */
 
 .orders-table {
-	table-layout: fixed;
-	margin: 0 40px 28px 80px;
-	width: 820px;
+    margin: 0 40px 28px 80px;
+    table-layout: fixed;
+    width: 820px;
 }
 
 .orders-table .order-tbl-creation-date {
@@ -32,6 +32,7 @@
 .orders-table .order-tbl-account {
     text-align: left;
     width: 125px;
+
 }
 
 .orders-table .order-tbl-order-no {
@@ -51,6 +52,26 @@
 
 .orders-table .order-tbl-symbol {
     text-align: right;
+
+}
+
+.orders-table .order-tbl-order-no {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-type {
+    text-align: center;
+    width: 35px;
+}
+
+.orders-table .order-tbl-action-ro {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-symbol {
+    text-align: center;
     width: 50px;
 }
 
