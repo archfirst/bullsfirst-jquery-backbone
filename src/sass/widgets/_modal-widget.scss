@@ -207,8 +207,8 @@
 
   input[type="text"],
   input[type="password"] {
-    text-indent: 7px;
-    width: 124px;
+    padding-left: 7px;
+    width: 117px;
   }
 
   input[type="radio"],
@@ -257,7 +257,7 @@
   }
 
   .sbSelector {
-    text-indent: 7px;
+    padding-left: 7px;
   }
 
   .sbOptions {

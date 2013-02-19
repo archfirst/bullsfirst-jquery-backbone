@@ -19,10 +19,8 @@
     line-height: 25px;
     outline: none;
     overflow: hidden;
-    position: absolute;
-    text-indent: 10px;
+    padding-left: 7px;
     top: 0;
-    width: 170px;
 }
 
 .sbSelector:link, .sbSelector:visited, .sbSelector:hover{
@@ -61,7 +59,8 @@
 }
 
 .sbOptions li{
-    padding: 0 6px; //6px instead of 7px to accomodate for border
+    //padding: 0 6px; //6px instead of 7px to accomodate for border
+    padding-left: 7px;
 }
 
 .sbOptions li:hover{
