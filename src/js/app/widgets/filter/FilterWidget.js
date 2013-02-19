@@ -22,6 +22,7 @@
 define(
     [
         'app/common/Message',
+        'app/domain/Repository',
         'framework/BaseView',
         'framework/MessageBus',
         'jquery',
@@ -29,7 +30,7 @@ define(
         'jqueryselectbox'
     ],
     
-    function( Message, BaseView, MessageBus, $, moment ) {
+    function( Message, Repository, BaseView, MessageBus, $, moment ) {
         'use strict';
         
 
@@ -51,6 +52,35 @@ define(
                 this.listenTo(MessageBus, Message.TransactionFilterReset, this.resetFilter);
                 this.listenTo(MessageBus, Message.TransactionFilterApply, this.updateTransactions);
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
+            },
+
+            setFilters: function( formElement ){
+                var orderFilter = Repository.getOrderFilters();
+
+                _.each(orderFilter, function( value, prop ) {
+                    //
+                    var _element = formElement.find('[name="'+prop+'"]');
+                    //
+                    if (value && _element.hasClass('datepicker')) {
+                        _element.datepicker('setDate', new Date(value));
+                    }
+                    else if ( _element.is('select') ) {
+                        //detach the selectbox from UI
+                        _element.selectbox('detach');
+                        // set the value to select tag
+                        _element.val(value);
+                        // again attach the select box to populate on set value of select tag
+                        _element.selectbox('attach');
+                    }
+                    // check for tags with type checkbox and name is prop[]
+                    else if ( formElement.find('input[name="'+prop+'[]"]').is(':checkbox')) {
+                        var valuearr = value.split(',');
+                        formElement.find('input[name="'+prop+'[]"]').val(valuearr);
+                    }
+                    else {
+                        _element.prop( 'value', value );
+                    }
+                },this);
             },
 
             resetDatepicker: function(tab){

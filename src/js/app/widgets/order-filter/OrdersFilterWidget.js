@@ -52,6 +52,15 @@ define(
                 'click #orders-filter .js-apply-filters-button' : 'updateOrders'
             },
 
+            defaultFilterCriteria: {
+               accountId:'',
+               fromDate: moment(new Date()).format('YYYY-MM-DD'),
+               sides: '',
+               statuses: '',
+               symbol: '',
+               toDate: moment(new Date()).format('YYYY-MM-DD')
+            },
+
             initialize: function() {
 
                 FilterWidget.prototype.initialize.call(this);
@@ -73,46 +82,16 @@ define(
                     this.setFilterCriteria();
                 }
                 else {
-                    var orderFilter = Repository.getOrderFilters();
-
-                    _.each(orderFilter, function( value, prop ) {
-                        //
-                        var _element = $(this.ordersFilterFormElement).find('[name="'+prop+'"]');
-                        //
-                        if (value && _element.hasClass('datepicker')) {
-                            _element.datepicker('setDate', new Date(value));
-                        }
-                        else if ( _element.is('select') ) {
-                            //detach the selectbox from UI
-                            _element.selectbox('detach');
-                            // set the value to select tag
-                            _element.val(value);
-                            // again attach the select box to populate on set value of select tag
-                            _element.selectbox('attach');
-                        }
-                        // check for tags with type checkbox and name is prop[]
-                        else if ( $(this.ordersFilterFormElement).find('input[name="'+prop+'[]"]').is(':checkbox')) {
-                            var valuearr = value.split(',');
-                            $(this.ordersFilterFormElement).find('input[name="'+prop+'[]"]').val(valuearr);
-                        }
-                        else {
-                            _element.prop( 'value', value );
-                        }
-                    },this);
+                    this.setFilters( $(this.ordersFilterFormElement) );
                 }
                 
                 Repository.getOrders();
             },
-            
+
             resetFilters: function() {
                 //selectbox and datepicker reset inhertied from the filterWidget
-                $(this.ordersFilterFormElement).find('#orders-filter-accountId').selectbox('detach');
-                $(this.ordersFilterFormElement).find('#orders-filter-accountId').val('');
-                $(this.ordersFilterFormElement).find('#orders-filter-accountId').selectbox('attach');
-                $(this.ordersFilterFormElement).find('input:text').prop('value', '');
-                $(this.ordersFilterFormElement).find('#orders-fromDate').datepicker('setDate', new Date());
-                $(this.ordersFilterFormElement).find('#orders-toDate').datepicker('setDate', new Date());
-                $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
+                Repository.setOrderFilterCriteria( this.defaultFilterCriteria );
+                this.setFilters( $(this.ordersFilterFormElement) );
                 this.updateOrders();
             },
 
