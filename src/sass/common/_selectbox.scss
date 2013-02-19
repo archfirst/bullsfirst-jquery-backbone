@@ -19,10 +19,8 @@
     line-height: 25px;
     outline: none;
     overflow: hidden;
-    position: absolute;
-    text-indent: 10px;
+    padding-left: 7px;
     top: 0;
-    width: 170px;
 }
 
 .sbSelector:link, .sbSelector:visited, .sbSelector:hover{
@@ -52,7 +50,7 @@
     list-style: none;
     left: 0;
     margin: 0;
-    padding: 1px;
+    padding: 0;
     position: absolute;
     top: 25px;
     width: 298px;
@@ -61,7 +59,7 @@
 }
 
 .sbOptions li{
-    padding: 0 7px;
+    padding-left: 7px;
 }
 
 .sbOptions li:hover{
@@ -72,7 +70,7 @@
     border-bottom: solid 1px $black;
     display: block;
     outline: none;
-    padding: 4px 0 4px 3px;
+    padding: 4px 0 4px 0;
 }
 
 .sbOptions a:last-child {
