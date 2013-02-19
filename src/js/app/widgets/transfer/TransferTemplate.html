@@ -1,62 +1,62 @@
 <header>
-    <h2>{{settings.title}}</h2>
-    {{#if settings.closeButton}}
-        <a class="modal-close" href="#"></a>
-    {{/if}}
+  <h2>{{settings.title}}</h2>
+  {{#if settings.closeButton}}
+    <a class="modal-close" href="#"></a>
+  {{/if}}
 </header>
 
 <section>
-    <div id="transfer-tabbar" data-tabbar="transfer">
-            <ul>
-                    <li><a href="#" data-tab="cash-tab" class="selected">Cash</a></li>
-                    <li><a href="#" data-tab="securities-tab">Securities</a></li>
-            </ul>
-    </div>
-    <form id="transfer-form">
-            <label for="fromAccount">From</label>
-            <select id="fromAccount" name="fromAccount" class="validate[required]">
-                    {{#each accounts}}
-                            <option {{#ifEqual ../selectedAccount.id id}} selected="selected" {{/ifEqual}} value="{{id}}">{{displayString}}</option>
-                    {{/each}}
-            </select>
-            <label for="toAccount">To</label>
-            <select id="toAccount" name="toAccount" class="validate[required]">
-                    <option value=""> </option>
-                    {{#each accounts}}
-                            <option value="{{id}}">{{name}} {{displayString}}</option>
-                    {{/each}}
-            </select>
-            <div id="securities-fields-container" class="nodisplay transfer-fields-container">
-                    <div id="hboxContainer">
-                            <div class="symbol">
-                                    <label for="symbol">Symbol</label>
-                                    <input type="text" name="symbol" class="js-transferSymbol" id="symbol">
-                            </div>
-                            <div class="quantity">
-                                    <label for="quantity">Quantity</label>
-                                    <input
-                                            type="text"
-                                            name="quantity"
-                                            id="quantity"
-                                            class="validate[custom[number],min[1]]"/>
-                            </div>
-                    </div>
-                    <label for="price">Price Paid/Share</label>
-                    <input
-                            id="price"
-                            name="price"
-                            type="text"
-                            class="validate[custom[number],min[0.01]] lastField"/>
-            </div>
-            <div id="cash-fields-container" class="transfer-fields-container">
-                    <label for="amount">Amount</label>
-                    <input
-                            id="amount"
-                            name="amount"
-                            type="text"
-                            class="validate[required] validate[custom[number],min[0.01]] lastField" />
-            </div>
-            <a id="add-external-account-button" href="#"><span>Add an external account</span></a>
-    </form>
-    <a id="process-transfer-button" class="button large transfer-icon" href="#"><span>Transfer</span></a>
+  <div id="transfer-tabbar" data-tabbar="transfer">
+      <ul>
+          <li><a href="#" data-tab="cash-tab" class="selected">Cash</a></li>
+          <li><a href="#" data-tab="securities-tab">Securities</a></li>
+      </ul>
+  </div>
+  <form id="transfer-form">
+      <label for="fromAccount">From</label>
+      <select id="fromAccount" name="fromAccount" class="validate[required]">
+          {{#each accounts}}
+              <option {{#ifEqual ../selectedAccount.id id}} selected="selected" {{/ifEqual}} value="{{id}}">{{displayString}}</option>
+          {{/each}}
+      </select>
+      <label for="toAccount">To</label>
+      <select id="toAccount" name="toAccount" class="validate[required]">
+          <option value=""> </option>
+          {{#each accounts}}
+              <option value="{{id}}">{{name}} {{displayString}}</option>
+          {{/each}}
+      </select>
+      <div id="securities-fields-container" class="nodisplay transfer-fields-container">
+          <div id="hboxContainer">
+              <div class="symbol">
+                  <label for="symbol">Symbol</label>
+                  <input type="text" name="symbol" class="js-transferSymbol" id="symbol">
+              </div>
+              <div class="quantity">
+                  <label for="quantity">Quantity</label>
+                  <input
+                      type="text"
+                      name="quantity"
+                      id="quantity"
+                      class="validate[custom[number],min[1]]"/>
+              </div>
+          </div>
+          <label for="price">Price Paid/Share</label>
+          <input
+              id="price"
+              name="price"
+              type="text"
+              class="validate[custom[number],min[0.01]] lastField"/>
+      </div>
+      <div id="cash-fields-container" class="transfer-fields-container">
+          <label for="amount">Amount</label>
+          <input
+              id="amount"
+              name="amount"
+              type="text"
+              class="validate[required] validate[custom[number],min[0.01]] lastField" />
+      </div>
+      <a id="add-external-account-button" href="#"><span>Add an external account</span></a>
+  </form>
+  <a id="process-transfer-button" class="button large transfer-icon" href="#"><span>Transfer</span></a>
 </section>
