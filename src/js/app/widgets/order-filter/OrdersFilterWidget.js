@@ -59,31 +59,84 @@ define(
                 this.listenTo(MessageBus, Message.UpdateOrders, function(){
                     this.updateOrders();
                 });
-                
+
+                this.listenTo(MessageBus, Message.FilterLoaded, this.orderFilterLoad );
             },
 
             postPlace: function() {
                 this._initSymbolField();
-                var orderFilter = Repository.getOrderFilters();
-                $(this.ordersFilterSymbolElement).prop('value',orderFilter.OrderFilterCriteria.symbol);
+            },
+
+            orderFilterLoad: function() {
+
+                if ( _.isEmpty( Repository.getOrderFilters() ) ) {
+                    this.setFilterCriteria();
+                }
+                else {
+                    var orderFilter = Repository.getOrderFilters();
+
+                    _.each(orderFilter, function( value, prop ) {
+                        //
+                        var _element = $(this.ordersFilterFormElement).find('[name="'+prop+'"]');
+                        //
+                        if (value && _element.hasClass('datepicker')) {
+                            _element.datepicker('setDate', new Date(value));
+                        }
+                        else if ( _element.is('select') ) {
+                            //detach the selectbox from UI
+                            _element.selectbox('detach');
+                            // set the value to select tag
+                            _element.val(value);
+                            // again attach the select box to populate on set value of select tag
+                            _element.selectbox('attach');
+                        }
+                        // check for tags with type checkbox and name is prop[]
+                        else if ( $(this.ordersFilterFormElement).find('input[name="'+prop+'[]"]').is(':checkbox')) {
+                            var valuearr = value.split(',');
+                            $(this.ordersFilterFormElement).find('input[name="'+prop+'[]"]').val(valuearr);
+                        }
+                        else {
+                            _element.prop( 'value', value );
+                        }
+                    },this);
+                }
+                
+                Repository.getOrders();
             },
             
             resetFilters: function() {
                 //selectbox and datepicker reset inhertied from the filterWidget
-                $(this.ordersFilterFormElement).find('#orders-filter-accountId').prop('selectedIndex', 0);
+                $(this.ordersFilterFormElement).find('#orders-filter-accountId').selectbox('detach');
+                $(this.ordersFilterFormElement).find('#orders-filter-accountId').val('');
+                $(this.ordersFilterFormElement).find('#orders-filter-accountId').selectbox('attach');
                 $(this.ordersFilterFormElement).find('input:text').prop('value', '');
                 $(this.ordersFilterFormElement).find('#orders-fromDate').datepicker('setDate', new Date());
                 $(this.ordersFilterFormElement).find('#orders-toDate').datepicker('setDate', new Date());
                 $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
                 this.updateOrders();
             },
+
+            setFilterCriteria: function() {
+                var filtercriteria = $(this.ordersFilterFormElement).toObject();
+                if (filtercriteria.fromDate) {
+                    filtercriteria.fromDate = moment(new Date(filtercriteria.fromDate)).format('YYYY-MM-DD');
+                }
+                if (filtercriteria.toDate) {
+                    filtercriteria.toDate = moment(new Date(filtercriteria.toDate)).format('YYYY-MM-DD');
+                }
+                if (filtercriteria.sides) {
+                    filtercriteria.sides = filtercriteria.sides.join(',');
+                }
+                if (filtercriteria.statuses){
+                    filtercriteria.statuses = filtercriteria.statuses.join(',');
+                }
+                 Repository.setOrderFilterCriteria( filtercriteria );
+            },
             
             updateOrders: function() {
                 // Process filter criteria to server format
-                Repository.setOrderFilterCriteria( $(this.ordersFilterFormElement).toObject() );
+                this.setFilterCriteria();
                 Repository.getOrders();
-                // Send OrderFilterChanged message with filter criteria
-                //MessageBus.trigger(Message.OrderFilterChanged,this.filterCriteria);
             },
             render: function(){
                 var template = this.getTemplate(),

@@ -33,7 +33,6 @@ define(
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
         'app/domain/Orders',
-        'app/domain/OrderFilter',
         'app/domain/User',
         'app/services/InstrumentService',
         'framework/ErrorUtil',
@@ -42,7 +41,7 @@ define(
         'underscore'
     ],
     function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
-     Credentials, ExternalAccounts, Orders, OrderFilter, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
+     Credentials, ExternalAccounts, Orders, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -54,7 +53,7 @@ define(
         var _selectedAccount = null;
         var _instruments = null;
         var _orders = new Orders();
-        var _orderFilters = new OrderFilter();
+        var _orderFilterCriteria = {};
 
         var _repository = {
             getUser: function() { return _user; },
@@ -64,16 +63,19 @@ define(
             getExternalAccounts: function() { return _externalAccounts; },
             getSelectedAccount: function() { return _selectedAccount; },
             getInstruments: function() { return _instruments; },
-            getOrderFilters: function() { return _orderFilters; },
+            getOrderFilters: function() { return _orderFilterCriteria; },
             getOrders: function() {
-                _orders.fetch({
-                    data: _orderFilters.getOrderFilterCriteria()
-                });
+                var bool = _.isEmpty( _orderFilterCriteria );
+                if ( !bool ) {
+                    _orders.fetch({
+                        data: _orderFilterCriteria
+                    });
+                }
                 return _orders;
             },
 
             setOrderFilterCriteria: function( filtercriteria ) {
-                _orderFilters.setOrderFilterCriteria( filtercriteria );
+                _orderFilterCriteria = filtercriteria;
             },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },

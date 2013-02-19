@@ -33,6 +33,7 @@ define({
 	ExternalAccountsUpdated: 'ExternalAccounts:Updated',
 	ModalLoad: 'Modal:load',
 	FilterLoaded: 'FilterLoaded',
+    FilterLoaded: 'FilterLoaded',
     OrderFilterApply: 'Order:clickFilterApply',
     OrderFilterChanged: 'Order:orderFilterChanged',
     OrderFilterReset: 'Order:clickFilterReset',
