@@ -50,6 +50,7 @@ define(
                 OrderService.cancelOrder( this.model.id, _.bind(this.cancelOrderDone, this), ErrorUtil.showError);
                 return false;
             },
+            
             cancelOrderDone: function() {
                 MessageBus.trigger( Message.UpdateOrders );
             }

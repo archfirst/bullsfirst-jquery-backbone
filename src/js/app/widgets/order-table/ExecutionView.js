@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 Archfirst
+ * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,26 @@
  */
 
 /**
- * app/common/AppConfig
- *
- * Provides application configuration variables.
+ * app/widgets/order-table/ExecutionView
  *
  * @author Naresh Bhatia
  */
-define({
-    // The application root. The build process will take care of changing this to '/dist/'.
-    // If you then deploy /dist as a root directory for your application, this should be changed to '/'.
-    appRoot: '/src/'
-});
+define(
+    [
+        'framework/BaseView',
+        'text!app/widgets/order-table/ExecutionTemplate.html'
+    ],
+    function(BaseView, ExecutionTemplate) {
+        'use strict';
+
+        return BaseView.extend({
+
+            tagName: 'tr',
+
+            template: {
+                name: 'ExecutionTemplate',
+                source: ExecutionTemplate
+            }
+        });
+    }
+);

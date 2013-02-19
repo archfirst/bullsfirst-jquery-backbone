@@ -45,106 +45,62 @@ define(
                 source: OrdersFilterTemplate
             },
 
+            elements:['ordersFilterForm','ordersFilterSymbol'],
+
             events: {
-                'click #orders-filter .js-reset-filters-button' : 'triggerReset',
-                'click #orders-filter .js-apply-filters-button' : 'triggerApply'
+                'click #orders-filter .js-reset-filters-button' : 'resetFilters',
+                'click #orders-filter .js-apply-filters-button' : 'updateOrders'
             },
 
             initialize: function() {
+
+                FilterWidget.prototype.initialize.call(this);
+                
                 this.listenTo(MessageBus, Message.UpdateOrders, function(){
-                    this.updateOrders(this.className);
+                    this.updateOrders();
                 });
+                
             },
 
-            triggerReset: function() {
-                MessageBus.trigger(Message.OrderFilterReset, this.className);
-                return false;
-            },
-
-            triggerApply: function(){
-                MessageBus.trigger(Message.OrderFilterApply, this.className);
-                return false;
+            postPlace: function() {
+                this._initSymbolField();
             },
             
-            postRender: function(){
-                MessageBus.on(Message.OrderFilterReset, this.resetFilter, this);
-                MessageBus.on(Message.OrderFilterApply, this.updateOrders, this);
-            },
-            
-            resetFilter: function(tab) {
+            resetFilters: function() {
                 //selectbox and datepicker reset inhertied from the filterWidget
-                this.resetSelectbox(tab);
-				this.resetDatepicker(tab);
-                this.resetOrderId();
-                this.resetSymbol();
-                this.resetOrderAction();
-                this.resetOrderStatus();
-			},
-            
-            
-            resetOrderId: function(){
-                $('#order-filter-orderno').val('');
-            },
-            resetSymbol: function(){
-                $('#order-filter-symbol').val('');
-            },
-            resetOrderAction: function(){
-                
-                $('.order-filter-action li input[type="checkbox"]').attr('checked', false);
-            },
-            resetOrderStatus: function(){
-                $('.order-filter-status li input[type="checkbox"]').attr('checked', false);
+                $(this.ordersFilterFormElement).find('#orders-filter-accountId').prop('selectedIndex', 0);
+                $(this.ordersFilterFormElement).find('input:text').prop('value', '');
+                $(this.ordersFilterFormElement).find('#orders-fromDate').datepicker('setDate', new Date());
+                $(this.ordersFilterFormElement).find('#orders-toDate').datepicker('setDate', new Date());
+                $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
+                this.updateOrders();
             },
             
-            updateOrders: function( tab ) {
+            updateOrders: function() {
                 // Process filter criteria to server format
-				var filterCriteria = {},
-                    orderId = $('#order-filter-orderno').val(),
-                    accountId = $('#orders-filter-accountId').val(),
-                    symbol = $('#order-filter-symbol').val(),
-                    sides,
-                    statuses;
-
-                if ( accountId > 0 ) {
-                    filterCriteria.accountId = accountId;
-                }
-
-                if ( orderId > 0 ) {
-                    filterCriteria.orderId = orderId;
-                }
-                                
-                statuses = $.map($('.order-filter-status li input[type="checkbox"]:checked'), function(n){
-                    return n.value;
-                }).join(',');
+                this.updateFilters($(this.ordersFilterFormElement));
                 
-                sides = $.map($('.order-filter-action li input[type="checkbox"]:checked'), function(n){
-                    return n.value;
-                }).join(',');
-                
-                if(statuses){
-                    filterCriteria.statuses = statuses;
+                if (this.filterCriteria.fromDate) {
+                    this.filterCriteria.fromDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
                 }
-                
-                if(symbol){
-                    filterCriteria.symbol = symbol;
+                else {
+                    this.filterCriteria.fromDate = moment(new Date()).format('YYYY-MM-DD');
                 }
-                
-                if(sides){
-                    filterCriteria.sides = sides;
+                if (this.filterCriteria.toDate) {
+                    this.filterCriteria.toDate = moment($('#orders-fromDate').datepicker('getDate')).format('YYYY-MM-DD');
                 }
-
-				if ( $('#' + tab + '-fromDate').val().length > 0 ) {
-					filterCriteria.fromDate = moment( $('#' + tab + '-fromDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				if ( $('#' + tab + '-toDate').val().length > 0 ) {
-					filterCriteria.toDate = moment( $('#' + tab + '-toDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger('OrderFilterChanged', filterCriteria);
+                else {
+                    this.filterCriteria.toDate = moment(new Date()).format('YYYY-MM-DD');
+                }
+                if (this.filterCriteria.sides) {
+                    this.filterCriteria.sides = this.filterCriteria.sides.join(',');
+                }
+                if (this.filterCriteria.statuses) {
+                    this.filterCriteria.statuses = this.filterCriteria.statuses.join(',');
+                }
+                // Send OrderFilterChanged message with filter criteria
+                MessageBus.trigger(Message.OrderFilterChanged,this.filterCriteria);
             },
-
             render: function(){
                 var template = this.getTemplate(),
                     collection = this.collection || {},
@@ -161,6 +117,23 @@ define(
 
                 this.postRender();
                 return this;
+            },
+
+            _initSymbolField: function() {
+                
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
+                });
+
+                $(this.ordersFilterSymbolElement).autocomplete({
+                  source: instruments
+                });
+
+                return instruments;
+      
             }
         });
     }

@@ -26,7 +26,6 @@ define(
         'app/common/Message',
         'app/domain/MarketPrice',
         'app/domain/Repository',
-        'app/services/InstrumentService',
         'app/services/OrderEstimateService',
         'app/widgets/modal/ModalWidget',
         'app/widgets/trade-preview/TradePreviewViewModel',
@@ -44,7 +43,6 @@ define(
         Message,
         MarketPrice,
         Repository,
-        InstrumentService,
         OrderEstimateService,
         ModalWidget,
         TradePreviewViewModel,
@@ -67,6 +65,8 @@ define(
                 name: 'TradeTemplate',
                 source: TradeTemplate
             },
+
+            elements: ['tradesymbol'],
 
             events: (function() {
                 // Clone the prototype's events object, then extend it
@@ -182,7 +182,7 @@ define(
 
                 // init the symbol autocomplete field
                 // We want _initSymbolField to recognize the tradeWidget as this, so we pass a context
-                InstrumentService.getInstruments(this._initSymbolField, ErrorUtil.showError, this);
+                this._initSymbolField();
                 this._initFormStyles();
 
                 this.applySettings(this.settings);
@@ -394,10 +394,10 @@ define(
                 $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
             },
 
-            _initSymbolField: function(data) {
+            _initSymbolField: function() {
                 var tradeWidget = this;
-
-                var instruments = $.map(data, function(instrument) {
+                
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
                     return {
                         label: instrument.symbol + ' (' + instrument.name + ')',
                         value: instrument.symbol
@@ -406,7 +406,7 @@ define(
 
                 this.instruments = instruments;
 
-                $('#trade-symbol').autocomplete({
+                $(this.tradesymbolElement).autocomplete({
                   source: function( request, response ) {
                     var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
 

@@ -1,28 +1,85 @@
+/* -----------------------------------------------------------------------------
+ * order-table-widget
+ *
+ * Column        Padding + Width = Total
+ * creation-date   10    +  170  =  180
+ * account          0    +  125  =  125
+ * order-no         0    +   50  =   50
+ * type             0    +   35  =   35
+ * action-ro        0    +   50  =   50
+ * symbol           0    +   50  =   50
+ * qty              0    +   65  =   65
+ * limit-price      0    +   65  =   65
+ * exec-price       0    +   65  =   65
+ * status           0    +   80  =   80
+ * action          10    +   45  =   55
+ * ------------------------------------
+ * Total                            820
+ * -------------------------------------------------------------------------- */
+
 .orders-table {
-	margin: 0 40px 28px 80px;
-	width: 820px;
+    margin: 0 40px 28px 80px;
+    table-layout: fixed;
+    width: 820px;
 }
 
-.orders-table tr td:last-child { padding-right: 20px; }
-
-.orders-table:after {
-	content: "";
-	width: 820px;
-	height: 1px;
-	background: $brand-color;
-	display: block;
-	position: absolute;
-	bottom: 14px;
-	left: 80px;
-}
-.orders-table .center {
-	text-align: center;
+.orders-table .order-tbl-creation-date {
+    padding-left: 10px;
+    text-align: left;
+    width: 170px;
 }
 
-.orders-table .number {
-	text-align: right;
+.orders-table .order-tbl-account {
+    text-align: left;
+    width: 125px;
 }
 
-.orders-table .faded{
+.orders-table .order-tbl-order-no {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-type {
+    text-align: center;
+    width: 35px;
+}
+
+.orders-table .order-tbl-action-ro {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-symbol {
+    text-align: center;
+    width: 50px;
+}
+
+.orders-table .order-tbl-qty {
+    text-align: right;
+    width: 65px;
+}
+
+.orders-table .order-tbl-limit-price {
+    text-align: right;
+    width: 65px;
+}
+
+.orders-table .order-tbl-exec-price {
+    text-align: right;
+    width: 65px;
+}
+
+.orders-table .order-tbl-status {
+    text-align: center;
+    width: 80px;
+}
+
+.orders-table .order-tbl-action {
+    padding-right: 10px;
+    text-align: center;
+    width: 45px;
+}
+
+.orders-table .canceled {
     background-color: $table-row-faded;
 }

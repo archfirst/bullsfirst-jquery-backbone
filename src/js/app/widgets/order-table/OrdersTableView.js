@@ -21,71 +21,56 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/widgets/order-table/ExecutionView',
         'app/widgets/order-table/OrderView',
-        'framework/BaseView',
-        'framework/Formatter',
-        'framework/MessageBus',
-        'moment'
+        'framework/BaseView'
     ],
-    
-    function( Message, OrderView, BaseView, Formatter, MessageBus, moment ) {
+    function(ExecutionView, OrderView, BaseView) {
         'use strict';
-        
 
         return BaseView.extend({
 
-            initialize: function(){
+            render: function() {
+                this.destroyChildren();
 
-				this.collection.bind('reset', this.render, this);
+                this.collection.each(function(order) {
+                    var orderId = 'order-' + order.get('id');
+                    this.addChild({
+                        id: orderId,
+                        viewClass: OrderView,
+                        parentElement: this.$el,
+                        options: {
+                            model: order,
+                            id: orderId,
+                            className: (order.get('status') === 'Canceled') ? 'canceled' : ''
+                        }
+                    });
 
-				// Subscribe to events
-				MessageBus.on('OrderFilterChanged', function(filterCriteria) {
-					this.collection.fetch({data: filterCriteria});
-				}, this);
-                
-                this.collection.fetch();
-
-				this.render();
-			},
-
-			render: function(){
-
-                var orders = this.collection;
-
-                $(this.options.el).html('');
-
-                // Create new views for each transaction
-                orders.each( function(model) {
-                    this.renderOrder(model);
+                    // Add rows for executions
+                    var executions = order.get('executions');
+                    if (executions && executions.length > 0) {
+                        this._renderExecutions(executions, orderId);
+                    }
                 }, this);
 
                 return this;
+            },
 
-			},
-
-            renderOrder: function(order){
-                
-                var className = (order.attributes.status === 'Canceled')? 'faded' : '';
-                
-                // Format order values for display
-                order.attributes.creationTimeFormatted = Formatter.formatDateTime( moment(order.attributes.creationTime) );
-                order.attributes.limitPriceFormatted = Formatter.formatMoney(order.attributes.limitPrice);
-                order.attributes.executionPriceFormatted = Formatter.formatMoney(order.attributes.executions.price);
-                
-                var view = this.addChild({
-                    id: order.id,
-                    viewClass: OrderView,
-                    parentElement: this.$el.selector,
-                    options: {
-                        model: order,
-                        className: className
-                    }
-                });
-
-                return view;
+            _renderExecutions: function(executions, orderId) {
+                executions.forEach(function(execution) {
+                    var id = 'execution-' + execution.id;
+                    this.addChild({
+                        id: id,
+                        viewClass: ExecutionView,
+                        parentElement: this.$el,
+                        options: {
+                            model: execution,
+                            id: id,
+                            className: 'child-of-' + orderId
+                        }
+                    });
+                }, this);
             }
-
         });
     }
 );
