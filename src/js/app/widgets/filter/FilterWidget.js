@@ -47,17 +47,9 @@ define(
                 });
 			},
 
-            postRender: function(){
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.TransactionFilterReset, this.resetFilter);
-                this.listenTo(MessageBus, Message.TransactionFilterApply, this.updateTransactions);
-                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
-            },
+            setFilters: function( formElement, _filterCriteria ){
 
-            setFilters: function( formElement ){
-                var orderFilter = Repository.getOrderFilters();
-
-                _.each(orderFilter, function( value, prop ) {
+                _.each(_filterCriteria, function( value, prop ) {
                     //
                     var _element = formElement.find('[name="'+prop+'"]');
                     //
@@ -87,16 +79,6 @@ define(
                 $('.js-' + tab + 'FromDate').datepicker('setDate', new Date());
                 $('.js-' + tab + 'ToDate').datepicker('setDate', new Date());
             },
-
-			resetFilter: function(tab) {
-                this.resetSelectbox(tab);
-				this.resetDatepicker(tab);
-			},
-
-            resetSelectbox: function(tab){
-                $('.js-' + tab + 'FilterAccountId').prop('selectedIndex', 0);
-                $('.js-' + tab + 'FilterForm a.sbSelector').html( $('.js-' + tab + 'FilterForm select option:first-child').html() );
-            },
           
             styleFormElements: function(tab){
                 // Style select boxes
@@ -107,29 +89,8 @@ define(
                 $('.js-' + tab + 'ToDate').datepicker();
 
                 this.resetDatepicker(tab);
-            },
-
-			updateTransactions: function(tab) {
-                // Process filter criteria to server format
-				var filterCriteria = {},
-                    accountId = $('.js-' + tab + 'FilterAccountId').val();
-
-                if ( accountId > 0 ) {
-                    filterCriteria.accountId = accountId;
-                }
-
-				if ( $('.js-' + tab + 'FromDate').val().length > 0 ) {
-					filterCriteria.fromDate = moment( $('.js-' + tab + 'FromDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				if ( $('.js-' + tab + 'ToDate').val().length > 0 ) {
-					filterCriteria.toDate = moment( $('.js-' + tab + 'ToDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger(Message.TransactionFilterChanged, filterCriteria);
-			}
-                        
+            }
+         
         });
     }
 );

@@ -33,6 +33,7 @@ define(
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
         'app/domain/Orders',
+        'app/domain/Transactions',
         'app/domain/User',
         'app/services/InstrumentService',
         'framework/ErrorUtil',
@@ -41,7 +42,7 @@ define(
         'underscore'
     ],
     function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
-     Credentials, ExternalAccounts, Orders, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
+     Credentials, ExternalAccounts, Orders, Transactions, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -53,7 +54,9 @@ define(
         var _selectedAccount = null;
         var _instruments = null;
         var _orders = new Orders();
+        var _transactions = new Transactions();
         var _orderFilterCriteria = {};
+        var _transactionsFilterCriteria = {};
 
         var _repository = {
             getUser: function() { return _user; },
@@ -64,6 +67,7 @@ define(
             getSelectedAccount: function() { return _selectedAccount; },
             getInstruments: function() { return _instruments; },
             getOrderFilters: function() { return _orderFilterCriteria; },
+            getTransactionsFilters: function() { return _transactionsFilterCriteria; },
             getOrders: function() {
                 var bool = _.isEmpty( _orderFilterCriteria );
                 if ( !bool ) {
@@ -73,9 +77,22 @@ define(
                 }
                 return _orders;
             },
+            getTransactions: function() {
+                var bool = _.isEmpty( _transactionsFilterCriteria );
+                if ( !bool ) {
+                    _transactions.fetch({
+                        data: _transactionsFilterCriteria
+                    });
+                }
+                return _transactions;
+            },
 
             setOrderFilterCriteria: function( filtercriteria ) {
                 _orderFilterCriteria = filtercriteria;
+            },
+
+            setTransactionsFilterCriteria: function( filtercriteria ) {
+                _transactionsFilterCriteria = filtercriteria;
             },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },

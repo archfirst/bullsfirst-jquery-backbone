@@ -23,27 +23,14 @@ define(
     [
         'app/common/Message',
         'app/widgets/transaction-table/TransactionView',
-        'framework/BaseView',
-        'framework/Formatter',
-        'framework/MessageBus'
+        'framework/BaseView'
     ],
     
-    function( Message, TransactionView, BaseView, Formatter, MessageBus ) {
+    function( Message, TransactionView, BaseView ) {
         'use strict';
         
 
         return BaseView.extend({
-
-            initialize: function(){
-
-				this.collection.bind('reset', this.render, this);
-
-				// Subscribe to events
-                this.listenTo(MessageBus, Message.TransactionFilterChanged, function(filterCriteria) {
-                    this.collection.fetch({data: filterCriteria});
-                });
-
-			},
 
 			render: function(){
 

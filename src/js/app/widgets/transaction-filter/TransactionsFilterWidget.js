@@ -27,10 +27,11 @@ define(
         'backbone',
         'framework/BaseView',
         'framework/MessageBus',
+        'moment',
         'text!app/widgets/transaction-filter/TransactionsFilterTemplate.html',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, TransactionsFilterTemplate) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate) {
         'use strict';
 
         return FilterWidget.extend({
@@ -44,19 +45,58 @@ define(
                 source: TransactionsFilterTemplate
             },
 
+            elements:['transactionsFilterForm'],
+
             events: {
-                'click .transactions-filter .js-reset-filters-button' : 'triggerReset',
-                'click .transactions-filter .js-apply-filters-button' : 'triggerApply'
+                'click .transactions-filter .js-reset-filters-button' : 'resetFilters',
+                'click .transactions-filter .js-apply-filters-button' : 'updateTransactions'
             },
 
-            triggerReset: function() {
-                MessageBus.trigger(Message.TransactionFilterReset, this.className);
-                return false;
+            defaultFilterCriteria: {
+               accountId:'',
+               fromDate: moment(new Date()).format('YYYY-MM-DD'),
+               toDate: moment(new Date()).format('YYYY-MM-DD')
+            },
+            initialize: function() {
+                FilterWidget.prototype.initialize.call(this);
+                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
+                this.listenTo(MessageBus, Message.FilterLoaded, this.transactionsFilterLoad );
             },
 
-            triggerApply: function(){
-                MessageBus.trigger(Message.TransactionFilterApply, this.className);
-                return false;
+            resetFilters: function() {
+                //selectbox and datepicker reset inhertied from the filterWidget
+                Repository.setTransactionsFilterCriteria( this.defaultFilterCriteria );
+                this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters() );
+                this.updateTransactions();
+            },
+
+            setFilterCriteria: function() {
+                var filtercriteria = $(this.transactionsFilterFormElement).toObject();
+                if (filtercriteria.fromDate) {
+                    filtercriteria.fromDate = moment(new Date(filtercriteria.fromDate)).format('YYYY-MM-DD');
+                }
+                if (filtercriteria.toDate) {
+                    filtercriteria.toDate = moment(new Date(filtercriteria.toDate)).format('YYYY-MM-DD');
+                }
+                 Repository.setTransactionsFilterCriteria( filtercriteria );
+            },
+
+            transactionsFilterLoad: function() {
+
+                if ( _.isEmpty( Repository.getTransactionsFilters() ) ) {
+                    this.setFilterCriteria();
+                }
+                else {
+                    this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters() );
+                }
+                
+                Repository.getTransactions();
+            },
+
+            updateTransactions: function() {
+                // Process filter criteria to server format
+                this.setFilterCriteria();
+                Repository.getTransactions();
             },
 
             render: function(){

@@ -65,9 +65,7 @@ define(
 
                 FilterWidget.prototype.initialize.call(this);
                 
-                this.listenTo(MessageBus, Message.UpdateOrders, function(){
-                    this.updateOrders();
-                });
+                this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
 
                 this.listenTo(MessageBus, Message.FilterLoaded, this.orderFilterLoad );
             },
@@ -82,7 +80,7 @@ define(
                     this.setFilterCriteria();
                 }
                 else {
-                    this.setFilters( $(this.ordersFilterFormElement) );
+                    this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters() );
                 }
                 
                 Repository.getOrders();
@@ -91,7 +89,7 @@ define(
             resetFilters: function() {
                 //selectbox and datepicker reset inhertied from the filterWidget
                 Repository.setOrderFilterCriteria( this.defaultFilterCriteria );
-                this.setFilters( $(this.ordersFilterFormElement) );
+                this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters() );
                 this.updateOrders();
             },
 
