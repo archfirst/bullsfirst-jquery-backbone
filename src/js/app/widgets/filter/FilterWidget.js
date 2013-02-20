@@ -47,9 +47,6 @@ define(
                         _element.datepicker('setDate', new Date(value));
                     }
                     else if ( _element.is('select') ) {
-                        if (!_element.selectbox()){
-                            _element.selectbox();
-                        }
                         //detach the selectbox from UI
                         _element.selectbox('detach');
                         // set the value to select tag

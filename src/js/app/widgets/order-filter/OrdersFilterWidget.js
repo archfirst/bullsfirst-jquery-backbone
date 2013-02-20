@@ -60,10 +60,6 @@ define(
             postPlace: function() {
                 // initialize Symbol dropdown
                 this._initSymbolField();
-                // Add selectbox to account id selectlist
-                if (!($(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox())){
-                    $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox();
-                }
                 // instantiate fromDate to datepicker()
                 if (!($(this.ordersFromDateElement).datepicker())) {
                     $(this.ordersFromDateElement).datepicker();
@@ -79,6 +75,7 @@ define(
                 if ( !(_.isEmpty( Repository.getOrderFilters() )) ) {
                     this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
                 }
+                $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox();
                 this.setFilterCriteria();
             },
 

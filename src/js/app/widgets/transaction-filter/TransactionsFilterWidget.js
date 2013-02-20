@@ -58,10 +58,6 @@ define(
             },
 
             postPlace: function() {
-                // Add selectbox to account id selectlist
-                if (!($(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox())){
-                    $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox();
-                }
                 // instantiate fromDate to datepicker()
                 if (!($(this.transactionsFromDateElement).datepicker())) {
                     $(this.transactionsFromDateElement).datepicker();
@@ -77,6 +73,8 @@ define(
                 if ( !(_.isEmpty( Repository.getTransactionsFilters() )) ) {
                     this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
                 }
+                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox();
+                
                 this.setFilterCriteria();
             },
 
