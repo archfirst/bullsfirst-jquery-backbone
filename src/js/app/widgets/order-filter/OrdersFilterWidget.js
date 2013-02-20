@@ -45,55 +45,63 @@ define(
                 source: OrdersFilterTemplate
             },
 
-            elements:['ordersFilterForm','ordersFilterSymbol'],
+            elements:['ordersFilterForm','ordersFilterSymbol', 'ordersFromDate', 'ordersToDate'],
 
             events: {
                 'click #orders-filter .js-reset-filters-button' : 'resetFilters',
                 'click #orders-filter .js-apply-filters-button' : 'updateOrders'
             },
 
-            defaultFilterCriteria: {
-               accountId:'',
-               fromDate: moment(new Date()).format('YYYY-MM-DD'),
-               sides: '',
-               statuses: '',
-               symbol: '',
-               toDate: moment(new Date()).format('YYYY-MM-DD')
-            },
-
             initialize: function() {
-
-                FilterWidget.prototype.initialize.call(this);
                 
                 this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
-
-                this.listenTo(MessageBus, Message.FilterLoaded, this.orderFilterLoad );
             },
 
             postPlace: function() {
+                // initialize Symbol dropdown
                 this._initSymbolField();
-            },
-
-            orderFilterLoad: function() {
-
-                if ( _.isEmpty( Repository.getOrderFilters() ) ) {
-                    this.setFilterCriteria();
+                // Add selectbox to account id selectlist
+                if (!($(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox())){
+                    $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox();
                 }
-                else {
-                    this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters() );
+                // instantiate fromDate to datepicker()
+                if (!($(this.ordersFromDateElement).datepicker())) {
+                    $(this.ordersFromDateElement).datepicker();
                 }
-                
-                Repository.getOrders();
+                // instantiate ToDate to datepicker()
+                if (!($(this.ordersToDateElement).datepicker())) {
+                    $(this.ordersToDateElement).datepicker();
+                }
+                // Initially set fromDate and ToDate to current date
+                $(this.ordersFromDateElement).datepicker('setDate', new Date());
+                $(this.ordersToDateElement).datepicker('setDate', new Date());
+                // Restore filters for the orders tab
+                if ( !(_.isEmpty( Repository.getOrderFilters() )) ) {
+                    this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
+                }
+                this.setFilterCriteria();
             },
 
             resetFilters: function() {
-                //selectbox and datepicker reset inhertied from the filterWidget
-                Repository.setOrderFilterCriteria( this.defaultFilterCriteria );
-                this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters() );
+                // Reset selectbox to ''
+                $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox('detach');
+                $(this.ordersFilterFormElement).find('select[name="accountId"]').val('');
+                $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox('attach');
+                // Reset all the text inputs to ''
+                $(this.ordersFilterFormElement).find('input:text').prop('value', '');
+                // Reset datepicker
+                $(this.ordersFromDateElement).datepicker('setDate', new Date());
+                $(this.ordersToDateElement).datepicker('setDate', new Date());
+                // Resest all the checkboxes in formelement to false
+                $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
+                // Save order filter criteria in Repository
+                Repository.setOrderFilterCriteria( $(this.ordersFilterFormElement).toObject() );
+                // Update Orders for reset filter criteria
                 this.updateOrders();
             },
-
+            // Set the selected filter criteria and save it in Repository
             setFilterCriteria: function() {
+                // get selected filter values in orderFilterForm to a object
                 var filtercriteria = $(this.ordersFilterFormElement).toObject();
                 if (filtercriteria.fromDate) {
                     filtercriteria.fromDate = moment(new Date(filtercriteria.fromDate)).format('YYYY-MM-DD');
@@ -107,9 +115,10 @@ define(
                 if (filtercriteria.statuses){
                     filtercriteria.statuses = filtercriteria.statuses.join(',');
                 }
-                 Repository.setOrderFilterCriteria( filtercriteria );
+                // save selected filter criteria in Repository
+                Repository.setOrderFilterCriteria( filtercriteria );
             },
-            
+            // update orders for current filter criteria
             updateOrders: function() {
                 // Process filter criteria to server format
                 this.setFilterCriteria();
@@ -132,7 +141,7 @@ define(
                 this.postRender();
                 return this;
             },
-
+            // initialize symbol dropdown with instruments
             _initSymbolField: function() {
                 
                 var instruments = $.map(Repository.getInstruments(), function(instrument) {

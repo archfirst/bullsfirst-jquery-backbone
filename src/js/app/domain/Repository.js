@@ -69,21 +69,15 @@ define(
             getOrderFilters: function() { return _orderFilterCriteria; },
             getTransactionsFilters: function() { return _transactionsFilterCriteria; },
             getOrders: function() {
-                var bool = _.isEmpty( _orderFilterCriteria );
-                if ( !bool ) {
-                    _orders.fetch({
-                        data: _orderFilterCriteria
-                    });
-                }
+                _orders.fetch({
+                    data: _orderFilterCriteria
+                });
                 return _orders;
             },
             getTransactions: function() {
-                var bool = _.isEmpty( _transactionsFilterCriteria );
-                if ( !bool ) {
-                    _transactions.fetch({
-                        data: _transactionsFilterCriteria
-                    });
-                }
+                _transactions.fetch({
+                    data: _transactionsFilterCriteria
+                });
                 return _transactions;
             },
 

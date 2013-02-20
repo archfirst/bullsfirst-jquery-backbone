@@ -21,31 +21,18 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
         'framework/BaseView',
-        'framework/MessageBus',
-        'jquery',
-        'moment',
         'jqueryselectbox'
     ],
     
-    function( Message, Repository, BaseView, MessageBus, $, moment ) {
+    function( Repository, BaseView ) {
         'use strict';
         
 
         return BaseView.extend({
 
 			tagName: 'div',
-
-            initialize: function(){
-				var that = this;
-                this.render();
-                this.collection.bind('reset', this.render, this);
-                this.listenTo(MessageBus, Message.FilterLoaded, function(){
-                    that.styleFormElements(that.tab);
-                });
-			},
 
             setFilters: function( formElement, _filterCriteria ){
 
@@ -54,9 +41,15 @@ define(
                     var _element = formElement.find('[name="'+prop+'"]');
                     //
                     if (value && _element.hasClass('datepicker')) {
+                        if (!_element.datepicker()){
+                            _element.datepicker();
+                        }
                         _element.datepicker('setDate', new Date(value));
                     }
                     else if ( _element.is('select') ) {
+                        if (!_element.selectbox()){
+                            _element.selectbox();
+                        }
                         //detach the selectbox from UI
                         _element.selectbox('detach');
                         // set the value to select tag
@@ -73,22 +66,6 @@ define(
                         _element.prop( 'value', value );
                     }
                 },this);
-            },
-
-            resetDatepicker: function(tab){
-                $('.js-' + tab + 'FromDate').datepicker('setDate', new Date());
-                $('.js-' + tab + 'ToDate').datepicker('setDate', new Date());
-            },
-          
-            styleFormElements: function(tab){
-                // Style select boxes
-                $('.js-' + tab + 'FilterForm select').selectbox();
-
-                // Create date pickers
-                $('.js-' + tab + 'FromDate').datepicker();
-                $('.js-' + tab + 'ToDate').datepicker();
-
-                this.resetDatepicker(tab);
             }
          
         });
