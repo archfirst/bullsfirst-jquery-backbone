@@ -29,9 +29,10 @@ define(
         'framework/MessageBus',
         'moment',
         'text!app/widgets/order-filter/OrdersFilterTemplate.html',
+        'underscore',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate, _) {
         'use strict';
 
         return FilterWidget.extend({

@@ -23,10 +23,11 @@ define(
     [
         'app/domain/Repository',
         'framework/BaseView',
+        'underscore',
         'jqueryselectbox'
     ],
     
-    function( Repository, BaseView ) {
+    function( Repository, BaseView, _ ) {
         'use strict';
         
 
