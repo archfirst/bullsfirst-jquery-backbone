@@ -27,10 +27,12 @@ define(
         'backbone',
         'framework/BaseView',
         'framework/MessageBus',
+        'moment',
         'text!app/widgets/transaction-filter/TransactionsFilterTemplate.html',
+        'underscore',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, TransactionsFilterTemplate) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate, _) {
         'use strict';
 
         return FilterWidget.extend({
@@ -44,19 +46,72 @@ define(
                 source: TransactionsFilterTemplate
             },
 
+            elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate'],
+
             events: {
-                'click .transactions-filter .js-reset-filters-button' : 'triggerReset',
-                'click .transactions-filter .js-apply-filters-button' : 'triggerApply'
+                'click .transactions-filter .js-reset-filters-button' : 'resetFilters',
+                'click .transactions-filter .js-apply-filters-button' : 'updateTransactions'
+            },
+            
+            initialize: function() {
+                FilterWidget.prototype.initialize.call(this);
+                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
             },
 
-            triggerReset: function() {
-                MessageBus.trigger(Message.TransactionFilterReset, this.className);
-                return false;
+            postPlace: function() {
+                // instantiate fromDate to datepicker()
+                if (!($(this.transactionsFromDateElement).datepicker())) {
+                    $(this.transactionsFromDateElement).datepicker();
+                }
+                // instantiate ToDate to datepicker()
+                if (!($(this.transactionsToDateElement).datepicker())) {
+                    $(this.transactionsToDateElement).datepicker();
+                }
+                // Initially set fromDate and ToDate to current date
+                $(this.transactionsFromDateElement).datepicker('setDate', new Date());
+                $(this.transactionsToDateElement).datepicker('setDate', new Date());
+                // Restore filters for the transactions tab
+                if ( !(_.isEmpty( Repository.getTransactionsFilters() )) ) {
+                    this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
+                }
+                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox();
+                
+                this.setFilterCriteria();
             },
 
-            triggerApply: function(){
-                MessageBus.trigger(Message.TransactionFilterApply, this.className);
-                return false;
+            resetFilters: function() {
+                // Reset selectbox to ''
+                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox('detach');
+                $(this.transactionsFilterFormElement).find('select[name="accountId"]').val('');
+                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox('attach');
+                // Reset all the text inputs to ''
+                $(this.transactionsFilterFormElement).find('input:text').prop('value', '');
+                // Reset datepicker
+                $(this.transactionsFromDateElement).datepicker('setDate', new Date());
+                $(this.transactionsToDateElement).datepicker('setDate', new Date());
+                // Save transactions filter criteria in Repository
+                Repository.setTransactionsFilterCriteria( $(this.transactionsFilterFormElement).toObject() );
+                // Update transactions for reset filter criteria
+                this.updateTransactions();
+            },
+            // Set the selected filter criteria and save it in Repository
+            setFilterCriteria: function() {
+                // get selected filter values in orderFilterForm to a object
+                var filtercriteria = $(this.transactionsFilterFormElement).toObject();
+                if (filtercriteria.fromDate) {
+                    filtercriteria.fromDate = moment(new Date(filtercriteria.fromDate)).format('YYYY-MM-DD');
+                }
+                if (filtercriteria.toDate) {
+                    filtercriteria.toDate = moment(new Date(filtercriteria.toDate)).format('YYYY-MM-DD');
+                }
+                // save selected filter criteria in Repository
+                Repository.setTransactionsFilterCriteria( filtercriteria );
+            },
+
+            updateTransactions: function() {
+                // Process filter criteria to server format
+                this.setFilterCriteria();
+                Repository.getTransactions();
             },
 
             render: function(){
