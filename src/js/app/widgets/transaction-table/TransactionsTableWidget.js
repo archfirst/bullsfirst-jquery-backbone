@@ -41,6 +41,17 @@ define(
                 source: TransactionsTableTemplate
             },
 
+            initialize: function(){
+                
+                this.collection = Repository.getTransactions();
+                this.collection.bind('reset', this.render, this);
+                // Subscribe to events
+                this.listenTo(MessageBus, Message.TransactionFilterChanged, function(filterCriteria) {
+                    this.collection.fetch({data: filterCriteria});
+                });
+
+            },
+
             postRender: function() {
                 this.addChildren([
                     {
@@ -50,7 +61,7 @@ define(
                         options: {
                             el: '.transactions-table tbody',
                             tab: 'transactions',
-                            collection: new Transactions()
+                            collection: this.collection
                         }
                     }
                 ]);

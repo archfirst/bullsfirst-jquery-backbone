@@ -23,13 +23,14 @@ define(
     [
         'app/common/Message',
         'app/domain/Orders',
+        'app/domain/Repository',
         'app/widgets/order-table/OrdersTableView',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/widgets/order-table/OrdersTableTemplate.html',
         'jqueryTreeTable'
     ],
-    function(Message, Orders, OrdersTableView, BaseView, MessageBus, OrdersTableTemplate) {
+    function(Message, Orders, Repository, OrdersTableView, BaseView, MessageBus, OrdersTableTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -44,7 +45,7 @@ define(
 
             initialize: function() {
 
-                this.collection = new Orders();
+                this.collection = Repository.getOrders();
                 this.collection.bind('reset', this.render, this);
 
                 // Subscribe to events

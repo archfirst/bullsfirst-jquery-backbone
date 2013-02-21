@@ -21,15 +21,13 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/domain/Repository',
         'framework/BaseView',
-        'framework/MessageBus',
-        'jquery',
-        'moment',
+        'underscore',
         'jqueryselectbox'
     ],
     
-    function( Message, BaseView, MessageBus, $, moment ) {
+    function( Repository, BaseView, _ ) {
         'use strict';
         
 
@@ -37,73 +35,37 @@ define(
 
 			tagName: 'div',
 
-            initialize: function(){
-				var that = this;
-                this.render();
-                this.collection.bind('reset', this.render, this);
-                this.listenTo(MessageBus, Message.FilterLoaded, function(){
-                    that.styleFormElements(that.tab);
-                });
-			},
+            setFilters: function( formElement, _filterCriteria ){
 
-            postRender: function(){
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.TransactionFilterReset, this.resetFilter);
-                this.listenTo(MessageBus, Message.TransactionFilterApply, this.updateTransactions);
-                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
-            },
-
-            updateFilters: function(context){
-                this.filterCriteria = context.toObject();
-            },
-
-            resetDatepicker: function(tab){
-                $('.js-' + tab + 'FromDate').datepicker('setDate', new Date());
-                $('.js-' + tab + 'ToDate').datepicker('setDate', new Date());
-            },
-
-			resetFilter: function(tab) {
-                this.resetSelectbox(tab);
-				this.resetDatepicker(tab);
-			},
-
-            resetSelectbox: function(tab){
-                $('.js-' + tab + 'FilterAccountId').prop('selectedIndex', 0);
-                $('.js-' + tab + 'FilterForm a.sbSelector').html( $('.js-' + tab + 'FilterForm select option:first-child').html() );
-            },
-          
-            styleFormElements: function(tab){
-                // Style select boxes
-                $('.js-' + tab + 'FilterForm select').selectbox();
-
-                // Create date pickers
-                $('.js-' + tab + 'FromDate').datepicker();
-                $('.js-' + tab + 'ToDate').datepicker();
-
-                this.resetDatepicker(tab);
-            },
-
-			updateTransactions: function(tab) {
-                // Process filter criteria to server format
-				var filterCriteria = {},
-                    accountId = $('.js-' + tab + 'FilterAccountId').val();
-
-                if ( accountId > 0 ) {
-                    filterCriteria.accountId = accountId;
-                }
-
-				if ( $('.js-' + tab + 'FromDate').val().length > 0 ) {
-					filterCriteria.fromDate = moment( $('.js-' + tab + 'FromDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				if ( $('.js-' + tab + 'ToDate').val().length > 0 ) {
-					filterCriteria.toDate = moment( $('.js-' + tab + 'ToDate').datepicker('getDate') ).format('YYYY-MM-DD');
-				}
-
-				// Send OrderFilterChanged message with filter criteria
-				MessageBus.trigger(Message.TransactionFilterChanged, filterCriteria);
-			}
-                        
+                _.each(_filterCriteria, function( value, prop ) {
+                    //
+                    var _element = formElement.find('[name="'+prop+'"]');
+                    //
+                    if (value && _element.hasClass('datepicker')) {
+                        if (!_element.datepicker()){
+                            _element.datepicker();
+                        }
+                        _element.datepicker('setDate', new Date(value));
+                    }
+                    else if ( _element.is('select') ) {
+                        //detach the selectbox from UI
+                        _element.selectbox('detach');
+                        // set the value to select tag
+                        _element.val(value);
+                        // again attach the select box to populate on set value of select tag
+                        _element.selectbox('attach');
+                    }
+                    // check for tags with type checkbox and name is prop[]
+                    else if ( formElement.find('input[name="'+prop+'[]"]').is(':checkbox')) {
+                        var valuearr = value.split(',');
+                        formElement.find('input[name="'+prop+'[]"]').val(valuearr);
+                    }
+                    else {
+                        _element.prop( 'value', value );
+                    }
+                },this);
+            }
+         
         });
     }
 );
