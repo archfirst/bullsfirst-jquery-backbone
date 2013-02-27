@@ -46,7 +46,7 @@ define(
                 source: TransactionsFilterTemplate
             },
 
-            elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate'],
+            elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate','transactionsFilterAccountId'],
 
             events: {
                 'click .transactions-filter .js-reset-filters-button' : 'resetFilters',
@@ -54,8 +54,9 @@ define(
             },
             
             initialize: function() {
-                FilterWidget.prototype.initialize.call(this);
+                
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
+                this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
             },
 
             postPlace: function() {
@@ -76,9 +77,13 @@ define(
                 if ( !(_.isEmpty( Repository.getTransactionsFilters() )) ) {
                     this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
                 }
-                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox();
+                
                 
                 this.setFilterCriteria();
+            },
+
+            onFilterLoad: function() {
+                $(this.transactionsFilterAccountIdElement).selectbox();
             },
 
             resetFilters: function() {
