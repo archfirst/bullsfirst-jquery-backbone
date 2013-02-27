@@ -45,7 +45,7 @@ define(
                         if (!_element.datepicker()){
                             _element.datepicker();
                         }
-                        _element.datepicker('setDate', new Date(value));
+                        _element.datepicker('setDate', this._parseDate(value));
                     }
                     else if ( _element.is('select') ) {
                         //detach the selectbox from UI
@@ -64,6 +64,11 @@ define(
                         _element.prop( 'value', value );
                     }
                 },this);
+            },
+            _parseDate: function ( _date ) {
+                //extract all the digits from _date which is in format YYYY-MM-DD
+                var parts = _date.match(/(\d+)/g);
+                return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
             }
          
         });
