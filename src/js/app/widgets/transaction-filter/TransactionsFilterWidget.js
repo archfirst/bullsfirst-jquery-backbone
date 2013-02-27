@@ -60,6 +60,8 @@ define(
 
             postPlace: function() {
                 // instantiate fromDate to datepicker()
+                $(this.transactionsFilterFormElement).validationEngine();
+
                 if (!($(this.transactionsFromDateElement).datepicker())) {
                     $(this.transactionsFromDateElement).datepicker();
                 }
@@ -80,6 +82,7 @@ define(
             },
 
             resetFilters: function() {
+                this.closePopups();
                 // Reset selectbox to ''
                 $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox('detach');
                 $(this.transactionsFilterFormElement).find('select[name="accountId"]').val('');
@@ -110,8 +113,18 @@ define(
 
             updateTransactions: function() {
                 // Process filter criteria to server format
+                if (!($(this.transactionsFilterFormElement).validationEngine('validate'))) {
+                    return;
+                }
+                this.closePopups();
                 this.setFilterCriteria();
                 Repository.getTransactions();
+            },
+
+            closePopups: function(){
+                $(this.transactionsFilterFormElement).validationEngine('hideAll');
+                $(this.transactionsFromDateElement).datepicker('hide');
+                $(this.transactionsToDateElement).datepicker('hide');
             },
 
             render: function(){
