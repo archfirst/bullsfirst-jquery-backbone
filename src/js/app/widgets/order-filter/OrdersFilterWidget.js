@@ -46,7 +46,7 @@ define(
                 source: OrdersFilterTemplate
             },
 
-            elements:['ordersFilterForm','ordersFilterSymbol', 'ordersFromDate', 'ordersToDate'],
+            elements:['ordersFilterForm','ordersFilterSymbol', 'ordersFromDate', 'ordersToDate','ordersFilterAccountId'],
 
             events: {
                 'click #orders-filter .js-reset-filters-button' : 'resetFilters',
@@ -56,11 +56,15 @@ define(
             initialize: function() {
                 
                 this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
+
             },
 
             postPlace: function() {
                 // initialize Symbol dropdown
                 this._initSymbolField();
+
+                $(this.ordersFilterFormElement).validationEngine();
+
                 // instantiate fromDate to datepicker()
                 if (!($(this.ordersFromDateElement).datepicker())) {
                     $(this.ordersFromDateElement).datepicker();
@@ -76,11 +80,12 @@ define(
                 if ( !(_.isEmpty( Repository.getOrderFilters() )) ) {
                     this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
                 }
-                $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox();
+                $(this.ordersFilterAccountIdElement).selectbox();
                 this.setFilterCriteria();
             },
 
             resetFilters: function() {
+                this.closePopups();
                 // Reset selectbox to ''
                 $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox('detach');
                 $(this.ordersFilterFormElement).find('select[name="accountId"]').val('');
@@ -119,8 +124,17 @@ define(
             // update orders for current filter criteria
             updateOrders: function() {
                 // Process filter criteria to server format
+                if (!($(this.ordersFilterFormElement).validationEngine('validate'))) {
+                    return;
+                }
+                this.closePopups();
                 this.setFilterCriteria();
                 Repository.getOrders();
+            },
+            closePopups: function(){
+                $(this.ordersFilterFormElement).validationEngine('hideAll');
+                $(this.ordersFromDateElement).datepicker('hide');
+                $(this.ordersToDateElement).datepicker('hide');
             },
             render: function(){
                 var template = this.getTemplate(),
