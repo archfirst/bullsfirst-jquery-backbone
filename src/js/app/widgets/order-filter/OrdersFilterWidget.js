@@ -56,6 +56,7 @@ define(
             initialize: function() {
                 
                 this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
+                this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
 
             },
 
@@ -80,8 +81,12 @@ define(
                 if ( !(_.isEmpty( Repository.getOrderFilters() )) ) {
                     this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
                 }
-                $(this.ordersFilterAccountIdElement).selectbox();
+                
                 this.setFilterCriteria();
+            },
+
+            onFilterLoad: function() {
+                $(this.ordersFilterAccountIdElement).selectbox();
             },
 
             resetFilters: function() {
