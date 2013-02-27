@@ -46,7 +46,7 @@ define(
                 source: TransactionsFilterTemplate
             },
 
-            elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate'],
+            elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate','transactionsFilterAccountId'],
 
             events: {
                 'click .transactions-filter .js-reset-filters-button' : 'resetFilters',
@@ -54,12 +54,15 @@ define(
             },
             
             initialize: function() {
-                FilterWidget.prototype.initialize.call(this);
+                
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
+                this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
             },
 
             postPlace: function() {
                 // instantiate fromDate to datepicker()
+                $(this.transactionsFilterFormElement).validationEngine();
+
                 if (!($(this.transactionsFromDateElement).datepicker())) {
                     $(this.transactionsFromDateElement).datepicker();
                 }
@@ -74,12 +77,17 @@ define(
                 if ( !(_.isEmpty( Repository.getTransactionsFilters() )) ) {
                     this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
                 }
-                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox();
+                
                 
                 this.setFilterCriteria();
             },
 
+            onFilterLoad: function() {
+                $(this.transactionsFilterAccountIdElement).selectbox();
+            },
+
             resetFilters: function() {
+                this.closePopups();
                 // Reset selectbox to ''
                 $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox('detach');
                 $(this.transactionsFilterFormElement).find('select[name="accountId"]').val('');
@@ -110,8 +118,18 @@ define(
 
             updateTransactions: function() {
                 // Process filter criteria to server format
+                if (!($(this.transactionsFilterFormElement).validationEngine('validate'))) {
+                    return;
+                }
+                this.closePopups();
                 this.setFilterCriteria();
                 Repository.getTransactions();
+            },
+
+            closePopups: function(){
+                $(this.transactionsFilterFormElement).validationEngine('hideAll');
+                $(this.transactionsFromDateElement).datepicker('hide');
+                $(this.transactionsToDateElement).datepicker('hide');
             },
 
             render: function(){
