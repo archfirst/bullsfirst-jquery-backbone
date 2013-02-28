@@ -96,6 +96,11 @@ define(
 
               },
 
+              postPlace: function() {
+                $('#fromAccount').selectbox();
+                $('#toAccount').selectbox();
+              },
+
             populateSymbolField: function () {
                 //get instruments
                 var instruments = $.map(Repository.getInstruments(), function(instrument) {
