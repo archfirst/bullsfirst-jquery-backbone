@@ -48,9 +48,11 @@ define(
                 // Subscribe to `SelectedAccountChanged` event
                 this.listenTo(MessageBus, Message.SelectedAccountChanged, function(selectedAccount) {
                     var tableView = this.children.PositionTableBodyView;
-                    tableView.collection = selectedAccount.get('positions');
-                    tableView.render();
-                    this.$el.treeTable();
+                    if (selectedAccount && tableView) {
+                        tableView.collection = selectedAccount.get('positions');
+                        tableView.render();
+                        this.$el.treeTable();
+                    }
                 });
             },
 
@@ -61,7 +63,7 @@ define(
                         viewClass: PositionTableBodyView,
                         options: {
                             el: this.positionTableBodyElement,
-                            collection: Repository.getSelectedAccount().get('positions')
+                            collection: (Repository.getSelectedAccount()) ? (Repository.getSelectedAccount().get('positions')):({})
                         }
                     }
                 ]);
