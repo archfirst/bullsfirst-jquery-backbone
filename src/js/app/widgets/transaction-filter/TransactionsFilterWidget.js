@@ -70,15 +70,8 @@ define(
                 if (!($(this.transactionsToDateElement).datepicker())) {
                     $(this.transactionsToDateElement).datepicker();
                 }
-                // Initially set fromDate and ToDate to current date
-                $(this.transactionsFromDateElement).datepicker('setDate', new Date());
-                $(this.transactionsToDateElement).datepicker('setDate', new Date());
                 // Restore filters for the transactions tab
-                if ( !(_.isEmpty( Repository.getTransactionsFilters() )) ) {
-                    this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
-                }
-                
-                
+                this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
                 this.setFilterCriteria();
             },
 
