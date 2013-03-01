@@ -136,6 +136,12 @@ define(
                 $(this.ordersFromDateElement).datepicker('hide');
                 $(this.ordersToDateElement).datepicker('hide');
             },
+            //override destrory of base view to remove popups
+            destroy: function() {
+                this.closePopups();
+                // call to super class destroy function
+                BaseView.prototype.destroy.call(this);
+            },
             render: function(){
                 var template = this.getTemplate(),
                     collection = this.collection || {},
