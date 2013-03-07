@@ -55,13 +55,15 @@ define(
             },
 
             postRender: function() {
+                var selectedAccount = Repository.getSelectedAccount();
                 this.addChildren([
                     {
                         id: 'PositionTableBodyView',
                         viewClass: PositionTableBodyView,
                         options: {
                             el: this.positionTableBodyElement,
-                            collection: Repository.getSelectedAccount().get('positions')
+                            collection: selectedAccount ?
+                                selectedAccount.get('positions') : new Backbone.Collection()
                         }
                     }
                 ]);
