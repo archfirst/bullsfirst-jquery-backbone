@@ -96,6 +96,7 @@ input[type="text"], input[type="password"] {
     margin-bottom: 10px;
     width: 100%;
     padding-left: 7px;
+    @include box-sizing(border-box);
 }
 
 /* -----------------------------------------------------------------------------
