@@ -60,7 +60,10 @@ define(
             fromDate: moment(new Date()).format('YYYY-MM-DD'),
             toDate: moment(new Date()).format('YYYY-MM-DD')
         };
-        var _transactionsFilterCriteria = {};
+        var _transactionsFilterCriteria = {
+            fromDate: moment(new Date()).format('YYYY-MM-DD'),
+            toDate: moment(new Date()).format('YYYY-MM-DD')
+        };
 
         var _repository = {
             getUser: function() { return _user; },

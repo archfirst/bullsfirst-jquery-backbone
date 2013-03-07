@@ -70,15 +70,8 @@ define(
                 if (!($(this.transactionsToDateElement).datepicker())) {
                     $(this.transactionsToDateElement).datepicker();
                 }
-                // Initially set fromDate and ToDate to current date
-                $(this.transactionsFromDateElement).datepicker('setDate', new Date());
-                $(this.transactionsToDateElement).datepicker('setDate', new Date());
                 // Restore filters for the transactions tab
-                if ( !(_.isEmpty( Repository.getTransactionsFilters() )) ) {
-                    this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
-                }
-                
-                
+                this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
                 this.setFilterCriteria();
             },
 
@@ -130,6 +123,13 @@ define(
                 $(this.transactionsFilterFormElement).validationEngine('hideAll');
                 $(this.transactionsFromDateElement).datepicker('hide');
                 $(this.transactionsToDateElement).datepicker('hide');
+            },
+
+            //override destrory of base view to remove popups
+            destroy: function() {
+                this.closePopups();
+                // call to super class destroy function
+                BaseView.prototype.destroy.call(this);
             },
 
             render: function(){
