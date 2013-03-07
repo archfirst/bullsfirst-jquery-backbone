@@ -42,7 +42,10 @@ define(
             },
 
             render: function() {
-                this.$el.html(this.model.get('name'));
+                if (this.model) {
+                    this.$el.html(this.model.get('name'));
+                }
+                
                 return this;
             }
         });

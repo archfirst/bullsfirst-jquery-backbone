@@ -22,9 +22,10 @@
 define(
     [
         'app/widgets/position-table/PositionView',
-        'framework/BaseView'
+        'framework/BaseView',
+        'underscore'
     ],
-    function(PositionView, BaseView) {
+    function(PositionView, BaseView, _) {
         'use strict';
 
         return BaseView.extend({
@@ -37,26 +38,27 @@ define(
 
             render: function() {
                 this.destroyChildren();
+                
+                if (!(_.isEmpty(this.collection))) {
+                    this.collection.each(function(position) {
+                        var positionId = 'position-' + position.get('instrumentSymbol');
+                        this.addChild({
+                            id: positionId,
+                            viewClass: PositionView,
+                            parentElement: this.$el,
+                            options: {
+                                model: position,
+                                id: positionId
+                            }
+                        });
 
-                this.collection.each(function(position) {
-                    var positionId = 'position-' + position.get('instrumentSymbol');
-                    this.addChild({
-                        id: positionId,
-                        viewClass: PositionView,
-                        parentElement: this.$el,
-                        options: {
-                            model: position,
-                            id: positionId
+                        // Add rows for children
+                        var children = position.get('children');
+                        if (children) {
+                            this._renderChildren(children, positionId);
                         }
-                    });
-
-                    // Add rows for children
-                    var children = position.get('children');
-                    if (children) {
-                        this._renderChildren(children, positionId);
-                    }
-                }, this);
-
+                    }, this);
+                }
                 return this;
             },
 
