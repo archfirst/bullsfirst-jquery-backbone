@@ -74,13 +74,8 @@ define(
                 if (!($(this.ordersToDateElement).datepicker())) {
                     $(this.ordersToDateElement).datepicker();
                 }
-                // Initially set fromDate and ToDate to current date
-                $(this.ordersFromDateElement).datepicker('setDate', new Date());
-                $(this.ordersToDateElement).datepicker('setDate', new Date());
                 // Restore filters for the orders tab
-                if ( !(_.isEmpty( Repository.getOrderFilters() )) ) {
-                    this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
-                }
+                this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
                 
                 this.setFilterCriteria();
             },
@@ -140,6 +135,12 @@ define(
                 $(this.ordersFilterFormElement).validationEngine('hideAll');
                 $(this.ordersFromDateElement).datepicker('hide');
                 $(this.ordersToDateElement).datepicker('hide');
+            },
+            //override destrory of base view to remove popups
+            destroy: function() {
+                this.closePopups();
+                // call to super class destroy function
+                BaseView.prototype.destroy.call(this);
             },
             render: function(){
                 var template = this.getTemplate(),

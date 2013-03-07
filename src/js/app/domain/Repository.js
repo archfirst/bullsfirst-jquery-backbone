@@ -39,10 +39,11 @@ define(
         'framework/ErrorUtil',
         'framework/Formatter',
         'framework/MessageBus',
+        'moment',
         'underscore'
     ],
     function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
-     Credentials, ExternalAccounts, Orders, Transactions, User, InstrumentService, ErrorUtil, Formatter, MessageBus, _) {
+     Credentials, ExternalAccounts, Orders, Transactions, User, InstrumentService, ErrorUtil, Formatter, MessageBus, moment, _) {
         'use strict';
 
         // Module level variables act as singletons
@@ -55,7 +56,10 @@ define(
         var _instruments = null;
         var _orders = new Orders();
         var _transactions = new Transactions();
-        var _orderFilterCriteria = {};
+        var _orderFilterCriteria = {
+            fromDate: moment(new Date()).format('YYYY-MM-DD'),
+            toDate: moment(new Date()).format('YYYY-MM-DD')
+        };
         var _transactionsFilterCriteria = {};
 
         var _repository = {
