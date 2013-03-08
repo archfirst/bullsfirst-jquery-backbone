@@ -24,12 +24,13 @@ define(
         'app/common/Message',
         'app/domain/Repository',
         'app/widgets/position-table/PositionTableBodyView',
+        'backbone',
         'framework/BaseView',
         'framework/MessageBus',
         'text!app/widgets/position-table/PositionTableTemplate.html',
         'jqueryTreeTable'
     ],
-    function(Message, Repository, PositionTableBodyView, BaseView, MessageBus, PositionTableTemplate) {
+    function(Message, Repository, PositionTableBodyView, Backbone, BaseView, MessageBus, PositionTableTemplate) {
         'use strict';
 
         return BaseView.extend({
