@@ -87,7 +87,6 @@ define(
                 this.settings = {
                     id: this.id,
                     title: 'Transfer',
-                    type: 'trade',
                     overlay: false,
                     closeButton: true,
                     draggable: true,
