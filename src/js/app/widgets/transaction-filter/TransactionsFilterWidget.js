@@ -32,7 +32,7 @@ define(
         'underscore',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate, _) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate ) {
         'use strict';
 
         return FilterWidget.extend({
