@@ -167,7 +167,6 @@ define(
                 this.settings = {
                     id: this.id,
                     title: 'Trade',
-                    type: 'trade',
                     overlay: false,
                     draggable: true,
                     closeButton: true,
