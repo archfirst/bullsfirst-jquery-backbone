@@ -41,7 +41,7 @@ define(
 
         return ModalWidget.extend({
             id: 'trade-summary',
-            className: 'modal-wrapper summary-modal',
+            className: 'modal modal-level2',
 
             template: {
                 name: 'AddExternalAccountTemplate',
@@ -58,19 +58,9 @@ define(
             }()),
 
             initialize: function() {
-                /*this.listenTo(MessageBus, Message.TradeModalOpen, function(){
-                   console.log('open me');
-                });*/
-
-                //this.listenTo(this.model, 'change', this.render);
                 this.settings = {
-                    id: this.id,
-                    title: 'Add an External Account',
-                    type: 'add-external-account',
                     overlay: true,
-                    closeButton: true,
-                    draggable: false,
-                    position: 'center'
+                    centerInWindow: true
                 };
 
                 return this;
@@ -104,12 +94,9 @@ define(
             },
 
             postPlace: function(){
+                ModalWidget.prototype.postPlace.call(this);
 
                 this.$el.find('form').validationEngine();
-
-                this._postPlace();
-
-                MessageBus.trigger(Message.ModalLoad);
 
                 return this;
             }

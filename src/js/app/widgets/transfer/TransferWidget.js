@@ -50,7 +50,7 @@ define(
 
         return ModalWidget.extend({
             id: 'transfer-modal',
-            className: 'modal-wrapper right form-modal',
+            className: 'modal form-modal',
 
             template: {
                 name: 'TransferTemplate',
@@ -70,6 +70,14 @@ define(
                 });
             }()),
 
+            initialize: function() {
+                this.settings = {
+                    draggable: true
+                };
+
+                this.listenTo(MessageBus, Message.ExternalAccountsUpdated, this.render);
+            },
+
             addExternalAcoount: function () {
 
                 this.addChildren([
@@ -82,36 +90,15 @@ define(
                 return false;
             },
 
-            initialize: function() {
-
-                this.settings = {
-                    id: this.id,
-                    title: 'Transfer',
-                    overlay: false,
-                    closeButton: true,
-                    draggable: true,
-                    position: 'right'
-                };
-
-            },
-
             postPlace: function() {
-                $('#fromAccount').selectbox();
-                $('#toAccount').selectbox();
-            },
+                ModalWidget.prototype.postPlace.call(this);
 
-            populateSymbolField: function () {
-                //get instruments
-                var instruments = $.map(Repository.getInstruments(), function(instrument) {
-                    return {
-                        label: instrument.symbol + ' (' + instrument.name + ')',
-                        value: instrument.symbol
-                    };
-                });
+                $('#fromAccount, #toAccount').selectbox();
+                this._initSymbolField();
 
-                $(this.transferSymbolElement).autocomplete({
-                    source: instruments
-                });
+                this.$el.find('form').validationEngine();
+
+                return this;
             },
 
             processToAccountSelection: function (event) {
@@ -191,50 +178,18 @@ define(
                 this.closeModal();
             },
 
-            render: function() {
-                var accounts = this.model.toJSON(),
-                    applySettings = this.applySettings,
-                    settings = this.settings,
-                    modalView = this,
-                    template = this.getTemplate(),
-                    selectedAccount = Repository.getSelectedAccount(),
-                    that = this,
-                    context = {};
-
-                context.accounts = accounts;
-                context.selectedAccount = selectedAccount;
-                context.settings = this.settings;
-
-                this.destroyChildren();
-
-                this.$el.html(template(context));
-                this._setupElements();
-
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.ModalLoad, function(){
-                    applySettings(settings);
+            _initSymbolField: function () {
+                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    };
                 });
 
-                this.listenTo(MessageBus, Message.ExternalAccountsUpdated, function() {
-                    that.render();
+                $(this.transferSymbolElement).autocomplete({
+                    source: instruments
                 });
-
-                $(window).on('keyup', function(e) {
-                    if (e.which === 27) { // Escape
-                        modalView.closeModal();
-                    }
-                });
-
-                this.postRender(settings);
-
-                _.defer(function () {
-                    $('#transfer-form').validationEngine();
-                    that.populateSymbolField();
-                });
-
-                return this;
             }
-
         });
     }
 );

@@ -17,21 +17,24 @@
 /**
  * app/widgets/modal/ModalWidget
  *
- * This is the trade widget for the user page.
+ * Base view for creating modal dialogs.
+ *
+ * Derived classes can initialize a settings property to control the
+ * behavior of the modal dialog:
+ *
+ *   settings.draggable: boolean - allows the user to drag the dialog box
+ *   settings.centerInWindow : boolean - center the dialog in the window
+ *   settings.style: string - adds the specified style to the dialog
+ *   settings.overlay: boolean - creates an overlay on the entire window
  *
  * @author Alasdair Swan
  */
 define(
     [
-        'app/common/Message',
-        'app/domain/Repository',
         'app/widgets/modal/ModalOverlayView',
-        'backbone',
-        'framework/BaseView',
-        'framework/MessageBus',
-        'text!app/widgets/modal/ModalTemplate.html'
+        'framework/BaseView'
     ],
-    function(Message, Repository, ModalOverlayView, Backbone, BaseView, MessageBus, ModalTemplate) {
+    function(ModalOverlayView, BaseView) {
         'use strict';
 
         return BaseView.extend({
@@ -41,32 +44,7 @@ define(
                 'click .modal-close' : 'closeModal'
             },
 
-            template: {
-                name: 'ModalTemplate',
-                source: ModalTemplate
-            },
-
-            applySettings: function(settings){
-                if ( $('.modal-overlay').css('display') === 'none' ) {
-                    $('.modal-overlay').show();
-                }
-
-                if (settings.overlay) {
-                    $('.modal-overlay').addClass('show');
-                }
-
-                if (settings.style) {
-                    $('#' + settings.id).addClass(settings.style);
-                }
-
-                if (settings.draggable) {
-                    $('#' + settings.id).draggable();
-                }
-
-            },
-
-            centerModal: function() {
-
+            centerInWindow: function() {
                 var top = ($(window).height() - this.$el.height()) / 2;
                 var left = ($(window).width() - this.$el.width()) / 2;
 
@@ -74,7 +52,6 @@ define(
                     top: top,
                     left: left
                 });
-
             },
 
             closeModal: function(e) {
@@ -87,60 +64,37 @@ define(
             },
 
             postPlace: function() {
-                this._postPlace();
-            },
+                if (this.settings.draggable === true) {
+                    this.$el.draggable();
+                }
 
-            _postPlace: function() {
-                if (this.settings.position === 'center') {
-                    this.centerModal();
+                if (this.settings.centerInWindow === true) {
+                    this.centerInWindow();
                 }
             },
 
-            postRender: function(settings) {
-                this._postRender(settings);
-            },
+            postRender: function() {
+                if (this.settings.style) {
+                    this.$el.addClass(this.settings.style);
+                }
 
-            _postRender: function(settings) {
-
-                if (settings.overlay) {
-                    this.addChildren([{
+                if (this.settings.overlay === true) {
+                    this.addChild({
                         id: 'ModalOverlayView',
                         viewClass: ModalOverlayView,
                         parentElement: $('body')
-                    }]);
+                    });
                 }
 
-            },
-
-            render: function() {
-
-                var template = this.getTemplate(),
-                    settings = this.settings,
-                    applySettings = this.applySettings,
-                    modalView = this;
-
-                // Destroy existing children
-                this.destroyChildren();
-
-                this.$el.html(template(settings));
-                this._setupElements();
-
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.ModalLoad, function(){
-                    applySettings(settings);
-                });
-
+                var modalView = this;
                 $(window).on('keyup', function(e) {
                     if (e.which === 27) { // Escape
                         modalView.closeModal();
                     }
                 });
-
-                this.postRender(settings);
-
-                return this;
             },
 
+            // TODO: figure out what stacked and show are doing?
             updateModal: function(modal) {
                 if ( ! $(modal).hasClass('stacked') ) {
                     $(modal).hide();

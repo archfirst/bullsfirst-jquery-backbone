@@ -47,6 +47,7 @@
 @import "common/tables";
 @import "common/legends";
 @import "common/selectbox";
+@import "common/modals";
 
 // -----------------------------------------------------------------------------
 // Page Stylesheets
@@ -65,21 +66,21 @@
 // -----------------------------------------------------------------------------
 // Base Modal Stylesheets
 // -----------------------------------------------------------------------------
-@import "widgets/modal-widget";
 @import "widgets/form-modal";
 
 // -----------------------------------------------------------------------------
 // Widget Stylesheets
 // -----------------------------------------------------------------------------
 @import "widgets/account-selector-widget";
-@import "widgets/add-external-account-widget";
-@import "widgets/login-widget";
-@import "widgets/intro-widget";
-@import "widgets/user-page-header-widget";
 @import "widgets/account-table-widget";
-@import "widgets/position-table-widget";
-@import "widgets/open-account-form-widget";
+@import "widgets/add-external-account-widget";
 @import "widgets/filter-widget";
+@import "widgets/intro-widget";
+@import "widgets/login-widget";
+@import "widgets/open-account-form-widget";
 @import "widgets/order-filter-widget.scss";
 @import "widgets/order-table-widget";
+@import "widgets/position-table-widget";
+@import "widgets/trade-preview-widget";
 @import "widgets/transfer-widget";
+@import "widgets/user-page-header-widget";

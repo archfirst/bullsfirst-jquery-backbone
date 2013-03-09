@@ -1,40 +1,38 @@
 <header>
-  <h2>{{title}}</h2>
-  {{#if closeButton}}
-    <a class="modal-close" href="#"></a>
-  {{/if}}
+  <h2>Trade Summary</h2>
+  <a class="modal-close" href="#"></a>
 </header>
 
 <section>
   <table>
     <tr>
       <th>Account:</th>
-      <td>{{summary.brokerageAccountName}}</td>
+      <td>{{brokerageAccountName}}</td>
     </tr>
     <tr>
       <th>Symbol:</th>
-      <td>{{summary.orderParams.symbol}}</td>
+      <td>{{orderParams.symbol}}</td>
     </tr>
     <tr>
       <th>Action:</th>
-      <td>{{summary.orderParams.side}}</td>
+      <td>{{orderParams.side}}</td>
     </tr>
     <tr>
       <th>Quantity:</th>
-      <td>{{summary.orderParams.quantity}}</td>
+      <td>{{orderParams.quantity}}</td>
     </tr>
     <tr>
       <th>Order Type:</th>
-      <td>{{summary.orderParams.type}}</td>
+      <td>{{orderParams.type}}</td>
     </tr>
     <tr>
       <th>Term:</th>
-      <td>{{summary.orderParams.term}}</td>
+      <td>{{orderParams.term}}</td>
     </tr>
     <tr>
       <th>All-or-None:</th>
       <td>
-        {{#if summary.orderParams.allOrNone}}
+        {{#if orderParams.allOrNone}}
           true
         {{else}}
           false
@@ -43,15 +41,15 @@
     </tr>
     <tr class="cost-summary">
       <th>Trade Cost:</th>
-      <td>{{summary.orderEstimate.estimatedValue}}</td>
+      <td>{{orderEstimate.estimatedValue}}</td>
     </tr>
     <tr class="cost-summary">
       <th>Fees:</th>
-      <td>+{{summary.orderEstimate.fees}}</td>
+      <td>+{{orderEstimate.fees}}</td>
     </tr>
     <tr class="cost-total">
       <th>Total Cost:</th>
-      <td>{{summary.orderEstimate.estimatedValueInclFees}}</td>
+      <td>{{orderEstimate.estimatedValueInclFees}}</td>
     </tr>
   </table>
 

@@ -77,7 +77,10 @@ define(
                         viewClass: TradeWidget,
                         parentElement: this.$el,
                         options: {
-                            collection: Repository.getBrokerageAccounts()
+                            model: {
+                                accounts: Repository.getBrokerageAccounts().toJSON(),
+                                selectedAccount: Repository.getSelectedAccount()
+                            }
                         }
                     }
                 ]);
@@ -92,7 +95,10 @@ define(
                         viewClass: TransferWidget,
                         parentElement: this.$el,
                         options: {
-                            model: Repository.getBaseAccounts()
+                            model: {
+                                accounts: Repository.getBaseAccounts().toJSON(),
+                                selectedAccount: Repository.getSelectedAccount()
+                            }
                         }
                     }
                 ]);

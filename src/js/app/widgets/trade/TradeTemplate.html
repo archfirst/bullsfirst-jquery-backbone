@@ -1,8 +1,6 @@
 <header>
-  <h2>{{settings.title}}</h2>
-  {{#if settings.closeButton}}
-    <a class="modal-close" href="#"></a>
-  {{/if}}
+  <h2>Trade</h2>
+  <a class="modal-close" href="#"></a>
 </header>
 
 <section>
@@ -12,7 +10,7 @@
     	    <label for="trade-accountId">Account</label>
     	    <select id="trade-accountId" name="brokerageAccountId">
     	    	{{#each accounts}}
-    	    		<option value={{this.id}}>{{this.name}} ({{this.valueFormatted}})</option>
+    	    		<option value={{id}}>{{name}} ({{formatMoney cashPosition}})</option>
     	    	{{/each}}
     	    </select>
     	</div>

@@ -59,7 +59,7 @@ define(
 
         return ModalWidget.extend({
             id: 'trade-modal',
-            className: 'modal-wrapper form-modal',
+            className: 'modal form-modal',
 
             template: {
                 name: 'TradeTemplate',
@@ -81,6 +81,27 @@ define(
                     'mousedown' : 'blurForm'
                 });
             }()),
+
+            initialize: function() {
+
+                this.orderRequest = {
+                    brokerageAccountId: null,
+                    orderParams: {
+                        symbol: null,
+                        side: 'Buy', // Default to Buy
+                        quantity: 0,
+                        type: 'Market',
+                        term: 'GoodForTheDay',
+                        allOrNone: false
+                    }
+                };
+
+                this.settings = {
+                    draggable: true
+                };
+
+                return this;
+            },
 
             blurForm: function(e) {
                 if ( e.target.tagName.toUpperCase() !== 'INPUT') {
@@ -150,41 +171,11 @@ define(
                 }
             },
 
-            initialize: function() {
-
-                this.orderRequest = {
-                    brokerageAccountId: null,
-                    orderParams: {
-                        symbol: null,
-                        side: 'Buy', // Default to Buy
-                        quantity: 0,
-                        type: 'Market',
-                        term: 'GoodForTheDay',
-                        allOrNone: false
-                    }
-                };
-
-                this.settings = {
-                    id: this.id,
-                    title: 'Trade',
-                    overlay: false,
-                    draggable: true,
-                    closeButton: true,
-                    position: 'center'
-                };
-
-                return this;
-            },
-
             postPlace: function(){
-                MessageBus.trigger(Message.ModalLoad);
+                ModalWidget.prototype.postPlace.call(this);
 
-                // init the symbol autocomplete field
-                // We want _initSymbolField to recognize the tradeWidget as this, so we pass a context
+                $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
                 this._initSymbolField();
-                this._initFormStyles();
-
-                this.applySettings(this.settings);
 
                 return this;
             },
@@ -207,43 +198,6 @@ define(
 
                     $('.modal-overlay').addClass('show stacked');
                 }
-            },
-
-            render: function(){
-                var template = this.getTemplate(),
-                    settings = this.settings,
-                    collection = this.collection || {},
-                    applySettings = this.applySettings,
-                    modalView = this,
-                    context = {};
-
-                collection.each(function(models){
-                    models.attributes.valueFormatted = Formatter.formatMoney(models.attributes.marketValue);
-                });
-
-                // If the collection contains a toJSON method, call it to create the context
-                context.accounts = collection.toJSON ? collection.toJSON() : [];
-                context.settings = settings;
-
-                // Destroy existing children
-                this.destroyChildren();
-
-                this.$el.html(template(context));
-                this._setupElements();
-
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.ModalLoad, function(){
-                    applySettings(settings);
-                });
-
-                $(window).on('keyup', function(e) {
-                    if (e.which === 27) { // Escape
-                        modalView.closeModal();
-                    }
-                });
-
-                this.postRender(settings);
-                return this;
             },
 
             selectCheckbox: function(e) {
@@ -388,10 +342,6 @@ define(
                 else {
                     this._marketPriceFetched(null);
                 }
-            },
-
-            _initFormStyles: function(){
-                $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
             },
 
             _initSymbolField: function() {

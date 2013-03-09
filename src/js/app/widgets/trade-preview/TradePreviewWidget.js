@@ -37,7 +37,7 @@ define(
 
         return ModalWidget.extend({
             id: 'trade-summary',
-            className: 'modal-wrapper summary-modal',
+            className: 'modal modal-level2',
 
             template: {
                 name: 'TradePreviewTemplate',
@@ -54,30 +54,13 @@ define(
 
                 this.model.set('brokerageAccountName', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
 
-                //this.listenTo(this.model, 'change', this.render);
-
                 this.settings = {
-                    id: this.id,
-                    title: 'Trade Summary',
-                    type: 'trade-summary',
                     overlay: true,
-                    draggable: false,
-                    closeButton: true,
-                    position: 'center',
-                    summary: this.model.toJSON()
+                    centerInWindow: true
                 };
 
                 return this;
 
-            },
-
-            postPlace: function(){
-
-                this._postPlace();
-
-                MessageBus.trigger(Message.ModalLoad);
-
-                return this;
             },
 
             submitOrder: function(){

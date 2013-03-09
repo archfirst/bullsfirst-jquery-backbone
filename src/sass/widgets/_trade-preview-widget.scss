@@ -1,0 +1,17 @@
+/* -----------------------------------------------------------------------------
+ * trade-preview-widget
+ * -------------------------------------------------------------------------- */
+
+#trade-summary {
+    .cost-summary {
+        background: $modal-table-costs !important;
+
+        &:first-child {
+            margin-top: 20px;
+        }
+    }
+
+    .cost-total {
+        background: $modal-table-total !important;
+    }
+}
