@@ -26,10 +26,10 @@ define(
         'underscore',
         'jqueryselectbox'
     ],
-    
+
     function( Repository, BaseView, _ ) {
         'use strict';
-        
+
 
         return BaseView.extend({
 
@@ -70,7 +70,7 @@ define(
                 var parts = _date.match(/(\d+)/g);
                 return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
             }
-         
+
         });
     }
 );

@@ -49,7 +49,7 @@ define(
         return Backbone.Model.extend({
 
             initialize: function() {
-                
+
                 // Initialize calculated fields
                 var isInstrumentPosition = typeof this.get('lotId') === 'undefined';
                 var isTradable = isInstrumentPosition && this.get('instrumentSymbol') !== 'CASH';

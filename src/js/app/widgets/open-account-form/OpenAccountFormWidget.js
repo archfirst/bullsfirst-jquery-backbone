@@ -82,10 +82,10 @@ define(
 
             checkEnterKey: function checkEnterKey(event) {
 
-              if (event.keyCode === $.ui.keyCode.ENTER) {
-                event.preventDefault();
-                this.handleOpenAccountButton();
-              }
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    event.preventDefault();
+                    this.handleOpenAccountButton();
+                }
             },
 
             createUser: function createUser() {
@@ -110,64 +110,66 @@ define(
             },
 
             createBrokerageAccountDone: function(data /*, textStatus, jqXHR */){
-              this.brokerageAccountId = data.id;
+                this.brokerageAccountId = data.id;
 
-              // Create external account
-              var externalAccount = new ExternalAccount({
-                name: 'External Account 1', routingNumber: '022000248', accountNumber: '12345678'
-              });
-              Repository.getExternalAccounts().add(externalAccount);
-              externalAccount.save(null, {
-                success: _.bind(this.createExternalAccountDone, this),
-                error: ErrorUtil.showBackboneError
-              });
+                // Create external account
+                var externalAccount = new ExternalAccount({
+                    name: 'External Account 1',
+                    routingNumber: '022000248',
+                    accountNumber: '12345678'
+                });
+                Repository.getExternalAccounts().add(externalAccount);
+                externalAccount.save(null, {
+                    success: _.bind(this.createExternalAccountDone, this),
+                    error: ErrorUtil.showBackboneError
+                });
             },
 
             createExternalAccountDone: function(model /*, jqXHR */){
-              this.externalAccountId = model.id;
+                this.externalAccountId = model.id;
 
-              // Transfer cash
-              AccountService.transferCash(
-                this.externalAccountId,
-                { amount: {amount: 100000, currency: 'USD'}, toAccountId: this.brokerageAccountId },
-                _.bind(this.transferCashDone, this),
-                ErrorUtil.showError
-              );
+                // Transfer cash
+                AccountService.transferCash(
+                    this.externalAccountId,
+                    { amount: {amount: 100000, currency: 'USD'}, toAccountId: this.brokerageAccountId },
+                    _.bind(this.transferCashDone, this),
+                    ErrorUtil.showError
+                );
             },
 
             transferCashDone: function(/* data, textStatus, jqXHR */){
-              Backbone.history.navigate('accounts', true);
-              MessageBus.trigger(Message.UserLoggedInEvent);
+                Backbone.history.navigate('accounts', true);
+                MessageBus.trigger(Message.UserLoggedInEvent);
             },
 
             handleCancelButton: function(){
-              this.openAccountFormElement.validationEngine('hide');
+                this.openAccountFormElement.validationEngine('hide');
             },
 
             // ------------------------------------------------------------
-                // Helper functions
-                // ------------------------------------------------------------
-                // Creates a CreateUserRequest from the Open Account form
+            // Helper functions
+            // ------------------------------------------------------------
+            // Creates a CreateUserRequest from the Open Account form
             form2CreateUserRequest: function(){
-              var formObject = this.openAccountFormElement.toObject();
-                    delete formObject.confirmPassword; // property not expected by REST service
-                    return formObject;
+                var formObject = this.openAccountFormElement.toObject();
+                delete formObject.confirmPassword; // property not expected by REST service
+                return formObject;
             },
 
             // Creates a User from the Open Account form
             form2User: function(){
-              var formObject = this.openAccountFormElement.toObject();
-              delete formObject.password;
-              delete formObject.confirmPassword;
-              return formObject;
+                var formObject = this.openAccountFormElement.toObject();
+                delete formObject.password;
+                delete formObject.confirmPassword;
+                return formObject;
             },
 
             // Creates Credentials from the Open Account form
             form2Credentials: function(){
-              return new Credentials(
-                $('#oa-username').val(),
-                $('#oa-password').val()
-              );
+                return new Credentials(
+                    $('#oa-username').val(),
+                    $('#oa-password').val()
+                );
             },
 
             handleOpenAccountButton: function handleOpenAccountButton() {

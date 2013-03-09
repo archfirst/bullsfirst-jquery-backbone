@@ -42,7 +42,7 @@ define(
             },
 
             initialize: function(){
-                
+
                 this.collection = Repository.getTransactions();
                 this.collection.bind('reset', this.render, this);
                 // Subscribe to events

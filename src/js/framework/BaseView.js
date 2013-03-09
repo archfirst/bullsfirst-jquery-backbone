@@ -135,7 +135,7 @@ define(
 
                 return _templates[this.template.name];
             },
-            
+
             template: {
                 name: 'DefaultTemplate',
                 source: '<div></div>'

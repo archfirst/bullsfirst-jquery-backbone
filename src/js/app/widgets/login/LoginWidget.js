@@ -60,10 +60,10 @@ define(
             },
 
             checkEnterKey: function(event) {
-               if (event.keyCode === $.ui.keyCode.ENTER) {
-                   this.login();
-                   return false;
-               }
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    this.login();
+                    return false;
+                }
             },
 
             login: function() {

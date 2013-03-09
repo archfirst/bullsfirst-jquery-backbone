@@ -19,8 +19,6 @@
  *
  * @author Vikas Goyal
  */
-/* jslint flags */
-/*global $, define, _*/
 define(
     [
         'app/common/Message',
@@ -32,6 +30,7 @@ define(
         'framework/ErrorUtil',
         'framework/MessageBus',
         'text!app/widgets/transfer/TransferTemplate.html',
+        'underscore',
         'jqueryExtensions',
         'jqueryValidationEngineRules'
     ],
@@ -44,7 +43,8 @@ define(
         AlertUtil,
         ErrorUtil,
         MessageBus,
-        TransferTemplate
+        TransferTemplate,
+        _
     ) {
         'use strict';
 
@@ -60,14 +60,14 @@ define(
             elements: ['transferSymbol'],
 
             events: (function() {
-              // Clone the prototype's events object, then extend it
-              // TODO: figure out a better way to do this without instantiating a new object
-              return _.extend(_.clone(new ModalWidget().events), {
-                'click #transfer-tabbar a': 'selectTab',
-                'click select[name=toAccount]': 'processToAccountSelection',
-                'click #process-transfer-button': 'processTransfer',
-                'click #add-external-account-button': 'addExternalAcoount'
-              });
+                // Clone the prototype's events object, then extend it
+                // TODO: figure out a better way to do this without instantiating a new object
+                return _.extend(_.clone(new ModalWidget().events), {
+                    'click #transfer-tabbar a': 'selectTab',
+                    'click select[name=toAccount]': 'processToAccountSelection',
+                    'click #process-transfer-button': 'processTransfer',
+                    'click #add-external-account-button': 'addExternalAcoount'
+                });
             }()),
 
             addExternalAcoount: function () {
@@ -93,12 +93,12 @@ define(
                     position: 'right'
                 };
 
-              },
+            },
 
-              postPlace: function() {
+            postPlace: function() {
                 $('#fromAccount').selectbox();
                 $('#toAccount').selectbox();
-              },
+            },
 
             populateSymbolField: function () {
                 //get instruments
@@ -108,9 +108,9 @@ define(
                         value: instrument.symbol
                     };
                 });
-                
+
                 $(this.transferSymbolElement).autocomplete({
-                        source: instruments
+                    source: instruments
                 });
             },
 
@@ -216,13 +216,13 @@ define(
                 });
 
                 this.listenTo(MessageBus, Message.ExternalAccountsUpdated, function() {
-                  that.render();
+                    that.render();
                 });
 
                 $(window).on('keyup', function(e) {
-                  if (e.which === 27) { // Escape
-                    modalView.closeModal();
-                  }
+                    if (e.which === 27) { // Escape
+                        modalView.closeModal();
+                    }
                 });
 
                 this.postRender(settings);

@@ -111,7 +111,7 @@ define(
                 } else {
                     that.symbolNotRecognized();
                 }
-                
+
             },
 
             createEstimate: function(callback) {
@@ -237,9 +237,9 @@ define(
                 });
 
                 $(window).on('keyup', function(e) {
-                  if (e.which === 27) { // Escape
-                    modalView.closeModal();
-                  }
+                    if (e.which === 27) { // Escape
+                        modalView.closeModal();
+                    }
                 });
 
                 this.postRender(settings);
@@ -320,7 +320,7 @@ define(
                     $('#totalCost').html(zero);
                 });
             },
-            
+
             toggleLimitField: function(e){
                 if ( $(e.target).val().toLowerCase() === 'limit' ) {
                     $('.limit-price').removeClass('hidden');
@@ -339,18 +339,18 @@ define(
                     target = e.target,
                     name = $(target).attr('name');
 
-                switch ( name ) {
-                    case 'brokerageAccountId':
-                    case 'tradeSymbol':
-                        break;
-                    case 'limitPrice':
-                        tradeWidget.orderRequest.orderParams[name] = {
-                            amount: $(target).val(),
-                            currency: tradeWidget.marketPrice.attributes.price.currency
-                        };
-                        break;
-                    default:
-                        tradeWidget.orderRequest.orderParams[name] = $(target).val();
+                switch (name) {
+                case 'brokerageAccountId':
+                case 'tradeSymbol':
+                    break;
+                case 'limitPrice':
+                    tradeWidget.orderRequest.orderParams[name] = {
+                        amount: $(target).val(),
+                        currency: tradeWidget.marketPrice.attributes.price.currency
+                    };
+                    break;
+                default:
+                    tradeWidget.orderRequest.orderParams[name] = $(target).val();
                 }
 
                 // tradeSymbol field is a special case
@@ -376,15 +376,16 @@ define(
                     this.marketPrice = new MarketPrice({symbol: symbol});
                     this.marketPrice.fetch({
                         success: function(price) {
-                          tradeWidget._marketPriceFetched(price);
-                          tradeWidget.orderRequest.orderParams.symbol = symbol;
+                            tradeWidget._marketPriceFetched(price);
+                            tradeWidget.orderRequest.orderParams.symbol = symbol;
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
-                          tradeWidget._marketPriceFetched(null);
-                          ErrorUtil.showBackboneError(jqXHR, textStatus, errorThrown);
+                            tradeWidget._marketPriceFetched(null);
+                            ErrorUtil.showBackboneError(jqXHR, textStatus, errorThrown);
                         }
                     });
-                } else {
+                }
+                else {
                     this._marketPriceFetched(null);
                 }
             },
@@ -395,7 +396,7 @@ define(
 
             _initSymbolField: function() {
                 var tradeWidget = this;
-                
+
                 var instruments = $.map(Repository.getInstruments(), function(instrument) {
                     return {
                         label: instrument.symbol + ' (' + instrument.name + ')',
@@ -406,19 +407,19 @@ define(
                 this.instruments = instruments;
 
                 $(this.tradesymbolElement).autocomplete({
-                  source: function( request, response ) {
-                    var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
+                    source: function( request, response ) {
+                        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
 
-                    response( $.grep( instruments, function( item ){
-                        return matcher.test(item.label);
-                    }) );
-                  },
-                  change: function( event ) {
-                    tradeWidget.checkTypedSymbol(event);
-                  },
-                  select: function( event, ui ) {
-                    tradeWidget.symbolChanged(ui.item.value);
-                  }
+                        response( $.grep( instruments, function( item ) {
+                            return matcher.test(item.label);
+                        }) );
+                    },
+                    change: function( event ) {
+                        tradeWidget.checkTypedSymbol(event);
+                    },
+                    select: function( event, ui ) {
+                        tradeWidget.symbolChanged(ui.item.value);
+                    }
                 });
 
                 return this.instruments;

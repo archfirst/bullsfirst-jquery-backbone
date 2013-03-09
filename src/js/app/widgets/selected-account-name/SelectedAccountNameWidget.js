@@ -45,7 +45,7 @@ define(
                 if (this.model) {
                     this.$el.html(this.model.get('name'));
                 }
-                
+
                 return this;
             }
         });

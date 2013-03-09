@@ -28,10 +28,10 @@ define(
         'moment',
         'jqueryselectbox'
     ],
-    
+
     function( Message, BaseView, MessageBus, $, moment ) {
         'use strict';
-        
+
 
         return BaseView.extend({
 
@@ -66,7 +66,7 @@ define(
                 document.getElementById(tab + '-filter-accountId').selectedIndex = 0;
                 $('#' + tab + '-filter-form a.sbSelector').html( $('#' + tab + '-filter-form select option:first-child').html() );
             },
-          
+
             styleFormElements: function(tab){
                 // Style select boxes
                 $('#' + tab + '-filter-form select').selectbox();

@@ -25,10 +25,10 @@ define(
         'app/widgets/transaction-table/TransactionView',
         'framework/BaseView'
     ],
-    
+
     function( Message, TransactionView, BaseView ) {
         'use strict';
-        
+
 
         return BaseView.extend({
 
@@ -48,7 +48,7 @@ define(
 			},
 
             renderTransaction: function(transaction){
-                
+
                 // Set boolean if negative value so can add styling class
                 if ( transaction.attributes.amount.amount < 0 ) {
                     transaction.attributes.negativeAmount = true;

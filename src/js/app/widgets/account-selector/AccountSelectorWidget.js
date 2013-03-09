@@ -69,7 +69,7 @@ define(
 
                     var template = this.getTemplate();
                     var context = model.toJSON();
-                    
+
                     this.$el.append(template(context));
                 }, this);
 

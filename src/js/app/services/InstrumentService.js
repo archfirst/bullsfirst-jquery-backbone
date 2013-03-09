@@ -30,8 +30,8 @@ define(function() {
             context = context || this;
 
             $.ajax({
-              url: '/bfexch-javaee/rest/instruments',
-              context: context
+                url: '/bfexch-javaee/rest/instruments',
+                context: context
             })
             .then(doneCallbacks, failCallbacks);
         }

@@ -48,38 +48,38 @@ define(
 
             applySettings: function(settings){
                 if ( $('.modal-overlay').css('display') === 'none' ) {
-                  $('.modal-overlay').show();
+                    $('.modal-overlay').show();
                 }
 
                 if (settings.overlay) {
-                  $('.modal-overlay').addClass('show');
+                    $('.modal-overlay').addClass('show');
                 }
 
                 if (settings.style) {
-                  $('#' + settings.id).addClass(settings.style);
+                    $('#' + settings.id).addClass(settings.style);
                 }
 
                 if (settings.draggable) {
-                  $('#' + settings.id).draggable();
+                    $('#' + settings.id).draggable();
                 }
 
             },
 
             centerModal: function() {
 
-              var top = ($(window).height() - this.$el.height()) / 2;
-              var left = ($(window).width() - this.$el.width()) / 2;
+                var top = ($(window).height() - this.$el.height()) / 2;
+                var left = ($(window).width() - this.$el.width()) / 2;
 
-              this.$el.css({
-                top: top,
-                left: left
-              });
+                this.$el.css({
+                    top: top,
+                    left: left
+                });
 
             },
 
             closeModal: function(e) {
                 if (e) {
-                  e.preventDefault();
+                    e.preventDefault();
                 }
 
                 this.destroy();
@@ -87,30 +87,28 @@ define(
             },
 
             postPlace: function() {
-              this._postPlace();
+                this._postPlace();
             },
 
             _postPlace: function() {
-              if (this.settings.position === 'center') {
-                this.centerModal();
-              }
+                if (this.settings.position === 'center') {
+                    this.centerModal();
+                }
             },
 
             postRender: function(settings) {
-              this._postRender(settings);
+                this._postRender(settings);
             },
 
             _postRender: function(settings) {
 
-              if (settings.overlay) {
-                this.addChildren([
-                  {
-                    id: 'ModalOverlayView',
-                    viewClass: ModalOverlayView,
-                    parentElement: $('body')
-                  }
-                ]);
-              }
+                if (settings.overlay) {
+                    this.addChildren([{
+                        id: 'ModalOverlayView',
+                        viewClass: ModalOverlayView,
+                        parentElement: $('body')
+                    }]);
+                }
 
             },
 
@@ -133,9 +131,9 @@ define(
                 });
 
                 $(window).on('keyup', function(e) {
-                  if (e.which === 27) { // Escape
-                    modalView.closeModal();
-                  }
+                    if (e.which === 27) { // Escape
+                        modalView.closeModal();
+                    }
                 });
 
                 this.postRender(settings);
@@ -146,7 +144,8 @@ define(
             updateModal: function(modal) {
                 if ( ! $(modal).hasClass('stacked') ) {
                     $(modal).hide();
-                } else {
+                }
+                else {
                     $(modal).removeClass('stacked show');
                 }
             }

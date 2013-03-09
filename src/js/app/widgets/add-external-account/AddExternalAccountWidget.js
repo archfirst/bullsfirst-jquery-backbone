@@ -78,10 +78,10 @@ define(
             },
 
             checkEnterKey: function(event) {
-               if (event.keyCode === $.ui.keyCode.ENTER) {
-                   this.validateForm();
-                   return false;
-               }
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    this.validateForm();
+                    return false;
+                }
             },
 
             validateForm: function() {
