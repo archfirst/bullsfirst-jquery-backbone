@@ -29,10 +29,9 @@ define(
         'framework/MessageBus',
         'moment',
         'text!app/widgets/order-filter/OrdersFilterTemplate.html',
-        'underscore',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate, _) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate) {
         'use strict';
 
         return FilterWidget.extend({
@@ -54,7 +53,7 @@ define(
             },
 
             initialize: function() {
-                
+
                 this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
                 this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
 
@@ -76,7 +75,7 @@ define(
                 }
                 // Restore filters for the orders tab
                 this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
-                
+
                 this.setFilterCriteria();
             },
 
@@ -161,7 +160,7 @@ define(
             },
             // initialize symbol dropdown with instruments
             _initSymbolField: function() {
-                
+
                 var instruments = $.map(Repository.getInstruments(), function(instrument) {
                     return {
                         label: instrument.symbol + ' (' + instrument.name + ')',
@@ -170,11 +169,11 @@ define(
                 });
 
                 $(this.ordersFilterSymbolElement).autocomplete({
-                  source: instruments
+                    source: instruments
                 });
 
                 return instruments;
-      
+
             }
         });
     }

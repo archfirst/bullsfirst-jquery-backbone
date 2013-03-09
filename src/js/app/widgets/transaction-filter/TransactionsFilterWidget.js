@@ -29,10 +29,9 @@ define(
         'framework/MessageBus',
         'moment',
         'text!app/widgets/transaction-filter/TransactionsFilterTemplate.html',
-        'underscore',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate, _) {
+    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate) {
         'use strict';
 
         return FilterWidget.extend({
@@ -52,9 +51,9 @@ define(
                 'click .transactions-filter .js-reset-filters-button' : 'resetFilters',
                 'click .transactions-filter .js-apply-filters-button' : 'updateTransactions'
             },
-            
+
             initialize: function() {
-                
+
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
                 this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
             },
