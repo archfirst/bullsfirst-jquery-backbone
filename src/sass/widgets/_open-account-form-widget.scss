@@ -1,33 +1,26 @@
 .open-account-section {
-  float: right;
-  margin-right: 162px;
-  margin-top: 10px;
-  margin-bottom: 21px;
+    float: right;
+    margin-right: 162px;
+    margin-top: 10px;
+    margin-bottom: 21px;
 }
 
-#open-account-form{
+#open-account-form {
     background-color: #404040;
     height: 440px;
     padding: 10px 15px 0 15px;
     width: 270px;
-}
 
-
-#open-account-button{
-  float: left;
-    margin: 10px 0 0 0;
+    .mandatory-text {
+        margin:0 0 10px 0;
+        color: #F8E5C9;
+    }
 }
 
 #oa-cancel-button {
-  float: left;
-  margin: 60px 0 0 20px;
-  background-color: #c03b00;
+    background-color: #c03b00;
 }
 
 #oa-cancel-button:hover {
-  background-color: #F36733;
-}
-
-a.button.popsicle-icon span  {
-    background: url(../img/popsicle_white.png) no-repeat scroll center 13px;
+    background-color: #F36733;
 }

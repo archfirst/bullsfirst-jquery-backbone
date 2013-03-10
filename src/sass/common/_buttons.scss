@@ -16,12 +16,31 @@ a.button span  {
     display: block;
 }
 
+/* -----------------------------------------------------------------------------
+ * Button Icons
+ * -------------------------------------------------------------------------- */
 a.button.person-icon span  {
     background: url(../img/person-icon.png) no-repeat;
 }
 
+a.button.plus-icon-large span  {
+    background: url(../img/plus-icon-large.png) no-repeat;
+}
+
+a.button.popsicle-icon span  {
+    background: url(../img/popsicle_white.png) no-repeat;
+}
+
+a.button.preview-icon span  {
+    background: url(../img/preview-icon.png) no-repeat;
+}
+
 a.button.refresh-icon span  {
     background: url(../img/refresh-icon.png) no-repeat;
+}
+
+a.button.submit-icon span  {
+    background: url(../img/submit-icon.png) no-repeat;
 }
 
 a.button.trade-icon span  {
@@ -57,7 +76,7 @@ a.button.small:active {
  * -------------------------------------------------------------------------- */
 a.button.medium {
     background-color: $button-medium-color;
-    font-size: 11px;
+    font-size: 12px;
     height: 25px;
     line-height: 25px;
     text-align: center;
@@ -72,12 +91,22 @@ a.button.medium:active {
     background-color: $button-active-color;
 }
 
+// font-awesome icons
+a.button.medium i {
+    font-size: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
 /* -----------------------------------------------------------------------------
  * button.large
  * -------------------------------------------------------------------------- */
 a.button.large {
     background-color: $button-large-color;
+    font-size: 14px;
     height: 75px;
+    line-height: 18px;
+    text-align: center;
     width: 110px;
 }
 
@@ -92,7 +121,21 @@ a.button.large:active {
 a.button.large span  {
     background-position: center 13px;
     padding-top: 43px;
-    text-align: center;
+}
+
+// font-awesome icons
+a.button.large i {
+    float: left;
+    font-size: 30px;
+    margin-top: 16px;
+    width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+ * Centered Buttons
+ * -------------------------------------------------------------------------- */
+a.button.center {
+    margin: 10px auto;
 }
 
 /* -----------------------------------------------------------------------------

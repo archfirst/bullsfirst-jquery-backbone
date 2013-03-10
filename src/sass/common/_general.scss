@@ -32,17 +32,6 @@ h2 {
     font: normal normal 16px Aller;
 }
 
-select {
-  height: 25px;
-  margin-bottom: 10px;
-  width: 100%;
-  padding-left: 7px;
-}
-
-option {
-  padding-left: 12px;
-}
-
 a {
     font-size: 14px;
 }
@@ -76,27 +65,6 @@ a:focus {
  * -------------------------------------------------------------------------- */
 .nodisplay {
     display: none;
-}
-
-/* -----------------------------------------------------------------------------
- * Form Styles
- * -------------------------------------------------------------------------- */
-label {
-    background-color: $label-background-color;
-    color: $label-text-color;
-    display: block;
-    font: 11px/25px Aller;
-    height: 25px;
-    padding-left: 9px;
-    width: 71px;
-}
-
-input[type="text"], input[type="password"] {
-    height: 21px;
-    margin-bottom: 10px;
-    width: 100%;
-    padding-left: 7px;
-    @include box-sizing(border-box);
 }
 
 /* -----------------------------------------------------------------------------

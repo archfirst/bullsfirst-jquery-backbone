@@ -17,7 +17,11 @@
 /**
  * framework/ModalOverlayView
  *
+ * Creates an overlay on the entire window. It expects a user defined
+ * style class called "modal-overlay".
+ *
  * @author Alasdair Swan
+ * @author Naresh Bhatia
  */
 define(
     [

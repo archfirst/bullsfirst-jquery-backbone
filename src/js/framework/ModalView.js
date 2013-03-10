@@ -28,6 +28,7 @@
  *   settings.overlay: boolean - creates an overlay on the entire window
  *
  * @author Alasdair Swan
+ * @author Naresh Bhatia
  */
 define(
     [

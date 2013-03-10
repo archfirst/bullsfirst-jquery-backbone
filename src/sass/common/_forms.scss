@@ -1,0 +1,167 @@
+/* -----------------------------------------------------------------------------
+ * forms
+ * -------------------------------------------------------------------------- */
+label {
+    background-color: $label-background-color;
+    color: $label-text-color;
+    display: block;
+    font: 11px/25px Aller;
+    height: 25px;
+    padding-left: 9px;
+    width: 71px;
+}
+
+input[type="text"], input[type="password"] {
+    height: 21px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding-left: 7px;
+    @include box-sizing(border-box);
+}
+
+select {
+  height: 25px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding-left: 7px;
+}
+
+option {
+  padding-left: 12px;
+}
+
+.inline {
+    @include inline-float(left);
+}
+
+.form-modal {
+    background: #3F3F3F;
+    border: 10px solid rgba(255, 255, 255, 0.3);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+
+    header {
+        background: #3F3F3F;
+        color: $white;
+    }
+}
+
+.modal-field {
+    @include inline-float(left);
+    width: 130px;
+    margin-bottom: 10px;
+
+    &.full {
+        width: 100%;
+        clear: left;
+
+        input[type="text"] {
+            width: 100%;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            height: 28px;
+        }
+
+        .sbOptions {
+            width: 99%;
+        }
+    }
+
+    &.left {
+        clear: left;
+    }
+
+    &.right {
+        margin-left: 11px;
+
+        label {
+            width: 57px;
+        }
+    }
+
+    &.trade-costs {
+        p {
+            width: auto;
+            height: 20px;
+            overflow: hidden;
+            text-align: right;
+            font-size: 12px;
+            line-height: 14px;
+        }
+    }
+
+    a {
+        &.modal-radio {
+            @include inline-float(left);
+            width: 65px;
+            height: 50px;
+            background: $button-large-color;
+            text-align: center;
+            line-height: 50px;
+
+            &:hover{
+                background: $button-hover-color;
+            }
+
+            &.selected {
+                background: $button-medium-color;
+                border: 2px solid $white;
+                width: 61px;
+                height: 46px;
+            }
+        }
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding-left: 7px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    label {
+        padding: 0 7px;
+    }
+
+    &.lastTradePrice {
+        p:first-child {
+            margin-top: 24px;
+        }
+
+        p {
+            margin-top: 0;
+            line-height: 14px;;
+        }
+    }
+
+    p {
+        color: $white;
+    }
+
+    .modal-checkbox {
+        @include inline-float(left);
+        width: 20px;
+        height: 25px;
+        padding: 0 0 0 3px;
+        line-height: 26px;
+        font-size: 17px;
+        color: $white;
+        background: $icon-color;
+        &.empty::before {
+            content: '';
+        }
+    }
+
+    .sbSelector {
+        padding-left: 7px;
+    }
+
+    .sbOptions {
+        width: 97%;
+    }
+}

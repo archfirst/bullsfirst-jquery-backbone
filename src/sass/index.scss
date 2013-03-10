@@ -38,12 +38,13 @@
 @import "vendor/validationEngine.jquery-2.5.2";
 
 // -----------------------------------------------------------------------------
-// Application Stylesheets
+// Common Stylesheets
 // -----------------------------------------------------------------------------
 @import "common/colors";
 @import "common/mixins";
 @import "common/general";
 @import "common/buttons";
+@import "common/forms";
 @import "common/tables";
 @import "common/legends";
 @import "common/selectbox";
@@ -64,16 +65,10 @@
 @import "pages/transactions-tab";
 
 // -----------------------------------------------------------------------------
-// Base Modal Stylesheets
-// -----------------------------------------------------------------------------
-@import "widgets/form-modal";
-
-// -----------------------------------------------------------------------------
 // Widget Stylesheets
 // -----------------------------------------------------------------------------
 @import "widgets/account-selector-widget";
 @import "widgets/account-table-widget";
-@import "widgets/add-external-account-widget";
 @import "widgets/filter-widget";
 @import "widgets/intro-widget";
 @import "widgets/login-widget";
