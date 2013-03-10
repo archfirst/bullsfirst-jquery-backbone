@@ -27,7 +27,7 @@ define(
         'app/domain/MarketPrice',
         'app/domain/Repository',
         'app/services/OrderEstimateService',
-        'app/widgets/modal/ModalWidget',
+        'app/widgets/modal/ModalView',
         'app/widgets/trade-preview/TradePreviewViewModel',
         'app/widgets/trade-preview/TradePreviewWidget',
         'framework/ErrorUtil',
@@ -36,7 +36,6 @@ define(
         'jquery',
         'moment',
         'text!app/widgets/trade/TradeTemplate.html',
-        'underscore',
         'jqueryselectbox'
     ],
     function(
@@ -44,7 +43,7 @@ define(
         MarketPrice,
         Repository,
         OrderEstimateService,
-        ModalWidget,
+        ModalView,
         TradePreviewViewModel,
         TradePreviewWidget,
         ErrorUtil,
@@ -52,12 +51,11 @@ define(
         MessageBus,
         $,
         moment,
-        TradeTemplate,
-        _
+        TradeTemplate
     ) {
         'use strict';
 
-        return ModalWidget.extend({
+        return ModalView.extend({
             id: 'trade-modal',
             className: 'modal form-modal',
 
@@ -68,19 +66,16 @@ define(
 
             elements: ['tradesymbol'],
 
-            events: (function() {
-                // Clone the prototype's events object, then extend it
-                // TODO: figure out a better way to do this without instantiating a new object
-                return _.extend(_.clone(new ModalWidget().events), {
-                    'blur .modal-field input[type="text"]' : 'updateOrder',
-                    'change .modal-field select' : 'selectDropdown',
-                    'change #trade-orderType' : 'toggleLimitField',
-                    'click .modal-checkbox' : 'selectCheckbox',
-                    'click .modal-radio' : 'selectRadio',
-                    'click #trade-preview-order' : 'previewOrder',
-                    'mousedown' : 'blurForm'
-                });
-            }()),
+            events: {
+                'blur .modal-field input[type="text"]': 'updateOrder',
+                'change #trade-orderType': 'toggleLimitField',
+                'change .modal-field select': 'selectDropdown',
+                'click #trade-preview-order': 'previewOrder',
+                'click .modal-checkbox': 'selectCheckbox',
+                'click .modal-close': 'close',
+                'click .modal-radio': 'selectRadio',
+                'mousedown': 'blurForm'
+            },
 
             initialize: function() {
 
@@ -172,7 +167,7 @@ define(
             },
 
             postPlace: function(){
-                ModalWidget.prototype.postPlace.call(this);
+                ModalView.prototype.postPlace.call(this);
 
                 $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
                 this._initSymbolField();
@@ -182,21 +177,17 @@ define(
 
             previewOrder: function(){
                 if (this.validateOrder()) {
-                    var orderRequest = this.orderRequest;
-
-                    // Launch TradePreviewWidget, passing in this object
-                    this.addChildren([
-                        {
-                            id: 'TradePreviewWidget',
-                            viewClass: TradePreviewWidget,
-                            parentElement: $('body'),
-                            options: {
-                                model: new TradePreviewViewModel(orderRequest)
-                            }
+                    this.addChild({
+                        id: 'TradePreviewWidget',
+                        viewClass: TradePreviewWidget,
+                        parentElement: $('body'),
+                        options: {
+                            model: new TradePreviewViewModel(this.orderRequest)
                         }
-                    ]);
+                    });
 
-                    $('.modal-overlay').addClass('show stacked');
+                    // Raise the z-index of the overlay
+                    $('.modal-overlay').addClass('stacked');
                 }
             },
 

@@ -25,7 +25,7 @@ define(
         'app/domain/Repository',
         'app/services/AccountService',
         'app/widgets/add-external-account/AddExternalAccountWidget',
-        'app/widgets/modal/ModalWidget',
+        'app/widgets/modal/ModalView',
         'framework/AlertUtil',
         'framework/ErrorUtil',
         'framework/MessageBus',
@@ -39,7 +39,7 @@ define(
         Repository,
         AccountService,
         AddExternalAccountWidget,
-        ModalWidget,
+        ModalView,
         AlertUtil,
         ErrorUtil,
         MessageBus,
@@ -48,7 +48,7 @@ define(
     ) {
         'use strict';
 
-        return ModalWidget.extend({
+        return ModalView.extend({
             id: 'transfer-modal',
             className: 'modal form-modal',
 
@@ -59,16 +59,13 @@ define(
 
             elements: ['transferSymbol'],
 
-            events: (function() {
-                // Clone the prototype's events object, then extend it
-                // TODO: figure out a better way to do this without instantiating a new object
-                return _.extend(_.clone(new ModalWidget().events), {
-                    'click #transfer-tabbar a': 'selectTab',
-                    'click select[name=toAccount]': 'processToAccountSelection',
-                    'click #process-transfer-button': 'processTransfer',
-                    'click #add-external-account-button': 'addExternalAcoount'
-                });
-            }()),
+            events: {
+                'click #add-external-account-button': 'addExternalAcoount',
+                'click #process-transfer-button': 'processTransfer',
+                'click #transfer-tabbar a': 'selectTab',
+                'click .modal-close': 'close',
+                'click select[name=toAccount]': 'processToAccountSelection'
+            },
 
             initialize: function() {
                 this.settings = {
@@ -79,19 +76,20 @@ define(
             },
 
             addExternalAcoount: function () {
+                this.addChild({
+                    id: 'AddExternalAccountWidget',
+                    viewClass: AddExternalAccountWidget,
+                    parentElement: $('body')
+                });
 
-                this.addChildren([
-                    {
-                        id: 'AddExternalAccountWidget',
-                        viewClass: AddExternalAccountWidget,
-                        parentElement: $('body')
-                    }
-                ]);
+                // Raise the z-index of the overlay
+                $('.modal-overlay').addClass('stacked');
+
                 return false;
             },
 
             postPlace: function() {
-                ModalWidget.prototype.postPlace.call(this);
+                ModalView.prototype.postPlace.call(this);
 
                 $('#fromAccount, #toAccount').selectbox();
                 this._initSymbolField();
@@ -175,7 +173,7 @@ define(
             transferProcessed: function () {
                 AlertUtil.showConfirmation('Transfer processed');
                 Repository.updateAccounts();
-                this.closeModal();
+                this.close();
             },
 
             _initSymbolField: function () {

@@ -26,16 +26,16 @@ define(
         'app/common/Message',
         'app/domain/Repository',
         'app/services/OrderService',
-        'app/widgets/modal/ModalWidget',
+        'app/widgets/modal/ModalView',
         'framework/ErrorUtil',
         'framework/MessageBus',
         'text!app/widgets/trade-preview/TradePreviewTemplate.html',
         'underscore'
     ],
-    function(Message, Repository, OrderService, ModalWidget, ErrorUtil, MessageBus, TradePreviewTemplate, _) {
+    function(Message, Repository, OrderService, ModalView, ErrorUtil, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
-        return ModalWidget.extend({
+        return ModalView.extend({
             id: 'trade-summary',
             className: 'modal modal-level2',
 
@@ -45,9 +45,9 @@ define(
             },
 
             events: {
-                'click .modal-close' : 'closeModal',
-                'click .trade-submit-order' : 'submitOrder',
-                'click .trade-edit-order' : 'closeModal'
+                'click .modal-close': 'close',
+                'click .trade-edit-order': 'close',
+                'click .trade-submit-order': 'submitOrder'
             },
 
             initialize: function() {
@@ -80,7 +80,7 @@ define(
                 MessageBus.trigger('UpdateOrders');
                 MessageBus.trigger('UserTabSelectionRequest', 'orders');
 
-                this.closeModal();
+                this.close();
             }
 
         });

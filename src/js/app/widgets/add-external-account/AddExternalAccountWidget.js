@@ -26,20 +26,19 @@ define(
         'app/common/Message',
         'app/domain/ExternalAccount',
         'app/domain/Repository',
-        'app/widgets/modal/ModalWidget',
+        'app/widgets/modal/ModalView',
         'framework/AlertUtil',
         'framework/ErrorUtil',
         'framework/MessageBus',
         'text!app/widgets/add-external-account/AddExternalAccountTemplate.html',
-        'underscore',
         'form2js',
         'jqueryToObject',
         'jqueryValidationEngineRules'
     ],
-    function(Message, ExternalAccount, Repository, ModalWidget, AlertUtil, ErrorUtil, MessageBus, AddExternalAccountTemplate, _) {
+    function(Message, ExternalAccount, Repository, ModalView, AlertUtil, ErrorUtil, MessageBus, AddExternalAccountTemplate) {
         'use strict';
 
-        return ModalWidget.extend({
+        return ModalView.extend({
             id: 'trade-summary',
             className: 'modal modal-level2',
 
@@ -48,14 +47,11 @@ define(
                 source: AddExternalAccountTemplate
             },
 
-            events: (function() {
-                // Clone the prototype's events object, then extend it
-                // TODO: figure out a better way to do this without instantiating a new object
-                return _.extend(_.clone(new ModalWidget().events), {
-                    'click #add_external_account_button': 'validateForm',
-                    'keypress #add_account_dialog': 'checkEnterKey'
-                });
-            }()),
+            events: {
+                'click #add_external_account_button': 'validateForm',
+                'click .modal-close': 'close',
+                'keypress #add_account_dialog': 'checkEnterKey'
+            },
 
             initialize: function() {
                 this.settings = {
@@ -84,7 +80,7 @@ define(
                         success: this.createExternalAccountDone,
                         error: ErrorUtil.showBackboneError
                     });
-                    this.closeModal();
+                    this.close();
                 }
             },
 
@@ -94,7 +90,7 @@ define(
             },
 
             postPlace: function(){
-                ModalWidget.prototype.postPlace.call(this);
+                ModalView.prototype.postPlace.call(this);
 
                 this.$el.find('form').validationEngine();
 

@@ -2,6 +2,10 @@
  * modals
  * -------------------------------------------------------------------------- */
 
+// z-index of various layers:
+//   ModalOverlayView: 489  (raised to 499 if level2 dialog is up)
+//   ModalView:        499
+
 .modal {
     font: 12px/25px Aller;
     width: 291px;

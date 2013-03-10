@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/modal/ModalWidget
+ * app/widgets/modal/ModalView
  *
  * Base view for creating modal dialogs.
  *
@@ -32,17 +32,14 @@
 define(
     [
         'app/widgets/modal/ModalOverlayView',
-        'framework/BaseView'
+        'framework/BaseView',
+        'jqueryui'
     ],
     function(ModalOverlayView, BaseView) {
         'use strict';
 
         return BaseView.extend({
             tagName: 'div',
-
-            events: {
-                'click .modal-close' : 'closeModal'
-            },
 
             centerInWindow: function() {
                 var top = ($(window).height() - this.$el.height()) / 2;
@@ -54,13 +51,12 @@ define(
                 });
             },
 
-            closeModal: function(e) {
+            close: function(e) {
                 if (e) {
                     e.preventDefault();
                 }
 
                 this.destroy();
-                this.updateModal('.modal-overlay');
             },
 
             postPlace: function() {
@@ -89,19 +85,9 @@ define(
                 var modalView = this;
                 $(window).on('keyup', function(e) {
                     if (e.which === 27) { // Escape
-                        modalView.closeModal();
+                        modalView.close();
                     }
                 });
-            },
-
-            // TODO: figure out what stacked and show are doing?
-            updateModal: function(modal) {
-                if ( ! $(modal).hasClass('stacked') ) {
-                    $(modal).hide();
-                }
-                else {
-                    $(modal).removeClass('stacked show');
-                }
             }
         });
     }
