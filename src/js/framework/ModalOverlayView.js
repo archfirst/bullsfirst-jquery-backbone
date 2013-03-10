@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/modal/ModalOverlayView
+ * framework/ModalOverlayView
  *
  * @author Alasdair Swan
  */

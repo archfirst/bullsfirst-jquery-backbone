@@ -25,10 +25,10 @@ define(
         'app/domain/Repository',
         'app/services/AccountService',
         'app/widgets/add-external-account/AddExternalAccountWidget',
-        'app/widgets/modal/ModalView',
         'framework/AlertUtil',
         'framework/ErrorUtil',
         'framework/MessageBus',
+        'framework/ModalView',
         'text!app/widgets/transfer/TransferTemplate.html',
         'underscore',
         'jqueryExtensions',
@@ -39,10 +39,10 @@ define(
         Repository,
         AccountService,
         AddExternalAccountWidget,
-        ModalView,
         AlertUtil,
         ErrorUtil,
         MessageBus,
+        ModalView,
         TransferTemplate,
         _
     ) {
