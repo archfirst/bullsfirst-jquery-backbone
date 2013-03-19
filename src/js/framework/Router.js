@@ -79,8 +79,6 @@ function(Message, MessageBus, Backbone) {
             MessageBus.trigger(Message.PageBeforeChange, page);
 
 
-            console.log(page);
-            console.log(pageName);
             // Load in the page's module and render it
             require(['app/pages/' + page + '/' + pageName + 'Page'], function(PageConstructor) {
 
