@@ -15,7 +15,7 @@
  */
 
 /**
- * app/pages/openaccount/OpenaccountPage
+ * app/pages/open-account/OpenAccountPage
  *
  * @author Kanakaraj Venkataswamy
  */
@@ -25,9 +25,9 @@ define(
         'app/widgets/open-account-form/OpenAccountFormWidget',
         'app/widgets/open-account-intro/OpenAccountIntroWidget',
         'framework/BaseView',
-        'text!app/pages/openaccount/OpenaccountPageTemplate.html'
+        'text!app/pages/open-account/OpenAccountPageTemplate.html'
     ],
-    function(FooterWidget, OpenAccountFormWidget, OpenAccountIntroWidget, BaseView, OpenaccountPageTemplate) {
+    function(FooterWidget, OpenAccountFormWidget, OpenAccountIntroWidget, BaseView, OpenAccountPageTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -36,8 +36,8 @@ define(
             className: 'intro-page clearfix',
 
             template: {
-                name: 'OpenaccountPageTemplate',
-                source: OpenaccountPageTemplate
+                name: 'OpenAccountPageTemplate',
+                source: OpenAccountPageTemplate
             },
 
             postRender: function() {
