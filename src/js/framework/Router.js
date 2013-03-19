@@ -1,74 +1,98 @@
-/**
- * Copyright 2013 Archfirst
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/*!
+* Copyright 2013 Archfirst
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 /**
- * framework/Router
- *
- * Based on: https://github.com/bobholt/backbone-arch-demo/blob/master/src/framework/Router.js
- * License:  https://github.com/bobholt/backbone-arch-demo/blob/master/LICENSE.md
- *
- * Extends Backbone.Router to route to different pages in the application.
- *
- * @author Naresh Bhatia
- */
-define(
-    [
-        'app/common/Message',
-        'backbone',
-        'framework/MessageBus'
-    ],
-    function(Message, Backbone, MessageBus) {
-        'use strict';
+* framework/Router
+*
+* Extends Backbone.Router to route to different pages in the application.
+*
+* @module Router
+* @requires Message, MessageBus, Backbone
+* @author Bob Holt
+*/
+define([
 
-        return Backbone.Router.extend({
+    'app/common/Message',
+    'framework/MessageBus',
+    'backbone'
+],
 
-            // Route map
-            routes: {
-                '':       'goToPage',
-                ':page':  'goToPage'
-            },
+function(Message, MessageBus, Backbone) {
+    'use strict';
 
-            // Simply directs the application to go to a specific page
-            goToPage: function(page) {
+    /**
+    * Defining the application router, you can attach sub routers here.
+    *
+    * @class Router
+    * @constructor
+    * @extends Backbone.Router
+    **/
+    var Router = Backbone.Router.extend({
 
-                // If we do not receive a page argument, just go home
-                if (!page || page === 'index.html') {
-                    page = 'home';
-                }
+        /**
+        * Route map
+        *
+        * @property routes
+        * @type Object
+        * @default
+        *     {
+        *         '':       'goToPage',
+        *         ':page':  'goToPage'
+        *     }
+        **/
+        routes: {
+            '':       'goToPage',
+            ':page':  'goToPage'
+        },
 
-                // Trigger the `pageBeforeChange` event in the MessageBus
-                MessageBus.trigger(Message.PageBeforeChange, page);
+        /**
+        * Directs the application to go to a specific page
+        * Loads the page's view module, renders, and places it
+        *
+        * @method goToPage
+        * @param {String} [page=undefined] The page name to navigate to
+        **/
+        goToPage: function(page) {
 
-                // Derive page name from route, e.g. `home` becomes `HomePage`
-                var pageName = page[0].toUpperCase() + page.slice(1) + 'Page';
-
-                // Load the page and render it
-                require(['app/pages/' + page + '/' + pageName], function(PageConstructor) {
-
-                    var pageInstance = new PageConstructor().render().place('#container');
-
-                    // Remove the page on a `pageBeforeChange` event
-                    pageInstance.listenTo(MessageBus, Message.PageBeforeChange, function() {
-                        pageInstance.destroy();
-                    });
-
-                    // Trigger the `pageChange` event in the MessageBus
-                    MessageBus.trigger(Message.PageChange, page);
-                });
+            // If we do not receive a page argument, just go home
+            if (!page || page === 'index.html') {
+                page = 'home';
             }
-        });
-    }
-);
+
+            // Trigger the `pageBeforeChange` event in the MessageBus
+            MessageBus.trigger(Message.PageBeforeChange, page);
+
+            // Convert to Uppercase first letter
+            page = page[0].toUpperCase() + page.slice(1).replace(/-\w/g, function(v) {  return v[1].toUpperCase(); });
+
+            // Load in the page's module and render it
+            require(['app/pages/' + page + '/' + page + 'Page'], function(PageConstructor) {
+
+                var pageInstance = new PageConstructor().render().place('#container');
+
+                // Remove the page on a `pageBeforeChange` event
+                pageInstance.listenTo(MessageBus, Message.PageBeforeChange, function() {
+                    pageInstance.destroy();
+                });
+
+                // Trigger the `pageChange` event in the MessageBus
+                MessageBus.trigger(Message.PageChange, page);
+            });
+        }
+    });
+
+    return Router;
+});
