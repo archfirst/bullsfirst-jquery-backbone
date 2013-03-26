@@ -25,12 +25,11 @@ define(
         'app/widgets/footer/FooterWidget',
         'app/widgets/intro/IntroWidget',
         'app/widgets/login/LoginWidget',
-        'backbone',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/pages/home/HomePageTemplate.html'
     ],
-    function(Message, FooterWidget, IntroWidget, LoginWidget, Backbone, BaseView, MessageBus, HomePageTemplate) {
+    function(Message, FooterWidget, IntroWidget, LoginWidget, BaseView, MessageBus, HomePageTemplate) {
         'use strict';
 
         return BaseView.extend({

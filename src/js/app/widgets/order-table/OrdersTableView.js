@@ -23,7 +23,7 @@ define(
     [
         'app/widgets/order-table/ExecutionView',
         'app/widgets/order-table/OrderView',
-        'framework/BaseView'
+        'keel/BaseView'
     ],
     function(ExecutionView, OrderView, BaseView) {
         'use strict';

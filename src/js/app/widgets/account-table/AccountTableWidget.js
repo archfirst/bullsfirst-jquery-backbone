@@ -25,8 +25,8 @@ define(
         'app/domain/Repository',
         'app/widgets/account-table/AccountTableBodyView',
         'app/widgets/account-table/AccountTotalsView',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/account-table/AccountTableTemplate.html'
     ],
     function(Message, Repository, AccountTableBodyView, AccountTotalsView, BaseView, MessageBus, AccountTableTemplate) {

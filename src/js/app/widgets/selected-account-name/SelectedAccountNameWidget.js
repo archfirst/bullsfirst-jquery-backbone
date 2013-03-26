@@ -22,8 +22,8 @@
 define(
     [
         'app/common/Message',
-        'framework/BaseView',
-        'framework/MessageBus'
+        'keel/BaseView',
+        'keel/MessageBus'
     ],
     function(Message, BaseView, MessageBus) {
         'use strict';

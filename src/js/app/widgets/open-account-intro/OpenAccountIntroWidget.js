@@ -21,7 +21,7 @@
  */
 define(
     [
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/widgets/open-account-intro/OpenAccountIntroTemplate.html'
     ],
     function(BaseView, OpenAccountIntroTemplate) {

@@ -24,7 +24,7 @@ define(
         'app/domain/Repository',
         'app/widgets/account-chart/AccountChartWidget',
         'app/widgets/account-table/AccountTableWidget',
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/pages/accounts/AccountsTabTemplate.html'
     ],
     function(Repository, AccountChartWidget, AccountTableWidget, BaseView, AccountsTabTemplate) {

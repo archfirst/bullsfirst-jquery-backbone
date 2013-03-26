@@ -25,8 +25,8 @@ define(
         'app/domain/Repository',
         'app/widgets/position-table/PositionTableBodyView',
         'backbone',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/position-table/PositionTableTemplate.html',
         'jqueryTreeTable'
     ],

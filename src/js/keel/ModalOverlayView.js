@@ -25,7 +25,7 @@
  */
 define(
     [
-        'framework/BaseView'
+        'keel/BaseView'
     ],
     function(BaseView) {
         'use strict';

@@ -23,7 +23,7 @@
  */
 define(
     [
-        'framework/Formatter',
+        'app/framework/Formatter',
         'handlebars'
     ],
     function(Formatter, Handlebars) {

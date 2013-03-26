@@ -23,12 +23,12 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
-        'framework/BaseView',
-        'framework/ErrorUtil',
-        'framework/MessageBus',
+        'app/framework/ErrorUtil',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/transaction-table/TransactionTemplate.html'
     ],
-    function(Message, Repository, BaseView, ErrorUtil, MessageBus, TransactionTemplate) {
+    function(Message, Repository, ErrorUtil, BaseView, MessageBus, TransactionTemplate) {
         'use strict';
 
         return BaseView.extend({

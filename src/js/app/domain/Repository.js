@@ -35,15 +35,30 @@ define(
         'app/domain/Orders',
         'app/domain/Transactions',
         'app/domain/User',
+        'app/framework/ErrorUtil',
+        'app/framework/Formatter',
         'app/services/InstrumentService',
-        'framework/ErrorUtil',
-        'framework/Formatter',
-        'framework/MessageBus',
+        'keel/MessageBus',
         'moment',
         'underscore'
     ],
-    function(Message, BaseAccount, BaseAccounts, BrokerageAccounts,
-     Credentials, ExternalAccounts, Orders, Transactions, User, InstrumentService, ErrorUtil, Formatter, MessageBus, moment, _) {
+    function(
+        Message,
+        BaseAccount,
+        BaseAccounts,
+        BrokerageAccounts,
+        Credentials,
+        ExternalAccounts,
+        Orders,
+        Transactions,
+        User,
+        ErrorUtil,
+        Formatter,
+        InstrumentService,
+        MessageBus,
+        moment,
+        _
+    ) {
         'use strict';
 
         // Module level variables act as singletons

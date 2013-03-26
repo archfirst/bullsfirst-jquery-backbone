@@ -28,8 +28,8 @@ define(
         'app/widgets/trade/TradeWidget',
         'app/widgets/transfer/TransferWidget',
         'backbone',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
     function(Message, Repository, TradeWidget, TransferWidget, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {

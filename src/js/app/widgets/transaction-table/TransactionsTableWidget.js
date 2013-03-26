@@ -25,8 +25,8 @@ define(
         'app/domain/Repository',
         'app/domain/Transactions',
         'app/widgets/transaction-table/TransactionsTableView',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/transaction-table/TransactionsTableTemplate.html'
     ],
     function(Message, Repository, Transactions, TransactionsTableView,

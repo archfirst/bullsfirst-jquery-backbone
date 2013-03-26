@@ -25,8 +25,8 @@ define(
         'app/domain/Orders',
         'app/domain/Repository',
         'app/widgets/order-table/OrdersTableView',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/order-table/OrdersTableTemplate.html',
         'jqueryTreeTable'
     ],

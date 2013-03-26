@@ -24,7 +24,7 @@ define(
         'app/domain/Repository',
         'app/widgets/transaction-filter/TransactionsFilterWidget',
         'app/widgets/transaction-table/TransactionsTableWidget',
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/pages/transactions/TransactionsTabTemplate.html'
     ],
     function(Repository, TransactionsFilterWidget, TransactionsTableWidget, BaseView, TransactionsTabTemplate) {

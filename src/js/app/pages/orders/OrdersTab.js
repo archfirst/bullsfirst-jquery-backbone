@@ -21,13 +21,13 @@
  */
 define(
     [
-        'framework/BaseView',
         'app/domain/Repository',
         'app/widgets/order-filter/OrdersFilterWidget',
         'app/widgets/order-table/OrdersTableWidget',
+        'keel/BaseView',
         'text!app/pages/orders/OrdersTabTemplate.html'
     ],
-    function(BaseView, Repository, OrdersFilterWidget, OrdersTableWidget, OrdersTabTemplate) {
+    function(Repository, OrdersFilterWidget, OrdersTableWidget, BaseView, OrdersTabTemplate) {
         'use strict';
 
         return BaseView.extend({
