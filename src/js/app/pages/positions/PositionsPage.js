@@ -26,8 +26,8 @@ define(
         'app/pages/positions/PositionsTab',
         'app/widgets/footer/FooterWidget',
         'app/widgets/user-page-header/UserPageHeaderWidget',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/pages/positions/PositionsPageTemplate.html'
     ],
     function(Message, Repository, PositionsTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, PositionsPageTemplate) {

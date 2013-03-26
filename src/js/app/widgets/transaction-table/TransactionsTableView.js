@@ -23,7 +23,7 @@ define(
     [
         'app/common/Message',
         'app/widgets/transaction-table/TransactionView',
-        'framework/BaseView'
+        'keel/BaseView'
     ],
 
     function( Message, TransactionView, BaseView ) {

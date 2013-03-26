@@ -26,8 +26,8 @@ define(
         'app/pages/transactions/TransactionsTab',
         'app/widgets/footer/FooterWidget',
         'app/widgets/user-page-header/UserPageHeaderWidget',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/pages/transactions/TransactionsPageTemplate.html'
     ],
     function(Message, Repository, TransactionsTab, FooterWidget,

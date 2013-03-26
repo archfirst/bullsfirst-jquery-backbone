@@ -21,7 +21,7 @@
  */
 define(
     [
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/widgets/order-table/ExecutionTemplate.html'
     ],
     function(BaseView, ExecutionTemplate) {

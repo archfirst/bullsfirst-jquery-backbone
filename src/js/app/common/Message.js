@@ -22,7 +22,7 @@
  * @author Naresh Bhatia
  */
 define([
-    'framework/Message',
+    'keel/Message',
     'underscore'
 ],
 function(frameworkMessage, _) {

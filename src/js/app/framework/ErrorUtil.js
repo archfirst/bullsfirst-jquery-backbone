@@ -21,7 +21,7 @@
  *
  * @author Naresh Bhatia
  */
-define(['framework/AlertUtil'],
+define(['app/framework/AlertUtil'],
        function(AlertUtil) {
     'use strict';
 

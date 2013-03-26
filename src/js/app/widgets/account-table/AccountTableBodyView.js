@@ -23,8 +23,8 @@ define(
     [
         'app/common/Message',
         'app/widgets/account-table/AccountView',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'underscore'
     ],
     function(Message, AccountView, BaseView, MessageBus, _) {

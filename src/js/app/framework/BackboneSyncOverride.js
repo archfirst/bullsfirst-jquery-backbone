@@ -24,11 +24,11 @@
 define(
     [
         'app/domain/Repository',
+        'app/framework/AjaxUtil',
         'backbone',
-        'framework/AjaxUtil',
         'underscore'
     ],
-    function(Repository, Backbone, AjaxUtil, _) {
+    function(Repository, AjaxUtil, Backbone, _) {
         'use strict';
 
         Backbone._sync = Backbone.sync;

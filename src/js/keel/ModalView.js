@@ -32,8 +32,8 @@
  */
 define(
     [
-        'framework/BaseView',
-        'framework/ModalOverlayView',
+        'keel/BaseView',
+        'keel/ModalOverlayView',
         'jqueryui'
     ],
     function(BaseView, ModalOverlayView) {

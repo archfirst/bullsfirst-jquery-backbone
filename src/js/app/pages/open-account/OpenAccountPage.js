@@ -24,7 +24,7 @@ define(
         'app/widgets/footer/FooterWidget',
         'app/widgets/open-account-form/OpenAccountFormWidget',
         'app/widgets/open-account-intro/OpenAccountIntroWidget',
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/pages/open-account/OpenAccountPageTemplate.html'
     ],
     function(FooterWidget, OpenAccountFormWidget, OpenAccountIntroWidget, BaseView, OpenAccountPageTemplate) {

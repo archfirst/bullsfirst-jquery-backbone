@@ -26,8 +26,8 @@ define(
         'app/pages/orders/OrdersTab',
         'app/widgets/footer/FooterWidget',
         'app/widgets/user-page-header/UserPageHeaderWidget',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/pages/orders/OrdersPageTemplate.html'
     ],
     function(Message, Repository, OrdersTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, OrdersPageTemplate) {

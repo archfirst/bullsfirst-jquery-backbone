@@ -35,7 +35,7 @@ var require = {
         jqueryValidationEngine:      'vendor/jquery.validationEngine-2.5.2',
         jqueryValidationEngineRules: 'vendor/jquery.validationEngine-en-2.5.2',
         jqueryTreeTable:             'vendor/jquery.treeTable-20121109',
-        jqueryExtensions:            'framework/JqueryExtensions',
+        jqueryExtensions:            'app/framework/JqueryExtensions',
 
         // Form Serialization
         // TODO: Find a way to remove these from OpenAccountFormWidget

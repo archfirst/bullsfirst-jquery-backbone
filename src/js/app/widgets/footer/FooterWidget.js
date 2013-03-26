@@ -21,7 +21,7 @@
  */
 define(
     [
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/widgets/footer/FooterTemplate.html'
     ],
     function(BaseView, FooterTemplate) {

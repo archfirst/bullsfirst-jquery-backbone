@@ -22,13 +22,13 @@
 define(
     [
         'app/common/Message',
-        'framework/BaseView',
-        'framework/MessageBus',
         'highcharts',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/account-chart/AccountChartTemplate.html',
         'underscore'
     ],
-    function(Message, BaseView, MessageBus, Highcharts, AccountChartTemplate, _) {
+    function(Message, Highcharts, BaseView, MessageBus, AccountChartTemplate, _) {
         'use strict';
 
         var ACCOUNTS_TITLE = 'All Accounts';

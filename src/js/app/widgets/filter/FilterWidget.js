@@ -22,7 +22,7 @@
 define(
     [
         'app/domain/Repository',
-        'framework/BaseView',
+        'keel/BaseView',
         'underscore',
         'jqueryselectbox'
     ],

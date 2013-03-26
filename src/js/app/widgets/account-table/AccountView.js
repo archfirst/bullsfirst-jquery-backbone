@@ -23,13 +23,13 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
+        'app/framework/ErrorUtil',
         'app/services/AccountService',
-        'framework/BaseView',
-        'framework/ErrorUtil',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/account-table/AccountTemplate.html'
     ],
-    function(Message, Repository, AccountService, BaseView, ErrorUtil, MessageBus, AccountTemplate) {
+    function(Message, Repository, ErrorUtil, AccountService, BaseView, MessageBus, AccountTemplate) {
         'use strict';
 
         return BaseView.extend({

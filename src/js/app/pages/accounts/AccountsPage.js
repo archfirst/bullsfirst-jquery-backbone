@@ -26,8 +26,8 @@ define(
         'app/pages/accounts/AccountsTab',
         'app/widgets/footer/FooterWidget',
         'app/widgets/user-page-header/UserPageHeaderWidget',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/pages/accounts/AccountsPageTemplate.html'
     ],
     function(Message, Repository, AccountsTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, AccountsPageTemplate) {

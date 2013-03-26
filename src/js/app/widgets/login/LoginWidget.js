@@ -25,16 +25,16 @@ define(
         'app/domain/Credentials',
         'app/domain/Repository',
         'app/services/UserService',
+        'app/framework/ErrorUtil',
         'backbone',
-        'framework/BaseView',
-        'framework/ErrorUtil',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/login/LoginTemplate.html',
         'underscore',
         'jqueryui',
         'jqueryValidationEngineRules'
     ],
-    function(Message, Credentials, Repository, UserService, Backbone, BaseView, ErrorUtil, MessageBus, LoginTemplate, _) {
+    function(Message, Credentials, Repository, UserService, ErrorUtil, Backbone, BaseView, MessageBus, LoginTemplate, _) {
         'use strict';
 
         return BaseView.extend({
