@@ -26,7 +26,7 @@
  * @author Naresh Bhatia
  */
 define(['app/domain/Repository',
-        'framework/AjaxUtil'],
+        'app/framework/AjaxUtil'],
        function(Repository, AjaxUtil) {
     'use strict';
 

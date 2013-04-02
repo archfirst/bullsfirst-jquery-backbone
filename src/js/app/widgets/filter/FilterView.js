@@ -22,14 +22,14 @@
 define(
     [
         'app/common/Message',
-        'framework/BaseView',
-        'framework/MessageBus',
         'jquery',
+        'keel/BaseView',
+        'keel/MessageBus',
         'moment',
         'jqueryselectbox'
     ],
 
-    function( Message, BaseView, MessageBus, $, moment ) {
+    function( Message, $, BaseView, MessageBus, moment ) {
         'use strict';
 
 

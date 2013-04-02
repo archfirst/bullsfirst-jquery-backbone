@@ -22,7 +22,7 @@
 define(
     [
         'app/widgets/account-table/AccountTotalsViewModel',
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/widgets/account-table/AccountTotalsTemplate.html'
     ],
     function(AccountTotalsViewModel, BaseView, AccountTotalsTemplate) {

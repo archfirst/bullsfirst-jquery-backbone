@@ -23,14 +23,14 @@ define(
     [
         'app/common/Message',
         'app/domain/Repository',
+        'app/framework/ErrorUtil',
         'app/services/OrderService',
-        'framework/BaseView',
-        'framework/ErrorUtil',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/order-table/OrderTemplate.html',
         'underscore'
     ],
-    function(Message, Repository, OrderService, BaseView, ErrorUtil, MessageBus, OrderTemplate, _) {
+    function(Message, Repository, ErrorUtil, OrderService, BaseView, MessageBus, OrderTemplate, _) {
         'use strict';
 
         return BaseView.extend({

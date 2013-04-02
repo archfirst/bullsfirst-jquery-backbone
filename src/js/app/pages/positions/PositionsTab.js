@@ -25,7 +25,7 @@ define(
         'app/widgets/account-selector/AccountSelectorWidget',
         'app/widgets/position-table/PositionTableWidget',
         'app/widgets/selected-account-name/SelectedAccountNameWidget',
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/pages/positions/PositionsTabTemplate.html'
     ],
     function(Repository, AccountSelectorWidget, PositionTableWidget, SelectedAccountNameWidget, BaseView, PositionsTabTemplate) {

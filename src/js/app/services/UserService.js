@@ -25,7 +25,7 @@
  *
  * @author Naresh Bhatia
  */
-define(['framework/AjaxUtil'],
+define(['app/framework/AjaxUtil'],
        function(AjaxUtil) {
     'use strict';
 

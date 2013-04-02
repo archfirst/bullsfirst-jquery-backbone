@@ -22,8 +22,8 @@
 define(
     [
         'app/common/Message',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'text!app/widgets/position-table/PositionTemplate.html'
     ],
     function(Message, BaseView, MessageBus, PositionTemplate) {

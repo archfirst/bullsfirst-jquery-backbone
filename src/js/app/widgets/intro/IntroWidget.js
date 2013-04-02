@@ -21,7 +21,7 @@
  */
 define(
     [
-        'framework/BaseView',
+        'keel/BaseView',
         'text!app/widgets/intro/IntroTemplate.html'
     ],
     function(BaseView, IntroTemplate) {

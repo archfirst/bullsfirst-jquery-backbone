@@ -22,7 +22,7 @@
 require(
     [
         'app/common/HandlebarsUtil',
-        'framework/App',
+        'app/framework/App',
         'jquery'
     ],
     function(HandlebarsUtil, App, $) {

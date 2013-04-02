@@ -22,7 +22,7 @@
 define(
     [
         'app/widgets/position-table/PositionView',
-        'framework/BaseView'
+        'keel/BaseView'
     ],
     function(PositionView, BaseView) {
         'use strict';

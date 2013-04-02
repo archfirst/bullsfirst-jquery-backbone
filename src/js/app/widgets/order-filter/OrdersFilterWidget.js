@@ -25,8 +25,8 @@ define(
         'app/domain/Repository',
         'app/widgets/filter/FilterWidget',
         'backbone',
-        'framework/BaseView',
-        'framework/MessageBus',
+        'keel/BaseView',
+        'keel/MessageBus',
         'moment',
         'text!app/widgets/order-filter/OrdersFilterTemplate.html',
         'jqueryselectbox'
