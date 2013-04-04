@@ -21,13 +21,13 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Credentials',
         'app/domain/ExternalAccount',
         'app/domain/ExternalAccounts',
         'app/domain/Repository',
         'app/domain/User',
         'app/framework/ErrorUtil',
+        'app/framework/Message',
         'app/services/AccountService',
         'app/services/BrokerageAccountService',
         'app/services/UserService',
@@ -41,13 +41,13 @@ define(
         'jqueryValidationEngineRules'
     ],
     function (
-        Message,
         Credentials,
         ExternalAccount,
         ExternalAccounts,
         Repository,
         User,
         ErrorUtil,
+        Message,
         AccountService,
         BrokerageAccountService,
         UserService,

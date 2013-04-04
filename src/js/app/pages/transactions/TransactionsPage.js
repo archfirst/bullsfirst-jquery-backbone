@@ -21,8 +21,8 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/pages/transactions/TransactionsTab',
         'app/widgets/footer/FooterWidget',
         'app/widgets/user-page-header/UserPageHeaderWidget',
@@ -30,7 +30,7 @@ define(
         'keel/MessageBus',
         'text!app/pages/transactions/TransactionsPageTemplate.html'
     ],
-    function(Message, Repository, TransactionsTab, FooterWidget,
+    function(Repository,Message,  TransactionsTab, FooterWidget,
         UserPageHeaderWidget, BaseView, MessageBus, TransactionsPageTemplate) {
         'use strict';
 

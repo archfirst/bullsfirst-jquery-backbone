@@ -21,7 +21,7 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/framework/Message',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/position-table/PositionTemplate.html'

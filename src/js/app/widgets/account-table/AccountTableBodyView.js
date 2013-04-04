@@ -21,7 +21,7 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/framework/Message',
         'app/widgets/account-table/AccountView',
         'keel/BaseView',
         'keel/MessageBus',

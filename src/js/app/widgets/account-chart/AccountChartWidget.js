@@ -21,7 +21,7 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/framework/Message',
         'highcharts',
         'keel/BaseView',
         'keel/MessageBus',

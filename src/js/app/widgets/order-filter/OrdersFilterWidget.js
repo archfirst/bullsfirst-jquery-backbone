@@ -21,8 +21,8 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/widgets/filter/FilterWidget',
         'backbone',
         'keel/BaseView',
@@ -31,7 +31,7 @@ define(
         'text!app/widgets/order-filter/OrdersFilterTemplate.html',
         'jqueryselectbox'
     ],
-    function(Message, Repository, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate) {
+    function(Repository, Message, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate) {
         'use strict';
 
         return FilterWidget.extend({

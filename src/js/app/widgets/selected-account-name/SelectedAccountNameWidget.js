@@ -21,7 +21,7 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/framework/Message',
         'keel/BaseView',
         'keel/MessageBus'
     ],

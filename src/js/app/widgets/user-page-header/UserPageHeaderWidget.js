@@ -23,8 +23,8 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/widgets/trade/TradeWidget',
         'app/widgets/transfer/TransferWidget',
         'backbone',
@@ -32,7 +32,7 @@ define(
         'keel/MessageBus',
         'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
-    function(Message, Repository, TradeWidget, TransferWidget, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
+    function(Repository, Message, TradeWidget, TransferWidget, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
         'use strict';
 
         return BaseView.extend({

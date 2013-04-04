@@ -21,14 +21,14 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
         'app/framework/Formatter',
+        'app/framework/Message',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/account-selector/AccountSelectorTemplate.html'
     ],
-    function(Message, Repository, Formatter, BaseView, MessageBus, AccountSelectorTemplate) {
+    function(Repository, Formatter, Message, BaseView, MessageBus, AccountSelectorTemplate) {
         'use strict';
 
         return BaseView.extend({

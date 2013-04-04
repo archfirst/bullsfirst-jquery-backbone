@@ -25,7 +25,7 @@
 */
 define([
 
-    'app/common/Message',
+    'app/framework/Message',
     'keel/MessageBus',
     'backbone'
 ],

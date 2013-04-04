@@ -21,16 +21,16 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Orders',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/widgets/order-table/OrdersTableView',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/order-table/OrdersTableTemplate.html',
         'jqueryTreeTable'
     ],
-    function(Message, Orders, Repository, OrdersTableView, BaseView, MessageBus, OrdersTableTemplate) {
+    function(Orders, Repository, Message, OrdersTableView, BaseView, MessageBus, OrdersTableTemplate) {
         'use strict';
 
         return BaseView.extend({

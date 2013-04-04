@@ -21,9 +21,9 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Credentials',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/services/UserService',
         'app/framework/ErrorUtil',
         'backbone',
@@ -34,7 +34,7 @@ define(
         'jqueryui',
         'jqueryValidationEngineRules'
     ],
-    function(Message, Credentials, Repository, UserService, ErrorUtil, Backbone, BaseView, MessageBus, LoginTemplate, _) {
+    function(Credentials, Repository, Message, UserService, ErrorUtil, Backbone, BaseView, MessageBus, LoginTemplate, _) {
         'use strict';
 
         return BaseView.extend({

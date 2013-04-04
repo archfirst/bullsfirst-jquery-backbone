@@ -21,15 +21,15 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
         'app/domain/Transactions',
+        'app/framework/Message',
         'app/widgets/transaction-table/TransactionsTableView',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/transaction-table/TransactionsTableTemplate.html'
     ],
-    function(Message, Repository, Transactions, TransactionsTableView,
+    function(Repository, Transactions, Message, TransactionsTableView,
         BaseView, MessageBus, TransactionsTableTemplate) {
         'use strict';
 

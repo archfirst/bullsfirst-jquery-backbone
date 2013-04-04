@@ -26,7 +26,6 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/BaseAccount',
         'app/domain/BaseAccounts',
         'app/domain/BrokerageAccounts',
@@ -37,13 +36,13 @@ define(
         'app/domain/User',
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
+        'app/framework/Message',
         'app/services/InstrumentService',
         'keel/MessageBus',
         'moment',
         'underscore'
     ],
     function(
-        Message,
         BaseAccount,
         BaseAccounts,
         BrokerageAccounts,
@@ -54,6 +53,7 @@ define(
         User,
         ErrorUtil,
         Formatter,
+        Message,
         InstrumentService,
         MessageBus,
         moment,

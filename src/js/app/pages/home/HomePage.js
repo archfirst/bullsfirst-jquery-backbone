@@ -21,7 +21,7 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/framework/Message',
         'app/widgets/footer/FooterWidget',
         'app/widgets/intro/IntroWidget',
         'app/widgets/login/LoginWidget',

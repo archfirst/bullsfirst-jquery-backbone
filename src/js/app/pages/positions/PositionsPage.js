@@ -21,8 +21,8 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/pages/positions/PositionsTab',
         'app/widgets/footer/FooterWidget',
         'app/widgets/user-page-header/UserPageHeaderWidget',
@@ -30,7 +30,7 @@ define(
         'keel/MessageBus',
         'text!app/pages/positions/PositionsPageTemplate.html'
     ],
-    function(Message, Repository, PositionsTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, PositionsPageTemplate) {
+    function(Repository,Message,  PositionsTab, FooterWidget, UserPageHeaderWidget, BaseView, MessageBus, PositionsPageTemplate) {
         'use strict';
 
         return BaseView.extend({

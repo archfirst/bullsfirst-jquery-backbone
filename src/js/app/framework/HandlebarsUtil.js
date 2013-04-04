@@ -15,7 +15,7 @@
  */
 
 /**
- * app/common/HandlebarsUtil
+ * app/framework/HandlebarsUtil
  *
  * Utility functions for Handlebars
  *

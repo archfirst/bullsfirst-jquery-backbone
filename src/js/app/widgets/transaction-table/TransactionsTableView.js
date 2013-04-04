@@ -21,7 +21,7 @@
  */
 define(
     [
-        'app/common/Message',
+        'app/framework/Message',
         'app/widgets/transaction-table/TransactionView',
         'keel/BaseView'
     ],

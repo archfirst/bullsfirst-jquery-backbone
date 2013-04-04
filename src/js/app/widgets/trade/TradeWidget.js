@@ -23,11 +23,11 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/MarketPrice',
         'app/domain/Repository',
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
+        'app/framework/Message',
         'app/services/OrderEstimateService',
         'app/widgets/trade-preview/TradePreviewViewModel',
         'app/widgets/trade-preview/TradePreviewWidget',
@@ -39,11 +39,11 @@ define(
         'jqueryselectbox'
     ],
     function(
-        Message,
         MarketPrice,
         Repository,
         ErrorUtil,
         Formatter,
+        Message,
         OrderEstimateService,
         TradePreviewViewModel,
         TradePreviewWidget,

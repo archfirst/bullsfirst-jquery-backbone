@@ -21,8 +21,8 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/services/AccountService',
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
@@ -35,8 +35,8 @@ define(
         'jqueryValidationEngineRules'
     ],
     function (
-        Message,
         Repository,
+        Message,
         AccountService,
         AlertUtil,
         ErrorUtil,

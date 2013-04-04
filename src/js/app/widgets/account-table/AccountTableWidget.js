@@ -21,15 +21,15 @@
  */
 define(
     [
-        'app/common/Message',
         'app/domain/Repository',
+        'app/framework/Message',
         'app/widgets/account-table/AccountTableBodyView',
         'app/widgets/account-table/AccountTotalsView',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/account-table/AccountTableTemplate.html'
     ],
-    function(Message, Repository, AccountTableBodyView, AccountTotalsView, BaseView, MessageBus, AccountTableTemplate) {
+    function(Repository, Message, AccountTableBodyView, AccountTotalsView, BaseView, MessageBus, AccountTableTemplate) {
         'use strict';
 
         return BaseView.extend({

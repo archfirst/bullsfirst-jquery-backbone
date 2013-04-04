@@ -15,7 +15,7 @@
  */
 
 /**
- * app/common/Message
+ * app/framework/Message
  *
  * Enumeration of messages
  *
