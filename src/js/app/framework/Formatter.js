@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/Formatter
+ * app/framework/Formatter
  *
  * Functions formatting data
  *

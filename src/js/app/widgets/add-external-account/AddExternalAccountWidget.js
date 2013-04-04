@@ -28,14 +28,14 @@ define(
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
         'app/framework/Message',
+        'app/framework/ModalView',
         'keel/MessageBus',
-        'keel/ModalView',
         'text!app/widgets/add-external-account/AddExternalAccountTemplate.html',
         'form2js',
         'jqueryToObject',
         'jqueryValidationEngineRules'
     ],
-    function(ExternalAccount, Repository, AlertUtil, ErrorUtil, Message, MessageBus, ModalView, AddExternalAccountTemplate) {
+    function(ExternalAccount, Repository, AlertUtil, ErrorUtil, Message, ModalView, MessageBus, AddExternalAccountTemplate) {
         'use strict';
 
         return ModalView.extend({

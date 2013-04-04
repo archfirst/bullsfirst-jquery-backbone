@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/ErrorUtil
+ * app/framework/ErrorUtil
  *
  * Utility functions for error handling
  *

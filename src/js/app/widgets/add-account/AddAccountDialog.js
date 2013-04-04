@@ -23,7 +23,7 @@
  */
 define(
     [
-        'keel/ModalView',
+        'app/framework/ModalView',
         'text!app/widgets/add-account/AddAccountTemplate.html'
     ],
     function(

@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/ModalView
+ * app/framework/ModalView
  *
  * Base view for creating modal dialogs.
  *
@@ -33,11 +33,11 @@
  */
 define(
     [
+        'app/framework/ModalOverlayView',
         'keel/BaseView',
-        'keel/ModalOverlayView',
         'jqueryui'
     ],
-    function(BaseView, ModalOverlayView) {
+    function(ModalOverlayView, BaseView) {
         'use strict';
 
         return BaseView.extend({

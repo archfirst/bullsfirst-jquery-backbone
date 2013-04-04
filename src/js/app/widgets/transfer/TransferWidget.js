@@ -26,9 +26,9 @@ define(
         'app/services/AccountService',
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
+        'app/framework/ModalView',
         'app/widgets/add-external-account/AddExternalAccountWidget',
         'keel/MessageBus',
-        'keel/ModalView',
         'text!app/widgets/transfer/TransferTemplate.html',
         'underscore',
         'jqueryExtensions',
@@ -40,9 +40,9 @@ define(
         AccountService,
         AlertUtil,
         ErrorUtil,
+        ModalView,
         AddExternalAccountWidget,
         MessageBus,
-        ModalView,
         TransferTemplate,
         _
     ) {

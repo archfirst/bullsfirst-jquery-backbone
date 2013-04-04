@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/framework/JqueryExtensions
+ * app/framework/JqueryExtensions
  *
  * jQuery extension functions
  *

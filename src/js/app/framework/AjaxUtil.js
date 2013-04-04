@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/AjaxUtil
+ * app/framework/AjaxUtil
  *
  * Utility functions for error handling
  *

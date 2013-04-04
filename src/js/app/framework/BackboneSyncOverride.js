@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/BackboneSyncOverride
+ * app/framework/BackboneSyncOverride
  *
  * Overrides Backbone.sync to send an authorization header for secure urls
  *

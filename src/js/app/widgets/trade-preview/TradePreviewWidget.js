@@ -26,13 +26,13 @@ define(
         'app/domain/Repository',
         'app/framework/ErrorUtil',
         'app/framework/Message',
+        'app/framework/ModalView',
         'app/services/OrderService',
         'keel/MessageBus',
-        'keel/ModalView',
         'text!app/widgets/trade-preview/TradePreviewTemplate.html',
         'underscore'
     ],
-    function(Repository, ErrorUtil, Message, OrderService, MessageBus, ModalView, TradePreviewTemplate, _) {
+    function(Repository, ErrorUtil, Message, ModalView, OrderService, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
         return ModalView.extend({

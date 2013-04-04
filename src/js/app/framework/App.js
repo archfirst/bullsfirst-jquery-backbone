@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/App
+ * app/framework/App
  *
  * Based on: https://github.com/bobholt/backbone-arch-demo/blob/master/src/app/app.js
  * License:  https://github.com/bobholt/backbone-arch-demo/blob/master/LICENSE.md

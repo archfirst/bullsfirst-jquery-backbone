@@ -15,7 +15,7 @@
  */
 
 /**
- * framework/AlertUtil
+ * app/framework/AlertUtil
  *
  * Utility functions showing alerts using jQuery Alerts
  * See: http://www.codeproject.com/Articles/295236/jQuery-UI-Alerts-Dialog-using-ThemeRollers
