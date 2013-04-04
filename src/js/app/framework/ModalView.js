@@ -56,8 +56,8 @@ define(
             // Call when this modal dialog needs to be stacked on top of the other
             // It increases the z-index of this dialog as well as its overlay
             stack: function() {
-                this.$el.addClass("stacked");
-                this.children['ModalOverlayView'].$el.addClass("stacked");
+                this.$el.addClass('stacked');
+                this.children.ModalOverlayView.$el.addClass('stacked');
             },
 
             close: function(e) {
