@@ -39,8 +39,8 @@ define(
         'use strict';
 
         return ModalView.extend({
-            id: 'trade-summary',
-            className: 'modal modal-level2',
+            id: 'add-external-account',
+            className: 'modal theme-b',
 
             template: {
                 name: 'AddExternalAccountTemplate',
@@ -49,13 +49,13 @@ define(
 
             events: {
                 'click #add_external_account_button': 'validateForm',
-                'click .modal-close': 'close',
+                'click .close-button': 'close',
                 'keypress #add_account_dialog': 'checkEnterKey'
             },
 
             initialize: function() {
                 this.settings = {
-                    overlay: true,
+                    overlayVisible: true,
                     centerInWindow: true
                 };
 

@@ -2,38 +2,49 @@
  * modals
  * -------------------------------------------------------------------------- */
 
-// z-index of various layers:
-//   ModalOverlayView: 489  (raised to 499 if level2 dialog is up)
-//   ModalView:        499
-
 .modal {
     font: 12px/25px Aller;
-    width: 291px;
     position: absolute;
-    z-index: 499;
     right: 0px;
     top: 0px;
+    width: 291px;
+    z-index: 490;
 
-    &.modal-level2 {
+    &.stacked {
+        z-index: 500;
+    }
+
+    &.theme-a {
+        background: #3F3F3F;
+        border: 10px solid rgba(255, 255, 255, 0.3);
+        color: $white;
+        @include background-clip(padding-box);
+    }
+
+    &.theme-b {
         background: $brand-color;
         border: 10px solid $container-background-color;
-        -moz-background-clip: padding;
-        -webkit-background-clip: padding;
-        background-clip: padding-box;
+        color: $black;
+        @include background-clip(padding-box);
+    }
 
-        header {
-            background: $brand-color;
-            color: $black;
+    .header {
+        padding: 10px 10px 20px 10px;
+
+        h1 {
+            font: normal normal 16px Aller;
+        }
+
+        .close-button {
+            background: url(../img/modal-close.png) no-repeat;
+            float: right;
+            height: 17px;
+            width: 17px;
         }
     }
 
-    header {
-        height: auto;
-        margin: 10px 10px 30px;
-    }
-
-    section {
-        margin: 0 9px 0 10px;
+    .body {
+        padding: 10px;
     }
 
     table {
@@ -50,27 +61,21 @@
     }
 }
 
-.modal-close {
-    width: 17px;
-    height: 17px;
-    background: url('../img/modal-close.png');
-    position: absolute;
-    display: inline;
-    top: 10px;
-    right: 9px;
-}
-
 .modal-overlay {
+    background: #3F3F3F;
+    height: 100%;
+    left: 0;
+    opacity: 0;
     position: fixed;
     top: 0;
-    left: 0;
-    height: 100%;
-    opacity: 0.75;
     width: 100%;
-    background: #3F3F3F;
     z-index: 489;
 
     &.stacked {
         z-index: 499;
+    }
+
+    &.visible {
+        opacity: 0.75;
     }
 }

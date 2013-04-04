@@ -37,7 +37,7 @@ define(
 
         return ModalView.extend({
             id: 'trade-summary',
-            className: 'modal modal-level2',
+            className: 'modal theme-b',
 
             template: {
                 name: 'TradePreviewTemplate',
@@ -45,7 +45,7 @@ define(
             },
 
             events: {
-                'click .modal-close': 'close',
+                'click .close-button': 'close',
                 'click .trade-edit-order': 'close',
                 'click .trade-submit-order': 'submitOrder'
             },
@@ -55,7 +55,7 @@ define(
                 this.model.set('brokerageAccountName', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
 
                 this.settings = {
-                    overlay: true,
+                    overlayVisible: true,
                     centerInWindow: true
                 };
 

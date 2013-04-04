@@ -57,7 +57,7 @@ define(
 
         return ModalView.extend({
             id: 'trade-modal',
-            className: 'modal form-modal',
+            className: 'modal theme-a',
 
             template: {
                 name: 'TradeTemplate',
@@ -72,7 +72,7 @@ define(
                 'change .modal-field select': 'selectDropdown',
                 'click #trade-preview-order': 'previewOrder',
                 'click .modal-checkbox': 'selectCheckbox',
-                'click .modal-close': 'close',
+                'click .close-button': 'close',
                 'click .modal-radio': 'selectRadio',
                 'mousedown': 'blurForm'
             },
@@ -177,7 +177,7 @@ define(
 
             previewOrder: function(){
                 if (this.validateOrder()) {
-                    this.addChild({
+                    var previewOrderDialog = this.addChild({
                         id: 'TradePreviewWidget',
                         viewClass: TradePreviewWidget,
                         parentElement: $('body'),
@@ -186,8 +186,8 @@ define(
                         }
                     });
 
-                    // Raise the z-index of the overlay
-                    $('.modal-overlay').addClass('stacked');
+                    // Stack above this dialog box
+                    previewOrderDialog.stack();
                 }
             },
 

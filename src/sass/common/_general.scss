@@ -1,20 +1,26 @@
 ﻿/* -----------------------------------------------------------------------------
  * general
  * -------------------------------------------------------------------------- */
+/* apply a natural box layout model to all elements */
+/*
+* {
+    @include box-sizing(border-box);
+}
+*/
 
 /* -----------------------------------------------------------------------------
  * Library Overrides
  * -------------------------------------------------------------------------- */
 .treeTable tr.collapsed td a.expander {
-  background-image: url(images/ui-icons_666666_256x240.png);
-  background-position:-30px -20px;
-  border-bottom: 0;
+    background-image: url(images/ui-icons_666666_256x240.png);
+    background-position:-30px -20px;
+    border-bottom: 0;
 }
 
 .treeTable tr.expanded td a.expander {
-  background-image: url(images/ui-icons_666666_256x240.png);
-  background-position:-60px -20px;
-  border-bottom: 0;
+    background-image: url(images/ui-icons_666666_256x240.png);
+    background-position:-60px -20px;
+    border-bottom: 0;
 }
 
 /* -----------------------------------------------------------------------------
@@ -22,6 +28,10 @@
  * -------------------------------------------------------------------------- */
 p {
     margin: 6px 0 0 0;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
 }
 
 h1 {
@@ -84,6 +94,13 @@ a:focus {
     margin: 0 10px 0 10px;
     min-height: 400px;
     position: relative;
+}
+
+.tab-heading {
+    font: normal normal 18px/18px Aller;
+    left: 60px;
+    position: absolute;
+    top: 30px;
 }
 
 /* -----------------------------------------------------------------------------

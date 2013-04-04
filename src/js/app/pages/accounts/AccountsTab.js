@@ -24,10 +24,11 @@ define(
         'app/domain/Repository',
         'app/widgets/account-chart/AccountChartWidget',
         'app/widgets/account-table/AccountTableWidget',
+        'app/widgets/add-account/AddAccountDialog',
         'keel/BaseView',
         'text!app/pages/accounts/AccountsTabTemplate.html'
     ],
-    function(Repository, AccountChartWidget, AccountTableWidget, BaseView, AccountsTabTemplate) {
+    function(Repository, AccountChartWidget, AccountTableWidget, AddAccountDialog, BaseView, AccountsTabTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -63,6 +64,12 @@ define(
             },
 
             addAccount: function() {
+                this.addChild({
+                    id: 'AddAccountDialog',
+                    viewClass: AddAccountDialog,
+                    parentElement: this.$el
+                });
+
                 return false;
             },
 

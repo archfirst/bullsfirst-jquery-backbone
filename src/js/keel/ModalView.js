@@ -19,13 +19,14 @@
  *
  * Base view for creating modal dialogs.
  *
+ * TODO: Make it so that derived classes do not have to set a settings property
  * Derived classes can initialize a settings property to control the
  * behavior of the modal dialog:
  *
  *   settings.draggable: boolean - allows the user to drag the dialog box
  *   settings.centerInWindow : boolean - center the dialog in the window
  *   settings.style: string - adds the specified style to the dialog
- *   settings.overlay: boolean - creates an overlay on the entire window
+ *   settings.overlayVisible: boolean - makes the overlay visible by making it opaque
  *
  * @author Alasdair Swan
  * @author Naresh Bhatia
@@ -52,6 +53,13 @@ define(
                 });
             },
 
+            // Call when this modal dialog needs to be stacked on top of the other
+            // It increases the z-index of this dialog as well as its overlay
+            stack: function() {
+                this.$el.addClass("stacked");
+                this.children['ModalOverlayView'].$el.addClass("stacked");
+            },
+
             close: function(e) {
                 if (e) {
                     e.preventDefault();
@@ -75,12 +83,13 @@ define(
                     this.$el.addClass(this.settings.style);
                 }
 
-                if (this.settings.overlay === true) {
-                    this.addChild({
-                        id: 'ModalOverlayView',
-                        viewClass: ModalOverlayView,
-                        parentElement: $('body')
-                    });
+                var overlay = this.addChild({
+                    id: 'ModalOverlayView',
+                    viewClass: ModalOverlayView,
+                    parentElement: $('body')
+                });
+                if (this.settings.overlayVisible === true) {
+                    overlay.$el.addClass('visible');
                 }
 
                 var modalView = this;

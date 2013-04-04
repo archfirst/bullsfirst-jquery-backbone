@@ -50,7 +50,7 @@ define(
 
         return ModalView.extend({
             id: 'transfer-modal',
-            className: 'modal form-modal',
+            className: 'modal theme-a',
 
             template: {
                 name: 'TransferTemplate',
@@ -63,7 +63,7 @@ define(
                 'click #add-external-account-button': 'addExternalAcoount',
                 'click #process-transfer-button': 'processTransfer',
                 'click #transfer-tabbar a': 'selectTab',
-                'click .modal-close': 'close',
+                'click .close-button': 'close',
                 'click select[name=toAccount]': 'processToAccountSelection'
             },
 
@@ -76,14 +76,14 @@ define(
             },
 
             addExternalAcoount: function () {
-                this.addChild({
+                var externalAccountDialog = this.addChild({
                     id: 'AddExternalAccountWidget',
                     viewClass: AddExternalAccountWidget,
                     parentElement: $('body')
                 });
 
-                // Raise the z-index of the overlay
-                $('.modal-overlay').addClass('stacked');
+                // Stack above this dialog box
+                externalAccountDialog.stack();
 
                 return false;
             },
