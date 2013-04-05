@@ -43,10 +43,10 @@ var require = {
         jqueryToObject:              'vendor/jquery.toObject',
 
         // Underscore
-        underscore:                  'vendor/underscore-1.4.3',
+        underscore:                  'vendor/underscore-1.4.4',
 
         // Backbone
-        backbone:                    'vendor/backbone-0.9.9',
+        backbone:                    'vendor/backbone-1.0.0',
 
         // Templating
         handlebars:                  'vendor/handlebars-1.0.rc.1',
