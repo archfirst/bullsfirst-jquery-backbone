@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
