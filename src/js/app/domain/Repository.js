@@ -92,12 +92,14 @@ define(
             getTransactionsFilters: function() { return _transactionsFilterCriteria; },
             getOrders: function() {
                 _orders.fetch({
+                    reset: true,
                     data: _orderFilterCriteria
                 });
                 return _orders;
             },
             getTransactions: function() {
                 _transactions.fetch({
+                    reset: true,
                     data: _transactionsFilterCriteria
                 });
                 return _transactions;
@@ -141,6 +143,7 @@ define(
 
             updateAccounts: function() {
                 _brokerageAccounts.fetch({
+                    reset: true,
                     success: _.bind(this._updateExternalAccounts, this),
                     error: ErrorUtil.showBackboneError
                 });
@@ -148,6 +151,7 @@ define(
 
             _updateExternalAccounts: function() {
                 _externalAccounts.fetch({
+                    reset: true,
                     success: _.bind(this._updateExternalAccountsDone, this),
                     error: ErrorUtil.showBackboneError
                 });

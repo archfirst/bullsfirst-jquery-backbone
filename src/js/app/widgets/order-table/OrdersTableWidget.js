@@ -44,14 +44,8 @@ define(
             },
 
             initialize: function() {
-
                 this.collection = Repository.getOrders();
                 this.collection.bind('reset', this.render, this);
-
-                // Subscribe to events
-                this.listenTo(MessageBus, Message.OrderFilterChanged, function(filterCriteria) {
-                    this.collection.fetch({data: filterCriteria});
-                });
             },
 
             postRender: function() {
