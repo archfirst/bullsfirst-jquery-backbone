@@ -15,7 +15,7 @@
 */
 
 /**
-* framework/Router
+* keel/Router
 *
 * Extends Backbone.Router to route to different pages in the application.
 *
@@ -25,7 +25,7 @@
 */
 define([
 
-    'app/framework/Message',
+    'keel/Message',
     'keel/MessageBus',
     'backbone'
 ],

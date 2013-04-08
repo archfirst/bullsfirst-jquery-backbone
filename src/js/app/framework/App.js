@@ -29,12 +29,12 @@
 define(
     [
         'app/common/AppConfig',
+        'app/framework/AppRouter',
         'app/framework/BackboneSyncOverride',
-        'keel/Router',
         'backbone',
         'jquery'
     ],
-    function(AppConfig, BackboneSyncOverride, Router, Backbone, $) {
+    function(AppConfig, Router, BackboneSyncOverride, Backbone, $) {
         'use strict';
 
         return {
