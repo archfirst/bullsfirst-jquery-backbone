@@ -19,7 +19,7 @@
 
 
 /**
-* framework/BaseView
+* keel/BaseView
 *
 * This is a view base class built on top of the default Backbone.View; it
 * provides a set of rendering, binding, and lifecycle methods that tend to

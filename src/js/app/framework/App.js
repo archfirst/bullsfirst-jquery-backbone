@@ -30,7 +30,7 @@ define(
     [
         'app/common/AppConfig',
         'app/framework/BackboneSyncOverride',
-        'keel/Router',
+        'app/framework/AppRouter',
         'backbone',
         'jquery'
     ],
