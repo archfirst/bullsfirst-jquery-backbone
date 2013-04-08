@@ -15,7 +15,7 @@
 */
 
 /**
-* app/framework/Router
+* app/framework/AppRouter
 *
 * Extends the Keel Router to route to different pages in the application.
 *
@@ -29,7 +29,7 @@ define([
 
 ],
 
-function(KeelRouter) {
+function(Router) {
     'use strict';
 
     /**
@@ -39,7 +39,7 @@ function(KeelRouter) {
     * @constructor
     * @extends keel/Router
     **/
-    var Router = KeelRouter.extend();
+    var AppRouter = Router.extend();
 
-    return Router;
+    return AppRouter;
 });
