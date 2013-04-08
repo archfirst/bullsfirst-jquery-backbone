@@ -19,7 +19,7 @@
 *
 * Extends the Keel Router to route to different pages in the application.
 *
-* @module Router
+* @module AppRouter
 * @requires Router
 * @author Bob Holt
 */
@@ -35,9 +35,9 @@ function(Router) {
     /**
     * Defining the application router, you can attach sub routers here.
     *
-    * @class Router
+    * @class AppRouter
     * @constructor
-    * @extends keel/Router
+    * @extends Router
     **/
     var AppRouter = Router.extend();
 
