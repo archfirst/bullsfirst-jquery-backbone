@@ -1,14 +1,24 @@
 module.exports = function(grunt) {
 
+  var readOptionalJSON = function(filepath) {
+    var data = null;
+    try {
+      data = grunt.file.readJSON(filepath);
+    } catch(e) {}
+    return data;
+  };
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    appConfigDefault: grunt.file.readJSON('config.json'),
+    appConfigOverride: readOptionalJSON('config-override.json'),
 
     // ### clean
     // grunt-contrib-clean npm task
     // Deletes the <string> paths in the array
     clean: {
-      clean: ['src/css', 'dist']
+      clean: ['src/css', 'src/js/app/framework/AppConfig.js', 'dist']
     },
 
     // ### compass
@@ -39,16 +49,6 @@ module.exports = function(grunt) {
     // ### copy
     // grunt-contrib-copy npm task
     copy: {
-      dev: {
-        files: [
-          {src: 'src/js/app/common/AppConfig-Dev.js', dest: 'src/js/app/common/AppConfig.js'}
-        ]
-      },
-      dist: {
-        files: [
-          {src: 'src/js/app/common/AppConfig-Dist.js', dest: 'src/js/app/common/AppConfig.js'}
-        ]
-      },
       cssImages: {
         expand: true,
         cwd: 'src/sass/images/',
@@ -161,6 +161,17 @@ module.exports = function(grunt) {
           interrupt: true
         }
       }
+    },
+  
+    // ### configureApp
+    // Configures the application based on config.json and config-override.json
+    configureApp: {
+      dev: {
+        configFile: 'src/js/app/framework/AppConfig.js'  
+      },
+      dist: {
+        configFile: 'dist/js/app/framework/AppConfig.js'  
+      }
     }
   });
 
@@ -173,5 +184,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'jshint', 'compass:dev', 'copy:dev', 'copy:cssImages']);
+  grunt.registerTask('default', ['clean', 'jshint', 'configureApp:dev', 'compass:dev', 'copy:cssImages']);
+
+  grunt.registerMultiTask('configureApp', function() {
+    var template = 
+      'define({\n' +
+        '    appRoot: "<%= appRoot %>"\n' +
+      '});';
+      
+    // Choose between default and override configurations
+    var config = grunt.config.get();
+    var appConfig = config.appConfigOverride ? config.appConfigOverride : config.appConfigDefault;
+    
+    var env = this.target;
+    var buffer = grunt.template.process(template, {data: appConfig[env]});
+    grunt.file.write(this.data.configFile, buffer)
+  });
 };

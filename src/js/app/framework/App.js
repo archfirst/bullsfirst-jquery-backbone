@@ -28,7 +28,7 @@
 /*jshint nonew:false */
 define(
     [
-        'app/common/AppConfig',
+        'app/framework/AppConfig',
         'app/framework/AppRouter',
         'app/framework/BackboneSyncOverride',
         'backbone',
