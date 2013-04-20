@@ -30,12 +30,8 @@ option {
   padding-left: 12px;
 }
 
-.inline {
-    @include inline-float(left);
-}
-
 .modal-field {
-    @include inline-float(left);
+    float: left;
     width: 130px;
     margin-bottom: 10px;
 
@@ -81,7 +77,7 @@ option {
 
     a {
         &.modal-radio {
-            @include inline-float(left);
+            float: left;
             width: 65px;
             height: 50px;
             background: $button-large-color;
@@ -131,7 +127,7 @@ option {
     }
 
     .modal-checkbox {
-        @include inline-float(left);
+        float: left;
         width: 20px;
         height: 25px;
         padding: 0 0 0 3px;
