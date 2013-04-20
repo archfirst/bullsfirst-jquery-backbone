@@ -61,7 +61,7 @@
     left: 80px;
     position: absolute;
     top: 107px;
-} 
+}
 
 .tabbar ul {
     list-style-type: none;
@@ -82,7 +82,7 @@
     line-height: 25px;
     margin: 5px 2px 0 0;
     min-width: 103px;
-    padding: 1px 10px 0 10px;  // padding-top of 1px makes the text vertically centered on some browsers
+    padding: 1px 10px 0 10px;  // 1px top padding makes the text look vertically centered
     text-align: center;
 }
 
@@ -93,6 +93,7 @@
 .tabbar ul li a.selected {
     background-color: $white;
     color: $black;
+    height: 30px;
     margin-top: 0;
-    padding-top: 5px;
+    padding-top: 4px;
 }

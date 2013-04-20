@@ -7,7 +7,7 @@
 	padding:  10px 20px 6px;
 	background: #bfbfbf;
  }
- 
+
  .filter-form {
  	width: 670px;
  	position: relative;
@@ -27,6 +27,7 @@
  	width: 300px;
  }
 
+/*
  .filter-buttons {
 	float: right;
 	width: 110px;
@@ -60,6 +61,7 @@
  .filter-buttons a.js-apply-filters-button.medium.button:hover {
  	background: $button-hover-color;
  }
+ */
 
  .filter-field label {
  	background: #a3a3a3;
@@ -84,11 +86,11 @@
  .filter-field input[type="text"] {
  	height: 23px;
  }
- 
+
  .filter-field .datepicker {
  	background: #fff url(../img/datepicker-icon.png) no-repeat 120px center;
  }
- 
+
  .filter-field ul li{
     list-style : none;
  }

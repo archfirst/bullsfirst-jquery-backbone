@@ -8,15 +8,14 @@ label {
     font: 11px/25px Aller;
     height: 25px;
     padding-left: 9px;
-    width: 71px;
+    width: 80px;
 }
 
 input[type="text"], input[type="password"] {
-    height: 21px;
+    height: 25px;
     margin-bottom: 10px;
     width: 100%;
     padding-left: 7px;
-    @include box-sizing(border-box);
 }
 
 select {
@@ -41,9 +40,6 @@ option {
 
         input[type="text"] {
             width: 100%;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
             height: 28px;
         }
 

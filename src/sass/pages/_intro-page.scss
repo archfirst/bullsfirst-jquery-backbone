@@ -2,7 +2,7 @@
  * intro-page (includes home-page and open-account-page)
  * -------------------------------------------------------------------------- */
 .intro-page {
-    background: $brand-color url(../img/horns.png) no-repeat right bottom;
+    background: $brand-color url(../img/horns.png) no-repeat 320px 0px;
     margin: 10px 10px 0 10px;
     position: relative;
 
@@ -34,4 +34,33 @@
         background: $text-selection-alternate-color;
     }
 
+}
+
+/* Place various sections on the pages */
+#home-page {
+    .login-section {
+        float: left;
+        margin: 181px 0 0 78px;
+    }
+
+    .intro-section {
+        float: right;
+        /* bottom margin adjusted to set page height to 600px */
+        margin: 111px 83px 41px 0;
+        width: 380px;
+    }
+}
+
+#open-account-page {
+    .intro-section {
+        float: left;
+        /* bottom margin adjusted to set page height to 600px */
+        margin: 180px 0 116px 78px;
+        width: 380px;
+    }
+
+    .open-account-section {
+        float: right;
+        margin: 10px 120px 0 0;
+    }
 }

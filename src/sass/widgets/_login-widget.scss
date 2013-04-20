@@ -2,8 +2,6 @@
  * login-widget
  * -------------------------------------------------------------------------- */
 .login-section {
-    float: left;
-    margin: 181px 0 0 78px;
     position: relative;
 }
 
@@ -14,9 +12,9 @@
 
 .login-form {
     background-color: $form-background-color;
-    height: 247px;
+    height: 282px;
     padding: 35px 15px 0 15px;
-    width: 270px;
+    width: 300px;
 }
 
 .login-button {
