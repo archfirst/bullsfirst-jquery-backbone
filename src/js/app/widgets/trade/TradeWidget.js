@@ -67,13 +67,13 @@ define(
             elements: ['tradesymbol'],
 
             events: {
-                'blur .modal-field input[type="text"]': 'updateOrder',
+                'blur .field input[type="text"]': 'updateOrder',
                 'change #trade-orderType': 'toggleLimitField',
-                'change .modal-field select': 'selectDropdown',
+                'change .field select': 'selectDropdown',
                 'click #trade-preview-order': 'previewOrder',
-                'click .modal-checkbox': 'selectCheckbox',
+                'click .bf-checkbox': 'selectCheckbox',
+                'click .bf-radio': 'selectRadio',
                 'click .close-button': 'close',
-                'click .modal-radio': 'selectRadio',
                 'mousedown': 'blurForm'
             },
 
@@ -257,8 +257,8 @@ define(
             symbolNotRecognized: function() {
                 var zero = '$0.00';
                 this.symbolChanged(null);
-                this.createEstimate(function(){
-                    $('#trade-form .lastPrice').html('');
+                this.createEstimate(function() {
+                    $('#trade-form .last-trade-price-value').html('');
                     $('#last-trade-price').val(0);
                     $('#tradeCost').html(zero);
                     $('#fees-field, #fees').html(zero);
@@ -368,7 +368,7 @@ define(
 
             _marketPriceFetched: function(marketPrice) {
                 var price = marketPrice ? Formatter.formatMoney(marketPrice.attributes.price) : '';
-                $('#trade-form .lastPrice').html(price);
+                $('#trade-form .last-trade-price-value').html(price);
                 $('#last-trade-price').val(price);
 
                 this.createEstimate();

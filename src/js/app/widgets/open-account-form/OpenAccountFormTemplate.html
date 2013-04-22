@@ -4,46 +4,56 @@
 
     <p class="mandatory-text">All the field below are required.</p>
 
-    <label for="oa-firstname">First Name</label>
-    <input
-        id="oa-firstname"
-        name="firstName"
-        type="text"
-        class="validate[required,custom[onlyLetterSp]]"
-        placeholder="Enter your first name" />
+    <div class="field">
+        <label for="oa-firstname">First Name</label>
+        <input
+            id="oa-firstname"
+            name="firstName"
+            type="text"
+            class="validate[required,custom[onlyLetterSp]]"
+            placeholder="Enter your first name" />
+    </div>
 
-    <label for="oa-lastname">Last Name</label>
-    <input
-        id="oa-lastname"
-        name="lastName"
-        type="text"
-        class="validate[required,custom[onlyLetterSp]]"
-        placeholder="Enter your last name" />
+    <div class="field">
+        <label for="oa-lastname">Last Name</label>
+        <input
+            id="oa-lastname"
+            name="lastName"
+            type="text"
+            class="validate[required,custom[onlyLetterSp]]"
+            placeholder="Enter your last name" />
+    </div>
 
-    <label for="oa-username">Username</label>
-    <input
-        id="oa-username"
-        name="username"
-        type="text"
-        class="validate[required]"
-        placeholder= "Enter a username" />
+    <div class="field">
+        <label for="oa-username">Username</label>
+        <input
+            id="oa-username"
+            name="username"
+            type="text"
+            class="validate[required]"
+            placeholder= "Enter a username" />
+    </div>
 
-    <label for="oa-password">Password</label>
-    <input id="oa-password"
-        name="password"
-        type="password"
-        class="validate[required]"
-        placeholder="Enter a password" />
+    <div class="field">
+        <label for="oa-password">Password</label>
+        <input id="oa-password"
+            name="password"
+            type="password"
+            class="validate[required]"
+            placeholder="Enter a password" />
+    </div>
 
-    <label for="oa-confirmPassword">Confirm Password</label>
-    <input
-        id="oa-confirmPassword"
-        name="confirmPassword"
-        type="password"
-        class="validate[required, equals[oa-password]]"
-        placeholder="Retype the password" />
+    <div class="field">
+        <label for="oa-confirmPassword">Confirm Password</label>
+        <input
+            id="oa-confirmPassword"
+            name="confirmPassword"
+            type="password"
+            class="validate[required, equals[oa-password]]"
+            placeholder="Retype the password" />
+    </div>
 
-    <div class="modal-field full">
+    <div>
         <a id="open-account-button" class="button large popsicle-icon center" href="#">
             <span>Open Account</span>
         </a>

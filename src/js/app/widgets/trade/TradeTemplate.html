@@ -3,83 +3,102 @@
     <h1>Trade</h1>
 </header>
 
-<section class="body clearfix">
+<section class="body">
+
     <form id="trade-form">
-    	<div class="modal-field full account">
-    	    <label for="trade-accountId">Account</label>
-    	    <select id="trade-accountId" name="brokerageAccountId">
-    	    	{{#each accounts}}
-    	    		<option value={{id}}>{{name}} ({{formatMoney cashPosition}})</option>
-    	    	{{/each}}
-    	    </select>
-    	</div>
 
-    	<div class="modal-field">
-    	    <label for="symbol">Symbol</label>
-    	    <input id="trade-symbol" class="js-tradesymbol" name="tradeSymbol" type="text" />
-    	</div>
+        <div class="grid-narrow">
 
-    	<div class="modal-field right lastTradePrice">
-    		<p>Last Trade Price</p>
-    		<p class="lastPrice"></p>
-    		<input id="last-trade-price" name="lastTradePrice" type="text" class="hidden" />
-    	</div>
+            <div class="grid-row">
+                <div class="grid-col field">
+                    <label for="trade-accountId">Account</label>
+                    <select id="trade-accountId" name="brokerageAccountId">
+                        {{#each accounts}}
+                            <option value={{id}}>{{name}} ({{formatMoney cashPosition}})</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
 
-    	<div class="modal-field left">
-    		<a class="modal-radio button selected" href="#" attr-value="buy">Buy</a>
-    		<a class="modal-radio button" href="#" attr-value="sell">Sell</a>
-    		<input type="radio" name="buyOrSell" value="buy" checked="checked">
-    		<input type="radio" name="buyOrSell" value="sell">
-    	</div>
+            <div class="grid-row">
+                <div class="grid-col span-1-2 field">
+                    <label for="trade-symbol">Symbol</label>
+                    <input id="trade-symbol" class="js-tradesymbol" name="tradeSymbol" type="text" />
+                </div>
 
-    	<div class="modal-field right">
-    	    <label for="quantity">Quantity</label>
-    	    <input id="trade-quantity" name="quantity" type="text" />
-    	</div>
+                <div class="grid-col span-1-2 field">
+                    <p class="last-trade-price-label">Last Trade Price</p>
+                    <p class="last-trade-price-value"></p>
+                    <input id="last-trade-price" name="lastTradePrice" type="text" class="hidden" />
+                </div>
+            </div>
 
-    	<div class="modal-field">
-    	    <label for="trade-orderType">Order Type</label>
-    	    <select id="trade-orderType" name="type">
-    	    	<option value="Market">Market</option>
-    	    	<option value="Limit">Limit</option>
-    	    </select>
-    	</div>
+            <div class="grid-row">
+                <div class="grid-col span-1-2 field">
+                    <a class="bf-radio button selected" href="#" attr-value="buy">Buy</a>
+                    <a class="bf-radio button" href="#" attr-value="sell">Sell</a>
+                    <input type="radio" name="buyOrSell" value="buy" checked="checked" class="hidden">
+                    <input type="radio" name="buyOrSell" value="sell" class="hidden">
+                </div>
 
-    	<div class="modal-field right">
-    	    <label for="term">Term</label>
-    	    <select id="trade-term" name="term">
-    	    	<option value="GoodForTheDay">GoodForTheDay</option>
-    	    	<option value="GoodTilCanceled">GoodTilCanceled</option>
-    	    </select>
-    	</div>
+                <div class="grid-col span-1-2 field">
+                    <label for="trade-quantity">Quantity</label>
+                    <input id="trade-quantity" name="quantity" type="text" />
+                </div>
+            </div>
 
-    	<div class="modal-field">
-    	    <label for="limit-price" class="limit-price hidden">Limit</label>
-    	    <input id="trade-limitPrice" class="limit-price hidden" name="limitPrice" type="text" />
+            <div class="grid-row">
+                <div class="grid-col span-1-2 field">
+                    <label for="trade-orderType">Order Type</label>
+                    <select id="trade-orderType" name="type">
+                        <option value="Market">Market</option>
+                        <option value="Limit">Limit</option>
+                    </select>
+                </div>
 
-    		<label for="allOrNone" class="pull-left">All-or-None</label>
-    		<a class="modal-checkbox" attr-value="allOrNone" href="#"></a>
-    		<input type="checkbox" name="allOrNone" value="allOrNone" />
-    	</div>
+                <div class="grid-col span-1-2 field">
+                    <label for="trade-term">Term</label>
+                    <select id="trade-term" name="term">
+                        <option value="GoodForTheDay">GoodForTheDay</option>
+                        <option value="GoodTilCanceled">GoodTilCanceled</option>
+                    </select>
+                </div>
+            </div>
 
-    	<div class="modal-field right trade-costs">
-    		<label class="pull-left">Trade Cost</label>
-    		<p id="tradeCost">$0.00</p>
-    		<input id="trade-cost-field" name="tradeCost" type="text" class="hidden" />
+            <div class="grid-row">
+                <div class="grid-col span-1-2 field">
+                    <label for="trade-limitPrice" class="limit-price hidden">Limit</label>
+                    <input id="trade-limitPrice" class="limit-price hidden" name="limitPrice" type="text" />
 
-    		<label class="pull-left">Fees</label>
-    		<p id="fees">$0.00</p>
-    		<input id="fees-field" name="fees" type="text" class="hidden" />
+                    <label for="trade-all-or-none" class="pull-left">All-or-None</label>
+                    <a id="trade-all-or-none" class="bf-checkbox" attr-value="allOrNone" href="#"></a>
+                    <input type="checkbox" name="allOrNone" value="allOrNone" class="hidden" />
+                </div>
 
-    		<label class="pull-left">Total Cost</label>
-    		<p id="totalCost">$0.00</p>
-    		<input id="total-cost-field" name="totalCost" type="text" class="hidden" />
-    	</div>
+                <div class="grid-col span-1-2 field trade-costs">
+                    <label class="pull-left">Trade Cost</label>
+                    <p id="tradeCost">$0.00</p>
+                    <input id="trade-cost-field" name="tradeCost" type="text" class="hidden" />
 
-    	<div class="modal-field full">
-            <a id="trade-preview-order" class="button large preview-icon center" href="#">
-                <span>Preview Order</span>
-            </a>
-    	</div>
+                    <label class="pull-left">Fees</label>
+                    <p id="fees">$0.00</p>
+                    <input id="fees-field" name="fees" type="text" class="hidden" />
+
+                    <label class="pull-left">Total Cost</label>
+                    <p id="totalCost">$0.00</p>
+                    <input id="total-cost-field" name="totalCost" type="text" class="hidden" />
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-col field">
+                    <a id="trade-preview-order" class="button large preview-icon center" href="#">
+                        <span>Preview Order</span>
+                    </a>
+                </div>
+            </div>
+
+        </div> <!-- grid -->
+
     </form>
 </section>
