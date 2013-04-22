@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/views/TransferView
+ * app/widgets/transfer/TransferDialog
  *
  * @author Vikas Goyal
  */
@@ -26,8 +26,8 @@ define(
         'app/services/AccountService',
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
-        'app/framework/ModalView',
-        'app/widgets/add-external-account/AddExternalAccountWidget',
+        'app/framework/ModalDialog',
+        'app/widgets/add-external-account/AddExternalAccountDialog',
         'keel/MessageBus',
         'text!app/widgets/transfer/TransferTemplate.html',
         'underscore',
@@ -40,15 +40,15 @@ define(
         AccountService,
         AlertUtil,
         ErrorUtil,
-        ModalView,
-        AddExternalAccountWidget,
+        ModalDialog,
+        AddExternalAccountDialog,
         MessageBus,
         TransferTemplate,
         _
     ) {
         'use strict';
 
-        return ModalView.extend({
+        return ModalDialog.extend({
             id: 'transfer-modal',
             className: 'modal theme-a',
 
@@ -77,8 +77,8 @@ define(
 
             addExternalAcoount: function () {
                 var externalAccountDialog = this.addChild({
-                    id: 'AddExternalAccountWidget',
-                    viewClass: AddExternalAccountWidget,
+                    id: 'AddExternalAccountDialog',
+                    viewClass: AddExternalAccountDialog,
                     parentElement: $('body')
                 });
 
@@ -89,7 +89,7 @@ define(
             },
 
             postPlace: function() {
-                ModalView.prototype.postPlace.call(this);
+                ModalDialog.prototype.postPlace.call(this);
 
                 $('#fromAccount, #toAccount').selectbox();
                 this._initSymbolField();

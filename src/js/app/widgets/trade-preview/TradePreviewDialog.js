@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/trade/TradeSummaryWidget
+ * app/widgets/trade/TradePreviewDialog
  *
  * This is the trade widget for the user page.
  *
@@ -26,16 +26,16 @@ define(
         'app/domain/Repository',
         'app/framework/ErrorUtil',
         'app/framework/Message',
-        'app/framework/ModalView',
+        'app/framework/ModalDialog',
         'app/services/OrderService',
         'keel/MessageBus',
         'text!app/widgets/trade-preview/TradePreviewTemplate.html',
         'underscore'
     ],
-    function(Repository, ErrorUtil, Message, ModalView, OrderService, MessageBus, TradePreviewTemplate, _) {
+    function(Repository, ErrorUtil, Message, ModalDialog, OrderService, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
-        return ModalView.extend({
+        return ModalDialog.extend({
             id: 'trade-summary',
             className: 'modal theme-b',
 

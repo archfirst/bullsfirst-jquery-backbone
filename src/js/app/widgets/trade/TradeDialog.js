@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/trade/TradeWidget
+ * app/widgets/trade/TradeDialog
  *
  * This is the trade widget for the user page.
  *
@@ -28,10 +28,10 @@ define(
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
         'app/framework/Message',
-        'app/framework/ModalView',
+        'app/framework/ModalDialog',
         'app/services/OrderEstimateService',
         'app/widgets/trade-preview/TradePreviewViewModel',
-        'app/widgets/trade-preview/TradePreviewWidget',
+        'app/widgets/trade-preview/TradePreviewDialog',
         'keel/MessageBus',
         'jquery',
         'moment',
@@ -44,10 +44,10 @@ define(
         ErrorUtil,
         Formatter,
         Message,
-        ModalView,
+        ModalDialog,
         OrderEstimateService,
         TradePreviewViewModel,
-        TradePreviewWidget,
+        TradePreviewDialog,
         MessageBus,
         $,
         moment,
@@ -55,7 +55,7 @@ define(
     ) {
         'use strict';
 
-        return ModalView.extend({
+        return ModalDialog.extend({
             id: 'trade-modal',
             className: 'modal theme-a',
 
@@ -132,7 +132,7 @@ define(
 
             createEstimate: function(callback) {
 
-                var tradeWidget = this;
+                var tradeDialog = this;
 
                 this.orderRequest.brokerageAccountId = this.$el.find('#trade-accountId').val();
                 if (this.orderRequest.orderParams.type === 'Market') {
@@ -148,7 +148,7 @@ define(
                         var fees = Formatter.formatMoney(response.fees);
                         var estimatedValueInclFees = Formatter.formatMoney(response.estimatedValueInclFees);
 
-                        tradeWidget.orderRequest.orderEstimate = {
+                        tradeDialog.orderRequest.orderEstimate = {
                             estimatedValue: estimatedValue,
                             fees: fees,
                             estimatedValueInclFees: estimatedValueInclFees
@@ -167,7 +167,7 @@ define(
             },
 
             postPlace: function(){
-                ModalView.prototype.postPlace.call(this);
+                ModalDialog.prototype.postPlace.call(this);
 
                 $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
                 this._initSymbolField();
@@ -178,8 +178,8 @@ define(
             previewOrder: function(){
                 if (this.validateOrder()) {
                     var previewOrderDialog = this.addChild({
-                        id: 'TradePreviewWidget',
-                        viewClass: TradePreviewWidget,
+                        id: 'TradePreviewDialog',
+                        viewClass: TradePreviewDialog,
                         parentElement: $('body'),
                         options: {
                             model: new TradePreviewViewModel(this.orderRequest)
@@ -194,7 +194,7 @@ define(
             selectCheckbox: function(e) {
                 e.preventDefault();
 
-                var tradeWidget = this;
+                var tradeDialog = this;
 
                 var target = $(e.currentTarget);
                 var $checkbox = $(':checkbox[value=' + target.attr('attr-value') + ']');
@@ -203,12 +203,12 @@ define(
                     target.addClass('empty');
                     target.removeClass('selected icon-ok');
                     $checkbox.attr('checked', false);
-                    tradeWidget.orderRequest.orderParams.allOrNone = false;
+                    tradeDialog.orderRequest.orderParams.allOrNone = false;
                 } else {
                     target.removeClass('empty');
                     target.addClass('selected icon-ok');
                     $checkbox.attr('checked', true);
-                    tradeWidget.orderRequest.orderParams.allOrNone = true;
+                    tradeDialog.orderRequest.orderParams.allOrNone = true;
                 }
 
                 this.createEstimate();
@@ -217,12 +217,12 @@ define(
             },
 
             selectDropdown: function(e) {
-                var tradeWidget = this,
+                var tradeDialog = this,
                     target = $(e.target),
                     name = $(target).attr('name');
 
                 if ( name !== 'brokerageAccountId') {
-                    tradeWidget.orderRequest.orderParams[name] = $(target).val();
+                    tradeDialog.orderRequest.orderParams[name] = $(target).val();
                 }
 
                 this.createEstimate();
@@ -280,7 +280,7 @@ define(
 
             updateOrder: function(e) {
 
-                var tradeWidget = this,
+                var tradeDialog = this,
                     target = e.target,
                     name = $(target).attr('name');
 
@@ -289,13 +289,13 @@ define(
                 case 'tradeSymbol':
                     break;
                 case 'limitPrice':
-                    tradeWidget.orderRequest.orderParams[name] = {
+                    tradeDialog.orderRequest.orderParams[name] = {
                         amount: $(target).val(),
-                        currency: tradeWidget.marketPrice.attributes.price.currency
+                        currency: tradeDialog.marketPrice.attributes.price.currency
                     };
                     break;
                 default:
-                    tradeWidget.orderRequest.orderParams[name] = $(target).val();
+                    tradeDialog.orderRequest.orderParams[name] = $(target).val();
                 }
 
                 // tradeSymbol field is a special case
@@ -316,16 +316,16 @@ define(
             },
 
             _fetchMarketPrice: function(symbol) {
-                var tradeWidget = this;
+                var tradeDialog = this;
                 if (symbol && symbol !== '') {
                     this.marketPrice = new MarketPrice({symbol: symbol});
                     this.marketPrice.fetch({
                         success: function(price) {
-                            tradeWidget._marketPriceFetched(price);
-                            tradeWidget.orderRequest.orderParams.symbol = symbol;
+                            tradeDialog._marketPriceFetched(price);
+                            tradeDialog.orderRequest.orderParams.symbol = symbol;
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
-                            tradeWidget._marketPriceFetched(null);
+                            tradeDialog._marketPriceFetched(null);
                             ErrorUtil.showBackboneError(jqXHR, textStatus, errorThrown);
                         }
                     });
@@ -336,7 +336,7 @@ define(
             },
 
             _initSymbolField: function() {
-                var tradeWidget = this;
+                var tradeDialog = this;
 
                 var instruments = $.map(Repository.getInstruments(), function(instrument) {
                     return {
@@ -356,10 +356,10 @@ define(
                         }) );
                     },
                     change: function( event ) {
-                        tradeWidget.checkTypedSymbol(event);
+                        tradeDialog.checkTypedSymbol(event);
                     },
                     select: function( event, ui ) {
-                        tradeWidget.symbolChanged(ui.item.value);
+                        tradeDialog.symbolChanged(ui.item.value);
                     }
                 });
 

@@ -15,7 +15,7 @@
  */
 
 /**
- * app/framework/ModalView
+ * app/framework/ModalDialog
  *
  * Base view for creating modal dialogs.
  *
@@ -33,11 +33,11 @@
  */
 define(
     [
-        'app/framework/ModalOverlayView',
+        'app/framework/ModalOverlay',
         'keel/BaseView',
         'jqueryui'
     ],
-    function(ModalOverlayView, BaseView) {
+    function(ModalOverlay, BaseView) {
         'use strict';
 
         return BaseView.extend({
@@ -57,7 +57,7 @@ define(
             // It increases the z-index of this dialog as well as its overlay
             stack: function() {
                 this.$el.addClass('stacked');
-                this.children.ModalOverlayView.$el.addClass('stacked');
+                this.children.ModalOverlay.$el.addClass('stacked');
             },
 
             close: function(e) {
@@ -84,8 +84,8 @@ define(
                 }
 
                 var overlay = this.addChild({
-                    id: 'ModalOverlayView',
-                    viewClass: ModalOverlayView,
+                    id: 'ModalOverlay',
+                    viewClass: ModalOverlay,
                     parentElement: $('body')
                 });
                 if (this.settings.overlayVisible === true) {

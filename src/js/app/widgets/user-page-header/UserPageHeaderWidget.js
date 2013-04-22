@@ -25,14 +25,14 @@ define(
     [
         'app/domain/Repository',
         'app/framework/Message',
-        'app/widgets/trade/TradeWidget',
-        'app/widgets/transfer/TransferWidget',
+        'app/widgets/trade/TradeDialog',
+        'app/widgets/transfer/TransferDialog',
         'backbone',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
-    function(Repository, Message, TradeWidget, TransferWidget, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
+    function(Repository, Message, TradeDialog, TransferDialog, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -73,8 +73,8 @@ define(
 
                 this.addChildren([
                     {
-                        id: 'TradeWidget',
-                        viewClass: TradeWidget,
+                        id: 'TradeDialog',
+                        viewClass: TradeDialog,
                         parentElement: this.$el,
                         options: {
                             model: {
@@ -91,8 +91,8 @@ define(
 
                 this.addChildren([
                     {
-                        id: 'TransferWidget',
-                        viewClass: TransferWidget,
+                        id: 'TransferDialog',
+                        viewClass: TransferDialog,
                         parentElement: this.$el,
                         options: {
                             model: {

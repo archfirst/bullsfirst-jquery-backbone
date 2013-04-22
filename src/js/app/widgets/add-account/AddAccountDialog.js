@@ -23,16 +23,16 @@
  */
 define(
     [
-        'app/framework/ModalView',
+        'app/framework/ModalDialog',
         'text!app/widgets/add-account/AddAccountTemplate.html'
     ],
     function(
-        ModalView,
+        ModalDialog,
         AddAccountTemplate
     ) {
         'use strict';
 
-        return ModalView.extend({
+        return ModalDialog.extend({
             id: 'add-account',
             className: 'modal theme-a',
 

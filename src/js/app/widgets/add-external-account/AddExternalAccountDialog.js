@@ -15,9 +15,7 @@
  */
 
 /**
- * app/widgets/trade/TradeSummaryWidget
- *
- * This is the trade widget for the user page.
+ * app/widgets/add-external-account/AddExternalAccountDialog
  *
  * @author Alasdair Swan
  */
@@ -28,17 +26,17 @@ define(
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
         'app/framework/Message',
-        'app/framework/ModalView',
+        'app/framework/ModalDialog',
         'keel/MessageBus',
         'text!app/widgets/add-external-account/AddExternalAccountTemplate.html',
         'form2js',
         'jqueryToObject',
         'jqueryValidationEngineRules'
     ],
-    function(ExternalAccount, Repository, AlertUtil, ErrorUtil, Message, ModalView, MessageBus, AddExternalAccountTemplate) {
+    function(ExternalAccount, Repository, AlertUtil, ErrorUtil, Message, ModalDialog, MessageBus, AddExternalAccountTemplate) {
         'use strict';
 
-        return ModalView.extend({
+        return ModalDialog.extend({
             id: 'add-external-account',
             className: 'modal theme-b',
 
@@ -90,7 +88,7 @@ define(
             },
 
             postPlace: function(){
-                ModalView.prototype.postPlace.call(this);
+                ModalDialog.prototype.postPlace.call(this);
 
                 this.$el.find('form').validationEngine();
 
