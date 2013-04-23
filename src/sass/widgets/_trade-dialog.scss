@@ -34,6 +34,10 @@
 /* -----------------------------------------------------------------------------
  * trade-preview-dialog
  * -------------------------------------------------------------------------- */
+$preview-dialog-costs:           #F9AD3D;  // off-white
+$preview-dialog-stripe:          #E08F18;  // faded gold
+$preview-dialog-total:           #E19C37;  // fade white
+
 #trade-preview-dialog {
     table {
         width: 99%;
@@ -45,11 +49,11 @@
     }
 
     tr:nth-child(odd) {
-        background: $modal-table-stripe;
+        background: $preview-dialog-stripe;
     }
 
     .cost-summary {
-        background: $modal-table-costs !important;
+        background: $preview-dialog-costs !important;
 
         &:first-child {
             margin-top: 20px;
@@ -57,6 +61,6 @@
     }
 
     .cost-total {
-        background: $modal-table-total !important;
+        background: $preview-dialog-total !important;
     }
 }

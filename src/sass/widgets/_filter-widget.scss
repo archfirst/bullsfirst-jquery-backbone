@@ -1,11 +1,12 @@
 /* -----------------------------------------------------------------------------
  * filter-widget
  * -------------------------------------------------------------------------- */
+$filter-background:               #bfbfbf;
 
  .filter-wrapper {
 	margin: 21px 40px 14px 80px;
 	padding:  10px 20px 6px;
-	background: #bfbfbf;
+	background: $filter-background;
  }
 
  .filter-form {
