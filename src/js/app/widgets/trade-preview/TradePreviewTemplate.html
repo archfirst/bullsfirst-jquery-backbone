@@ -4,61 +4,61 @@
 </header>
 
 <section class="body clearfix">
-  <table>
-    <tr>
-      <th>Account:</th>
-      <td>{{brokerageAccountName}}</td>
-    </tr>
-    <tr>
-      <th>Symbol:</th>
-      <td>{{orderParams.symbol}}</td>
-    </tr>
-    <tr>
-      <th>Action:</th>
-      <td>{{orderParams.side}}</td>
-    </tr>
-    <tr>
-      <th>Quantity:</th>
-      <td>{{orderParams.quantity}}</td>
-    </tr>
-    <tr>
-      <th>Order Type:</th>
-      <td>{{orderParams.type}}</td>
-    </tr>
-    <tr>
-      <th>Term:</th>
-      <td>{{orderParams.term}}</td>
-    </tr>
-    <tr>
-      <th>All-or-None:</th>
-      <td>
-        {{#if orderParams.allOrNone}}
-          true
-        {{else}}
-          false
-        {{/if}}
-      </td>
-    </tr>
-    <tr class="cost-summary">
-      <th>Trade Cost:</th>
-      <td>{{orderEstimate.estimatedValue}}</td>
-    </tr>
-    <tr class="cost-summary">
-      <th>Fees:</th>
-      <td>+{{orderEstimate.fees}}</td>
-    </tr>
-    <tr class="cost-total">
-      <th>Total Cost:</th>
-      <td>{{orderEstimate.estimatedValueInclFees}}</td>
-    </tr>
-  </table>
+    <table>
+        <tr>
+            <th>Account:</th>
+            <td>{{brokerageAccountName}}</td>
+        </tr>
+        <tr>
+            <th>Symbol:</th>
+            <td>{{orderParams.symbol}}</td>
+        </tr>
+        <tr>
+            <th>Action:</th>
+            <td>{{orderParams.side}}</td>
+        </tr>
+        <tr>
+            <th>Quantity:</th>
+            <td>{{orderParams.quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Type:</th>
+            <td>{{orderParams.type}}</td>
+        </tr>
+        <tr>
+            <th>Term:</th>
+            <td>{{orderParams.term}}</td>
+        </tr>
+        <tr>
+            <th>All-or-None:</th>
+            <td>
+                {{#if orderParams.allOrNone}}
+                    true
+                {{else}}
+                    false
+                {{/if}}
+            </td>
+        </tr>
+        <tr class="cost-summary">
+            <th>Trade Cost:</th>
+            <td>{{orderEstimate.estimatedValue}}</td>
+        </tr>
+        <tr class="cost-summary">
+            <th>Fees:</th>
+            <td>+{{orderEstimate.fees}}</td>
+        </tr>
+        <tr class="cost-total">
+            <th>Total Cost:</th>
+            <td>{{orderEstimate.estimatedValueInclFees}}</td>
+        </tr>
+    </table>
 
-  <div class="modal-field full">
-    <a class="trade-submit-order button large submit-icon center" href="#">
-      <span>Submit Order</span>
-    </a>
-    <a class="trade-edit-order button medium center" href="#">
-      <i class="icon-arrow-left"></i>Edit Order
-    </a>
-  </div>
+    <div class="field">
+        <a class="trade-submit-order button large submit-icon center" href="#">
+            <span>Submit Order</span>
+        </a>
+        <a class="trade-edit-order button medium center" href="#">
+            <i class="icon-arrow-left"></i>Edit Order
+        </a>
+    </div>
 </section>

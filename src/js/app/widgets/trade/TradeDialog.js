@@ -56,7 +56,7 @@ define(
         'use strict';
 
         return ModalDialog.extend({
-            id: 'trade-modal',
+            id: 'trade-dialog',
             className: 'modal theme-a',
 
             template: {

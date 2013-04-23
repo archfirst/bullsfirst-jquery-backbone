@@ -1,0 +1,62 @@
+/* -----------------------------------------------------------------------------
+ * trade-dialog
+ * -------------------------------------------------------------------------- */
+
+#trade-dialog {
+    width: 380px;
+}
+
+.last-trade-price-label {
+    margin-top: 23px;
+    line-height: 13px;
+}
+
+.last-trade-price-value {
+    margin-top: 0;
+    line-height: 14px;
+}
+
+#trade-limitPrice {
+    margin-bottom: 10px;
+}
+
+.field.trade-costs {
+    p {
+        width: auto;
+        height: 20px;
+        overflow: hidden;
+        text-align: right;
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * trade-preview-dialog
+ * -------------------------------------------------------------------------- */
+#trade-preview-dialog {
+    table {
+        width: 99%;
+    }
+
+    th {
+        text-align: left;
+        padding-left: 16px;
+    }
+
+    tr:nth-child(odd) {
+        background: $modal-table-stripe;
+    }
+
+    .cost-summary {
+        background: $modal-table-costs !important;
+
+        &:first-child {
+            margin-top: 20px;
+        }
+    }
+
+    .cost-total {
+        background: $modal-table-total !important;
+    }
+}
