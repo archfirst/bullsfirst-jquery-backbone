@@ -3,11 +3,21 @@
     <h1>Add an Account</h1>
 </header>
 
-<section class="body clearfix">
+<section class="body">
+
     <form id="add-account-form">
-        <div class="modal-field full">
-            <label for="name">Account Name</label>
-            <input id="name" class="js-name" name="name" type="text" />
+
+        <div class="field">
+            <label for="add-account-name" class="wide">Account Name</label>
+            <input
+                id="add-account-name"
+                type="text"
+                class="validate[required]" />
         </div>
+
+        <a class="add-account-button button large center" href="#">
+            <i class="icon-tag"></i><span>Add Account</span>
+        </a>
+
     </form>
 </section>

@@ -67,7 +67,7 @@ define(
                 this.addChild({
                     id: 'AddAccountDialog',
                     viewClass: AddAccountDialog,
-                    parentElement: this.$el
+                    parentElement: $('body')
                 });
 
                 return false;

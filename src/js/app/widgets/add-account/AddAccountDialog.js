@@ -23,18 +23,19 @@
  */
 define(
     [
+        'app/domain/Repository',
+        'app/framework/ErrorUtil',
         'app/framework/ModalDialog',
-        'text!app/widgets/add-account/AddAccountTemplate.html'
+        'app/services/BrokerageAccountService',
+        'text!app/widgets/add-account/AddAccountTemplate.html',
+        'jqueryValidationEngineRules'
     ],
-    function(
-        ModalDialog,
-        AddAccountTemplate
-    ) {
+    function(Repository, ErrorUtil, ModalDialog, BrokerageAccountService, AddAccountTemplate) {
         'use strict';
 
         return ModalDialog.extend({
-            id: 'add-account',
-            className: 'modal theme-a',
+            id: 'add-account-dialog',
+            className: 'modal theme-b',
 
             template: {
                 name: 'AddAccountTemplate',
@@ -42,14 +43,45 @@ define(
             },
 
             events: {
-                'click .close-button': 'close'
+                'click .add-account-button': 'validateForm',
+                'click .close-button': 'close',
+                'keypress #add-account-dialog': 'checkEnterKey'
             },
 
             initialize: function() {
                 this.settings = {
-                    draggable: true
+                    draggable: true,
+                    centerInWindow: true,
+                    overlayVisible: true
                 };
 
+            },
+
+            checkEnterKey: function(event) {
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    this.validateForm();
+                    return false;
+                }
+            },
+
+            validateForm: function() {
+                if ($('#add-account-form').validationEngine('validate')) {
+
+                    // Create brokerage account
+                    BrokerageAccountService.createBrokerageAccount(
+                        $('#add-account-name').val(), this.createBrokerageAccountDone, ErrorUtil.showError);
+
+                    this.close();
+                }
+            },
+
+            createBrokerageAccountDone: function(/*data, textStatus, jqXHR*/) {
+                Repository.updateAccounts();
+            },
+
+            postPlace: function(){
+                ModalDialog.prototype.postPlace.call(this);
+                this.$el.find('form').validationEngine();
                 return this;
             }
         });

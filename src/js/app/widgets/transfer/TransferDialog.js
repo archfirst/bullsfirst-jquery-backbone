@@ -49,7 +49,7 @@ define(
         'use strict';
 
         return ModalDialog.extend({
-            id: 'transfer-modal',
+            id: 'transfer-dialog',
             className: 'modal theme-a',
 
             template: {
@@ -62,7 +62,7 @@ define(
             events: {
                 'click #add-external-account-button': 'addExternalAcoount',
                 'click #process-transfer-button': 'processTransfer',
-                'click #transfer-tabbar a': 'selectTab',
+                'click .bf-radio': 'selectTab',
                 'click .close-button': 'close',
                 'click select[name=toAccount]': 'processToAccountSelection'
             },
@@ -127,9 +127,9 @@ define(
             },
 
             selectTab: function (event) {
-                var selectedTab = $(event.currentTarget),
-                    prevSelectedTab = $('#transfer-tabbar a.selected'),
-                    fieldContainers = $('.transfer-fields-container');
+                var selectedTab = $(event.currentTarget);
+                var prevSelectedTab = $('#transfer-tabbar a.selected');
+                var fieldContainers = $('.transfer-fields-container');
 
                 if (selectedTab[0] !== prevSelectedTab[0]) {
                     $('#transfer-form').validationEngine('hideAll');

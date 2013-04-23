@@ -3,60 +3,95 @@
     <h1>Transfer</h1>
 </header>
 
-<section class="body clearfix">
+<section class="body">
 
-  <div id="transfer-tabbar" data-tabbar="transfer">
-      <ul>
-          <li><a href="#" data-tab="cash-tab" class="selected">Cash</a></li>
-          <li><a href="#" data-tab="securities-tab">Securities</a></li>
-      </ul>
-  </div>
-  
-  <form id="transfer-form">
-      <label for="fromAccount">From</label>
-      <select id="fromAccount" name="fromAccount" class="validate[required]">
-          {{#each accounts}}
-              <option {{#ifEqual ../selectedAccount.id id}} selected="selected" {{/ifEqual}} value="{{id}}">{{displayString}}</option>
-          {{/each}}
-      </select>
-      <label for="toAccount">To</label>
-      <select id="toAccount" name="toAccount" class="validate[required]">
-          <option value=""> </option>
-          {{#each accounts}}
-              <option value="{{id}}">{{name}} {{displayString}}</option>
-          {{/each}}
-      </select>
-      <div id="securities-fields-container" class="nodisplay transfer-fields-container">
-          <div id="hboxContainer">
-              <div class="symbol">
-                  <label for="symbol">Symbol</label>
-                  <input type="text" name="symbol" class="js-transferSymbol" id="symbol">
-              </div>
-              <div class="quantity">
-                  <label for="quantity">Quantity</label>
-                  <input
-                      type="text"
-                      name="quantity"
-                      id="quantity"
-                      class="validate[custom[number],min[1]]"/>
-              </div>
-          </div>
-          <label for="price">Price Paid/Share</label>
-          <input
-              id="price"
-              name="price"
-              type="text"
-              class="validate[custom[number],min[0.01]] lastField"/>
-      </div>
-      <div id="cash-fields-container" class="transfer-fields-container">
-          <label for="amount">Amount</label>
-          <input
-              id="amount"
-              name="amount"
-              type="text"
-              class="validate[required] validate[custom[number],min[0.01]] lastField" />
-      </div>
-      <a id="add-external-account-button" href="#"><span>Add an external account</span></a>
-  </form>
-  <a id="process-transfer-button" class="button large transfer-icon" href="#"><span>Transfer</span></a>
+    <form id="transfer-form">
+
+        <div class="grid-narrow">
+
+            <div class="grid-row">
+                <div id="transfer-tabbar" class="grid-col field">
+                    <a class="bf-radio button selected" href="#">Cash</a>
+                    <a class="bf-radio button" href="#">Securities</a>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-col field">
+                    <label for="fromAccount">From</label>
+                    <select id="fromAccount" name="fromAccount" class="validate[required]">
+                        {{#each accounts}}
+                            <option {{#ifEqual ../selectedAccount.id id}} selected="selected" {{/ifEqual}} value="{{id}}">{{displayString}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-col field">
+                    <label for="toAccount">To</label>
+                    <select id="toAccount" name="toAccount" class="validate[required]">
+                        <option value=""></option>
+                        {{#each accounts}}
+                            <option value="{{id}}">{{name}} {{displayString}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div id="cash-fields-container" class="transfer-fields-container">
+                <div class="grid-row">
+                    <div class="grid-col field">
+                        <label for="amount">Amount</label>
+                        <input
+                            id="amount"
+                            name="amount"
+                            type="text"
+                            class="validate[required] validate[custom[number],min[0.01]] lastField" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="securities-fields-container" class="transfer-fields-container nodisplay">
+                <div class="grid-row">
+                    <div class="grid-col span-1-2 field">
+                        <label for="symbol">Symbol</label>
+                        <input id="symbol" type="text" name="symbol" class="js-transferSymbol">
+                    </div>
+                    <div class="grid-col span-1-2 field">
+                        <label for="quantity">Quantity</label>
+                        <input
+                            type="text"
+                            name="quantity"
+                            id="quantity"
+                            class="validate[custom[number],min[1]]" />
+                        </div>
+                </div>
+
+                <div class="grid-row">
+                    <div class="grid-col field">
+                        <label for="price">Price Paid/Share</label>
+                        <input
+                            id="price"
+                            name="price"
+                            type="text"
+                            class="validate[custom[number],min[0.01]] lastField" />
+                    </div>
+                </div>
+            </div>
+
+            <a id="add-external-account-button" href="#"><span>Add an external account</span></a>
+
+            <div class="grid-row">
+                <div class="grid-col field">
+                    <a id="process-transfer-button" class="button large transfer-icon center" href="#">
+                        <span>Transfer</span>
+                    </a>
+                </div>
+            </div>
+
+
+        </div> <!-- grid -->
+
+    </form>
 </section>

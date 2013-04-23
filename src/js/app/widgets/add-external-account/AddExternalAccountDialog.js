@@ -17,6 +17,8 @@
 /**
  * app/widgets/add-external-account/AddExternalAccountDialog
  *
+ * Allows user to add an external account.
+ *
  * @author Alasdair Swan
  */
 define(
@@ -25,19 +27,17 @@ define(
         'app/domain/Repository',
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
-        'app/framework/Message',
         'app/framework/ModalDialog',
-        'keel/MessageBus',
         'text!app/widgets/add-external-account/AddExternalAccountTemplate.html',
         'form2js',
         'jqueryToObject',
         'jqueryValidationEngineRules'
     ],
-    function(ExternalAccount, Repository, AlertUtil, ErrorUtil, Message, ModalDialog, MessageBus, AddExternalAccountTemplate) {
+    function(ExternalAccount, Repository, AlertUtil, ErrorUtil, ModalDialog, AddExternalAccountTemplate) {
         'use strict';
 
         return ModalDialog.extend({
-            id: 'add-external-account',
+            id: 'add-external-account-dialog',
             className: 'modal theme-b',
 
             template: {
@@ -46,9 +46,9 @@ define(
             },
 
             events: {
-                'click #add_external_account_button': 'validateForm',
+                'click .add-account-button': 'validateForm',
                 'click .close-button': 'close',
-                'keypress #add_account_dialog': 'checkEnterKey'
+                'keypress #add-external-account-dialog': 'checkEnterKey'
             },
 
             initialize: function() {
@@ -58,7 +58,6 @@ define(
                 };
 
                 return this;
-
             },
 
             checkEnterKey: function(event) {
@@ -89,12 +88,9 @@ define(
 
             postPlace: function(){
                 ModalDialog.prototype.postPlace.call(this);
-
                 this.$el.find('form').validationEngine();
-
                 return this;
             }
-
         });
     }
 );

@@ -31,7 +31,8 @@ module.exports = function(grunt) {
           imagesDir: 'src/img',
           javascriptsDir: 'src/js',
           noLineComments: false,
-          environment: 'development'
+          environment: 'development',
+          debugInfo: true
         }
       },
       dist: {

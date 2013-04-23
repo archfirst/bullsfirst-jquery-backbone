@@ -3,40 +3,40 @@
     <h1>Add an External Account</h1>
 </header>
 
-<section class="body clearfix">
+<section class="body">
+
     <form id="add-external-account-form">
-        <div class="modal-field full account">
-            <label for="addextacnt_name">Account Name</label>
+
+        <div class="field">
+            <label for="addextacnt_name" class="wide">Account Name</label>
             <input
                 type="text"
                 id="addextacnt_name"
                 name="name"
-                class="validate[required] stretchInput">
+                class="validate[required]">
         </div>
 
-        <div class="modal-field full">
-            <label for="addextacnt_routingNumber">Routing Number</label>
+        <div class="field">
+            <label for="addextacnt_routingNumber" class="wide">Routing Number</label>
             <input
                 id="addextacnt_routingNumber"
                 name="routingNumber"
                 type="text"
-                class="validate[required] stretchInput">
+                class="validate[required]">
         </div>
 
-        <div class="modal-field full">
-            <label for="addextacnt_accountNumber">Account Number</label>
+        <div class="field">
+            <label for="addextacnt_accountNumber" class="wide">Account Number</label>
             <input
                 id="addextacnt_accountNumber"
                 name="accountNumber"
                 type="text"
-                class="validate[required] stretchInput">
+                class="validate[required]">
         </div>
 
-        <div class="modal-field full">
-          <a id="add_external_account_button" class="button large center" href="#">
+        <a class="add-account-button button large center" href="#">
             <i class="icon-tag"></i><span>Add Account</span>
-          </a>
-        </div>
+        </a>
 
     </form>
 </section>
