@@ -15,53 +15,50 @@
  */
 
 /**
- * app/widgets/order-table/OrdersTableWidget
+ * app/widgets/transaction-table/TransactionTableWidget
  *
- * @author Sreejesh Karunakaran
+ * @author Alasdair Swan
  */
 define(
     [
-        'app/domain/Orders',
         'app/domain/Repository',
+        'app/domain/Transactions',
         'app/framework/Message',
-        'app/widgets/order-table/OrdersTableView',
+        'app/widgets/transaction-table/TransactionTableView',
         'keel/BaseView',
         'keel/MessageBus',
-        'text!app/widgets/order-table/OrdersTableTemplate.html',
-        'jqueryTreeTable'
+        'text!app/widgets/transaction-table/TransactionTableTemplate.html'
     ],
-    function(Orders, Repository, Message, OrdersTableView, BaseView, MessageBus, OrdersTableTemplate) {
+    function(Repository, Transactions, Message, TransactionTableView,
+        BaseView, MessageBus, TransactionTableTemplate) {
         'use strict';
 
         return BaseView.extend({
-            tagName: 'table',
-            className: 'orders-table bf-table',
-            elements: ['ordersTableBody'],
+            tagName: 'div',
 
             template: {
-                name: 'OrdersTableTemplate',
-                source: OrdersTableTemplate
+                name: 'TransactionTableTemplate',
+                source: TransactionTableTemplate
             },
 
-            initialize: function() {
-                this.collection = Repository.getOrders();
+            initialize: function(){
+                this.collection = Repository.getTransactions();
                 this.collection.bind('reset', this.render, this);
             },
 
             postRender: function() {
                 this.addChildren([
                     {
-                        id: 'OrdersTableView',
-                        viewClass: OrdersTableView,
+                        id: 'TransactionTableView',
+                        viewClass: TransactionTableView,
+                        el: '.transactions-table tbody',
                         options: {
-                            el: this.ordersTableBodyElement,
+                            el: '.transactions-table tbody',
+                            tab: 'transactions',
                             collection: this.collection
                         }
                     }
                 ]);
-
-                // Display as TreeTable
-                this.$el.treeTable();
             }
         });
     }

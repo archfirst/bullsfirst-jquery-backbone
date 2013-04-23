@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/transaction-table/TransactionsTableView
+ * app/widgets/transaction-table/TransactionTableView
  *
  * @author Alasdair Swan
  */

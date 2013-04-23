@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/transaction-filter/TransactionsFilterWidget
+ * app/widgets/order-filter/OrderFilterWidget
  *
  * @author Alasdair Swan
  */
@@ -28,10 +28,10 @@ define(
         'keel/BaseView',
         'keel/MessageBus',
         'moment',
-        'text!app/widgets/order-filter/OrdersFilterTemplate.html',
+        'text!app/widgets/order-filter/OrderFilterTemplate.html',
         'jqueryselectbox'
     ],
-    function(Repository, Message, FilterWidget, Backbone, BaseView, MessageBus, moment, OrdersFilterTemplate) {
+    function(Repository, Message, FilterWidget, Backbone, BaseView, MessageBus, moment, OrderFilterTemplate) {
         'use strict';
 
         return FilterWidget.extend({
@@ -41,8 +41,8 @@ define(
             tab: 'orders',
 
             template: {
-                name: 'OrderssFilterTemplate',
-                source: OrdersFilterTemplate
+                name: 'OrderFilterTemplate',
+                source: OrderFilterTemplate
             },
 
             elements:['ordersFilterForm','ordersFilterSymbol', 'ordersFromDate', 'ordersToDate','ordersFilterAccountId'],

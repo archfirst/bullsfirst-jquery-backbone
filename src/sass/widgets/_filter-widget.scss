@@ -4,9 +4,10 @@
 $filter-background:               #bfbfbf;
 
  .filter-wrapper {
-	margin: 21px 40px 14px 80px;
-	padding:  10px 20px 6px;
 	background: $filter-background;
+	margin: 21px auto 12px auto;
+	padding: 6px 20px;
+	width: 820px;
  }
 
  .filter-form {

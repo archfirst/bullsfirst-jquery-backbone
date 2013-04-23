@@ -190,7 +190,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('configureApp', function() {
     var template = 
       'define({\n' +
-        '    appRoot: "<%= appRoot %>"\n' +
+        '    appRoot: \'<%= appRoot %>\'\n' +
       '});';
       
     // Choose between default and override configurations

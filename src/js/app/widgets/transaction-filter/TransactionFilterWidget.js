@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/transaction-filter/TransactionsFilterWidget
+ * app/widgets/transaction-filter/TransactionFilterWidget
  *
  * @author Alasdair Swan
  */
@@ -28,10 +28,10 @@ define(
         'keel/BaseView',
         'keel/MessageBus',
         'moment',
-        'text!app/widgets/transaction-filter/TransactionsFilterTemplate.html',
+        'text!app/widgets/transaction-filter/TransactionFilterTemplate.html',
         'jqueryselectbox'
     ],
-    function(Repository, Message, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionsFilterTemplate) {
+    function(Repository, Message, FilterWidget, Backbone, BaseView, MessageBus, moment, TransactionFilterTemplate) {
         'use strict';
 
         return FilterWidget.extend({
@@ -41,8 +41,8 @@ define(
             tab: 'transactions',
 
             template: {
-                name: 'TransactionsFilterTemplate',
-                source: TransactionsFilterTemplate
+                name: 'TransactionFilterTemplate',
+                source: TransactionFilterTemplate
             },
 
             elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate','transactionsFilterAccountId'],

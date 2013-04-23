@@ -22,12 +22,12 @@
 define(
     [
         'app/domain/Repository',
-        'app/widgets/transaction-filter/TransactionsFilterWidget',
-        'app/widgets/transaction-table/TransactionsTableWidget',
+        'app/widgets/transaction-filter/TransactionFilterWidget',
+        'app/widgets/transaction-table/TransactionTableWidget',
         'keel/BaseView',
         'text!app/pages/transactions/TransactionsTabTemplate.html'
     ],
-    function(Repository, TransactionsFilterWidget, TransactionsTableWidget, BaseView, TransactionsTabTemplate) {
+    function(Repository, TransactionFilterWidget, TransactionTableWidget, BaseView, TransactionsTabTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -42,15 +42,15 @@ define(
             postRender: function() {
                 this.addChildren([
                     {
-                        id: 'TransactionsFilterWidget',
-                        viewClass: TransactionsFilterWidget,
+                        id: 'TransactionFilterWidget',
+                        viewClass: TransactionFilterWidget,
                         parentElement: this.$el,
                         options: {
                             collection: Repository.getBrokerageAccounts()
                         }
                     }, {
-                        id: 'TransactionsTableWidget',
-                        viewClass: TransactionsTableWidget,
+                        id: 'TransactionTableWidget',
+                        viewClass: TransactionTableWidget,
                         parentElement: this.$el,
                         options: {
                             model: Repository.getBrokerageAccounts()

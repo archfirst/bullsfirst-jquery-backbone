@@ -22,12 +22,12 @@
 define(
     [
         'app/domain/Repository',
-        'app/widgets/order-filter/OrdersFilterWidget',
-        'app/widgets/order-table/OrdersTableWidget',
+        'app/widgets/order-filter/OrderFilterWidget',
+        'app/widgets/order-table/OrderTableWidget',
         'keel/BaseView',
         'text!app/pages/orders/OrdersTabTemplate.html'
     ],
-    function(Repository, OrdersFilterWidget, OrdersTableWidget, BaseView, OrdersTabTemplate) {
+    function(Repository, OrderFilterWidget, OrderTableWidget, BaseView, OrdersTabTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -42,15 +42,15 @@ define(
             postRender: function() {
                 this.addChildren([
                     {
-                        id: 'OrdersFilterWidget',
-                        viewClass: OrdersFilterWidget,
+                        id: 'OrderFilterWidget',
+                        viewClass: OrderFilterWidget,
                         parentElement: this.$el,
                         options: {
                             collection: Repository.getBrokerageAccounts()
                         }
                     }, {
-                        id: 'OrdersTableWidget',
-                        viewClass: OrdersTableWidget,
+                        id: 'OrderTableWidget',
+                        viewClass: OrderTableWidget,
                         parentElement: this.$el,
                         options: {
                             model: Repository.getBrokerageAccounts()

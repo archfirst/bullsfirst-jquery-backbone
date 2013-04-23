@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/order-table/OrdersTableView
+ * app/widgets/order-table/OrderTableView
  *
  * @author Sreejesh Karunakaran
  */
