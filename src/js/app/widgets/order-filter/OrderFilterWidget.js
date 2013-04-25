@@ -43,11 +43,11 @@ define(
                 source: OrderFilterTemplate
             },
 
-            elements:['ordersFilterForm', 'ordersFilterSymbol', 'fromDate', 'toDate', 'account'],
+            elements:['form', 'symbol', 'fromDate', 'toDate', 'account', 'resetButton', 'applyFiltersButton'],
 
             events: {
-                'click #orders-filter .js-reset-filters-button' : 'resetFilters',
-                'click #orders-filter .js-apply-filters-button' : 'updateOrders'
+                'click .reset-filters-button': 'resetFilters',
+                'click .apply-filters-button': 'updateOrders'
             },
 
             initialize: function() {
@@ -61,7 +61,7 @@ define(
                 // initialize Symbol dropdown
                 this._initSymbolField();
 
-                $(this.ordersFilterFormElement).validationEngine();
+                $(this.formElement).validationEngine();
 
                 // instantiate fromDate to datepicker()
                 if (!($(this.fromDateElement).datepicker())) {
@@ -72,7 +72,7 @@ define(
                     $(this.toDateElement).datepicker();
                 }
                 // Restore filters for the orders tab
-                this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
+                this.setFilters( $(this.formElement), Repository.getOrderFilters()  );
 
                 this.setFilterCriteria();
             },
@@ -84,26 +84,26 @@ define(
             resetFilters: function() {
                 this.closePopups();
                 // Reset selectbox to ''
-                $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox('detach');
-                $(this.ordersFilterFormElement).find('select[name="accountId"]').val('');
-                $(this.ordersFilterFormElement).find('select[name="accountId"]').selectbox('attach');
+                this.accountElement.selectbox('detach');
+                this.accountElement.val('');
+                this.accountElement.selectbox('attach');
                 // Reset all the text inputs to ''
-                $(this.ordersFilterFormElement).find('input:text').prop('value', '');
+                $(this.formElement).find('input:text').prop('value', '');
                 // Reset datepicker
                 $(this.fromDateElement).datepicker('setDate', new Date());
                 $(this.toDateElement).datepicker('setDate', new Date());
                 // Resest all the checkboxes in formelement to false
-                $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
+                $(this.formElement).find('input:checkbox').prop('checked', false);
                 // Save order filter criteria in Repository
-                Repository.setOrderFilterCriteria( $(this.ordersFilterFormElement).toObject() );
+                Repository.setOrderFilterCriteria( $(this.formElement).toObject() );
                 // Update Orders for reset filter criteria
                 this.updateOrders();
             },
+
             // Set the selected filter criteria and save it in Repository
             setFilterCriteria: function() {
-/*
-                // get selected filter values in orderFilterForm to a object
-                var filtercriteria = $(this.ordersFilterFormElement).toObject();
+                // get selected filter values in form to a object
+                var filtercriteria = $(this.formElement).toObject();
                 if (filtercriteria.fromDate) {
                     filtercriteria.fromDate = moment(new Date(filtercriteria.fromDate)).format('YYYY-MM-DD');
                 }
@@ -118,29 +118,32 @@ define(
                 }
                 // save selected filter criteria in Repository
                 Repository.setOrderFilterCriteria( filtercriteria );
-*/
             },
+
             // update orders for current filter criteria
             updateOrders: function() {
                 // Process filter criteria to server format
-                if (!($(this.ordersFilterFormElement).validationEngine('validate'))) {
+                if (!($(this.formElement).validationEngine('validate'))) {
                     return;
                 }
                 this.closePopups();
                 this.setFilterCriteria();
                 Repository.getOrders();
             },
+
             closePopups: function(){
-                $(this.ordersFilterFormElement).validationEngine('hideAll');
+                $(this.formElement).validationEngine('hideAll');
                 $(this.fromDateElement).datepicker('hide');
                 $(this.toDateElement).datepicker('hide');
             },
+
             //override destrory of base view to remove popups
             destroy: function() {
                 this.closePopups();
                 // call to super class destroy function
                 BaseView.prototype.destroy.call(this);
             },
+
             render: function(){
                 var template = this.getTemplate(),
                     collection = this.collection || {},
@@ -158,6 +161,7 @@ define(
                 this.postRender();
                 return this;
             },
+
             // initialize symbol dropdown with instruments
             _initSymbolField: function() {
 
@@ -168,7 +172,7 @@ define(
                     };
                 });
 
-                $(this.ordersFilterSymbolElement).autocomplete({
+                $(this.symbolElement).autocomplete({
                     source: instruments
                 });
 

@@ -64,7 +64,7 @@ define(
                 source: TradeTemplate
             },
 
-            elements: ['tradesymbol'],
+            elements: ['accountId', 'symbol'],
 
             events: {
                 'blur .field input[type="text"]': 'updateOrder',
@@ -106,7 +106,7 @@ define(
             },
 
             checkTypedSymbol: function(e) {
-                var that = this,
+                var self = this,
                     input = $(e.target).val().toUpperCase(),
                     match = false;
 
@@ -120,35 +120,36 @@ define(
                 }
 
                 if (match) {
-                    that.orderRequest.orderParams.symbol = input;
+                    self.orderRequest.orderParams.symbol = input;
                     $(e.target).val(input);
-                    that.symbolChanged(input);
-                    that.createEstimate();
+                    self.symbolChanged(input);
+                    self.createEstimate();
                 } else {
-                    that.symbolNotRecognized();
+                    self.symbolNotRecognized();
                 }
 
             },
 
             createEstimate: function(callback) {
 
-                var tradeDialog = this;
+                var self = this;
+                var orderRequest = self.orderRequest;
 
-                this.orderRequest.brokerageAccountId = this.$el.find('#trade-accountId').val();
-                if (this.orderRequest.orderParams.type === 'Market') {
-                    delete this.orderRequest.orderParams.limitPrice;
+                orderRequest.brokerageAccountId = this.accountIdElement.val();
+                if (orderRequest.orderParams.type === 'Market') {
+                    delete orderRequest.orderParams.limitPrice;
                 }
 
-                delete this.orderRequest.orderEstimate;
+                delete orderRequest.orderEstimate;
 
-                if (this.validateOrder()) {
+                if (self.validateOrder()) {
 
-                    OrderEstimateService.createOrderEstimate(this.orderRequest, function(response) {
+                    OrderEstimateService.createOrderEstimate(orderRequest, function(response) {
                         var estimatedValue = Formatter.formatMoney(response.estimatedValue);
                         var fees = Formatter.formatMoney(response.fees);
                         var estimatedValueInclFees = Formatter.formatMoney(response.estimatedValueInclFees);
 
-                        tradeDialog.orderRequest.orderEstimate = {
+                        orderRequest.orderEstimate = {
                             estimatedValue: estimatedValue,
                             fees: fees,
                             estimatedValueInclFees: estimatedValueInclFees
@@ -194,21 +195,17 @@ define(
             selectCheckbox: function(e) {
                 e.preventDefault();
 
-                var tradeDialog = this;
-
                 var target = $(e.currentTarget);
                 var $checkbox = $(':checkbox[value=' + target.attr('attr-value') + ']');
 
                 if ( $checkbox.is(':checked') ) {
-                    target.addClass('empty');
                     target.removeClass('selected icon-ok');
                     $checkbox.attr('checked', false);
-                    tradeDialog.orderRequest.orderParams.allOrNone = false;
+                    this.orderRequest.orderParams.allOrNone = false;
                 } else {
-                    target.removeClass('empty');
                     target.addClass('selected icon-ok');
                     $checkbox.attr('checked', true);
-                    tradeDialog.orderRequest.orderParams.allOrNone = true;
+                    this.orderRequest.orderParams.allOrNone = true;
                 }
 
                 this.createEstimate();
@@ -347,7 +344,7 @@ define(
 
                 this.instruments = instruments;
 
-                $(this.tradesymbolElement).autocomplete({
+                $(this.symbolElement).autocomplete({
                     source: function( request, response ) {
                         var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
 

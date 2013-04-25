@@ -12,7 +12,7 @@
             <div class="grid-row">
                 <div class="grid-col field">
                     <label for="trade-accountId">Account</label>
-                    <select id="trade-accountId" name="brokerageAccountId">
+                    <select id="trade-accountId" class="js-accountId" name="brokerageAccountId">
                         {{#each accounts}}
                             <option value={{id}}>{{name}} ({{formatMoney cashPosition}})</option>
                         {{/each}}
@@ -23,7 +23,7 @@
             <div class="grid-row">
                 <div class="grid-col span-1-2 field">
                     <label for="trade-symbol">Symbol</label>
-                    <input id="trade-symbol" class="js-tradesymbol" name="tradeSymbol" type="text" />
+                    <input id="trade-symbol" class="js-symbol" name="tradeSymbol" type="text" />
                 </div>
 
                 <div class="grid-col span-1-2 field">
