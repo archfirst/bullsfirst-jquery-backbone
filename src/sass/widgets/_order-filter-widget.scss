@@ -1,59 +1,32 @@
 /* -----------------------------------------------------------------------------
- * order filter-widget
+ * order-filter-widget
+ *
+ * Column layout (total width 780)
+ * <-- 270 -->20<-- 120 -->20<-- 220 -->20<-- 110 -->
  * -------------------------------------------------------------------------- */
 
-#orders-filter .orders-filter-list{
-    padding-left: 0px;
-}
+.order-filter-form {
+    .col1, .col2, .col3, .col4 {
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
 
-#orders-filter .filter-field{
-    margin-top: 0px;
-}
+    .col1 {
+        width: 270px;
+    }
 
+    .col2 {
+        width: 120px;
+    }
 
-#orders-filter .orders-filter-list li{
-    list-style: none;
-}
+    .col3 {
+        width: 220px;
+    }
 
-#orders-filter .orders-filter-list li.status{
-    width: 182px;
-    background-color: #a3a3a3;
-    margin-right: 0px;
-}
-
-#orders-filter .orders-filter-list li.status li{
-    width : 49%;
-    float : left;
-}
-
-
-#orders-filter .orders-filter-list li.action{
-    background-color: #a3a3a3;
-}
-#orders-filter .order-filter-status, #orders-filter .order-filter-action{
-    padding-left: 0px;
-    height: 48px;
-    margin-top: 0px;
-}
-
-#orders-filter .order-filter-status label, #orders-filter .order-filter-action label{
-    display: inline;
-    line-height: 1;
-    font-size: 10px;
-    padding-left: 2px;
-    color: black;
-}
-
-#orders-filter .order-filter-status input[type='checkbox'], #orders-filter .order-filter-action input[type='checkbox']{
-    margin-left: 5px;
-}
-
-#orders-filter .order-filter-action span{
-    background: url('../img/checkbox.png') no-repeat;
-}
-
-
-#orders-filter .filter-buttons{
-    margin-top: 31px;
-    margin-right: -4px;
+    .col4 {
+        width: 110px;
+        margin-top: 8px;
+        margin-right: 0;
+    }
 }

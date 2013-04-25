@@ -4,6 +4,10 @@
 .field {
     margin-bottom: 10px;
 
+    &.kill-bottom-margin {
+        margin-bottom: 0;
+    }
+
     label {
         background-color: $label-background-color;
         color: $label-text-color;
@@ -34,6 +38,10 @@
         padding-left: 12px;
     }
 
+    .datepicker {
+        background: #fff url(../img/datepicker-icon.png) no-repeat 95% center;
+    }
+
     .sbSelector {
         padding-left: 7px;
     }
@@ -62,15 +70,68 @@
 
     .bf-checkbox {
         float: left;
-        width: 20px;
+        width: 22px;
         height: 25px;
         padding: 0 0 0 3px;
         line-height: 26px;
         font-size: 17px;
-        color: $white;
-        background: $icon-color;
-        &.empty::before {
-            content: '';
-        }
+        color: $label-background-color;
+        background: $checkbox-color;
     }
+}
+
+.field.filter {
+    label {
+        background-color: $filter-label-background-color;
+        font: 11px/18px Aller;
+        height: 18px;
+    }
+}
+
+.field-group.filter {
+    background-color: $filter-group-background-color;
+
+    label {
+        color: $label-text-color;
+        display: block;
+        font: 11px/18px Aller;
+        height: 20px;
+        padding-left: 9px;
+    }
+}
+
+.filter-checkbox {
+    a {
+        float: left;
+        width: 12px;
+        height: 11px;
+        font: 11px/11px Aller;
+        margin-left: 7px;
+        padding: 0 0 0 3px;
+        color: $white;
+        background: $checkbox-color;
+    }
+
+    span {
+        float: left;
+        color: $black;
+        font: 11px/11px Aller;
+        margin-bottom: 5px;
+        padding-left: 6px;
+    }
+}
+
+/* Add clearfix */
+.filter-checkbox:before,
+.filter-checkbox:after {
+    content: " ";
+    display: table;
+}
+
+.filter-checkbox:after {
+    clear: both;
+}
+
+a.button.medium.apply-filters-button {
+    background-color: $button-apply-filters-color;
 }

@@ -1,11 +1,6 @@
 /* -----------------------------------------------------------------------------
  * grids
  * -------------------------------------------------------------------------- */
-$grid-narrow-row-width-px:    300px;
-$grid-narrow-gutter-width-px: 10px;
-$grid-narrow-gutter-width:    $grid-narrow-gutter-width-px/$grid-narrow-row-width-px;
-
-
 @function span-width($num-columns-in-span, $total-columns, $gutter-width) {
 
     /* calculate width of a single column */
@@ -42,6 +37,10 @@ $grid-narrow-gutter-width:    $grid-narrow-gutter-width-px/$grid-narrow-row-widt
 }
 
 /* Narrow grid */
+$grid-narrow-row-width-px:    300px;
+$grid-narrow-gutter-width-px: 10px;
+$grid-narrow-gutter-width:    $grid-narrow-gutter-width-px/$grid-narrow-row-width-px;
+
 .grid-narrow {
 
     .grid-col {
@@ -58,5 +57,61 @@ $grid-narrow-gutter-width:    $grid-narrow-gutter-width-px/$grid-narrow-row-widt
 
     .span-2-3 {
         width: span-width(2, 3, $grid-narrow-gutter-width);
+    }
+}
+
+/* Wide grid */
+$grid-wide-row-width-px:    940px;
+$grid-wide-gutter-width-px: 20px;
+$grid-wide-gutter-width:    $grid-wide-gutter-width-px/$grid-wide-row-width-px;
+
+.grid-wide {
+
+    .grid-col {
+        margin-right: percentage($grid-wide-gutter-width);
+    }
+
+    .span-1-12 {
+        width: span-width(1, 12, $grid-wide-gutter-width);
+    }
+
+    .span-2-12 {
+        width: span-width(2, 12, $grid-wide-gutter-width);
+    }
+
+    .span-3-12, .span-1-4 {
+        width: span-width(3, 12, $grid-wide-gutter-width);
+    }
+
+    .span-4-12, .span-1-3 {
+        width: span-width(4, 12, $grid-wide-gutter-width);
+    }
+
+    .span-5-12 {
+        width: span-width(5, 12, $grid-wide-gutter-width);
+    }
+
+    .span-6-12, .span-1-2 {
+        width: span-width(6, 12, $grid-wide-gutter-width);
+    }
+
+    .span-7-12 {
+        width: span-width(7, 12, $grid-wide-gutter-width);
+    }
+
+    .span-8-12, .span-2-3 {
+        width: span-width(8, 12, $grid-wide-gutter-width);
+    }
+
+    .span-9-12, .span-3-4 {
+        width: span-width(9, 12, $grid-wide-gutter-width);
+    }
+
+    .span-10-12 {
+        width: span-width(10, 12, $grid-wide-gutter-width);
+    }
+
+    .span-11-12 {
+        width: span-width(11, 12, $grid-wide-gutter-width);
     }
 }

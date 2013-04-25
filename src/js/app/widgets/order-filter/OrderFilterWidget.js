@@ -36,16 +36,14 @@ define(
 
         return FilterWidget.extend({
             tagName: 'div',
-            className: 'orders',
-
-            tab: 'orders',
+            className: 'order-filter',
 
             template: {
                 name: 'OrderFilterTemplate',
                 source: OrderFilterTemplate
             },
 
-            elements:['ordersFilterForm','ordersFilterSymbol', 'ordersFromDate', 'ordersToDate','ordersFilterAccountId'],
+            elements:['ordersFilterForm', 'ordersFilterSymbol', 'fromDate', 'toDate', 'account'],
 
             events: {
                 'click #orders-filter .js-reset-filters-button' : 'resetFilters',
@@ -66,12 +64,12 @@ define(
                 $(this.ordersFilterFormElement).validationEngine();
 
                 // instantiate fromDate to datepicker()
-                if (!($(this.ordersFromDateElement).datepicker())) {
-                    $(this.ordersFromDateElement).datepicker();
+                if (!($(this.fromDateElement).datepicker())) {
+                    $(this.fromDateElement).datepicker();
                 }
                 // instantiate ToDate to datepicker()
-                if (!($(this.ordersToDateElement).datepicker())) {
-                    $(this.ordersToDateElement).datepicker();
+                if (!($(this.toDateElement).datepicker())) {
+                    $(this.toDateElement).datepicker();
                 }
                 // Restore filters for the orders tab
                 this.setFilters( $(this.ordersFilterFormElement), Repository.getOrderFilters()  );
@@ -80,7 +78,7 @@ define(
             },
 
             onFilterLoad: function() {
-                $(this.ordersFilterAccountIdElement).selectbox();
+                $(this.accountElement).selectbox();
             },
 
             resetFilters: function() {
@@ -92,8 +90,8 @@ define(
                 // Reset all the text inputs to ''
                 $(this.ordersFilterFormElement).find('input:text').prop('value', '');
                 // Reset datepicker
-                $(this.ordersFromDateElement).datepicker('setDate', new Date());
-                $(this.ordersToDateElement).datepicker('setDate', new Date());
+                $(this.fromDateElement).datepicker('setDate', new Date());
+                $(this.toDateElement).datepicker('setDate', new Date());
                 // Resest all the checkboxes in formelement to false
                 $(this.ordersFilterFormElement).find('input:checkbox').prop('checked', false);
                 // Save order filter criteria in Repository
@@ -103,6 +101,7 @@ define(
             },
             // Set the selected filter criteria and save it in Repository
             setFilterCriteria: function() {
+/*
                 // get selected filter values in orderFilterForm to a object
                 var filtercriteria = $(this.ordersFilterFormElement).toObject();
                 if (filtercriteria.fromDate) {
@@ -119,6 +118,7 @@ define(
                 }
                 // save selected filter criteria in Repository
                 Repository.setOrderFilterCriteria( filtercriteria );
+*/
             },
             // update orders for current filter criteria
             updateOrders: function() {
@@ -132,8 +132,8 @@ define(
             },
             closePopups: function(){
                 $(this.ordersFilterFormElement).validationEngine('hideAll');
-                $(this.ordersFromDateElement).datepicker('hide');
-                $(this.ordersToDateElement).datepicker('hide');
+                $(this.fromDateElement).datepicker('hide');
+                $(this.toDateElement).datepicker('hide');
             },
             //override destrory of base view to remove popups
             destroy: function() {

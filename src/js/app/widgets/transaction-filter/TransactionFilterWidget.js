@@ -36,9 +36,7 @@ define(
 
         return FilterWidget.extend({
             tagName: 'div',
-            className: 'transactions',
-
-            tab: 'transactions',
+            className: 'transaction-filter',
 
             template: {
                 name: 'TransactionFilterTemplate',

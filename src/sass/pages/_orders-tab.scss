@@ -1,8 +1,9 @@
 /* -----------------------------------------------------------------------------
  * orders-tab
  * -------------------------------------------------------------------------- */
-.orders-tab h1 {
-    float: left;
-    font: normal normal 18px/18px Aller;
-    margin: 30px 0 10px 60px;
+.order-filter {
+    background: $filter-background;
+    margin: 21px auto 12px auto;
+    padding: 6px 20px;
+    width: 820px;
 }

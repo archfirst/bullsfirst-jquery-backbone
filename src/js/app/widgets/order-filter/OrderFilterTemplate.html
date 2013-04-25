@@ -1,61 +1,117 @@
-<div id="orders-filter" class="filter-wrapper clearfix">
-	<div class="filter-form">
-	    <form id="orders-filter-form" class="js-ordersFilterForm">
-	        <ul class="orders-filter-list">
-                <li>
-                    <div class="filter-field account">
-                        <label for="filter-accountId">Account</label>
-                        <select id="orders-filter-accountId" class="js-ordersFilterAccountId" name="accountId">
-                            <option value="">All Accounts</option>
-                            {{#each accounts}}
-                                <option value={{this.id}}>{{this.name}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </li>
-                <li class="filter-field order">
-                    <label for="order-filter-orderno">Order #</label>
-                    <input type="text" id="order-filter-orderno" name="orderno" placeholder="Optional" ></input>
-                </li>
-                <li class="filter-field symbol">
-                    <label for="order-filter-symbol">Symbol</label>
-                    <input type="text" id="order-filter-symbol" class="js-ordersFilterSymbol" name="symbol" placeholder="Optional"></input>
-                </li>
-                <li class="filter-field">
-                    <div class="filter-field">
-                        <label for="filter-fromDate">From</label>
-                        <input id="orders-fromDate" class="js-ordersFromDate datepicker validate[custom[dateFormat]]" name="fromDate" type="text" />
-                    </div>
-                </li>
-                <li class="filter-field">
-                    <div class="filter-field">
-                        <label for="filter-toDate">To</label>
-                        <input id="orders-toDate" class="js-ordersToDate datepicker validate[custom[dateFormat]]" name="toDate" type="text" />
-                    </div>
-                </li>
-                <li class="action filter-field">
-                    <label for="order-filter-action">Order Action</label>
-                    <ul class="order-filter-action" id="order-filter-action">
-                        <li><input id="ord-buy" type="checkbox" name="sides[]" value="Buy" /><label for="ord-buy">Buy</label></li>
-                        <li><input id="ord-sell" type="checkbox" name="sides[]" value="Sell" /><label for="ord-sell">Sell</label></li>
-                    </ul>
-                </li>
-                <li class="status filter-field">
-                    <label for="order-filter-status">Order Status</label>
-                    <ul class="order-filter-status" id="order-filter-status">
-                        <li><input id="ord-done" type="checkbox" name="statuses[]" value="DoneForDay" /><label for="ord-done">DoneForDay</label></li>
-                        <li><input id="ord-partial" type="checkbox" name="statuses[]" value="PartiallyFilled" /><label for="ord-partial">Partially Filled</label></li>
-                        <li><input id="ord-cancel" type="checkbox" name="statuses[]" value="Canceled" /><label for="ord-cancel">Cancelled</label></li>
-                        <li><input id="ord-filled" type="checkbox" name="statuses[]" value="Filled" /><label for="ord-filled">Filled</label></li>
-                        <li><input id="ord-new" type="checkbox" name="statuses[]" value="New" /><label for="ord-new">New</label></li>
-                    </ul>
-                </li>
-            </ul>
-	    </form>
-	</div>
+<form class="order-filter-form clearfix">
 
-	<div class="pull-right">
-	    <a class="js-reset-filters-button button medium" href="#"><i class="icon-repeat"></i>Reset</a>
-	    <a class="js-apply-filters-button button medium" href="#"><i class="icon-filter"></i>Apply Filters</a>
-	</div>
-</div>
+    <div class="col1">
+        <div class="field filter">
+            <label for="order-filter-account">Account</label>
+            <select id="order-filter-account" class="js-account" name="accountId">
+                <option value="">All Accounts</option>
+                {{#each accounts}}
+                    <option value={{id}}>{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="grid-narrow">
+            <div class="grid-row">
+                <div class="grid-col span-1-2 field filter kill-bottom-margin">
+                    <label for="order-filter-from-date">From</label>
+                    <input
+                        id="order-filter-from-date"
+                        class="js-fromDate datepicker validate[custom[dateFormat]]"
+                        name="fromDate"
+                        type="text" />
+                </div>
+                <div class="grid-col span-1-2 field filter kill-bottom-margin">
+                    <label for="order-filter-to-date">To</label>
+                    <input
+                        id="order-filter-to-date"
+                        class="js-toDate datepicker validate[custom[dateFormat]]"
+                        name="toDate"
+                        type="text" />
+                </div>
+            </div>
+        </div> <!-- grid -->
+    </div> <!-- col1 -->
+
+    <div class="col2">
+        <div class="field filter">
+            <label for="order-filter-order-number">Order #</label>
+            <input
+                id="order-filter-order-number"
+                class="js-orderNumber"
+                name="orderNumber"
+                placeholder="Optional"
+                type="text" />
+        </div>
+        <div class="field-group filter">
+            <label>Order Action</label>
+            <div class="filter-checkbox">
+                <a href="#"></a>
+                <span>Buy</span>
+                <input id="order-filter-action-buy" name="sides[]" type="checkbox" value="Buy" class="hidden" />
+            </div>
+            <div class="filter-checkbox">
+                <a href="#"></a>
+                <span>Sell</span>
+                <input id="order-filter-action-sell" name="sides[]" type="checkbox" value="Sell" class="hidden" />
+            </div>
+            <div class="filter-checkbox">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col3">
+        <div class="field filter">
+            <label for="order-filter-symbol">Symbol</label>
+            <input
+                id="order-filter-symbol"
+                class="js-symbol"
+                name="symbol"
+                placeholder="Optional"
+                type="text" />
+        </div>
+        <div class="field-group filter">
+            <label>Order Status</label>
+            <div class="grid-narrow">
+                <div class="grid-row">
+                    <div class="grid-col span-1-2 field filter kill-bottom-margin">
+                        <div class="filter-checkbox">
+                            <a href="#"></a>
+                            <span>New</span>
+                            <input id="order-filter-new" name="statuses[]" type="checkbox" value="New" class="hidden" />
+                        </div>
+                        <div class="filter-checkbox">
+                            <a href="#"></a>
+                            <span>Partially Filled</span>
+                            <input id="order-filter-partially-filled" name="statuses[]" type="checkbox" value="PartiallyFilled" class="hidden" />
+                        </div>
+                        <div class="filter-checkbox">
+                            <a href="#"></a>
+                            <span>Filled</span>
+                            <input id="order-filter-filled" name="statuses[]" type="checkbox" value="Filled" class="hidden" />
+                        </div>
+                    </div>
+                    <div class="grid-col span-1-2 field filter kill-bottom-margin">
+                        <div class="filter-checkbox">
+                            <a href="#"></a>
+                            <span>Canceled</span>
+                            <input id="order-filter-canceled" name="statuses[]" type="checkbox" value="Canceled" class="hidden" />
+                        </div>
+                        <div class="filter-checkbox">
+                            <a href="#"></a>
+                            <span>Done For Day</span>
+                            <input id="order-filter-done-for-day" name="statuses[]" type="checkbox" value="DoneForDay" class="hidden" />
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- grid -->
+        </div>
+    </div>
+
+    <div class="col4">
+        <a class="js-resetButton button medium center" href="#"><i class="icon-repeat"></i>Reset</a>
+        <a class="js-applyFiltersButton apply-filters-button button medium center" href="#"><i class="icon-filter"></i>Apply Filters</a>
+    </div>
+
+</form>

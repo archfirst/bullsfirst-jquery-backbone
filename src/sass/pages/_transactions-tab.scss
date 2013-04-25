@@ -1,6 +1,12 @@
 /* -----------------------------------------------------------------------------
  * transactions-tab
  * -------------------------------------------------------------------------- */
+.transaction-filter {
+    background: $filter-background;
+    margin: 21px auto 12px auto;
+    padding: 6px 20px;
+    width: 820px;
+}
 
 .transactions-table {
 	margin: auto;

@@ -14,14 +14,14 @@
 
     .mandatory-text {
         margin:0 0 10px 0;
-        color: #F8E5C9;
+        color: $label-text-color;
     }
 }
 
 #oa-cancel-button {
-    background-color: #c03b00;
+    background-color: $button-cancel-color;
 }
 
 #oa-cancel-button:hover {
-    background-color: #F36733;
+    background-color: $button-hover-color;
 }
