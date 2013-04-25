@@ -52,7 +52,8 @@ define(
 
             initialize: function() {
 
-                this.model.set('brokerageAccountName', Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name'));
+                this.model.brokerageAccountName =
+                    Repository.getBrokerageAccount(this.model.brokerageAccountId).get('name');
 
                 this.settings = {
                     overlayVisible: true,
@@ -65,14 +66,13 @@ define(
 
             submitOrder: function(){
 
-                var attr = this.model.attributes,
-                    orderRequest = {
-                        brokerageAccountId: attr.brokerageAccountId,
-                        orderParams: attr.orderParams
+                var orderRequest = {
+                        brokerageAccountId: this.model.brokerageAccountId,
+                        orderParams: this.model.orderParams
                     };
 
                 // Create brokerage account
-                OrderService.createOrder( orderRequest, _.bind(this.orderComplete, this), ErrorUtil.showError);
+                OrderService.createOrder(orderRequest, _.bind(this.orderComplete, this), ErrorUtil.showError);
             },
 
             orderComplete: function() {

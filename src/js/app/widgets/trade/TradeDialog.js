@@ -30,7 +30,6 @@ define(
         'app/framework/Message',
         'app/framework/ModalDialog',
         'app/services/OrderEstimateService',
-        'app/widgets/trade-preview/TradePreviewViewModel',
         'app/widgets/trade-preview/TradePreviewDialog',
         'keel/MessageBus',
         'jquery',
@@ -46,7 +45,6 @@ define(
         Message,
         ModalDialog,
         OrderEstimateService,
-        TradePreviewViewModel,
         TradePreviewDialog,
         MessageBus,
         $,
@@ -133,18 +131,24 @@ define(
             createEstimate: function(callback) {
 
                 var self = this;
-                var orderRequest = self.orderRequest;
-
-                orderRequest.brokerageAccountId = this.accountIdElement.val();
-                if (orderRequest.orderParams.type === 'Market') {
-                    delete orderRequest.orderParams.limitPrice;
-                }
-
-                delete orderRequest.orderEstimate;
 
                 if (self.validateOrder()) {
 
-                    OrderEstimateService.createOrderEstimate(orderRequest, function(response) {
+                    var orderRequest = self.orderRequest;
+                    orderRequest.brokerageAccountId = this.accountIdElement.val();
+                    if (orderRequest.orderParams.type === 'Market') {
+                        delete orderRequest.orderParams.limitPrice;
+                    }
+
+                    delete orderRequest.orderEstimate;
+
+                    // Clean up any unwanted attributes
+                    var cleanOrderRequest = {
+                        brokerageAccountId: orderRequest.brokerageAccountId,
+                        orderParams: orderRequest.orderParams
+                    };
+
+                    OrderEstimateService.createOrderEstimate(cleanOrderRequest, function(response) {
                         var estimatedValue = Formatter.formatMoney(response.estimatedValue);
                         var fees = Formatter.formatMoney(response.fees);
                         var estimatedValueInclFees = Formatter.formatMoney(response.estimatedValueInclFees);
@@ -162,7 +166,7 @@ define(
                     }, ErrorUtil.showError);
                 }
 
-                if ( callback instanceof Function ) {
+                if (callback instanceof Function) {
                     callback();
                 }
             },
@@ -183,7 +187,7 @@ define(
                         viewClass: TradePreviewDialog,
                         parentElement: $('body'),
                         options: {
-                            model: new TradePreviewViewModel(this.orderRequest)
+                            model: this.orderRequest
                         }
                     });
 
