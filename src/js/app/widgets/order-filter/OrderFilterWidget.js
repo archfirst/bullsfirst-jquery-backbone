@@ -76,7 +76,7 @@ define(
             },
 
             onFilterLoad: function() {
-                $(this.accountElement).selectbox();
+                $(this.accountElement).selectbox({effect: 'fade'});
             },
 
             resetFilters: function() {
