@@ -75,7 +75,7 @@ define(
             fromDate: moment(new Date()).format('YYYY-MM-DD'),
             toDate: moment(new Date()).format('YYYY-MM-DD')
         };
-        var _transactionsFilterCriteria = {
+        var _transactionFilterCriteria = {
             fromDate: moment(new Date()).format('YYYY-MM-DD'),
             toDate: moment(new Date()).format('YYYY-MM-DD')
         };
@@ -89,7 +89,7 @@ define(
             getSelectedAccount: function() { return _selectedAccount; },
             getInstruments: function() { return _instruments; },
             getOrderFilters: function() { return _orderFilterCriteria; },
-            getTransactionsFilters: function() { return _transactionsFilterCriteria; },
+            getTransactionFilters: function() { return _transactionFilterCriteria; },
             getOrders: function() {
                 _orders.fetch({
                     reset: true,
@@ -100,7 +100,7 @@ define(
             getTransactions: function() {
                 _transactions.fetch({
                     reset: true,
-                    data: _transactionsFilterCriteria
+                    data: _transactionFilterCriteria
                 });
                 return _transactions;
             },
@@ -109,8 +109,8 @@ define(
                 _orderFilterCriteria = filtercriteria;
             },
 
-            setTransactionsFilterCriteria: function( filtercriteria ) {
-                _transactionsFilterCriteria = filtercriteria;
+            setTransactionFilterCriteria: function( filtercriteria ) {
+                _transactionFilterCriteria = filtercriteria;
             },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },

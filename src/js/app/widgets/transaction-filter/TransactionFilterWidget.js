@@ -43,59 +43,60 @@ define(
                 source: TransactionFilterTemplate
             },
 
-            elements:['transactionsFilterForm','transactionsFromDate','transactionsToDate','transactionsFilterAccountId'],
+            elements:['form', 'fromDate', 'toDate', 'account', 'resetButton', 'applyFiltersButton'],
 
             events: {
-                'click .transactions-filter .js-reset-filters-button' : 'resetFilters',
-                'click .transactions-filter .js-apply-filters-button' : 'updateTransactions'
+                'click .reset-filters-button': 'resetFilters',
+                'click .apply-filters-button': 'updateTransactions'
             },
 
             initialize: function() {
-
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
                 this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
             },
 
             postPlace: function() {
-                // instantiate fromDate to datepicker()
-                $(this.transactionsFilterFormElement).validationEngine();
+                $(this.formElement).validationEngine();
 
-                if (!($(this.transactionsFromDateElement).datepicker())) {
-                    $(this.transactionsFromDateElement).datepicker();
+                // instantiate fromDate to datepicker()
+                if (!($(this.fromDateElement).datepicker())) {
+                    $(this.fromDateElement).datepicker();
                 }
                 // instantiate ToDate to datepicker()
-                if (!($(this.transactionsToDateElement).datepicker())) {
-                    $(this.transactionsToDateElement).datepicker();
+                if (!($(this.toDateElement).datepicker())) {
+                    $(this.toDateElement).datepicker();
                 }
                 // Restore filters for the transactions tab
-                this.setFilters( $(this.transactionsFilterFormElement), Repository.getTransactionsFilters()  );
+                this.setFilters( $(this.formElement), Repository.getTransactionFilters()  );
+
                 this.setFilterCriteria();
             },
 
             onFilterLoad: function() {
-                $(this.transactionsFilterAccountIdElement).selectbox();
+                $(this.accountElement).selectbox();
             },
 
             resetFilters: function() {
                 this.closePopups();
                 // Reset selectbox to ''
-                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox('detach');
-                $(this.transactionsFilterFormElement).find('select[name="accountId"]').val('');
-                $(this.transactionsFilterFormElement).find('select[name="accountId"]').selectbox('attach');
+                this.accountElement.selectbox('detach');
+                this.accountElement.val('');
+                this.accountElement.selectbox('attach');
                 // Reset all the text inputs to ''
-                $(this.transactionsFilterFormElement).find('input:text').prop('value', '');
+                $(this.formElement).find('input:text').prop('value', '');
                 // Reset datepicker
-                $(this.transactionsFromDateElement).datepicker('setDate', new Date());
-                $(this.transactionsToDateElement).datepicker('setDate', new Date());
-                // Save transactions filter criteria in Repository
-                Repository.setTransactionsFilterCriteria( $(this.transactionsFilterFormElement).toObject() );
+                $(this.fromDateElement).datepicker('setDate', new Date());
+                $(this.toDateElement).datepicker('setDate', new Date());
+                // Save transaction filter criteria in Repository
+                Repository.setTransactionFilterCriteria( $(this.formElement).toObject() );
                 // Update transactions for reset filter criteria
                 this.updateTransactions();
             },
+
             // Set the selected filter criteria and save it in Repository
             setFilterCriteria: function() {
-                // get selected filter values in orderFilterForm to a object
-                var filtercriteria = $(this.transactionsFilterFormElement).toObject();
+                // get selected filter values in form to a object
+                var filtercriteria = $(this.formElement).toObject();
                 if (filtercriteria.fromDate) {
                     filtercriteria.fromDate = moment(new Date(filtercriteria.fromDate)).format('YYYY-MM-DD');
                 }
@@ -103,12 +104,13 @@ define(
                     filtercriteria.toDate = moment(new Date(filtercriteria.toDate)).format('YYYY-MM-DD');
                 }
                 // save selected filter criteria in Repository
-                Repository.setTransactionsFilterCriteria( filtercriteria );
+                Repository.setTransactionFilterCriteria( filtercriteria );
             },
 
+            // update transactions for current filter criteria
             updateTransactions: function() {
                 // Process filter criteria to server format
-                if (!($(this.transactionsFilterFormElement).validationEngine('validate'))) {
+                if (!($(this.formElement).validationEngine('validate'))) {
                     return;
                 }
                 this.closePopups();
@@ -117,9 +119,9 @@ define(
             },
 
             closePopups: function(){
-                $(this.transactionsFilterFormElement).validationEngine('hideAll');
-                $(this.transactionsFromDateElement).datepicker('hide');
-                $(this.transactionsToDateElement).datepicker('hide');
+                $(this.formElement).validationEngine('hideAll');
+                $(this.fromDateElement).datepicker('hide');
+                $(this.toDateElement).datepicker('hide');
             },
 
             //override destrory of base view to remove popups
@@ -129,21 +131,18 @@ define(
                 BaseView.prototype.destroy.call(this);
             },
 
-            render: function(){
-                var template = this.getTemplate(),
-                    collection = this.collection || {},
-                    context = {};
-
-                // If the collection contains a toJSON method, call it to create the context
-                context.accounts = collection.toJSON ? collection.toJSON() : [];
-
-                // Destroy existing children
+            render: function() {
                 this.destroyChildren();
 
+                var template = this.getTemplate();
+                var context = {
+                    accounts: this.collection.toJSON()
+                };
                 this.$el.html(template(context));
-                this._setupElements();
 
+                this._setupElements();
                 this.postRender();
+
                 return this;
             }
         });

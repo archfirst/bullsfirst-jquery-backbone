@@ -4,7 +4,7 @@
 .transaction-filter {
     background: $filter-background;
     margin: 21px auto 12px auto;
-    padding: 6px 20px;
+    padding: 0 20px;
     width: 820px;
 }
 
@@ -28,14 +28,3 @@
 .transactions-table .amount-head { width: 95px; padding-right: 20px; text-align: right; }
 
 .transactions-table tr td:last-child { padding-right: 20px; }
-
-.transactions-table:after {
-	content: "";
-	width: 820px;
-	height: 1px;
-	background: $brand-color;
-	display: block;
-	position: absolute;
-	bottom: 14px;
-	left: 80px;
-}

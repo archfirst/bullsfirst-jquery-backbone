@@ -51,10 +51,8 @@ define(
             },
 
             initialize: function() {
-
                 this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
                 this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
-
             },
 
             postPlace: function() {
@@ -144,21 +142,18 @@ define(
                 BaseView.prototype.destroy.call(this);
             },
 
-            render: function(){
-                var template = this.getTemplate(),
-                    collection = this.collection || {},
-                    context = {};
-
-                // If the collection contains a toJSON method, call it to create the context
-                context.accounts = collection.toJSON ? collection.toJSON() : [];
-
-                // Destroy existing children
+            render: function() {
                 this.destroyChildren();
 
+                var template = this.getTemplate();
+                var context = {
+                    accounts: this.collection.toJSON()
+                };
                 this.$el.html(template(context));
-                this._setupElements();
 
+                this._setupElements();
                 this.postRender();
+
                 return this;
             },
 

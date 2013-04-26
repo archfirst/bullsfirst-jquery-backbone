@@ -1,32 +1,42 @@
-<div class="transactions-filter filter-wrapper clearfix">
-	<div class="filter-form">
-	    <form class="js-transactionsFilterForm">
+<form class="transaction-filter-form js-form clearfix">
 
-	        <div class="filter-field account">
-	            <label for="filter-accountId">Account</label>
-	            <select class="js-transactionsFilterAccountId" name="accountId">
-	            	<option value="">All Accounts</option>
-	            	{{#each accounts}}
-	            		<option value={{this.id}}>{{this.name}}</option>
-	            	{{/each}}
-	            </select>
-	        </div>
+    <div class="col1">
+        <div class="field filter">
+            <label for="transaction-filter-account">Account</label>
+            <select id="transaction-filter-account" class="js-account" name="accountId">
+                <option value="">All Accounts</option>
+                {{#each accounts}}
+                    <option value={{id}}>{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div> <!-- col1 -->
 
-	        <div class="filter-field">
-	            <label for="filter-fromDate">From</label>
-	            <input class="js-transactionsFromDate datepicker validate[custom[dateFormat]]" name="fromDate" type="text" />
-	        </div>
+    <div class="col2">
+        <div class="field filter">
+            <label for="transaction-filter-from-date">From</label>
+            <input
+                id="transaction-filter-from-date"
+                class="js-fromDate datepicker validate[custom[dateFormat]]"
+                name="fromDate"
+                type="text" />
+        </div>
+    </div>
 
-	        <div class="filter-field">
-	            <label for="filter-toDate">To</label>
-	            <input class="js-transactionsToDate datepicker validate[custom[dateFormat]]" name="toDate" type="text" />
-	        </div>
+    <div class="col3">
+        <div class="field filter">
+            <label for="transaction-filter-to-date">To</label>
+            <input
+                id="transaction-filter-to-date"
+                class="js-toDate datepicker validate[custom[dateFormat]]"
+                name="toDate"
+                type="text" />
+        </div>
+    </div>
 
-	    </form>
-	</div>
+    <div class="col4">
+        <a class="apply-filters-button button medium center" href="#"><i class="icon-filter"></i>Apply Filters</a>
+        <a class="reset-filters-button button medium center" href="#"><i class="icon-repeat"></i>Reset</a>
+    </div>
 
-    <div class="pull-right">
-	    <a class="js-reset-filters-button button medium" href="#"><i class="icon-repeat"></i>Reset</a>
-	    <a class="js-apply-filters-button button medium" href="#"><i class="icon-filter"></i>Apply Filters</a>
-	</div>
-</div>
+</form>

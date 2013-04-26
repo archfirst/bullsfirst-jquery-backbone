@@ -48,7 +48,8 @@ define(
                         options: {
                             collection: Repository.getBrokerageAccounts()
                         }
-                    }, {
+                    },
+                    {
                         id: 'OrderTableWidget',
                         viewClass: OrderTableWidget,
                         parentElement: this.$el,

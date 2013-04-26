@@ -65,12 +65,12 @@ define(
                     }
                 },this);
             },
+
             _parseDate: function ( _date ) {
                 //extract all the digits from _date which is in format YYYY-MM-DD
                 var parts = _date.match(/(\d+)/g);
                 return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
             }
-
         });
     }
 );
