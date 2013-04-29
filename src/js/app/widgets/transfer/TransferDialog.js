@@ -91,7 +91,7 @@ define(
             postPlace: function() {
                 ModalDialog.prototype.postPlace.call(this);
 
-                $('#fromAccount, #toAccount').selectbox();
+                $('#fromAccount, #toAccount').selectbox({effect: 'fade'});
                 this._initSymbolField();
 
                 this.$el.find('form').validationEngine();
