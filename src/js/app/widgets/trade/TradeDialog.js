@@ -174,7 +174,7 @@ define(
             postPlace: function(){
                 ModalDialog.prototype.postPlace.call(this);
 
-                $('#trade-accountId, #trade-orderType, #trade-term').selectbox();
+                $('#trade-accountId, #trade-orderType, #trade-term').selectbox({effect: 'fade'});
                 this._initSymbolField();
 
                 return this;
