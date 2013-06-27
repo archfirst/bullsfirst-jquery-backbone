@@ -285,6 +285,10 @@ function( ExceptionUtil, Backbone, Handlebars, _, $ ) {
         **/
         getTemplate: function() {
 
+            if (!this.template) {
+                return function(){};
+            }
+
             if ( !_templates[this.template.name] ) {
                 _templates[ this.template.name ] = Handlebars.compile( this.template.source );
             }
