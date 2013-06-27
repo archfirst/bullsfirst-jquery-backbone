@@ -51,10 +51,7 @@ define(
             tagName: 'div',
             className: 'accounts-chart',
 
-            template: {
-                name: 'AccountChartTemplate',
-                source: AccountChartTemplate
-            },
+            template: null,
 
             chart: null,
 
@@ -77,7 +74,7 @@ define(
                 this.chart.get(accountId).select(false);
             },
 
-            render: function() {
+            postRender: function() {
                 // Convert accounts collection to a structure understood by the Highcharts
                 var accounts = this.collection.map(function(account) {
                     return {
