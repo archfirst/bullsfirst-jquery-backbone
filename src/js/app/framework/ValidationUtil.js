@@ -34,7 +34,7 @@ define(
         _.extend(Backbone.Validation.callbacks, {
 
             valid: function(view, attr, selector) {
-                console.log('valid: ' + attr + ', ' + selector);
+                // console.log('valid: ' + attr + ', ' + selector);
 
                 selector = (selector === 'id' ?
                             '#' + attr :
@@ -45,7 +45,7 @@ define(
             },
 
             invalid: function(view, attr, error, selector) {
-                console.log('invalid: ' + attr + ', ' + error + ', ' + selector);
+                // console.log('invalid: ' + attr + ', ' + error + ', ' + selector);
 
                 selector = (selector === 'id' ?
                             '#' + attr :
