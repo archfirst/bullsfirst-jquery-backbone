@@ -49,8 +49,8 @@ define(
                 xhr.setRequestHeader(
                     'Authorization',
                     'Basic ' + base64Encode(
-                        credentials.username + ':' +
-                        credentials.password));
+                        credentials.get('username') + ':' +
+                        credentials.get('password')));
             }
         };
     }

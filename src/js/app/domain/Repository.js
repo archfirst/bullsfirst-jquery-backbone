@@ -119,10 +119,6 @@ define(
                 _user.set(attributes);
             },
 
-            initCredentials: function(attributes) {
-                _credentials.set(attributes);
-            },
-
             setSelectedAccount: function(account) {
                 _selectedAccount = account;
                 MessageBus.trigger(Message.SelectedAccountChanged, _selectedAccount);
@@ -204,10 +200,6 @@ define(
 
             updateInstruments: function() {
                 InstrumentService.getInstruments( function( data ) { _instruments = data; }, ErrorUtil.showError, this);
-            },
-
-            isUserLoggedIn: function() {
-                return _credentials.isInitialized();
             }
         };
 

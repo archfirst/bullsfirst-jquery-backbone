@@ -47,6 +47,8 @@ var require = {
 
         // Backbone
         backbone:                    'vendor/backbone-1.0.0',
+        validation:                  'vendor/backbone-validation-0.8.0',
+        stickit:                     'vendor/backbone.stickit-0.6.3',
 
         // Templating
         handlebars:                  'vendor/handlebars-1.0.rc.1',
@@ -69,7 +71,10 @@ var require = {
         jqueryalerts:                'vendor/jquery.alerts',
 
         // Charting
-        highcharts:                  'vendor/highcharts-2.3.3'
+        highcharts:                  'vendor/highcharts-2.3.3',
+
+        // Tooptips
+        qtip:                        'vendor/jquery.qtip-2.1.1'
     },
 
     shim: {
@@ -131,8 +136,20 @@ var require = {
             exports: 'moment'
         },
 
+        qtip: {
+            deps: ['jquery']
+        },
+
+        stickit: {
+            deps: ['backbone']
+        },
+
         underscore: {
             exports: '_'
+        },
+
+        validation: {
+            deps: ['backbone']
         }
     }
 };

@@ -25,39 +25,43 @@
  *
  * @author Naresh Bhatia
  */
-define(['app/framework/AjaxUtil'],
-       function(AjaxUtil) {
-    'use strict';
+define(
+    [
+        'app/framework/AjaxUtil'
+    ],
+    function(AjaxUtil) {
+        'use strict';
 
-    // Module level variables act as singletons
-    var _url = '/bfoms-javaee/rest/users';
+        // Module level variables act as singletons
+        var _url = '/bfoms-javaee/rest/users';
 
-    return {
+        return {
 
-        // createUserRequest: an object containing firstName, lastName, username and password
-        // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
-        // failCallbacks: a function, or array of functions, called when the Deferred is rejected
-        createUser: function(createUserRequest, doneCallbacks, failCallbacks) {
-            $.ajax({
-                url: _url,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(createUserRequest, null, '\t')
-            })
-            .then(doneCallbacks, failCallbacks);
-        },
+            // createUserRequest: an object containing firstName, lastName, username and password
+            // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
+            // failCallbacks: a function, or array of functions, called when the Deferred is rejected
+            createUser: function(createUserRequest, doneCallbacks, failCallbacks) {
+                $.ajax({
+                    url: _url,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(createUserRequest, null, '\t')
+                })
+                .then(doneCallbacks, failCallbacks);
+            },
 
-        // credentials: credentials to use for getting the user
-        // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
-        // failCallbacks: a function, or array of functions, called when the Deferred is rejected
-        getUser: function(credentials, doneCallbacks, failCallbacks) {
-            $.ajax({
-                url: _url + '/' + credentials.username,
-                beforeSend: function(xhr) {
-                    AjaxUtil.setPasswordHeader(xhr, credentials.password);
-                }
-            })
-            .then(doneCallbacks, failCallbacks);
-        }
-    };
-});
+            // credentials: credentials to use for getting the user
+            // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
+            // failCallbacks: a function, or array of functions, called when the Deferred is rejected
+            getUser: function(credentials, doneCallbacks, failCallbacks) {
+                $.ajax({
+                    url: _url + '/' + credentials.get('username'),
+                    beforeSend: function(xhr) {
+                        AjaxUtil.setPasswordHeader(xhr, credentials.get('password'));
+                    }
+                })
+                .then(doneCallbacks, failCallbacks);
+            }
+        };
+    }
+);

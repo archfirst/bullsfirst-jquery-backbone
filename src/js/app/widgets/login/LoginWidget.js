@@ -21,7 +21,6 @@
  */
 define(
     [
-        'app/domain/Credentials',
         'app/domain/Repository',
         'app/framework/Message',
         'app/services/UserService',
@@ -30,21 +29,33 @@ define(
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/login/LoginTemplate.html',
-        'underscore',
-        'jqueryui',
-        'jqueryValidationEngineRules'
+        'stickit',
+        'validation'
     ],
-    function(Credentials, Repository, Message, UserService, ErrorUtil, Backbone, BaseView, MessageBus, LoginTemplate, _) {
+    function(Repository, Message, UserService, ErrorUtil, Backbone, BaseView, MessageBus, LoginTemplate) {
         'use strict';
 
         return BaseView.extend({
             tagName: 'section',
             className: 'login-section',
-            elements: ['loginForm', 'username', 'password'],
+            elements: ['loginForm'],
 
             template: {
                 name: 'LoginTemplate',
                 source: LoginTemplate
+            },
+
+            bindings: {
+                '#username': {
+                    observe: 'username',
+                    events: ['blur'],
+                    setOptions: { validate: true }
+                },
+                '#password': {
+                    observe: 'password',
+                    events: ['blur'],
+                    setOptions: { validate: true }
+                }
             },
 
             events: {
@@ -53,10 +64,13 @@ define(
                 'keypress .login-form': 'checkEnterKey'
             },
 
-            enteredCredentials: null,
+            initialize: function() {
+                this.model = Repository.getCredentials();
+                Backbone.Validation.bind(this);
+            },
 
-            postPlace: function() {
-                this.loginFormElement.validationEngine();
+            postRender: function() {
+                this.stickit();
             },
 
             checkEnterKey: function(event) {
@@ -66,44 +80,27 @@ define(
                 }
             },
 
-            login: function() {
-                this.enteredCredentials = this.form2Credentials();
-                if (this.loginFormElement.validationEngine('validate')) {
+            login: function(e) {
+                e.preventDefault();
+
+                if (this.model.isValid(true)) {
                     UserService.getUser(
-                        this.enteredCredentials, _.bind(this.loginDone, this), ErrorUtil.showError);
+                        this.model, this.loginDone, ErrorUtil.showError);
                 }
-                return false;
             },
 
-            testLogin: function() {
-                this.enteredCredentials = this.getTestCredentials();
-                UserService.getUser(
-                    this.enteredCredentials, _.bind(this.loginDone, this), ErrorUtil.showError);
-                return false;
+            testLogin: function(e) {
+                this.model.set({ username: 'test', password: 'test' });
+                this.login(e);
             },
 
             loginDone: function(data /* , textStatus, jqXHR */) {
                 // Add user to Repository
                 Repository.initUser(data);
-                Repository.initCredentials(this.enteredCredentials);
 
                 // Navigate to accounts and fire UserLoggedInEvent
                 Backbone.history.navigate('accounts', true);
                 MessageBus.trigger(Message.UserLoggedInEvent);
-            },
-
-            // ------------------------------------------------------------
-            // Helper functions
-            // ------------------------------------------------------------
-            // Creates Credentials from the Login form
-            form2Credentials: function() {
-                return new Credentials(
-                    this.usernameElement.val(),
-                    this.passwordElement.val());
-            },
-
-            getTestCredentials: function() {
-                return new Credentials('test', 'test');
             }
         });
     }

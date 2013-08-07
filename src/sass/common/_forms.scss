@@ -135,3 +135,12 @@
 a.button.medium.apply-filters-button {
     background-color: $button-apply-filters-color;
 }
+
+/* -----------------------------------------------------------------------------
+ * Validation messages
+ * -------------------------------------------------------------------------- */
+.validation-error {
+    border-color: $white;
+    background-color: #ee0101;
+    color: $white
+}

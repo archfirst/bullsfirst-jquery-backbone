@@ -286,6 +286,9 @@ function( ExceptionUtil, Backbone, Handlebars, _, $ ) {
         getTemplate: function() {
 
             if (!this.template) {
+                
+                // When applied, this function will return undefined
+                // jQuery.html() shortcuts if the argument is undefined as opposed to null or the empty string
                 return function(){};
             }
 
@@ -388,7 +391,7 @@ function( ExceptionUtil, Backbone, Handlebars, _, $ ) {
             // displayed as is.
             var context = model.toJSON ? model.toJSON() : model;
 
-            // Destroy existing children
+            // Remove existing children
             this.destroyChildren();
 
             // Render the template into the view's element

@@ -22,10 +22,11 @@
 require(
     [
         'app/framework/App',
+        'jquery',
         'app/framework/HandlebarsUtil',
-        'jquery'
+        'app/framework/ValidationUtil'
     ],
-    function(App, HandlebarsUtil, $) {
+    function(App, $) {
         'use strict';
 
         // Load Crockford's JSON library if browser does not have native support
@@ -35,14 +36,6 @@ require(
                 nope: 'js/vendor/json2.js'
             });
         });
-
-        // Set default timeout for AJAX requests to 20 seconds
-        // This should be done before instantiating the AppRouter,
-        // because the initialization sequence fires AJAX requests
-        $.ajaxSetup({timeout: 20000});
-
-        // Register Handlebars helpers
-        HandlebarsUtil.registerHelpers();
 
         // Kick off the application by requiring in the app and starting it
         App.start();

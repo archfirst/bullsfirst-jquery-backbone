@@ -29,45 +29,40 @@ define(
     function(Formatter, Handlebars) {
         'use strict';
 
-        return {
-            registerHelpers: function() {
+        // formatMoney
+        Handlebars.registerHelper('formatMoney', function(money) {
+            return Formatter.formatMoney(money);
+        });
 
-                // formatMoney
-                Handlebars.registerHelper('formatMoney', function(money) {
-                    return Formatter.formatMoney(money);
-                });
+        // formatPercent
+        Handlebars.registerHelper('formatPercent', function(percent) {
+            return Formatter.formatPercent(percent);
+        });
 
-                // formatPercent
-                Handlebars.registerHelper('formatPercent', function(percent) {
-                    return Formatter.formatPercent(percent);
-                });
+        // formatDate
+        Handlebars.registerHelper('formatDate', function(date) {
+            return Formatter.formatDate(date);
+        });
 
-                // formatDate
-                Handlebars.registerHelper('formatDate', function(date) {
-                    return Formatter.formatDate(date);
-                });
+        // formatDateTime
+        Handlebars.registerHelper('formatDateTime', function(date) {
+            return Formatter.formatDateTime(date);
+        });
 
-                // formatDateTime
-                Handlebars.registerHelper('formatDateTime', function(date) {
-                    return Formatter.formatDateTime(date);
-                });
-
-                Handlebars.registerHelper('ifOrderActive', function(status, options) {
-                    if ( status === 'New' || status === 'PartiallyFilled' || status === 'PendingNew' ) {
-                        return options.fn(this);
-                    }
-                });
-
-                Handlebars.registerHelper('ifEqual', function (left, right, options) {
-                    if (Handlebars.Utils.isEmpty(left) ||
-                        Handlebars.Utils.isEmpty(right) ||
-                        (left !== right)) {
-                        return options.inverse(this);
-                    } else {
-                        return options.fn(this);
-                    }
-                });
+        Handlebars.registerHelper('ifOrderActive', function(status, options) {
+            if ( status === 'New' || status === 'PartiallyFilled' || status === 'PendingNew' ) {
+                return options.fn(this);
             }
-        };
+        });
+
+        Handlebars.registerHelper('ifEqual', function (left, right, options) {
+            if (Handlebars.Utils.isEmpty(left) ||
+                Handlebars.Utils.isEmpty(right) ||
+                (left !== right)) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this);
+            }
+        });
     }
 );
