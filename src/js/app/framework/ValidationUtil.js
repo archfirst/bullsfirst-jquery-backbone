@@ -31,6 +31,12 @@ define(
     function(Backbone, _) {
         'use strict';
 
+        // Force update the model even if the values are invalid.
+        // This allows the view and the model to remain in sync.
+        Backbone.Validation.configure({
+            forceUpdate: true
+        });
+
         _.extend(Backbone.Validation.callbacks, {
 
             valid: function(view, attr, selector) {
