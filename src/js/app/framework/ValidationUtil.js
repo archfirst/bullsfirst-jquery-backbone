@@ -37,6 +37,10 @@ define(
             forceUpdate: true
         });
 
+        _.extend(Backbone.Validation.patterns, {
+            lettersOnly: /^[a-zA-Z\ \']+$/
+        });
+
         _.extend(Backbone.Validation.callbacks, {
 
             valid: function(view, attr, selector) {

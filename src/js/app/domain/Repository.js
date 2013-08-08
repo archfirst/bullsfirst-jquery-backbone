@@ -115,10 +115,6 @@ define(
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },
 
-            initUser: function(attributes) {
-                _user.set(attributes);
-            },
-
             setSelectedAccount: function(account) {
                 _selectedAccount = account;
                 MessageBus.trigger(Message.SelectedAccountChanged, _selectedAccount);

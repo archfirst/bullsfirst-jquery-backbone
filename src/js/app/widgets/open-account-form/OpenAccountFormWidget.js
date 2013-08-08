@@ -15,42 +15,37 @@
  */
 
 /**
- * app/widgets/login/LoginWidget
+ * app/widgets/open-account-form/OpenAccountFormWidget
  *
  * @author Naresh Bhatia
  */
 define(
     [
-        'app/domain/Credentials',
         'app/domain/ExternalAccount',
-        'app/domain/ExternalAccounts',
         'app/domain/Repository',
-        'app/domain/User',
         'app/framework/ErrorUtil',
         'app/framework/Message',
         'app/services/AccountService',
         'app/services/BrokerageAccountService',
         'app/services/UserService',
+        'app/widgets/open-account-form/CreateUserViewModel',
         'backbone',
         'keel/BaseView',
         'keel/MessageBus',
         'text!app/widgets/open-account-form/OpenAccountFormTemplate.html',
         'underscore',
-        'form2js',
-        'jqueryToObject',
-        'jqueryValidationEngineRules'
+        'stickit',
+        'validation'
     ],
     function (
-        Credentials,
         ExternalAccount,
-        ExternalAccounts,
         Repository,
-        User,
         ErrorUtil,
         Message,
         AccountService,
         BrokerageAccountService,
         UserService,
+        CreateUserViewModel,
         Backbone,
         BaseView,
         MessageBus,
@@ -60,11 +55,6 @@ define(
         'use strict';
 
         return BaseView.extend({
-
-            brokerageAccountId: 0,
-
-            externalAccountId: 0,
-
             tagName: 'section',
             className: 'open-account-section',
             elements: ['openAccountForm'],
@@ -74,42 +64,91 @@ define(
                 source: OpenAccountFormTemplate
             },
 
-            events: {
-                'click #open-account-button': 'handleOpenAccountButton',
-                'click #oa-cancel-button': 'handleCancelButton',
-                'keypress #open-account-form': 'checkEnterKey'
-            },
-
-            checkEnterKey: function checkEnterKey(event) {
-
-                if (event.keyCode === $.ui.keyCode.ENTER) {
-                    event.preventDefault();
-                    this.handleOpenAccountButton();
+            bindings: {
+                '#oa-firstname': {
+                    observe: 'firstName',
+                    events: ['blur'],
+                    setOptions: { validate: true }
+                },
+                '#oa-lastname': {
+                    observe: 'lastName',
+                    events: ['blur'],
+                    setOptions: { validate: true }
+                },
+                '#oa-username': {
+                    observe: 'username',
+                    events: ['blur'],
+                    setOptions: { validate: true }
+                },
+                '#oa-password': {
+                    observe: 'password',
+                    events: ['blur'],
+                    setOptions: { validate: true }
+                },
+                '#oa-confirmPassword': {
+                    observe: 'confirmPassword',
+                    events: ['blur'],
+                    setOptions: { validate: true }
                 }
             },
 
-            createUser: function createUser() {
-
-                UserService.createUser(
-                    this.form2CreateUserRequest(), _.bind(this.createUserDone, this),
-                    ErrorUtil.showError
-                );
-
+            events: {
+                'click #open-account-button': 'handleOpenAccountButton',
+                'keypress #open-account-form': 'checkEnterKey'
             },
 
-            createUserDone: function createUserDone(/* data, textStatus, jqXHR */) {
+            initialize: function() {
+                this.model = new CreateUserViewModel();
+                Backbone.Validation.bind(this);
+            },
 
-                // Add user to Repository
-                Repository.initUser(this.form2User());
-                Repository.initCredentials(this.form2Credentials());
+            postRender: function() {
+                this.stickit();
+            },
+
+            checkEnterKey: function(event) {
+                if (event.keyCode === $.ui.keyCode.ENTER) {
+                    this.handleOpenAccountButton(event);
+                }
+            },
+
+            handleOpenAccountButton: function(event) {
+                event.preventDefault();
+
+                if (this.model.isValid(true)) {
+                    this.createUser();
+                }
+            },
+
+            createUser: function() {
+                var createUserRequest = this.model.toJSON();
+                delete createUserRequest.confirmPassword; // property not expected by REST service
+
+                UserService.createUser(
+                    createUserRequest, _.bind(this.createUserDone, this), ErrorUtil.showError);
+            },
+
+            createUserDone: function() {
+                var createUserRequest = this.model.toJSON();
+
+                // Initialize user information
+                Repository.getUser().set({
+                    firstName: createUserRequest.firstName,
+                    lastName: createUserRequest.lastName,
+                    username: createUserRequest.username
+                });
+
+                Repository.getCredentials().set({
+                    username: createUserRequest.username,
+                    password: createUserRequest.password
+                });
 
                 // Create brokerage account
                 BrokerageAccountService.createBrokerageAccount(
                   'Brokerage Account 1', _.bind(this.createBrokerageAccountDone, this), ErrorUtil.showError);
-
             },
 
-            createBrokerageAccountDone: function(data /*, textStatus, jqXHR */){
+            createBrokerageAccountDone: function(data) {
                 this.brokerageAccountId = data.id;
 
                 // Create external account
@@ -125,8 +164,8 @@ define(
                 });
             },
 
-            createExternalAccountDone: function(model /*, jqXHR */){
-                this.externalAccountId = model.id;
+            createExternalAccountDone: function(data) {
+                this.externalAccountId = data.id;
 
                 // Transfer cash
                 AccountService.transferCash(
@@ -137,58 +176,10 @@ define(
                 );
             },
 
-            transferCashDone: function(/* data, textStatus, jqXHR */){
+            transferCashDone: function() {
                 Backbone.history.navigate('accounts', true);
                 MessageBus.trigger(Message.UserLoggedInEvent);
-            },
-
-            handleCancelButton: function(){
-                this.openAccountFormElement.validationEngine('hide');
-            },
-
-            // ------------------------------------------------------------
-            // Helper functions
-            // ------------------------------------------------------------
-            // Creates a CreateUserRequest from the Open Account form
-            form2CreateUserRequest: function(){
-                var formObject = this.openAccountFormElement.toObject();
-                delete formObject.confirmPassword; // property not expected by REST service
-                return formObject;
-            },
-
-            // Creates a User from the Open Account form
-            form2User: function(){
-                var formObject = this.openAccountFormElement.toObject();
-                delete formObject.password;
-                delete formObject.confirmPassword;
-                return formObject;
-            },
-
-            // Creates Credentials from the Open Account form
-            form2Credentials: function(){
-                return new Credentials(
-                    $('#oa-username').val(),
-                    $('#oa-password').val()
-                );
-            },
-
-            handleOpenAccountButton: function handleOpenAccountButton() {
-
-                if (this.openAccountFormElement.validationEngine('validate')) {
-
-                    this.createUser();
-
-                }
-
-                return false;
-            },
-
-            postPlace: function postPlace() {
-
-                this.openAccountFormElement.validationEngine();
-
             }
-
         });
     }
 );

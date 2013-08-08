@@ -75,13 +75,12 @@ define(
 
             checkEnterKey: function(event) {
                 if (event.keyCode === $.ui.keyCode.ENTER) {
-                    this.login();
-                    return false;
+                    this.login(event);
                 }
             },
 
-            login: function(e) {
-                e.preventDefault();
+            login: function(event) {
+                event.preventDefault();
 
                 if (this.model.isValid(true)) {
                     UserService.getUser(
@@ -95,8 +94,8 @@ define(
             },
 
             loginDone: function(data /* , textStatus, jqXHR */) {
-                // Add user to Repository
-                Repository.initUser(data);
+                // Initialize user information
+                Repository.getUser().set(data);
 
                 // Navigate to accounts and fire UserLoggedInEvent
                 Backbone.history.navigate('accounts', true);

@@ -15,7 +15,7 @@
  */
 
 /**
- * app/widgets/login/LoginWidget
+ * app/widgets/open-account-intro/OpenAccountIntroWidget
  *
  * @author Naresh Bhatia
  */
