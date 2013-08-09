@@ -52,9 +52,9 @@ module.exports = function(grunt) {
     copy: {
       cssImages: {
         expand: true,
-        cwd: 'src/sass/images/',
+        cwd: 'src/sass/css-images/',
         src: ['**/*'],
-        dest: 'src/css/images/'
+        dest: 'src/css/'
       }
     },
 
