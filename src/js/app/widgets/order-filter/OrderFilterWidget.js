@@ -52,7 +52,6 @@ define(
 
             initialize: function() {
                 this.listenTo(MessageBus, Message.UpdateOrders, this.updateOrders );
-                this.listenTo(MessageBus, Message.FilterLoaded, this.onFilterLoad );
             },
 
             postPlace: function() {
@@ -73,10 +72,6 @@ define(
                 this.setFilters( $(this.formElement), Repository.getOrderFilters()  );
 
                 this.setFilterCriteria();
-            },
-
-            onFilterLoad: function() {
-                $(this.accountElement).selectbox({effect: 'fade'});
             },
 
             resetFilters: function() {

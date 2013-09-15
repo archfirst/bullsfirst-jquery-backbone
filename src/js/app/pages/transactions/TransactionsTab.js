@@ -44,17 +44,12 @@ define(
                     {
                         id: 'TransactionFilterWidget',
                         viewClass: TransactionFilterWidget,
-                        parentElement: this.$el,
-                        options: {
-                            collection: Repository.getBrokerageAccounts()
-                        }
-                    }, {
+                        parentElement: this.$el
+                    },
+                    {
                         id: 'TransactionTableWidget',
                         viewClass: TransactionTableWidget,
-                        parentElement: this.$el,
-                        options: {
-                            model: Repository.getBrokerageAccounts()
-                        }
+                        parentElement: this.$el
                     }
                 ]);
             }

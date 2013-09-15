@@ -39,7 +39,6 @@ function(frameworkMessage, _) {
         AccountStoppedEditing: 'Account:stoppedEditing',
         ExternalAccountsUpdated: 'ExternalAccounts:Updated',
         ModalLoad: 'Modal:load',
-        FilterLoaded: 'FilterLoaded',
         OrderFilterApply: 'Order:clickFilterApply',
         OrderFilterReset: 'Order:clickFilterReset',
         SelectedAccountChanged: 'SelectedAccountChanged',

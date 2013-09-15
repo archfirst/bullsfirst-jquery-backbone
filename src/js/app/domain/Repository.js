@@ -38,6 +38,7 @@ define(
         'app/framework/Formatter',
         'app/framework/Message',
         'app/services/InstrumentService',
+        'backbone',
         'keel/MessageBus',
         'moment',
         'underscore'
@@ -55,6 +56,7 @@ define(
         Formatter,
         Message,
         InstrumentService,
+        Backbone,
         MessageBus,
         moment,
         _
@@ -71,14 +73,17 @@ define(
         var _instruments = null;
         var _orders = new Orders();
         var _transactions = new Transactions();
-        var _orderFilterCriteria = {
-            fromDate: moment(new Date()).format('YYYY-MM-DD'),
-            toDate: moment(new Date()).format('YYYY-MM-DD')
+        var _orderFilterCriteria = new Backbone.Model();
+        var _transactionFilterCriteria = new Backbone.Model();
+
+        var _resetTransactionFilterCriteria = function() {
+            _transactionFilterCriteria.set({
+                accountId: null,
+                fromDate: moment(new Date()).format('YYYY-MM-DD'),
+                toDate: moment(new Date()).format('YYYY-MM-DD')
+            });
         };
-        var _transactionFilterCriteria = {
-            fromDate: moment(new Date()).format('YYYY-MM-DD'),
-            toDate: moment(new Date()).format('YYYY-MM-DD')
-        };
+        _resetTransactionFilterCriteria();
 
         var _repository = {
             getUser: function() { return _user; },
@@ -88,29 +93,33 @@ define(
             getExternalAccounts: function() { return _externalAccounts; },
             getSelectedAccount: function() { return _selectedAccount; },
             getInstruments: function() { return _instruments; },
-            getOrderFilters: function() { return _orderFilterCriteria; },
-            getTransactionFilters: function() { return _transactionFilterCriteria; },
-            getOrders: function() {
+            getOrders: function() { return _orders; },
+            getTransactions: function() { return _transactions; },
+            getOrderFilterCriteria: function() { return _orderFilterCriteria; },
+            getTransactionFilterCriteria: function() { return _transactionFilterCriteria; },
+
+            fetchOrders: function() {
                 _orders.fetch({
-                    reset: true,
-                    data: _orderFilterCriteria
+                    data: _orderFilterCriteria.toJSON(),
+                    reset: true
                 });
-                return _orders;
             },
-            getTransactions: function() {
+
+            fetchTransactions: function() {
+                // Remove null elements because server does not understand them
+                var filterCriteria = _transactionFilterCriteria.toJSON();
+                if (filterCriteria.accountId === null) {
+                    delete filterCriteria.accountId;
+                }
+
                 _transactions.fetch({
-                    reset: true,
-                    data: _transactionFilterCriteria
+                    data: filterCriteria,
+                    reset: true
                 });
-                return _transactions;
             },
 
-            setOrderFilterCriteria: function( filtercriteria ) {
-                _orderFilterCriteria = filtercriteria;
-            },
-
-            setTransactionFilterCriteria: function( filtercriteria ) {
-                _transactionFilterCriteria = filtercriteria;
+            resetTransactionFilterCriteria: function() {
+                _resetTransactionFilterCriteria();
             },
 
             getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },
@@ -122,15 +131,6 @@ define(
 
             setSelectedAccountId: function(accountId) {
                 this.setSelectedAccount(_brokerageAccounts.get(accountId));
-            },
-
-            reset: function() {
-                _user.clear();
-                _credentials.clear();
-                _baseAccounts.reset();
-                _brokerageAccounts.reset();
-                _externalAccounts.reset();
-                _selectedAccount = null;
             },
 
             updateAccounts: function() {

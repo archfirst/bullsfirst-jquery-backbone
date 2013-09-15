@@ -24,6 +24,7 @@ require(
         'app/framework/App',
         'jquery',
         'app/framework/HandlebarsUtil',
+        'app/framework/StickitUtil',
         'app/framework/ValidationUtil'
     ],
     function(App, $) {

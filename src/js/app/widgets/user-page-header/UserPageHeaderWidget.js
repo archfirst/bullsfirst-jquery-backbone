@@ -59,14 +59,12 @@ define(
                 this.listenTo(MessageBus, Message.PageChange, this.selectTab);
             },
 
-            logout: function() {
-                Repository.reset();
+            logout: function(event) {
+                event.preventDefault();
 
                 // Do a full page refresh to start from scratch
                 Backbone.history.navigate('', false);
                 window.location.reload();
-
-                return false;
             },
 
             trade: function() {

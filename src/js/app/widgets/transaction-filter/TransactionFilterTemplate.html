@@ -3,12 +3,8 @@
     <div class="col1">
         <div class="field filter">
             <label for="transaction-filter-account">Account</label>
-            <select id="transaction-filter-account" class="js-account" name="accountId">
-                <option value="">All Accounts</option>
-                {{#each accounts}}
-                    <option value={{id}}>{{name}}</option>
-                {{/each}}
-            </select>
+            {{! select2 requires width to be specified inline (see http://ivaynberg.github.io/select2/#responsive) }}
+            <select name="accountId" id="transaction-filter-account" class="select2 js-account" style="width:100%"></select>
         </div>
     </div> <!-- col1 -->
 
