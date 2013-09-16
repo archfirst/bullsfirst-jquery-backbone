@@ -30,13 +30,13 @@ define(
             },
 
             // Convert from view to model: mm/dd/yy to yy-mm-dd
-            getVal: function($el, event, options) {
+            getVal: function($el /*, event, options */) {
 
                 var result;
                 var dateStr = $el.val();
 
                 if (dateStr === '') {
-                    result = ''
+                    result = '';
                 }
                 else {
                     var dateParts = dateStr.split('/');
@@ -53,7 +53,7 @@ define(
                 var dateStr = model.get(options.observe);
 
                 if (dateStr === '') {
-                    result = ''
+                    result = '';
                 }
                 else {
                     var dateParts = dateStr.split('-');

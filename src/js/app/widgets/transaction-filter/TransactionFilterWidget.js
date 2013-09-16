@@ -79,6 +79,7 @@ define(
 
             initialize: function() {
                 this.model = Repository.getTransactionFilterCriteria();
+                Backbone.Validation.bind(this);
                 this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
             },
 

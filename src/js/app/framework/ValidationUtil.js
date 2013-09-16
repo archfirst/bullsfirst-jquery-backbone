@@ -38,7 +38,12 @@ define(
         });
 
         _.extend(Backbone.Validation.patterns, {
-            lettersOnly: /^[a-zA-Z\ \']+$/
+
+            // Matches letters including spaces
+            lettersOnly: /^[a-zA-Z\ \']+$/,
+
+            // Matches ISO 8601 dates, e.g. 2013-01-01
+            isoDate: /\d{4}-\d{2}-\d{2}/
         });
 
         _.extend(Backbone.Validation.callbacks, {

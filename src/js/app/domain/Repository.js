@@ -32,6 +32,7 @@ define(
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
         'app/domain/Orders',
+        'app/domain/TransactionFilterCriteria',
         'app/domain/Transactions',
         'app/domain/User',
         'app/framework/ErrorUtil',
@@ -50,6 +51,7 @@ define(
         Credentials,
         ExternalAccounts,
         Orders,
+        TransactionFilterCriteria,
         Transactions,
         User,
         ErrorUtil,
@@ -74,7 +76,7 @@ define(
         var _orders = new Orders();
         var _transactions = new Transactions();
         var _orderFilterCriteria = new Backbone.Model();
-        var _transactionFilterCriteria = new Backbone.Model();
+        var _transactionFilterCriteria = new TransactionFilterCriteria();
 
         var _resetTransactionFilterCriteria = function() {
             _transactionFilterCriteria.set({
