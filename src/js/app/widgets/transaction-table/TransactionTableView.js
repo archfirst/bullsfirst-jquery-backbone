@@ -57,7 +57,7 @@ define(
                 var view = this.addChild({
                     id: transaction.id,
                     viewClass: TransactionView,
-                    parentElement: this.$el.selector,
+                    parentElement: this.$el,
                     options: {
                         model: transaction
                     }

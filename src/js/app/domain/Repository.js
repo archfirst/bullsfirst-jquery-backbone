@@ -106,10 +106,16 @@ define(
             },
 
             fetchTransactions: function() {
-                // Remove null elements because server does not understand them
+                // Remove empty elements because server does not understand them
                 var filterCriteria = _transactionFilterCriteria.toJSON();
                 if (filterCriteria.accountId === null) {
                     delete filterCriteria.accountId;
+                }
+                if (filterCriteria.fromDate === '') {
+                    delete filterCriteria.fromDate;
+                }
+                if (filterCriteria.toDate === '') {
+                    delete filterCriteria.toDate;
                 }
 
                 _transactions.fetch({

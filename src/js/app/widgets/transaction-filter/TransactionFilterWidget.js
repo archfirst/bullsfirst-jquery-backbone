@@ -64,6 +64,16 @@ define(
                         }
                     },
                     setOptions: { validate: true }
+                },
+
+                '.js-fromDate': {
+                    observe: 'fromDate',
+                    setOptions: { validate: true }
+                },
+
+                '.js-toDate': {
+                    observe: 'toDate',
+                    setOptions: { validate: true }
                 }
             },
 

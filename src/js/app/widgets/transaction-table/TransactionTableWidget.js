@@ -51,9 +51,8 @@ define(
                     {
                         id: 'TransactionTableView',
                         viewClass: TransactionTableView,
-                        el: '.transactions-table tbody',
                         options: {
-                            el: '.transactions-table tbody',
+                            el: this.$el.find('tbody'),
                             tab: 'transactions',
                             collection: this.collection
                         }
