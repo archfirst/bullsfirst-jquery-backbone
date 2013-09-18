@@ -49,7 +49,6 @@ function(frameworkMessage, _) {
         TransactionFilterApply: 'Transaction:clickFilterApply',
         TransactionFilterReset: 'Transaction:clickFilterReset',
         UpdateOrders: 'UpdateOrders',
-        UpdateTransactions: 'UpdateTransactions',
         UserLoggedInEvent: 'UserLoggedInEvent',
         UserLoggedOutEvent: 'UserLoggedOutEvent'
     }, frameworkMessage);

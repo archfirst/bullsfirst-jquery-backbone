@@ -65,9 +65,6 @@ var require = {
         // Date library
         moment:                      'vendor/moment-1.7.2',
 
-        // Formatting select boxes
-        jqueryselectbox:             'vendor/jquery.selectbox-0.2',
-
         // jQuery Alerts (http://www.codeproject.com/Articles/295236/jQuery-UI-Alerts-Dialog-using-ThemeRollers)
         jqueryalerts:                'vendor/jquery.alerts',
 
@@ -114,10 +111,6 @@ var require = {
         },
 
         jqueryformat: {
-            deps: ['jquery']
-        },
-
-        jqueryselectbox: {
             deps: ['jquery']
         },
 

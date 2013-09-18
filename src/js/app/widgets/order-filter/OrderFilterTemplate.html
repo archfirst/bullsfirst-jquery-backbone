@@ -3,12 +3,8 @@
     <div class="col1">
         <div class="field filter">
             <label for="order-filter-account">Account</label>
-            <select id="order-filter-account" class="js-account" name="accountId">
-                <option value="">All Accounts</option>
-                {{#each accounts}}
-                    <option value={{id}}>{{name}}</option>
-                {{/each}}
-            </select>
+            {{! select2 requires width to be specified inline (see http://ivaynberg.github.io/select2/#responsive) }}
+            <select name="accountId" id="order-filter-account" class="select2 js-account" style="width:100%"></select>
         </div>
 
         <div class="grid-narrow">
@@ -17,7 +13,7 @@
                     <label for="order-filter-from-date">From</label>
                     <input
                         id="order-filter-from-date"
-                        class="js-fromDate datepicker validate[custom[dateFormat]]"
+                        class="js-fromDate datepicker"
                         name="fromDate"
                         type="text" />
                 </div>
@@ -25,7 +21,7 @@
                     <label for="order-filter-to-date">To</label>
                     <input
                         id="order-filter-to-date"
-                        class="js-toDate datepicker validate[custom[dateFormat]]"
+                        class="js-toDate datepicker"
                         name="toDate"
                         type="text" />
                 </div>

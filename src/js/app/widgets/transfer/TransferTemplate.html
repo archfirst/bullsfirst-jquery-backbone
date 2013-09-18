@@ -19,7 +19,7 @@
             <div class="grid-row">
                 <div class="grid-col field">
                     <label for="fromAccount">From</label>
-                    <select id="fromAccount" name="fromAccount" class="validate[required]">
+                    <select id="fromAccount" name="fromAccount">
                         {{#each accounts}}
                             <option {{#ifEqual ../selectedAccount.id id}} selected="selected" {{/ifEqual}} value="{{id}}">{{displayString}}</option>
                         {{/each}}
@@ -30,7 +30,7 @@
             <div class="grid-row">
                 <div class="grid-col field">
                     <label for="toAccount">To</label>
-                    <select id="toAccount" name="toAccount" class="validate[required]">
+                    <select id="toAccount" name="toAccount">
                         <option value=""></option>
                         {{#each accounts}}
                             <option value="{{id}}">{{name}} {{displayString}}</option>

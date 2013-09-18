@@ -22,17 +22,14 @@
 define(
     [
         'app/domain/Repository',
-        'app/framework/Message',
         'backbone',
         'keel/BaseView',
-        'keel/MessageBus',
-        'moment',
         'text!app/widgets/transaction-filter/TransactionFilterTemplate.html',
         'select2',
         'stickit',
         'validation'
     ],
-    function(Repository, Message, Backbone, BaseView, MessageBus, moment, TransactionFilterTemplate) {
+    function(Repository, Backbone, BaseView, TransactionFilterTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -80,7 +77,6 @@ define(
             initialize: function() {
                 this.model = Repository.getTransactionFilterCriteria();
                 Backbone.Validation.bind(this);
-                this.listenTo(MessageBus, Message.UpdateTransactions, this.updateTransactions);
             },
 
             resetFilters: function() {

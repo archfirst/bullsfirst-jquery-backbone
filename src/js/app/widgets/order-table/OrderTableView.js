@@ -21,18 +21,24 @@
  */
 define(
     [
+        'app/domain/Repository',
         'app/widgets/order-table/ExecutionView',
         'app/widgets/order-table/OrderView',
         'keel/BaseView'
     ],
-    function(ExecutionView, OrderView, BaseView) {
+    function(Repository, ExecutionView, OrderView, BaseView) {
         'use strict';
 
         return BaseView.extend({
 
-            render: function() {
-                this.destroyChildren();
+            template: null,
 
+            initialize: function() {
+                this.collection = Repository.getOrders();
+                this.listenTo(this.collection, 'reset', this.render);
+            },
+
+            postRender: function() {
                 this.collection.each(function(order) {
                     var orderId = 'order-' + order.get('id');
                     this.addChild({

@@ -31,6 +31,7 @@ define(
         'app/domain/BrokerageAccounts',
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
+        'app/domain/OrderFilterCriteria',
         'app/domain/Orders',
         'app/domain/TransactionFilterCriteria',
         'app/domain/Transactions',
@@ -50,6 +51,7 @@ define(
         BrokerageAccounts,
         Credentials,
         ExternalAccounts,
+        OrderFilterCriteria,
         Orders,
         TransactionFilterCriteria,
         Transactions,
@@ -75,8 +77,16 @@ define(
         var _instruments = null;
         var _orders = new Orders();
         var _transactions = new Transactions();
-        var _orderFilterCriteria = new Backbone.Model();
+        var _orderFilterCriteria = new OrderFilterCriteria();
         var _transactionFilterCriteria = new TransactionFilterCriteria();
+
+        var _resetOrderFilterCriteria = function() {
+            _orderFilterCriteria.set({
+                accountId: null,
+                fromDate: moment(new Date()).format('YYYY-MM-DD'),
+                toDate: moment(new Date()).format('YYYY-MM-DD')
+            });
+        };
 
         var _resetTransactionFilterCriteria = function() {
             _transactionFilterCriteria.set({
@@ -85,6 +95,8 @@ define(
                 toDate: moment(new Date()).format('YYYY-MM-DD')
             });
         };
+
+        _resetOrderFilterCriteria();
         _resetTransactionFilterCriteria();
 
         var _repository = {
@@ -101,10 +113,26 @@ define(
             getTransactionFilterCriteria: function() { return _transactionFilterCriteria; },
 
             fetchOrders: function() {
+                // Remove empty elements because server does not understand them
+                var filterCriteria = _orderFilterCriteria.toJSON();
+                if (filterCriteria.accountId === null) {
+                    delete filterCriteria.accountId;
+                }
+                if (filterCriteria.fromDate === '') {
+                    delete filterCriteria.fromDate;
+                }
+                if (filterCriteria.toDate === '') {
+                    delete filterCriteria.toDate;
+                }
+
                 _orders.fetch({
-                    data: _orderFilterCriteria.toJSON(),
+                    data: filterCriteria,
                     reset: true
                 });
+            },
+
+            resetOrderFilterCriteria: function() {
+                _resetOrderFilterCriteria();
             },
 
             fetchTransactions: function() {

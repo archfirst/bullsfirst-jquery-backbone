@@ -21,29 +21,20 @@
  */
 define(
     [
-        'app/domain/Repository',
-        'app/domain/Transactions',
-        'app/framework/Message',
         'app/widgets/transaction-table/TransactionTableView',
         'keel/BaseView',
-        'keel/MessageBus',
         'text!app/widgets/transaction-table/TransactionTableTemplate.html'
     ],
-    function(Repository, Transactions, Message, TransactionTableView,
-        BaseView, MessageBus, TransactionTableTemplate) {
+    function(TransactionTableView, BaseView, TransactionTableTemplate) {
         'use strict';
 
         return BaseView.extend({
-            tagName: 'div',
+            tagName: 'table',
+            className: 'transactions-table bf-table',
 
             template: {
                 name: 'TransactionTableTemplate',
                 source: TransactionTableTemplate
-            },
-
-            initialize: function(){
-                this.collection = Repository.getTransactions();
-                this.collection.bind('reset', this.render, this);
             },
 
             postRender: function() {
@@ -52,9 +43,7 @@ define(
                         id: 'TransactionTableView',
                         viewClass: TransactionTableView,
                         options: {
-                            el: this.$el.find('tbody'),
-                            tab: 'transactions',
-                            collection: this.collection
+                            el: this.$el.find('tbody')
                         }
                     }
                 ]);

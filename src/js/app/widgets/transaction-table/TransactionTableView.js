@@ -21,30 +21,27 @@
  */
 define(
     [
-        'app/framework/Message',
+        'app/domain/Repository',
         'app/widgets/transaction-table/TransactionView',
         'keel/BaseView'
     ],
 
-    function( Message, TransactionView, BaseView ) {
+    function(Repository, TransactionView, BaseView) {
         'use strict';
-
 
         return BaseView.extend({
 
-			render: function(){
+            template: null,
 
-                var transactions = this.collection;
+            initialize: function() {
+                this.collection = Repository.getTransactions();
+                this.listenTo(this.collection, 'reset', this.render);
+            },
 
-                $(this.options.el).html('');
-
-                // Create new views for each transaction
-                transactions.each( function(model) {
-                    this.renderTransaction(model);
+			postRender: function(){
+                this.collection.each(function(transaction) {
+                    this.renderTransaction(transaction);
                 }, this);
-
-                return this;
-
 			},
 
             renderTransaction: function(transaction){

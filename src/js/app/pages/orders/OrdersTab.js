@@ -44,18 +44,12 @@ define(
                     {
                         id: 'OrderFilterWidget',
                         viewClass: OrderFilterWidget,
-                        parentElement: this.$el,
-                        options: {
-                            collection: Repository.getBrokerageAccounts()
-                        }
+                        parentElement: this.$el
                     },
                     {
                         id: 'OrderTableWidget',
                         viewClass: OrderTableWidget,
-                        parentElement: this.$el,
-                        options: {
-                            model: Repository.getBrokerageAccounts()
-                        }
+                        parentElement: this.$el
                     }
                 ]);
             }

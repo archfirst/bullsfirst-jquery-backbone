@@ -34,8 +34,7 @@ define(
         'keel/MessageBus',
         'jquery',
         'moment',
-        'text!app/widgets/trade/TradeTemplate.html',
-        'jqueryselectbox'
+        'text!app/widgets/trade/TradeTemplate.html'
     ],
     function(
         MarketPrice,

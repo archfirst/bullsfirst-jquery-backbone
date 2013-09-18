@@ -1,15 +1,19 @@
-	<td class="center">
-	    {{formatDateTime creationTime}}
-	</td>
-	<td class="left">
-	    {{accountName}}
-	</td>
-	<td class="center">
-	    {{type}}
-	</td>
-	<td class="left">
-	    {{description}}
-	</td>
-	<td class="number {{#if negativeAmount}}negative{{/if}}">
-	    {{formatMoney amount}}
-	</td>
+<td class="center">
+    {{formatDateTime creationTime}}
+</td>
+
+<td class="left">
+    {{accountName}}
+</td>
+
+<td class="center">
+    {{type}}
+</td>
+
+<td class="left">
+    {{description}}
+</td>
+
+<td class="number {{#if negativeAmount}}negative{{/if}}">
+    {{formatMoney amount}}
+</td>

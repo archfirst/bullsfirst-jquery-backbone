@@ -21,14 +21,10 @@
  */
 define(
     [
-        'app/domain/Repository',
-        'app/framework/ErrorUtil',
-        'app/framework/Message',
         'keel/BaseView',
-        'keel/MessageBus',
         'text!app/widgets/transaction-table/TransactionTemplate.html'
     ],
-    function(Repository, ErrorUtil, Message, BaseView, MessageBus, TransactionTemplate) {
+    function(BaseView, TransactionTemplate) {
         'use strict';
 
         return BaseView.extend({

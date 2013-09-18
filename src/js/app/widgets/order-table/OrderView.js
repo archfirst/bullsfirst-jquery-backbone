@@ -21,16 +21,14 @@
  */
 define(
     [
-        'app/domain/Repository',
         'app/framework/ErrorUtil',
         'app/framework/Message',
         'app/services/OrderService',
         'keel/BaseView',
         'keel/MessageBus',
-        'text!app/widgets/order-table/OrderTemplate.html',
-        'underscore'
+        'text!app/widgets/order-table/OrderTemplate.html'
     ],
-    function(Repository, ErrorUtil, Message, OrderService, BaseView, MessageBus, OrderTemplate, _) {
+    function(ErrorUtil, Message, OrderService, BaseView, MessageBus, OrderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -47,7 +45,7 @@ define(
             },
 
             cancelOrder: function() {
-                OrderService.cancelOrder( this.model.id, _.bind(this.cancelOrderDone, this), ErrorUtil.showError);
+                OrderService.cancelOrder( this.model.id, this.cancelOrderDone, ErrorUtil.showError);
                 return false;
             },
 

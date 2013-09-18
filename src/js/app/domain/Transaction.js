@@ -36,6 +36,7 @@ define(
         'use strict';
 
         return Backbone.Model.extend({
+            idAttribute: 'transactionId'
         });
     }
 );

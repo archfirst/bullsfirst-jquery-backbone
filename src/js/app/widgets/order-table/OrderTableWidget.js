@@ -21,31 +21,21 @@
  */
 define(
     [
-        'app/domain/Orders',
-        'app/domain/Repository',
-        'app/framework/Message',
         'app/widgets/order-table/OrderTableView',
         'keel/BaseView',
-        'keel/MessageBus',
         'text!app/widgets/order-table/OrderTableTemplate.html',
         'jqueryTreeTable'
     ],
-    function(Orders, Repository, Message, OrderTableView, BaseView, MessageBus, OrderTableTemplate) {
+    function(OrderTableView, BaseView, OrderTableTemplate) {
         'use strict';
 
         return BaseView.extend({
             tagName: 'table',
             className: 'orders-table bf-table',
-            elements: ['ordersTableBody'],
 
             template: {
                 name: 'OrderTableTemplate',
                 source: OrderTableTemplate
-            },
-
-            initialize: function() {
-                this.collection = Repository.getOrders();
-                this.collection.bind('reset', this.render, this);
             },
 
             postRender: function() {
@@ -54,8 +44,7 @@ define(
                         id: 'OrderTableView',
                         viewClass: OrderTableView,
                         options: {
-                            el: this.ordersTableBodyElement,
-                            collection: this.collection
+                            el: this.$el.find('tbody')
                         }
                     }
                 ]);
