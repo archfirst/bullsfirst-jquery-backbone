@@ -124,6 +124,9 @@ define(
                 if (filterCriteria.toDate === '') {
                     delete filterCriteria.toDate;
                 }
+                if (filterCriteria.orderId === '') {
+                    delete filterCriteria.orderId;
+                }
 
                 _orders.fetch({
                     data: filterCriteria,

@@ -50,6 +50,14 @@ define(
                         pattern: 'isoDate',
                         msg: 'Please enter a date as MM/DD/YYYY'
                     }
+                ],
+                orderId: [
+                    {
+                        required: false
+                    },
+                    {
+                        pattern: 'number'
+                    }
                 ]
             },
 

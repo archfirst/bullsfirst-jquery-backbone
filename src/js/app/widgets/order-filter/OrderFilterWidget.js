@@ -73,6 +73,11 @@ define(
                 '.js-toDate': {
                     observe: 'toDate',
                     setOptions: { validate: true }
+                },
+
+                '.js-orderNumber': {
+                    observe: 'orderId',
+                    setOptions: { validate: true }
                 }
             },
 
