@@ -43,7 +43,7 @@ define(
                 source: OrderFilterTemplate
             },
 
-            elements:['form', 'symbol', 'fromDate', 'toDate', 'account', 'resetButton', 'applyFiltersButton'],
+            elements:['symbol'],
 
             events: {
                 'click .reset-filters-button': 'resetFilters',
@@ -78,6 +78,11 @@ define(
                 '.js-orderNumber': {
                     observe: 'orderId',
                     setOptions: { validate: true }
+                },
+
+                '.js-symbol': {
+                    observe: 'symbol',
+                    setOptions: { validate: true }
                 }
             },
 
@@ -97,6 +102,25 @@ define(
             },
 
             postRender: function() {
+
+                var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
+
+                $(this.symbolElement).autocomplete({
+
+                    // This function is called every time the user types a character in the text field.
+                    //     request.term contains the text currently in the text field
+                    //     response is a callback whch expects a single argument, the data to suggest to the user.
+                    //     It returns an array of objects with label and value properties:
+                    //     [ { label: "Choice1", value: "value1" }, ... ]
+                    source: function( request, response ) {
+                        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
+
+                        response($.grep(instruments, function(item) {
+                            return matcher.test(item.label);
+                        }));
+                    }
+                });
+
                 this.stickit();
             }
         });

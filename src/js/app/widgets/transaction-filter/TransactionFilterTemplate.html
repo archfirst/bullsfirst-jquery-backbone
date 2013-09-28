@@ -4,7 +4,7 @@
         <div class="field filter">
             <label for="transaction-filter-account">Account</label>
             {{! select2 requires width to be specified inline (see http://ivaynberg.github.io/select2/#responsive) }}
-            <select name="accountId" id="transaction-filter-account" class="select2 js-account" style="width:100%"></select>
+            <select id="transaction-filter-account" class="select2 js-account" style="width:100%"></select>
         </div>
     </div> <!-- col1 -->
 
@@ -14,7 +14,6 @@
             <input
                 id="transaction-filter-from-date"
                 class="js-fromDate datepicker"
-                name="fromDate"
                 type="text" />
         </div>
     </div>
@@ -25,7 +24,6 @@
             <input
                 id="transaction-filter-to-date"
                 class="js-toDate datepicker"
-                name="toDate"
                 type="text" />
         </div>
     </div>

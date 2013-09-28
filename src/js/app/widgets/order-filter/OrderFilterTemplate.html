@@ -4,7 +4,7 @@
         <div class="field filter">
             <label for="order-filter-account">Account</label>
             {{! select2 requires width to be specified inline (see http://ivaynberg.github.io/select2/#responsive) }}
-            <select name="accountId" id="order-filter-account" class="select2 js-account" style="width:100%"></select>
+            <select id="order-filter-account" class="select2 js-account" style="width:100%"></select>
         </div>
 
         <div class="grid-narrow">
@@ -14,7 +14,6 @@
                     <input
                         id="order-filter-from-date"
                         class="js-fromDate datepicker"
-                        name="fromDate"
                         type="text" />
                 </div>
                 <div class="grid-col span-1-2 field filter kill-bottom-margin">
@@ -22,7 +21,6 @@
                     <input
                         id="order-filter-to-date"
                         class="js-toDate datepicker"
-                        name="toDate"
                         type="text" />
                 </div>
             </div>
@@ -35,7 +33,6 @@
             <input
                 id="order-filter-order-number"
                 class="js-orderNumber"
-                name="orderId"
                 placeholder="Optional"
                 type="text" />
         </div>
@@ -44,12 +41,12 @@
             <div class="filter-checkbox">
                 <a href="#"></a>
                 <span>Buy</span>
-                <input id="order-filter-action-buy" name="sides[]" type="checkbox" value="Buy" class="hidden" />
+                <input id="order-filter-action-buy" type="checkbox" value="Buy" class="hidden" />
             </div>
             <div class="filter-checkbox">
                 <a href="#"></a>
                 <span>Sell</span>
-                <input id="order-filter-action-sell" name="sides[]" type="checkbox" value="Sell" class="hidden" />
+                <input id="order-filter-action-sell" type="checkbox" value="Sell" class="hidden" />
             </div>
             <div class="filter-checkbox">
                 <span>&nbsp;</span>
@@ -63,7 +60,6 @@
             <input
                 id="order-filter-symbol"
                 class="js-symbol"
-                name="symbol"
                 placeholder="Optional"
                 type="text" />
         </div>
@@ -80,24 +76,24 @@
                         <div class="filter-checkbox">
                             <a href="#"></a>
                             <span>Partially Filled</span>
-                            <input id="order-filter-partially-filled" name="statuses[]" type="checkbox" value="PartiallyFilled" class="hidden" />
+                            <input id="order-filter-partially-filled" type="checkbox" value="PartiallyFilled" class="hidden" />
                         </div>
                         <div class="filter-checkbox">
                             <a href="#"></a>
                             <span>Filled</span>
-                            <input id="order-filter-filled" name="statuses[]" type="checkbox" value="Filled" class="hidden" />
+                            <input id="order-filter-filled" type="checkbox" value="Filled" class="hidden" />
                         </div>
                     </div>
                     <div class="grid-col span-1-2 field filter kill-bottom-margin">
                         <div class="filter-checkbox">
                             <a href="#"></a>
                             <span>Canceled</span>
-                            <input id="order-filter-canceled" name="statuses[]" type="checkbox" value="Canceled" class="hidden" />
+                            <input id="order-filter-canceled" type="checkbox" value="Canceled" class="hidden" />
                         </div>
                         <div class="filter-checkbox">
                             <a href="#"></a>
                             <span>Done For Day</span>
-                            <input id="order-filter-done-for-day" name="statuses[]" type="checkbox" value="DoneForDay" class="hidden" />
+                            <input id="order-filter-done-for-day" type="checkbox" value="DoneForDay" class="hidden" />
                         </div>
                     </div>
                 </div>

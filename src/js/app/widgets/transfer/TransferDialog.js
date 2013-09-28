@@ -177,7 +177,7 @@ define(
             },
 
             _initSymbolField: function () {
-                var instruments = $.map(Repository.getInstruments(), function(instrument) {
+                var instruments = $.map(Repository.getInstrumentCollection().getLabelValuePairs(), function(instrument) {
                     return {
                         label: instrument.symbol + ' (' + instrument.name + ')',
                         value: instrument.symbol

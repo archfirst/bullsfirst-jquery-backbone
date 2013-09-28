@@ -31,6 +31,7 @@ define(
         'app/domain/BrokerageAccounts',
         'app/domain/Credentials',
         'app/domain/ExternalAccounts',
+        'app/domain/InstrumentCollection',
         'app/domain/OrderFilterCriteria',
         'app/domain/Orders',
         'app/domain/TransactionFilterCriteria',
@@ -39,7 +40,6 @@ define(
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
         'app/framework/Message',
-        'app/services/InstrumentService',
         'backbone',
         'keel/MessageBus',
         'moment',
@@ -51,6 +51,7 @@ define(
         BrokerageAccounts,
         Credentials,
         ExternalAccounts,
+        InstrumentCollection,
         OrderFilterCriteria,
         Orders,
         TransactionFilterCriteria,
@@ -59,7 +60,6 @@ define(
         ErrorUtil,
         Formatter,
         Message,
-        InstrumentService,
         Backbone,
         MessageBus,
         moment,
@@ -74,28 +74,29 @@ define(
         var _brokerageAccounts = new BrokerageAccounts();
         var _externalAccounts = new ExternalAccounts();
         var _selectedAccount = null;
-        var _instruments = null;
+        var _instrumentCollection = new InstrumentCollection();
         var _orders = new Orders();
         var _transactions = new Transactions();
         var _orderFilterCriteria = new OrderFilterCriteria();
         var _transactionFilterCriteria = new TransactionFilterCriteria();
 
         var _resetOrderFilterCriteria = function() {
+            _orderFilterCriteria.clear();
             _orderFilterCriteria.set({
-                accountId: null,
                 fromDate: moment(new Date()).format('YYYY-MM-DD'),
                 toDate: moment(new Date()).format('YYYY-MM-DD')
             });
         };
 
         var _resetTransactionFilterCriteria = function() {
+            _transactionFilterCriteria.clear();
             _transactionFilterCriteria.set({
-                accountId: null,
                 fromDate: moment(new Date()).format('YYYY-MM-DD'),
                 toDate: moment(new Date()).format('YYYY-MM-DD')
             });
         };
 
+        _instrumentCollection.fetch();
         _resetOrderFilterCriteria();
         _resetTransactionFilterCriteria();
 
@@ -106,26 +107,40 @@ define(
             getBrokerageAccounts: function() { return _brokerageAccounts; },
             getExternalAccounts: function() { return _externalAccounts; },
             getSelectedAccount: function() { return _selectedAccount; },
-            getInstruments: function() { return _instruments; },
+            getInstrumentCollection: function() { return _instrumentCollection; },
             getOrders: function() { return _orders; },
             getTransactions: function() { return _transactions; },
             getOrderFilterCriteria: function() { return _orderFilterCriteria; },
             getTransactionFilterCriteria: function() { return _transactionFilterCriteria; },
 
             fetchOrders: function() {
+
                 // Remove empty elements because server does not understand them
                 var filterCriteria = _orderFilterCriteria.toJSON();
+
                 if (filterCriteria.accountId === null) {
                     delete filterCriteria.accountId;
                 }
+
                 if (filterCriteria.fromDate === '') {
                     delete filterCriteria.fromDate;
                 }
+
                 if (filterCriteria.toDate === '') {
                     delete filterCriteria.toDate;
                 }
+
                 if (filterCriteria.orderId === '') {
                     delete filterCriteria.orderId;
+                }
+
+                if (typeof filterCriteria.symbol === 'string') {
+                    if (filterCriteria.symbol === '') {
+                        delete filterCriteria.symbol;
+                    }
+                    else {
+                        filterCriteria.symbol = filterCriteria.symbol.toUpperCase();
+                    }
                 }
 
                 _orders.fetch({
@@ -141,12 +156,15 @@ define(
             fetchTransactions: function() {
                 // Remove empty elements because server does not understand them
                 var filterCriteria = _transactionFilterCriteria.toJSON();
+
                 if (filterCriteria.accountId === null) {
                     delete filterCriteria.accountId;
                 }
+
                 if (filterCriteria.fromDate === '') {
                     delete filterCriteria.fromDate;
                 }
+
                 if (filterCriteria.toDate === '') {
                     delete filterCriteria.toDate;
                 }
@@ -231,17 +249,12 @@ define(
 
                 // Reset base accounts
                 _baseAccounts.reset(accounts);
-            },
-
-            updateInstruments: function() {
-                InstrumentService.getInstruments( function( data ) { _instruments = data; }, ErrorUtil.showError, this);
             }
         };
 
         // Update accounts whenever user logs in
         MessageBus.on(Message.UserLoggedInEvent, function() {
             _repository.updateAccounts();
-            _repository.updateInstruments();
         });
 
         return _repository;

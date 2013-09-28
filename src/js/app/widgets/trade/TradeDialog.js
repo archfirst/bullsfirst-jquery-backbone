@@ -107,6 +107,7 @@ define(
                     input = $(e.target).val().toUpperCase(),
                     match = false;
 
+                // TODO: Remove this.instruments - there is no such thing
                 if (input.length > 0) {
                     $(this.instruments).each(function(){
                         if ( this.value === input ) {
@@ -338,22 +339,21 @@ define(
             _initSymbolField: function() {
                 var tradeDialog = this;
 
-                var instruments = $.map(Repository.getInstruments(), function(instrument) {
-                    return {
-                        label: instrument.symbol + ' (' + instrument.name + ')',
-                        value: instrument.symbol
-                    };
-                });
-
-                this.instruments = instruments;
+                var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
 
                 $(this.symbolElement).autocomplete({
-                    source: function( request, response ) {
-                        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
 
-                        response( $.grep( instruments, function( item ) {
+                    // This function is called every time the user types a character in the text field.
+                    //     request.term contains the text currently in the text field
+                    //     response is a callback whch expects a single argument, the data to suggest to the user.
+                    //     It returns an array of objects with label and value properties:
+                    //     [ { label: "Choice1", value: "value1" }, ... ]
+                    source: function( request, response ) {
+                        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
+
+                        response($.grep(instruments, function(item) {
                             return matcher.test(item.label);
-                        }) );
+                        }));
                     },
                     change: function( event ) {
                         tradeDialog.checkTypedSymbol(event);
@@ -362,8 +362,6 @@ define(
                         tradeDialog.symbolChanged(ui.item.value);
                     }
                 });
-
-                return this.instruments;
             },
 
             _marketPriceFetched: function(marketPrice) {
