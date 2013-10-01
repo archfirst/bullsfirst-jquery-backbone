@@ -143,6 +143,14 @@ define(
                     }
                 }
 
+                if (filterCriteria.sides && filterCriteria.sides.length > 0) {
+                    filterCriteria.sides = filterCriteria.sides.join();
+                }
+
+                if (filterCriteria.statuses && filterCriteria.statuses.length > 0) {
+                    filterCriteria.statuses = filterCriteria.statuses.join();
+                }
+
                 _orders.fetch({
                     data: filterCriteria,
                     reset: true

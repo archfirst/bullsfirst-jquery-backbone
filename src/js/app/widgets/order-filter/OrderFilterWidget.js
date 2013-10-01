@@ -83,6 +83,16 @@ define(
                 '.js-symbol': {
                     observe: 'symbol',
                     setOptions: { validate: true }
+                },
+
+                '.js-orderAction': {
+                    observe: 'sides',
+                    setOptions: { validate: true }
+                },
+
+                '.js-orderStatus': {
+                    observe: 'statuses',
+                    setOptions: { validate: true }
                 }
             },
 

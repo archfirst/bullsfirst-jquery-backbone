@@ -36,22 +36,21 @@
                 placeholder="Optional"
                 type="text" />
         </div>
-        <div class="field-group filter">
-            <label>Order Action</label>
+        <fieldset class="filter">
+            <legend>Order Action</legend>
             <div class="filter-checkbox">
-                <a href="#"></a>
-                <span>Buy</span>
-                <input id="order-filter-action-buy" type="checkbox" value="Buy" class="hidden" />
+                <input id="order-filter-action-buy" type="checkbox" class="js-orderAction" value="Buy" />
+                <label for="order-filter-action-buy">Buy</label>
             </div>
             <div class="filter-checkbox">
-                <a href="#"></a>
-                <span>Sell</span>
-                <input id="order-filter-action-sell" type="checkbox" value="Sell" class="hidden" />
+                <input id="order-filter-action-sell" type="checkbox" class="js-orderAction" value="Sell" />
+                <label for="order-filter-action-sell">Sell</label>
             </div>
-            <div class="filter-checkbox">
-                <span>&nbsp;</span>
+            <div class="filter-checkbox invisible">
+                <input id="order-filter-action-dummy" type="checkbox" />
+                <label for="order-filter-action-dummy">Dummy</label>
             </div>
-        </div>
+        </fieldset>
     </div>
 
     <div class="col3">
@@ -63,42 +62,42 @@
                 placeholder="Optional"
                 type="text" />
         </div>
-        <div class="field-group filter">
-            <label>Order Status</label>
+
+        <fieldset class="filter">
+            <legend>Order Status</legend>
             <div class="grid-narrow">
                 <div class="grid-row">
-                    <div class="grid-col span-1-2 field filter kill-bottom-margin">
+
+                    <div class="grid-col span-1-2">
                         <div class="filter-checkbox">
-                            <a href="#"></a>
-                            <span>New</span>
-                            <input id="order-filter-new" name="statuses[]" type="checkbox" value="New" class="hidden" />
+                            <input id="order-filter-status-new" type="checkbox" class="js-orderStatus" value="New" />
+                            <label for="order-filter-status-new">New</label>
                         </div>
                         <div class="filter-checkbox">
-                            <a href="#"></a>
-                            <span>Partially Filled</span>
-                            <input id="order-filter-partially-filled" type="checkbox" value="PartiallyFilled" class="hidden" />
+                            <input id="order-filter-status-partially-filled" type="checkbox" class="js-orderStatus" value="PartiallyFilled" />
+                            <label for="order-filter-status-partially-filled">Partially Filled</label>
                         </div>
                         <div class="filter-checkbox">
-                            <a href="#"></a>
-                            <span>Filled</span>
-                            <input id="order-filter-filled" type="checkbox" value="Filled" class="hidden" />
+                            <input id="order-filter-status-filled" type="checkbox" class="js-orderStatus" value="Filled" />
+                            <label for="order-filter-status-filled">Filled</label>
                         </div>
-                    </div>
-                    <div class="grid-col span-1-2 field filter kill-bottom-margin">
+                    </div> <!-- grid-col -->
+
+                    <div class="grid-col span-1-2">
                         <div class="filter-checkbox">
-                            <a href="#"></a>
-                            <span>Canceled</span>
-                            <input id="order-filter-canceled" type="checkbox" value="Canceled" class="hidden" />
+                            <input id="order-filter-status-canceled" type="checkbox" class="js-orderStatus" value="Canceled" />
+                            <label for="order-filter-status-canceled">Canceled</label>
                         </div>
                         <div class="filter-checkbox">
-                            <a href="#"></a>
-                            <span>Done For Day</span>
-                            <input id="order-filter-done-for-day" type="checkbox" value="DoneForDay" class="hidden" />
+                            <input id="order-filter-status-done-for-day" type="checkbox" class="js-orderStatus" value="DoneForDay" />
+                            <label for="order-filter-status-done-for-day">Done For Day</label>
                         </div>
-                    </div>
-                </div>
-            </div> <!-- grid -->
-        </div>
+                    </div> <!-- grid-col -->
+
+                </div> <!-- grid-row -->
+            </div> <!-- grid-narrow -->
+        </fieldset>
+
     </div>
 
     <div class="col4">
