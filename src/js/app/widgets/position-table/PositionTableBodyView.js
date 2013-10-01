@@ -21,19 +21,24 @@
  */
 define(
     [
+        'app/framework/Message',
         'app/widgets/position-table/PositionView',
-        'keel/BaseView'
+        'keel/BaseView',
+        'keel/MessageBus',
+        'jqueryTreeTable'
     ],
-    function(PositionView, BaseView) {
+    function(Message, PositionView, BaseView, MessageBus) {
         'use strict';
 
         return BaseView.extend({
 
-            // Constructor options:
-            //   el: <tbody> element where positions should be inserted
-            //   collection: collection of instrument positions for a brokerage acccount
-            // initialize: function() {
-            // },
+            initialize: function() {
+                // Subscribe to `SelectedAccountChanged` event
+                this.listenTo(MessageBus, Message.SelectedAccountChanged, function(selectedAccount) {
+                    this.collection = selectedAccount.get('positions');
+                    this.render();
+                });
+            },
 
             render: function() {
                 this.destroyChildren();
@@ -56,6 +61,9 @@ define(
                         this._renderChildren(children, positionId);
                     }
                 }, this);
+
+                // Display as TreeTable (need to call on the parent table)
+                this.$el.parent().treeTable();
 
                 return this;
             },

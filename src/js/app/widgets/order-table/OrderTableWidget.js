@@ -23,8 +23,7 @@ define(
     [
         'app/widgets/order-table/OrderTableView',
         'keel/BaseView',
-        'text!app/widgets/order-table/OrderTableTemplate.html',
-        'jqueryTreeTable'
+        'text!app/widgets/order-table/OrderTableTemplate.html'
     ],
     function(OrderTableView, BaseView, OrderTableTemplate) {
         'use strict';
@@ -48,9 +47,6 @@ define(
                         }
                     }
                 ]);
-
-                // Display as TreeTable
-                this.$el.treeTable();
             }
         });
     }

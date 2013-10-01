@@ -24,7 +24,8 @@ define(
         'app/domain/Repository',
         'app/widgets/order-table/ExecutionView',
         'app/widgets/order-table/OrderView',
-        'keel/BaseView'
+        'keel/BaseView',
+        'jqueryTreeTable'
     ],
     function(Repository, ExecutionView, OrderView, BaseView) {
         'use strict';
@@ -58,6 +59,10 @@ define(
                         this._renderExecutions(executions, orderId);
                     }
                 }, this);
+
+
+                // Display as TreeTable (need to call on the parent table)
+                this.$el.parent().treeTable();
 
                 return this;
             },

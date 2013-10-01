@@ -22,15 +22,12 @@
 define(
     [
         'app/domain/Repository',
-        'app/framework/Message',
         'app/widgets/position-table/PositionTableBodyView',
         'backbone',
         'keel/BaseView',
-        'keel/MessageBus',
-        'text!app/widgets/position-table/PositionTableTemplate.html',
-        'jqueryTreeTable'
+        'text!app/widgets/position-table/PositionTableTemplate.html'
     ],
-    function(Repository, Message, PositionTableBodyView, Backbone, BaseView, MessageBus, PositionTableTemplate) {
+    function(Repository, PositionTableBodyView, Backbone, BaseView, PositionTableTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -41,18 +38,6 @@ define(
             template: {
                 name: 'PositionTableTemplate',
                 source: PositionTableTemplate
-            },
-
-            // Constructor options:
-            //   none required
-            initialize: function() {
-                // Subscribe to `SelectedAccountChanged` event
-                this.listenTo(MessageBus, Message.SelectedAccountChanged, function(selectedAccount) {
-                    var tableView = this.children.PositionTableBodyView;
-                    tableView.collection = selectedAccount.get('positions');
-                    tableView.render();
-                    this.$el.treeTable();
-                });
             },
 
             postRender: function() {
@@ -68,9 +53,6 @@ define(
                         }
                     }
                 ]);
-
-                // Display as TreeTable
-                this.$el.treeTable();
             }
         });
     }
