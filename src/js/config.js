@@ -32,8 +32,6 @@ var require = {
         // jQuery
         jquery:                      'vendor/jquery-1.8.3',
         jqueryui:                    'vendor/jquery-ui-1.8.23.custom.min',
-        jqueryValidationEngine:      'vendor/jquery.validationEngine-2.5.2',
-        jqueryValidationEngineRules: 'vendor/jquery.validationEngine-en-2.5.2',
         jqueryTreeTable:             'vendor/jquery.treeTable-20121109',
         jqueryExtensions:            'app/framework/JqueryExtensions',
         select2:                     'vendor/select2-3.4.2',
@@ -120,14 +118,6 @@ var require = {
 
         jqueryui: {
             deps: ['jquery']
-        },
-
-        jqueryValidationEngine: {
-            deps: ['jquery']
-        },
-
-        jqueryValidationEngineRules: {
-            deps: ['jqueryValidationEngine']
         },
 
         moment: {

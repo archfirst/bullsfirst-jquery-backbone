@@ -27,29 +27,18 @@ define(
         'app/domain/Repository',
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
-        'app/framework/Message',
         'app/framework/ModalDialog',
         'app/services/OrderEstimateService',
         'app/widgets/trade-preview/TradePreviewDialog',
-        'keel/MessageBus',
+        'backbone',
         'jquery',
-        'moment',
-        'text!app/widgets/trade/TradeTemplate.html'
+        'text!app/widgets/trade/TradeTemplate.html',
+        'select2',
+        'stickit',
+        'validation'
     ],
-    function(
-        MarketPrice,
-        Repository,
-        ErrorUtil,
-        Formatter,
-        Message,
-        ModalDialog,
-        OrderEstimateService,
-        TradePreviewDialog,
-        MessageBus,
-        $,
-        moment,
-        TradeTemplate
-    ) {
+    function(MarketPrice, Repository, ErrorUtil, Formatter, ModalDialog,
+        OrderEstimateService, TradePreviewDialog, Backbone, $, TradeTemplate) {
         'use strict';
 
         return ModalDialog.extend({
@@ -61,71 +50,99 @@ define(
                 source: TradeTemplate
             },
 
-            elements: ['accountId', 'symbol'],
+            elements: ['symbol'],
 
             events: {
-                'blur .field input[type="text"]': 'updateOrder',
-                'change #trade-orderType': 'toggleLimitField',
-                'change .field select': 'selectDropdown',
                 'click #trade-preview-order': 'previewOrder',
-                'click .bf-checkbox': 'selectCheckbox',
-                'click .bf-radio': 'selectRadio',
-                'click .close-button': 'close',
-                'mousedown': 'blurForm'
+                'click .close-button': 'close'
             },
 
+            bindings: {
+                '.js-account': {
+                    observe: 'brokerageAccountId',
+                    selectOptions: {
+                        collection: Repository.getBrokerageAccounts(),
+                        labelPath: 'name',
+                        valuePath: 'id'
+                    },
+                    setOptions: { validate: true }
+                },
+
+                '.js-symbol': {
+                    observe: 'symbol',
+                    setOptions: { validate: true }
+                },
+
+                '.js-side': {
+                    observe: 'side',
+                    setOptions: { validate: true }
+                },
+
+                '.js-quantity': {
+                    observe: 'quantity',
+                    setOptions: { validate: true }
+                },
+
+                '.js-type': {
+                    observe: 'type',
+                    setOptions: { validate: true }
+                },
+
+                '.js-term': {
+                    observe: 'term',
+                    setOptions: { validate: true }
+                },
+
+                '.js-limitPriceElement': {
+                    attributes: [{
+                        name: 'class',
+                        observe: 'type',
+                        onGet: 'toggleLimitPriceField'
+                    }]
+                },
+
+                '.js-limitPrice': {
+                    observe: 'limitPrice',
+                    setOptions: { validate: true }
+                },
+
+                '.js-allOrNone': {
+                    observe: 'allOrNone',
+                    setOptions: { validate: true }
+                }
+            },
+
+            /* Caller to pass in an OrderRequest as the model */
             initialize: function() {
 
-                this.orderRequest = {
-                    brokerageAccountId: null,
-                    orderParams: {
-                        symbol: null,
-                        side: 'Buy', // Default to Buy
-                        quantity: 0,
-                        type: 'Market',
-                        term: 'GoodForTheDay',
-                        allOrNone: false
-                    }
-                };
+                Backbone.Validation.bind(this);
 
                 this.settings = {
                     draggable: true
                 };
-
-                return this;
             },
 
-            blurForm: function(e) {
-                if ( e.target.tagName.toUpperCase() !== 'INPUT') {
-                    e.preventDefault();
-                    $(document.activeElement).blur();
-                }
-            },
+            postRender: function() {
 
-            checkTypedSymbol: function(e) {
-                var self = this,
-                    input = $(e.target).val().toUpperCase(),
-                    match = false;
+                var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
 
-                // TODO: Remove this.instruments - there is no such thing
-                if (input.length > 0) {
-                    $(this.instruments).each(function(){
-                        if ( this.value === input ) {
-                            match = true;
+                $(this.symbolElement).autocomplete({
 
-                        }
-                    });
-                }
+                    // This function is called every time the user types a character in the text field.
+                    //     request.term contains the text currently in the text field
+                    //     response is a callback whch expects a single argument, the data to suggest to the user.
+                    //     It returns an array of objects with label and value properties:
+                    //     [ { label: "Choice1", value: "value1" }, ... ]
+                    source: function( request, response ) {
+                        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
 
-                if (match) {
-                    self.orderRequest.orderParams.symbol = input;
-                    $(e.target).val(input);
-                    self.symbolChanged(input);
-                    self.createEstimate();
-                } else {
-                    self.symbolNotRecognized();
-                }
+                        response($.grep(instruments, function(item) {
+                            return matcher.test(item.label);
+                        }));
+                    }
+                });
 
+                this.stickit();
             },
 
             createEstimate: function(callback) {
@@ -171,83 +188,20 @@ define(
                 }
             },
 
-            postPlace: function(){
-                ModalDialog.prototype.postPlace.call(this);
-
-                $('#trade-accountId, #trade-orderType, #trade-term').selectbox({effect: 'fade'});
-                this._initSymbolField();
-
-                return this;
-            },
-
-            previewOrder: function(){
-                if (this.validateOrder()) {
+            previewOrder: function() {
+                if (this.model.isValid(true)) {
                     var previewOrderDialog = this.addChild({
                         id: 'TradePreviewDialog',
                         viewClass: TradePreviewDialog,
                         parentElement: $('body'),
                         options: {
-                            model: this.orderRequest
+                            model: this.model
                         }
                     });
 
                     // Stack above this dialog box
                     previewOrderDialog.stack();
                 }
-            },
-
-            selectCheckbox: function(e) {
-                e.preventDefault();
-
-                var target = $(e.currentTarget);
-                var $checkbox = $(':checkbox[value=' + target.attr('attr-value') + ']');
-
-                if ( $checkbox.is(':checked') ) {
-                    target.removeClass('selected icon-ok');
-                    $checkbox.attr('checked', false);
-                    this.orderRequest.orderParams.allOrNone = false;
-                } else {
-                    target.addClass('selected icon-ok');
-                    $checkbox.attr('checked', true);
-                    this.orderRequest.orderParams.allOrNone = true;
-                }
-
-                this.createEstimate();
-
-                return this;
-            },
-
-            selectDropdown: function(e) {
-                var tradeDialog = this,
-                    target = $(e.target),
-                    name = $(target).attr('name');
-
-                if ( name !== 'brokerageAccountId') {
-                    tradeDialog.orderRequest.orderParams[name] = $(target).val();
-                }
-
-                this.createEstimate();
-
-                return this;
-            },
-
-            selectRadio: function(e){
-
-                // Cache DOM element
-                var target = $(e.target);
-
-                // Update pseudo-buttons
-                target.siblings('a.selected').removeClass('selected');
-                target.addClass('selected');
-
-                // Update radio buttons
-                $(':radio[value=' + target.attr('attr-value') + ']').siblings().attr('checked', false);
-                $(':radio[value=' + target.attr('attr-value') + ']').attr('checked', true);
-
-                this.orderRequest.orderParams.side = target.text();
-                this.createEstimate();
-
-                return this;
             },
 
             symbolChanged: function(value) {
@@ -267,53 +221,8 @@ define(
                 });
             },
 
-            toggleLimitField: function(e){
-                if ( $(e.target).val().toLowerCase() === 'limit' ) {
-                    $('.limit-price').removeClass('hidden');
-                } else {
-                    $('.limit-price').addClass('hidden');
-                }
-
-                this.createEstimate();
-
-                return this;
-            },
-
-            updateOrder: function(e) {
-
-                var tradeDialog = this,
-                    target = e.target,
-                    name = $(target).attr('name');
-
-                switch (name) {
-                case 'brokerageAccountId':
-                case 'tradeSymbol':
-                    break;
-                case 'limitPrice':
-                    tradeDialog.orderRequest.orderParams[name] = {
-                        amount: $(target).val(),
-                        currency: tradeDialog.marketPrice.attributes.price.currency
-                    };
-                    break;
-                default:
-                    tradeDialog.orderRequest.orderParams[name] = $(target).val();
-                }
-
-                // tradeSymbol field is a special case
-                if ( name !== 'tradeSymbol') {
-                    this.createEstimate();
-                }
-
-                return this;
-            },
-
-            validateOrder: function() {
-                var orderParams = this.orderRequest.orderParams;
-                var isValid = orderParams.symbol &&
-                    orderParams.quantity &&
-                    (orderParams.type === 'Market' || (orderParams.type === 'Limit' && orderParams.hasOwnProperty('limitPrice') ));
-
-                return isValid;
+            toggleLimitPriceField: function(type) {
+                return type === 'Market' ? 'hidden' : '';
             },
 
             _fetchMarketPrice: function(symbol) {
@@ -334,34 +243,6 @@ define(
                 else {
                     this._marketPriceFetched(null);
                 }
-            },
-
-            _initSymbolField: function() {
-                var tradeDialog = this;
-
-                var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
-
-                $(this.symbolElement).autocomplete({
-
-                    // This function is called every time the user types a character in the text field.
-                    //     request.term contains the text currently in the text field
-                    //     response is a callback whch expects a single argument, the data to suggest to the user.
-                    //     It returns an array of objects with label and value properties:
-                    //     [ { label: "Choice1", value: "value1" }, ... ]
-                    source: function( request, response ) {
-                        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
-
-                        response($.grep(instruments, function(item) {
-                            return matcher.test(item.label);
-                        }));
-                    },
-                    change: function( event ) {
-                        tradeDialog.checkTypedSymbol(event);
-                    },
-                    select: function( event, ui ) {
-                        tradeDialog.symbolChanged(ui.item.value);
-                    }
-                });
             },
 
             _marketPriceFetched: function(marketPrice) {

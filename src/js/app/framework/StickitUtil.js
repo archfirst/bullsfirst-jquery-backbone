@@ -98,5 +98,76 @@ define(
                 });
             }
         });
+
+        // ---------------------------------------------------------------
+        // Bullsfirst checkbox handler
+        // ---------------------------------------------------------------
+        Backbone.Stickit.addHandler({
+
+            selector: '.bf-checkbox',
+
+            updateModel: false,
+            updateView: false,
+
+            initialize: function($el, model, options) {
+
+                var updateView = function(checked) {
+                    return checked ? $el.addClass('checked') : $el.removeClass('checked');
+                };
+
+                var toggle = function() {
+                    var newValue = !$el.hasClass('checked');
+                    model.set(options.observe, newValue);
+                    return false;
+                };
+
+                updateView(model.get(options.observe));
+
+                $el.click(toggle);
+
+                $el.keypress(function(event) {
+                    if (event.which === 32) { // Space
+                        toggle();
+                    }
+                });
+
+                return this.listenTo(model, 'change:' + options.observe, function(model, value) {
+                    return updateView(value);
+                });
+            }
+        });
+
+        // ---------------------------------------------------------------
+        // Bullsfirst radio button handler
+        // ---------------------------------------------------------------
+        Backbone.Stickit.addHandler({
+
+            selector: '.bf-radio',
+
+            updateModel: false,
+            updateView: false,
+
+            initialize: function($el, model, options) {
+
+                var updateView = function(value) {
+                    $el.removeClass('checked');
+                    $el.filter('[data-value=' + value + ']').addClass('checked');
+                };
+
+                var handleClick = function(event) {
+                    var value = $(event.target).data('value');
+                    model.set(options.observe, value);
+                    return false;
+                };
+
+                updateView(model.get(options.observe));
+
+                $el.click(handleClick);
+
+                return this.listenTo(model, 'change:' + options.observe, function(model, value) {
+                    return updateView(value);
+                });
+            }
+        });
     }
 );

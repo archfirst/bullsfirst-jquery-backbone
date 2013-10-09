@@ -62,21 +62,22 @@
             background: $button-hover-color;
         }
 
-        &.selected {
+        &.checked {
             background: $button-medium-color;
             border: 2px solid $white;
         }
     }
 
     .bf-checkbox {
+
         float: left;
-        width: 22px;
         height: 25px;
-        padding: 0 0 0 3px;
-        line-height: 26px;
-        font-size: 17px;
-        color: $label-background-color;
-        background: $checkbox-color;
+        width: 23px;
+        background-image: url(../img/unchecked-large.png);
+
+        &.checked {
+            background-image: url(../img/checked-large.png);
+        }
     }
 }
 
@@ -120,5 +121,5 @@ a.button.medium.apply-filters-button {
 .validation-error {
     border-color: $white;
     background-color: #ee0101;
-    color: $white
+    color: $white;
 }

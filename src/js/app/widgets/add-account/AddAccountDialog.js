@@ -27,8 +27,7 @@ define(
         'app/framework/ErrorUtil',
         'app/framework/ModalDialog',
         'app/services/BrokerageAccountService',
-        'text!app/widgets/add-account/AddAccountTemplate.html',
-        'jqueryValidationEngineRules'
+        'text!app/widgets/add-account/AddAccountTemplate.html'
     ],
     function(Repository, ErrorUtil, ModalDialog, BrokerageAccountService, AddAccountTemplate) {
         'use strict';
@@ -65,14 +64,15 @@ define(
             },
 
             validateForm: function() {
-                if ($('#add-account-form').validationEngine('validate')) {
+                // TODO: Remove code below for old validation engine
+                // if ($('#add-account-form').validationEngine('validate')) {
 
-                    // Create brokerage account
-                    BrokerageAccountService.createBrokerageAccount(
-                        $('#add-account-name').val(), this.createBrokerageAccountDone, ErrorUtil.showError);
+                // Create brokerage account
+                BrokerageAccountService.createBrokerageAccount(
+                    $('#add-account-name').val(), this.createBrokerageAccountDone, ErrorUtil.showError);
 
-                    this.close();
-                }
+                this.close();
+                // }
             },
 
             createBrokerageAccountDone: function(/*data, textStatus, jqXHR*/) {
@@ -81,7 +81,8 @@ define(
 
             postPlace: function(){
                 ModalDialog.prototype.postPlace.call(this);
-                this.$el.find('form').validationEngine();
+                // TODO: introduce new validation engine
+                // this.$el.find('form').validationEngine();
                 return this;
             }
         });

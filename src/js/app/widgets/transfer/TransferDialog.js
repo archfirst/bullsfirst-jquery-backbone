@@ -31,8 +31,7 @@ define(
         'keel/MessageBus',
         'text!app/widgets/transfer/TransferTemplate.html',
         'underscore',
-        'jqueryExtensions',
-        'jqueryValidationEngineRules'
+        'jqueryExtensions'
     ],
     function (
         Repository,
@@ -94,7 +93,8 @@ define(
                 $('#fromAccount, #toAccount').selectbox({effect: 'fade'});
                 this._initSymbolField();
 
-                this.$el.find('form').validationEngine();
+                // TODO: introduce new validation engine
+                // this.$el.find('form').validationEngine();
 
                 return this;
             },
@@ -114,15 +114,16 @@ define(
                 var transferRequest,
                     transferForm = $('#transfer-form');
 
-                if (transferForm.validationEngine('validate')) {
-                    transferRequest = transferForm.serializeForm();
-                    //if the price is non-zero, the request is for securities transfer
-                    if (transferRequest.price) {
-                        this.transferSecurities(transferRequest);
-                    } else {
-                        this.transferCash(transferRequest);
-                    }
+                // Introduce new validation engine
+                // if (transferForm.validationEngine('validate')) {
+                transferRequest = transferForm.serializeForm();
+                //if the price is non-zero, the request is for securities transfer
+                if (transferRequest.price) {
+                    this.transferSecurities(transferRequest);
+                } else {
+                    this.transferCash(transferRequest);
                 }
+                // }
                 return false;
             },
 
@@ -132,19 +133,20 @@ define(
                 var fieldContainers = $('.transfer-fields-container');
 
                 if (selectedTab[0] !== prevSelectedTab[0]) {
-                    $('#transfer-form').validationEngine('hideAll');
+                    //$('#transfer-form').validationEngine('hideAll');
 
                     //toggle display of field containers (securities vs cash)
 
                     fieldContainers.toggleClass('nodisplay');
-                    fieldContainers.find('input').toggleClass('validate[required]');
+                    // TODO: Remove this line - we no longer use validate[required]
+                    // fieldContainers.find('input').toggleClass('validate[required]');
 
                     //toggle selected tab
                     selectedTab.toggleClass('selected');
                     prevSelectedTab.toggleClass('selected');
 
                     //re-attach validation engine
-                    $('#transfer-form').validationEngine();
+                    //$('#transfer-form').validationEngine();
                 }
                 return false;
             },

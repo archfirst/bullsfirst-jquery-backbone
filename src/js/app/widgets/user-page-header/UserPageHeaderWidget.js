@@ -23,6 +23,7 @@
  */
 define(
     [
+        'app/domain/OrderRequest',
         'app/domain/Repository',
         'app/framework/Message',
         'app/widgets/trade/TradeDialog',
@@ -32,7 +33,7 @@ define(
         'keel/MessageBus',
         'text!app/widgets/user-page-header/UserPageHeaderTemplate.html'
     ],
-    function(Repository, Message, TradeDialog, TransferDialog, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
+    function(OrderRequest, Repository, Message, TradeDialog, TransferDialog, Backbone, BaseView, MessageBus, UserPageHeaderTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -69,16 +70,16 @@ define(
 
             trade: function() {
 
+                var orderRequest = new OrderRequest();
+                orderRequest.set('brokerageAccountId', Repository.getSelectedAccount().id);
+
                 this.addChildren([
                     {
                         id: 'TradeDialog',
                         viewClass: TradeDialog,
                         parentElement: this.$el,
                         options: {
-                            model: {
-                                accounts: Repository.getBrokerageAccounts().toJSON(),
-                                selectedAccount: Repository.getSelectedAccount()
-                            }
+                            model: orderRequest
                         }
                     }
                 ]);

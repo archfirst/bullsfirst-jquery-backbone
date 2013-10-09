@@ -53,7 +53,7 @@ define(
             initialize: function() {
 
                 this.model.brokerageAccountName =
-                    Repository.getBrokerageAccount(this.model.brokerageAccountId).get('name');
+                    Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name');
 
                 this.settings = {
                     overlayVisible: true,

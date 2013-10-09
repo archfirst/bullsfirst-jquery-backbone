@@ -17,6 +17,11 @@
 /**
  * app/domain/TransactionFilterCriteria
  *
+ * Attributes:
+ *   accountId: int
+ *   fromDate: string (format MM/DD/YYYY)
+ *   toDate: string (format MM/DD/YYYY)
+ *
  * @author Naresh Bhatia
  */
 define(

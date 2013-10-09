@@ -30,8 +30,7 @@ define(
         'app/framework/ModalDialog',
         'text!app/widgets/add-external-account/AddExternalAccountTemplate.html',
         'form2js',
-        'jqueryToObject',
-        'jqueryValidationEngineRules'
+        'jqueryToObject'
     ],
     function(ExternalAccount, Repository, AlertUtil, ErrorUtil, ModalDialog, AddExternalAccountTemplate) {
         'use strict';
@@ -68,17 +67,18 @@ define(
             },
 
             validateForm: function() {
-                if ($('#add-external-account-form').validationEngine('validate')) {
+                // TODO: Remove code for old validation engine
+                // if ($('#add-external-account-form').validationEngine('validate')) {
 
-                    // Create external account
-                    var externalAccount = new ExternalAccount($('#add-external-account-form').toObject());
-                    Repository.getExternalAccounts().add(externalAccount);
-                    externalAccount.save(null, {
-                        success: this.createExternalAccountDone,
-                        error: ErrorUtil.showBackboneError
-                    });
-                    this.close();
-                }
+                // Create external account
+                var externalAccount = new ExternalAccount($('#add-external-account-form').toObject());
+                Repository.getExternalAccounts().add(externalAccount);
+                externalAccount.save(null, {
+                    success: this.createExternalAccountDone,
+                    error: ErrorUtil.showBackboneError
+                });
+                this.close();
+                // }
             },
 
             createExternalAccountDone: function(/*data, textStatus, jqXHR*/) {
@@ -88,7 +88,8 @@ define(
 
             postPlace: function(){
                 ModalDialog.prototype.postPlace.call(this);
-                this.$el.find('form').validationEngine();
+                // TODO: introduce new validation engine
+                // this.$el.find('form').validationEngine();
                 return this;
             }
         });

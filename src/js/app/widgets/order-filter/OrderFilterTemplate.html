@@ -4,7 +4,7 @@
         <div class="field filter">
             <label for="order-filter-account">Account</label>
             {{! select2 requires width to be specified inline (see http://ivaynberg.github.io/select2/#responsive) }}
-            <select id="order-filter-account" class="select2 js-account" style="width:100%"></select>
+            <select id="order-filter-account" class="select2 js-account" name="accountId" style="width:100%"></select>
         </div>
 
         <div class="grid-narrow">
@@ -14,6 +14,7 @@
                     <input
                         id="order-filter-from-date"
                         class="js-fromDate datepicker"
+                        name="fromDate"
                         type="text" />
                 </div>
                 <div class="grid-col span-1-2 field filter kill-bottom-margin">
@@ -21,6 +22,7 @@
                     <input
                         id="order-filter-to-date"
                         class="js-toDate datepicker"
+                        name="toDate"
                         type="text" />
                 </div>
             </div>
@@ -33,6 +35,7 @@
             <input
                 id="order-filter-order-number"
                 class="js-orderNumber"
+                name="orderId"
                 placeholder="Optional"
                 type="text" />
         </div>
@@ -59,6 +62,7 @@
             <input
                 id="order-filter-symbol"
                 class="js-symbol"
+                name="symbol"
                 placeholder="Optional"
                 type="text" />
         </div>

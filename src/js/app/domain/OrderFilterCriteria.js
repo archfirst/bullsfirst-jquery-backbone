@@ -17,6 +17,15 @@
 /**
  * app/domain/OrderFilterCriteria
  *
+ * Attributes:
+ *   accountId: int
+ *   fromDate: string (format MM/DD/YYYY)
+ *   toDate: string (format MM/DD/YYYY)
+ *   orderId: int
+ *   symbol: string
+ *   sides: string[] (Buy, Sell)
+ *   statuses: string[] (New, PartiallyFilled, Filled, Canceled, DoneForDay)
+ *
  * @author Naresh Bhatia
  */
 define(
