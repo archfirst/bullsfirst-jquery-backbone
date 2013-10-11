@@ -74,13 +74,12 @@ define(
                 ],
                 limitPrice: [
                     {
-                        required: false
+                        required: function(value, attr, computedState) {
+                            return (computedState.type === 'Limit') ? true : false;
+                        }
                     },
                     {
                         pattern: 'number'
-                    },
-                    {
-                        fn: 'validateLimitPrice'
                     }
                 ],
                 term: {
@@ -88,17 +87,6 @@ define(
                 },
                 allOrNone: {
                     required: true
-                }
-            },
-
-            validateLimitPrice: function(value, attr, computedState) {
-
-                // If limit order, check if limit price is specified
-                if (computedState.type === 'Limit') {
-                    var limitPrice = computedState.limitPrice;
-                    if (typeof(limitPrice) === 'undefined' || limitPrice.length === 0) {
-                        return 'Please specify a limit price';
-                    }
                 }
             }
         });
