@@ -113,6 +113,7 @@ define(
 
             postRender: function() {
 
+                var self = this;
                 var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
 
                 $(this.symbolElement).autocomplete({
@@ -122,12 +123,18 @@ define(
                     //     response is a callback whch expects a single argument, the data to suggest to the user.
                     //     It returns an array of objects with label and value properties:
                     //     [ { label: "Choice1", value: "value1" }, ... ]
-                    source: function( request, response ) {
+                    source: function(request, response) {
                         var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
 
                         response($.grep(instruments, function(item) {
                             return matcher.test(item.label);
                         }));
+                    },
+
+                    // jQuery UI autocomplete does not trigger a change event when an item is selected.
+                    // So force the update of the model manually.
+                    select: function(event, ui) {
+                        self.model.set('symbol', ui.item.value);
                     }
                 });
 

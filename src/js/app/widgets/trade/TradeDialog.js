@@ -50,7 +50,7 @@ define(
                 source: TradeTemplate
             },
 
-            elements: ['symbol'],
+            elements: ['symbol', 'lastTradePrice', 'estimatedValue', 'fees', 'estimatedValueInclFees'],
 
             events: {
                 'click #trade-preview-order': 'previewOrder',
@@ -120,10 +120,13 @@ define(
                 this.settings = {
                     draggable: true
                 };
+
+                this.listenTo(this.model, 'change:symbol', this.symbolChanged);
             },
 
             postRender: function() {
 
+                var self = this;
                 var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
 
                 $(this.symbolElement).autocomplete({
@@ -133,19 +136,44 @@ define(
                     //     response is a callback whch expects a single argument, the data to suggest to the user.
                     //     It returns an array of objects with label and value properties:
                     //     [ { label: "Choice1", value: "value1" }, ... ]
-                    source: function( request, response ) {
+                    source: function(request, response) {
                         var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
 
                         response($.grep(instruments, function(item) {
                             return matcher.test(item.label);
                         }));
+                    },
+
+                    // jQuery UI autocomplete does not trigger a change event when an item is selected.
+                    // So force the update of the model manually.
+                    select: function(event, ui) {
+                        self.model.set('symbol', ui.item.value);
                     }
                 });
 
                 this.stickit();
             },
 
-            createEstimate: function(callback) {
+            symbolChanged: function(model) {
+
+                var value = model.get('symbol').toUpperCase();
+
+                // Verify that it is a valid symbol and then fire a request to fetch the market price
+                var instrument = Repository.getInstrumentCollection().findWhere({symbol: value});
+                if (instrument) {
+                    this._fetchMarketPrice(value);
+                }
+                else {
+                    this.lastTradePriceElement.empty();
+                    this.renderEstimate({
+                        estimatedValue: 0,
+                        fees: 0,
+                        estimatedValueInclFees: 0
+                    });
+                }
+            },
+
+            createEstimate: function() {
 
                 var self = this;
 
@@ -166,26 +194,16 @@ define(
                     };
 
                     OrderEstimateService.createOrderEstimate(cleanOrderRequest, function(response) {
-                        var estimatedValue = Formatter.formatMoney(response.estimatedValue);
-                        var fees = Formatter.formatMoney(response.fees);
-                        var estimatedValueInclFees = Formatter.formatMoney(response.estimatedValueInclFees);
-
-                        orderRequest.orderEstimate = {
-                            estimatedValue: estimatedValue,
-                            fees: fees,
-                            estimatedValueInclFees: estimatedValueInclFees
-                        };
-
-                        $('#tradeCost').html(estimatedValue);
-                        $('#fees-field, #fees').html(fees);
-                        $('#totalCost').html(estimatedValueInclFees);
-
+                        this.renderEstimate(response);
                     }, ErrorUtil.showError);
                 }
+            },
 
-                if (callback instanceof Function) {
-                    callback();
-                }
+            // estimate is {estimatedValue, fees, estimatedValueInclFees}
+            renderEstimate: function(estimate) {
+                this.estimatedValueElement.html( Formatter.formatMoney(estimate.estimatedValue) );
+                this.feesElement.html( Formatter.formatMoney(estimate.fees) );
+                this.estimatedValueInclFeesElement.html( Formatter.formatMoney(estimate.estimatedValueInclFees) );
             },
 
             previewOrder: function() {
@@ -204,55 +222,24 @@ define(
                 }
             },
 
-            symbolChanged: function(value) {
-                this.orderRequest.orderParams.symbol = value;
-                this._fetchMarketPrice(value);
-            },
-
-            symbolNotRecognized: function() {
-                var zero = '$0.00';
-                this.symbolChanged(null);
-                this.createEstimate(function() {
-                    $('#trade-form .last-trade-price-value').html('');
-                    $('#last-trade-price').val(0);
-                    $('#tradeCost').html(zero);
-                    $('#fees-field, #fees').html(zero);
-                    $('#totalCost').html(zero);
-                });
-            },
-
             toggleLimitPriceField: function(type) {
                 return type === 'Market' ? 'hidden' : '';
             },
 
             _fetchMarketPrice: function(symbol) {
                 var tradeDialog = this;
-                if (symbol && symbol !== '') {
-                    this.marketPrice = new MarketPrice({symbol: symbol});
-                    this.marketPrice.fetch({
-                        success: function(price) {
-                            tradeDialog._marketPriceFetched(price);
-                            tradeDialog.orderRequest.orderParams.symbol = symbol;
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            tradeDialog._marketPriceFetched(null);
-                            ErrorUtil.showBackboneError(jqXHR, textStatus, errorThrown);
-                        }
-                    });
-                }
-                else {
-                    this._marketPriceFetched(null);
-                }
-            },
-
-            _marketPriceFetched: function(marketPrice) {
-                var price = marketPrice ? Formatter.formatMoney(marketPrice.attributes.price) : '';
-                $('#trade-form .last-trade-price-value').html(price);
-                $('#last-trade-price').val(price);
-
-                this.createEstimate();
+                this.marketPrice = new MarketPrice({symbol: symbol});
+                this.marketPrice.fetch({
+                    success: function(marketPrice) {
+                        var price = Formatter.formatMoney(marketPrice.get('price'));
+                        tradeDialog.lastTradePriceElement.html(price);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        tradeDialog.lastTradePriceElement.empty();
+                        ErrorUtil.showBackboneError(jqXHR, textStatus, errorThrown);
+                    }
+                });
             }
-
         });
     }
 );
