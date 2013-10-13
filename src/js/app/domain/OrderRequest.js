@@ -88,6 +88,29 @@ define(
                 allOrNone: {
                     required: true
                 }
+            },
+
+            toServerRequest: function() {
+                var request = {
+                    brokerageAccountId: this.get('brokerageAccountId'),
+                    orderParams: {
+                        side: this.get('side'),
+                        symbol: this.get('symbol').toUpperCase(),
+                        quantity: this.get('quantity'),
+                        type: this.get('type'),
+                        term: this.get('term'),
+                        allOrNone: this.get('allOrNone')
+                    }
+                };
+
+                if (this.get('type') === 'Limit') {
+                    request.limitPrice = {
+                        amount: this.get('limitPrice'),
+                        currency: 'USD'
+                    };
+                }
+
+                return request;
             }
         });
     }

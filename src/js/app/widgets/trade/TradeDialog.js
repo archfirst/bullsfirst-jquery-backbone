@@ -25,6 +25,7 @@ define(
     [
         'app/domain/MarketPrice',
         'app/domain/Repository',
+        'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
         'app/framework/ModalDialog',
@@ -37,7 +38,7 @@ define(
         'stickit',
         'validation'
     ],
-    function(MarketPrice, Repository, ErrorUtil, Formatter, ModalDialog,
+    function(MarketPrice, Repository, AlertUtil, ErrorUtil, Formatter, ModalDialog,
         OrderEstimateService, TradePreviewDialog, Backbone, $, TradeTemplate) {
         'use strict';
 
@@ -122,6 +123,7 @@ define(
                 };
 
                 this.listenTo(this.model, 'change:symbol', this.symbolChanged);
+                this.listenTo(this.model, 'change', this.orderRequestChanged);
             },
 
             postRender: function() {
@@ -165,11 +167,15 @@ define(
                 }
                 else {
                     this.lastTradePriceElement.empty();
-                    this.renderEstimate({
-                        estimatedValue: 0,
-                        fees: 0,
-                        estimatedValueInclFees: 0
-                    });
+                }
+            },
+
+            orderRequestChanged: function(model) {
+                if (model.isValid()) {
+                    this.createEstimate();
+                }
+                else {
+                    this.clearEstimate();
                 }
             },
 
@@ -177,29 +183,26 @@ define(
 
                 var self = this;
 
-                if (self.validateOrder()) {
+                OrderEstimateService.createOrderEstimate(this.model, function(response) {
 
-                    var orderRequest = self.orderRequest;
-                    orderRequest.brokerageAccountId = this.accountIdElement.val();
-                    if (orderRequest.orderParams.type === 'Market') {
-                        delete orderRequest.orderParams.limitPrice;
-                    }
+                    // Save estimate for future use
+                    self.estimate = response;
 
-                    delete orderRequest.orderEstimate;
-
-                    // Clean up any unwanted attributes
-                    var cleanOrderRequest = {
-                        brokerageAccountId: orderRequest.brokerageAccountId,
-                        orderParams: orderRequest.orderParams
-                    };
-
-                    OrderEstimateService.createOrderEstimate(cleanOrderRequest, function(response) {
-                        this.renderEstimate(response);
-                    }, ErrorUtil.showError);
-                }
+                    self.renderEstimate(response);
+                }, ErrorUtil.showError);
             },
 
-            // estimate is {estimatedValue, fees, estimatedValueInclFees}
+            clearEstimate: function() {
+                // delete the estimate saved in this object
+                delete this.estimate;
+
+                // Erase the estimate in the display
+                this.estimatedValueElement.html('$0.00');
+                this.feesElement.html('$0.00');
+                this.estimatedValueInclFeesElement.html('$0.00');
+            },
+
+            // estimate is {estimatedValue, fees, estimatedValueInclFees} (each attribute is a Money object)
             renderEstimate: function(estimate) {
                 this.estimatedValueElement.html( Formatter.formatMoney(estimate.estimatedValue) );
                 this.feesElement.html( Formatter.formatMoney(estimate.fees) );
@@ -207,19 +210,38 @@ define(
             },
 
             previewOrder: function() {
-                if (this.model.isValid(true)) {
-                    var previewOrderDialog = this.addChild({
-                        id: 'TradePreviewDialog',
-                        viewClass: TradePreviewDialog,
-                        parentElement: $('body'),
-                        options: {
-                            model: this.model
-                        }
-                    });
 
-                    // Stack above this dialog box
-                    previewOrderDialog.stack();
+                // Check if model is valid
+                if (this.model.isValid(true) === false) {
+                    return;
                 }
+
+                // Check if there is an order estimate (at this point it should be there)
+                if (!this.estimate) {
+                    AlertUtil.showError('No order estimate!');
+                    return;
+                }
+
+                // Check if model is compliant
+                var compliance = this.estimate.compliance;
+                if (compliance !== 'Compliant') {
+                    AlertUtil.showError(compliance);
+                    return;
+                }
+
+                // All checks passed. Show TradePreviewDialog.
+                var previewOrderDialog = this.addChild({
+                    id: 'TradePreviewDialog',
+                    viewClass: TradePreviewDialog,
+                    parentElement: $('body'),
+                    options: {
+                        model: this.model,
+                        estimate: this.estimate
+                    }
+                });
+
+                // Stack above this dialog box
+                previewOrderDialog.stack();
             },
 
             toggleLimitPriceField: function(type) {

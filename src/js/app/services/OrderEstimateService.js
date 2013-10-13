@@ -30,7 +30,6 @@ define(['app/domain/Repository',
     var _url = '/bfoms-javaee/rest/secure/order_estimates';
 
     return {
-        // orderRequest: see http://archfirst.org/books/bullsfirst-rest-service#order_estimates
         // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
         // failCallbacks: a function, or array of functions, called when the Deferred is rejected
         createOrderEstimate: function(orderRequest, doneCallbacks, failCallbacks) {
@@ -41,7 +40,7 @@ define(['app/domain/Repository',
                     AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 },
                 contentType: 'application/json',
-                data: JSON.stringify(orderRequest, null, '\t')
+                data: JSON.stringify(orderRequest.toServerRequest(), null, '\t')
             })
             .then(doneCallbacks, failCallbacks);
         }
