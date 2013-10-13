@@ -116,7 +116,7 @@ define(
                 var self = this;
                 var instruments = Repository.getInstrumentCollection().getLabelValuePairs();
 
-                $(this.symbolElement).autocomplete({
+                this.symbolElement.autocomplete({
 
                     // This function is called every time the user types a character in the text field.
                     //     request.term contains the text currently in the text field

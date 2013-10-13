@@ -186,7 +186,7 @@ define(
                     };
                 });
 
-                $(this.transferSymbolElement).autocomplete({
+                this.transferSymbolElement.autocomplete({
                     source: instruments
                 });
             }
