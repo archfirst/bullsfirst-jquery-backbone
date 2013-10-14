@@ -7,32 +7,32 @@
     <table>
         <tr>
             <th>Account:</th>
-            <td>{{brokerageAccountName}}</td>
+            <td class="js-accountName"></td>
         </tr>
         <tr>
             <th>Symbol:</th>
-            <td>{{orderParams.symbol}}</td>
+            <td>{{symbol}}</td>
         </tr>
         <tr>
             <th>Action:</th>
-            <td>{{orderParams.side}}</td>
+            <td>{{side}}</td>
         </tr>
         <tr>
             <th>Quantity:</th>
-            <td>{{orderParams.quantity}}</td>
+            <td>{{quantity}}</td>
         </tr>
         <tr>
             <th>Order Type:</th>
-            <td>{{orderParams.type}}</td>
+            <td>{{type}}</td>
         </tr>
         <tr>
             <th>Term:</th>
-            <td>{{orderParams.term}}</td>
+            <td>{{term}}</td>
         </tr>
         <tr>
             <th>All-or-None:</th>
             <td>
-                {{#if orderParams.allOrNone}}
+                {{#if allOrNone}}
                     true
                 {{else}}
                     false
@@ -41,15 +41,15 @@
         </tr>
         <tr class="cost-summary">
             <th>Trade Cost:</th>
-            <td>{{orderEstimate.estimatedValue}}</td>
+            <td class="js-estimatedValue"></td>
         </tr>
         <tr class="cost-summary">
             <th>Fees:</th>
-            <td>+{{orderEstimate.fees}}</td>
+            <td class="js-fees"></td>
         </tr>
         <tr class="cost-total">
             <th>Total Cost:</th>
-            <td>{{orderEstimate.estimatedValueInclFees}}</td>
+            <td class="js-estimatedValueInclFees"></td>
         </tr>
     </table>
 

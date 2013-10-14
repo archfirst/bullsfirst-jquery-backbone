@@ -25,6 +25,7 @@ define(
     [
         'app/domain/Repository',
         'app/framework/ErrorUtil',
+        'app/framework/Formatter',
         'app/framework/Message',
         'app/framework/ModalDialog',
         'app/services/OrderService',
@@ -32,7 +33,7 @@ define(
         'text!app/widgets/trade-preview/TradePreviewTemplate.html',
         'underscore'
     ],
-    function(Repository, ErrorUtil, Message, ModalDialog, OrderService, MessageBus, TradePreviewTemplate, _) {
+    function(Repository, ErrorUtil, Formatter, Message, ModalDialog, OrderService, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
         return ModalDialog.extend({
@@ -43,6 +44,8 @@ define(
                 name: 'TradePreviewTemplate',
                 source: TradePreviewTemplate
             },
+
+            elements: ['accountName', 'estimatedValue', 'fees', 'estimatedValueInclFees'],
 
             events: {
                 'click .close-button': 'close',
@@ -64,15 +67,23 @@ define(
 
             },
 
-            submitOrder: function(){
+            postRender: function() {
+                // Call the base class postRender first
+                ModalDialog.prototype.postRender.apply(this, arguments);
 
-                var orderRequest = {
-                        brokerageAccountId: this.model.brokerageAccountId,
-                        orderParams: this.model.orderParams
-                    };
+                // Fill the fields not available in the model
+                var accountName =
+                    Repository.getBrokerageAccount(this.model.get('brokerageAccountId')).get('name');
+                this.accountNameElement.html(accountName);
 
-                // Create brokerage account
-                OrderService.createOrder(orderRequest, _.bind(this.orderComplete, this), ErrorUtil.showError);
+                var estimate = this.options.estimate;
+                this.estimatedValueElement.html( Formatter.formatMoney(estimate.estimatedValue) );
+                this.feesElement.html( Formatter.formatMoney(estimate.fees) );
+                this.estimatedValueInclFeesElement.html( Formatter.formatMoney(estimate.estimatedValueInclFees) );
+            },
+
+            submitOrder: function() {
+                OrderService.createOrder(this.model, _.bind(this.orderComplete, this), ErrorUtil.showError);
             },
 
             orderComplete: function() {
@@ -82,7 +93,6 @@ define(
 
                 this.close();
             }
-
         });
     }
 );

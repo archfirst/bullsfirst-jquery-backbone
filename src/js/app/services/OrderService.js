@@ -45,7 +45,7 @@ define(['app/domain/Repository',
                     AjaxUtil.setAuthorizationHeader(xhr, Repository.getCredentials());
                 },
                 contentType: 'application/json',
-                data: JSON.stringify(orderRequest, null, '\t')
+                data: JSON.stringify(orderRequest.toServerRequest(), null, '\t')
             })
             .then(doneCallbacks, failCallbacks);
         },

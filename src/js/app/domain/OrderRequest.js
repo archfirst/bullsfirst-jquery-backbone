@@ -104,7 +104,7 @@ define(
                 };
 
                 if (this.get('type') === 'Limit') {
-                    request.limitPrice = {
+                    request.orderParams.limitPrice = {
                         amount: this.get('limitPrice'),
                         currency: 'USD'
                     };
