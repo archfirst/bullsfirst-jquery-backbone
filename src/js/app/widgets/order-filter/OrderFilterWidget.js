@@ -22,16 +22,14 @@
 define(
     [
         'app/domain/Repository',
-        'app/framework/Message',
         'backbone',
         'keel/BaseView',
-        'keel/MessageBus',
         'text!app/widgets/order-filter/OrderFilterTemplate.html',
         'select2',
         'stickit',
         'validation'
     ],
-    function(Repository, Message, Backbone, BaseView, MessageBus, OrderFilterTemplate) {
+    function(Repository, Backbone, BaseView, OrderFilterTemplate) {
         'use strict';
 
         return BaseView.extend({
@@ -99,8 +97,6 @@ define(
             initialize: function() {
                 this.model = Repository.getOrderFilterCriteria();
                 Backbone.Validation.bind(this);
-
-                this.listenTo(MessageBus, Message.UpdateOrders, this.applyFilters);
             },
 
             resetFilters: function() {

@@ -29,11 +29,12 @@ define(
         'app/framework/Message',
         'app/framework/ModalDialog',
         'app/services/OrderService',
+        'backbone',
         'keel/MessageBus',
         'text!app/widgets/trade-preview/TradePreviewTemplate.html',
         'underscore'
     ],
-    function(Repository, ErrorUtil, Formatter, Message, ModalDialog, OrderService, MessageBus, TradePreviewTemplate, _) {
+    function(Repository, ErrorUtil, Formatter, Message, ModalDialog, OrderService, Backbone, MessageBus, TradePreviewTemplate, _) {
         'use strict';
 
         return ModalDialog.extend({
@@ -83,14 +84,12 @@ define(
             },
 
             submitOrder: function() {
-                OrderService.createOrder(this.model, _.bind(this.orderComplete, this), ErrorUtil.showError);
+                OrderService.createOrder(this.model, _.bind(this.orderSubmissionSuccessful, this), ErrorUtil.showError);
             },
 
-            orderComplete: function() {
-                // Show the order
-                MessageBus.trigger('UpdateOrders');
-                MessageBus.trigger('UserTabSelectionRequest', 'orders');
-
+            orderSubmissionSuccessful: function() {
+                MessageBus.trigger('OrderSubmissionSuccessful');
+                Backbone.history.navigate('orders', true);
                 this.close();
             }
         });

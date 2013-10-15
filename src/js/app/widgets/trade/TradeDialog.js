@@ -28,18 +28,20 @@ define(
         'app/framework/AlertUtil',
         'app/framework/ErrorUtil',
         'app/framework/Formatter',
+        'app/framework/Message',
         'app/framework/ModalDialog',
         'app/services/OrderEstimateService',
         'app/widgets/trade-preview/TradePreviewDialog',
         'backbone',
         'jquery',
+        'keel/MessageBus',
         'text!app/widgets/trade/TradeTemplate.html',
         'select2',
         'stickit',
         'validation'
     ],
-    function(MarketPrice, Repository, AlertUtil, ErrorUtil, Formatter, ModalDialog,
-        OrderEstimateService, TradePreviewDialog, Backbone, $, TradeTemplate) {
+    function(MarketPrice, Repository, AlertUtil, ErrorUtil, Formatter, Message, ModalDialog,
+        OrderEstimateService, TradePreviewDialog, Backbone, $, MessageBus, TradeTemplate) {
         'use strict';
 
         return ModalDialog.extend({
@@ -124,6 +126,7 @@ define(
 
                 this.listenTo(this.model, 'change:symbol', this.symbolChanged);
                 this.listenTo(this.model, 'change', this.orderRequestChanged);
+                this.listenTo(MessageBus, Message.OrderSubmissionSuccessful, this.close);
             },
 
             postRender: function() {

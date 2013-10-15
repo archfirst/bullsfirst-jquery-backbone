@@ -265,6 +265,16 @@ define(
             _repository.updateAccounts();
         });
 
+        // Fetch latest list of orders when an order is submitted
+        MessageBus.on(Message.OrderSubmissionSuccessful, function() {
+            _repository.fetchOrders();
+        });
+
+        // Fetch latest list of orders when an order is canceled
+        MessageBus.on(Message.OrderCancellationSuccessful, function() {
+            _repository.fetchOrders();
+        });
+
         return _repository;
     }
 );

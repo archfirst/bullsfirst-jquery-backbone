@@ -38,19 +38,11 @@ function(frameworkMessage, _) {
         AccountMouseOverRaw: 'Account:mouseoverRaw',
         AccountStoppedEditing: 'Account:stoppedEditing',
         ExternalAccountsUpdated: 'ExternalAccounts:Updated',
-        ModalLoad: 'Modal:load',
-        OrderFilterApply: 'Order:clickFilterApply',
-        OrderFilterReset: 'Order:clickFilterReset',
+        OrderCancellationSuccessful: 'OrderCancellationSuccessful',
+        OrderSubmissionSuccessful: 'OrderSubmissionSuccessful',
         SelectedAccountChanged: 'SelectedAccountChanged',
-        TabSelectionRequest: 'TabSelectionRequest',
-        TradeCostUpdate: 'TradeCostUpdate',
         TradeRequest: 'TradeRequest',
-        TradeSymbolChange: 'TradeSymbolChange',
-        TransactionFilterApply: 'Transaction:clickFilterApply',
-        TransactionFilterReset: 'Transaction:clickFilterReset',
-        UpdateOrders: 'UpdateOrders',
-        UserLoggedInEvent: 'UserLoggedInEvent',
-        UserLoggedOutEvent: 'UserLoggedOutEvent'
+        UserLoggedInEvent: 'UserLoggedInEvent'
     }, frameworkMessage);
 
     return message;

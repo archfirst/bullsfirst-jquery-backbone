@@ -50,7 +50,7 @@ define(
             },
 
             cancelOrderDone: function() {
-                MessageBus.trigger( Message.UpdateOrders );
+                MessageBus.trigger( Message.OrderCancellationSuccessful );
             }
         });
     }
