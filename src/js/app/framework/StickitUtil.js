@@ -52,7 +52,7 @@ define(
                 var result;
                 var dateStr = model.get(options.observe);
 
-                if (dateStr === '') {
+                if ((typeof dateStr === 'undefined') || (dateStr === '')) {
                     result = '';
                 }
                 else {

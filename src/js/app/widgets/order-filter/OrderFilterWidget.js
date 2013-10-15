@@ -101,6 +101,7 @@ define(
 
             resetFilters: function() {
                 Repository.resetOrderFilterCriteria();
+                Repository.fetchOrders();
             },
 
             applyFilters: function() {

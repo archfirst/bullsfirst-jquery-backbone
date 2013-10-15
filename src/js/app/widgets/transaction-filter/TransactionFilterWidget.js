@@ -81,6 +81,7 @@ define(
 
             resetFilters: function() {
                 Repository.resetTransactionFilterCriteria();
+                Repository.fetchTransactions();
             },
 
             applyFilters: function() {
