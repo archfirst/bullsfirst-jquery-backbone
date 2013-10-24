@@ -21,15 +21,13 @@
  */
 define(
     [
-        'app/framework/Message',
         'app/widgets/footer/FooterWidget',
         'app/widgets/intro/IntroWidget',
         'app/widgets/login/LoginWidget',
         'keel/BaseView',
-        'keel/MessageBus',
         'text!app/pages/home/HomePageTemplate.html'
     ],
-    function(Message, FooterWidget, IntroWidget, LoginWidget, BaseView, MessageBus, HomePageTemplate) {
+    function(FooterWidget, IntroWidget, LoginWidget, BaseView, HomePageTemplate) {
         'use strict';
 
         return BaseView.extend({
