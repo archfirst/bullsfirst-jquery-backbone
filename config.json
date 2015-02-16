@@ -1,12 +1,12 @@
 {
     "dev": {
-        "appRoot": "/src/",
+        "appRoot": "/",
         "exchApi": "/bfexch-javaee/rest",
         "omsApi": "/bfoms-javaee/rest",
         "omsSecureApi": "/bfoms-javaee/rest/secure"
     },
     "dist": {
-        "appRoot": "/dist/",
+        "appRoot": "/",
         "exchApi": "/bfexch-javaee/rest",
         "omsApi": "/bfoms-javaee/rest",
         "omsSecureApi": "/bfoms-javaee/rest/secure"

@@ -1,7 +1,12 @@
 {
     "name": "bullsfirst-jquery-backbone",
     "version": "0.1.0",
+    "scripts": {
+        "start": "node proxy-server/server.js"
+    },
     "devDependencies": {
+        "connect-modrewrite": "^0.7.11",
+        "express": "^4.11.2",
         "grunt": "0.4.x",
         "grunt-contrib-clean": "0.4.x",
         "grunt-contrib-compass": "0.1.x",
