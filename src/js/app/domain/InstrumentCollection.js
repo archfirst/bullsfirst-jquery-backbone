@@ -21,14 +21,15 @@
  */
 define(
     [
+        'app/framework/AppConfig',
         'backbone'
     ],
-    function(Backbone) {
+    function(AppConfig, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({
             model: Backbone.Model,
-            url: '/bfexch-javaee/rest/instruments',
+            url: AppConfig.exchApi + '/instruments',
 
             getLabelValuePairs: function() {
                 return this.map(function(instrument) {

@@ -22,12 +22,13 @@
  * @author Naresh Bhatia
  */
 define(['app/domain/Repository',
-        'app/framework/AjaxUtil'],
-       function(Repository, AjaxUtil) {
+        'app/framework/AjaxUtil',
+        'app/framework/AppConfig'],
+       function(Repository, AjaxUtil, AppConfig) {
     'use strict';
 
     // Module level variables act as singletons
-    var _url = '/bfoms-javaee/rest/secure/order_estimates';
+    var _url = AppConfig.omsSecureApi + '/order_estimates';
 
     return {
         // doneCallbacks: a function, or array of functions, called when the Deferred is resolved

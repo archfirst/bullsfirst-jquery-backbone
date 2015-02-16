@@ -27,13 +27,14 @@
  */
 define(
     [
-        'app/framework/AjaxUtil'
+        'app/framework/AjaxUtil',
+        'app/framework/AppConfig'
     ],
-    function(AjaxUtil) {
+    function(AjaxUtil, AppConfig) {
         'use strict';
 
         // Module level variables act as singletons
-        var _url = '/bfoms-javaee/rest/users';
+        var _url = AppConfig.omsApi + '/users';
 
         return {
 

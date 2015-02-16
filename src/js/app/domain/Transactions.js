@@ -22,14 +22,15 @@
 define(
     [
         'app/domain/Transaction',
+        'app/framework/AppConfig',
         'backbone'
     ],
-    function(Transaction, Backbone) {
+    function(Transaction, AppConfig, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({
             model: Transaction,
-            url: '/bfoms-javaee/rest/secure/transactions'
+            url: AppConfig.omsSecureApi + '/transactions'
         });
     }
 );

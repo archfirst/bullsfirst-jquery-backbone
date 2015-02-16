@@ -21,13 +21,14 @@
  */
 define(
     [
+        'app/framework/AppConfig',
         'backbone'
     ],
-    function(Backbone) {
+    function(AppConfig, Backbone) {
         'use strict';
 
         return Backbone.Model.extend({
-            urlRoot: '/bfexch-javaee/rest/market_prices',
+            urlRoot: AppConfig.exchApi + '/market_prices',
             idAttribute: 'symbol'
         });
     }

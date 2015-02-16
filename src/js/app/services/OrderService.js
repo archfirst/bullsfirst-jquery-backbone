@@ -26,12 +26,13 @@
  * @author Naresh Bhatia
  */
 define(['app/domain/Repository',
-        'app/framework/AjaxUtil'],
-       function(Repository, AjaxUtil) {
+        'app/framework/AjaxUtil',
+        'app/framework/AppConfig'],
+       function(Repository, AjaxUtil, AppConfig) {
     'use strict';
 
     // Module level variables act as singletons
-    var _url = '/bfoms-javaee/rest/secure/orders';
+    var _url = AppConfig.omsSecureApi + '/orders';
 
     return {
         // orderRequest: see http://archfirst.org/books/bullsfirst-rest-service#orders

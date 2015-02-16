@@ -163,15 +163,15 @@ module.exports = function(grunt) {
         }
       }
     },
-  
+
     // ### configureApp
     // Configures the application based on config.json and config-override.json
     configureApp: {
       dev: {
-        configFile: 'src/js/app/framework/AppConfig.js'  
+        configFile: 'src/js/app/framework/AppConfig.js'
       },
       dist: {
-        configFile: 'dist/js/app/framework/AppConfig.js'  
+        configFile: 'dist/js/app/framework/AppConfig.js'
       }
     }
   });
@@ -188,15 +188,18 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['clean', 'jshint', 'configureApp:dev', 'compass:dev', 'copy:cssImages']);
 
   grunt.registerMultiTask('configureApp', function() {
-    var template = 
+    var template =
       'define({\n' +
-        '    appRoot: \'<%= appRoot %>\'\n' +
+        '    appRoot: \'<%= appRoot %>\',\n' +
+        '    exchApi: \'<%= exchApi %>\',\n' +
+        '    omsApi: \'<%= omsApi %>\',\n' +
+        '    omsSecureApi: \'<%= omsSecureApi %>\'\n' +
       '});';
-      
+
     // Choose between default and override configurations
     var config = grunt.config.get();
     var appConfig = config.appConfigOverride ? config.appConfigOverride : config.appConfigDefault;
-    
+
     var env = this.target;
     var buffer = grunt.template.process(template, {data: appConfig[env]});
     grunt.file.write(this.data.configFile, buffer)

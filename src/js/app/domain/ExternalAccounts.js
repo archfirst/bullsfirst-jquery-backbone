@@ -22,14 +22,15 @@
 define(
     [
         'app/domain/ExternalAccount',
+        'app/framework/AppConfig',
         'backbone'
     ],
-    function(ExternalAccount, Backbone) {
+    function(ExternalAccount, AppConfig, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({
             model: ExternalAccount,
-            url: '/bfoms-javaee/rest/secure/external_accounts'
+            url: AppConfig.omsSecureApi + '/external_accounts'
         });
     }
 );

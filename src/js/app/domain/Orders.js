@@ -22,14 +22,15 @@
 define(
     [
         'app/domain/Order',
+        'app/framework/AppConfig',
         'backbone'
     ],
-    function(Order, Backbone) {
+    function(Order, AppConfig, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({
             model: Order,
-            url: '/bfoms-javaee/rest/secure/orders'
+            url: AppConfig.omsSecureApi + '/orders'
         });
     }
 );

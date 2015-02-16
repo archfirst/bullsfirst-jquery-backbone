@@ -22,14 +22,15 @@
 define(
     [
         'app/domain/BrokerageAccount',
+        'app/framework/AppConfig',
         'backbone'
     ],
-    function(BrokerageAccount, Backbone) {
+    function(BrokerageAccount, AppConfig, Backbone) {
         'use strict';
 
         return Backbone.Collection.extend({
             model: BrokerageAccount,
-            url: '/bfoms-javaee/rest/secure/brokerage_accounts'
+            url: AppConfig.omsSecureApi + '/brokerage_accounts'
         });
     }
 );
